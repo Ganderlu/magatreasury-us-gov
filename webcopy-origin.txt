@@ -1,0 +1,84 @@
+Uri: https://officialtreasury-us-gov.netlify.app/
+File Name: C:\Users\User\Desktop\official\index.htm
+Content Type: text/html
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/0e0a9c88_js_7uVreUkNuXuJRVCrZwm2ZTSdRQAAt31MoyDiBE79tWo.js
+File Name: C:\Users\User\Desktop\official\assets\0e0a9c88_js_7uVreUkNuXuJRVCrZwm2ZTSdRQAAt31MoyDiBE79tWo.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/1c8c6547_icon-dot-gov.svg
+File Name: C:\Users\User\Desktop\official\assets\1c8c6547_icon-dot-gov.svg
+Content Type: image/svg+xml
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/2e462066_css_s7FbPwT9FMxsus3m7lMeRNtlD1rsOoaTsF4Z.css
+File Name: C:\Users\User\Desktop\official\assets\2e462066_css_s7FbPwT9FMxsus3m7lMeRNtlD1rsOoaTsF4Z.css
+Content Type: text/css
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/2eeda4bb_Universal-Federated-Analytics-Min.js
+File Name: C:\Users\User\Desktop\official\assets\2eeda4bb_Universal-Federated-Analytics-Min.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/5b5ee43c_css
+File Name: C:\Users\User\Desktop\official\assets\5b5ee43c_css
+Content Type: text/plain
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/75e99c99_css
+File Name: C:\Users\User\Desktop\official\assets\75e99c99_css
+Content Type: text/plain
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/822fd9f1_v4-shims.js
+File Name: C:\Users\User\Desktop\official\assets\822fd9f1_v4-shims.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/877d163d_js_xJVCExr5xEPVNABdngxw3UmFkQjmNl_riySABueRyVo.js
+File Name: C:\Users\User\Desktop\official\assets\877d163d_js_xJVCExr5xEPVNABdngxw3UmFkQjmNl_riySABueRyVo.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/981970b9_favicon_1.png
+File Name: C:\Users\User\Desktop\official\assets\981970b9_favicon_1.png
+Content Type: image/png
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/98b638a5_us_flag_small.png
+File Name: C:\Users\User\Desktop\official\assets\98b638a5_us_flag_small.png
+Content Type: image/png
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/a5c15bb0_icon-https.svg
+File Name: C:\Users\User\Desktop\official\assets\a5c15bb0_icon-https.svg
+Content Type: image/svg+xml
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/b237ebf3_js
+File Name: C:\Users\User\Desktop\official\assets\b237ebf3_js
+Content Type: text/plain
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/b7eab1bf_all.js
+File Name: C:\Users\User\Desktop\official\assets\b7eab1bf_all.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/c54a62d9_css_U0RhNlYHsUyDvXBejhBDOiE1ubxyQ48nQmlV.css
+File Name: C:\Users\User\Desktop\official\assets\c54a62d9_css_U0RhNlYHsUyDvXBejhBDOiE1ubxyQ48nQmlV.css
+Content Type: text/css
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/e1305471_js_qqUz1kH9lJLiGXp3Nuji9yT1QpVufwO-q1uQvEE0dx0.js
+File Name: C:\Users\User\Desktop\official\assets\e1305471_js_qqUz1kH9lJLiGXp3Nuji9yT1QpVufwO-q1uQvEE0dx0.js
+Content Type: application/javascript
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/e1e2623c_css
+File Name: C:\Users\User\Desktop\official\assets\e1e2623c_css
+Content Type: text/plain
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/e262d57e_css
+File Name: C:\Users\User\Desktop\official\assets\e262d57e_css
+Content Type: text/plain
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/f8a665f9_css_xvML0NG8fAZEJVduJROCiuukX0bsC1zHj08K.css
+File Name: C:\Users\User\Desktop\official\assets\f8a665f9_css_xvML0NG8fAZEJVduJROCiuukX0bsC1zHj08K.css
+Content Type: text/css
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/mobile-logo.svg
+File Name: C:\Users\User\Desktop\official\assets\mobile-logo.svg
+Content Type: image/svg+xml
+
+Uri: https://officialtreasury-us-gov.netlify.app/assets/qfs_bill.jpg
+File Name: C:\Users\User\Desktop\official\assets\qfs_bill.jpg
+Content Type: image/jpeg
+
