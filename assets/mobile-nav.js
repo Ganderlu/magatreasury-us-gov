@@ -4,6 +4,21 @@
     var nav = document.querySelector("nav.mm.block-system-menublock");
     if (!burger || !nav) return;
 
+    function normalizeLogoSrc() {
+      var images = document.querySelectorAll(".logo img");
+      for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        var src = img.getAttribute("src");
+        if (!src) continue;
+        if (src.indexOf(".old.") !== -1) {
+          img.setAttribute("src", src.replace(".old.", "."));
+        }
+      }
+    }
+
+    normalizeLogoSrc();
+    window.addEventListener("resize", normalizeLogoSrc);
+
     function setState(open) {
       document.documentElement.classList.toggle("treas-mobile-nav-open", open);
       document.body.classList.toggle("treas-mobile-nav-open", open);
