@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify">
+  <id>https://ourmagashop.com/collections/all.atom</id>
+  <link rel="alternate" type="text/html" href="https://ourmagashop.com/collections/all"/>
+  <link rel="self" type="application/atom+xml" href="https://ourmagashop.com/collections/medallions.atom"/>
+  <title>Our Maga Shop</title>
+  <updated>2026-03-19T16:56:22+01:00</updated>
+  <author>
+    <name>Our Maga Shop</name>
+  </author>
+  <entry>
+    <id>https://ourmagashop.com/products/10154944200980</id>
+    <published>2026-03-19T16:56:22+01:00</published>
+    <updated>2026-03-19T16:56:22+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/president-trump-first-2026-edition-silver-medallion"/>
+    <title>President Trump First 2026 Edition Silver Medallion</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            49.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><div data-id="gxZ5EfTNWo" class="gxZ5EfTNWo">
+<div class="gp-flex">
+<h2 data-gp-text="" class="gp-g-heading-1  gp-text-instant gp-text"><strong>Premium, Patriotic, Built to Last:</strong></h2>
+</div>
+</div>
+<div data-id="gDK7RX8xWk" class="gDK7RX8xWk">
+<div class="gp-flex">
+<div data-gp-text="" class="gp-text-instant gp-text">
+<p>crafted with a polished silver finish and high-relief detailing for striking depth and clarity. each medallion is designed in america for americans, honoring the values that make our nation strong.</p>
+<ul>
+<li>limited 2025 edition collectible</li>
+<li>gleaming silver-plated finish</li>
+<li>high-relief engraved design for vivid detail</li>
+<li>diameter: 1.57" (40mm)</li>
+<li>weight: approx. 1 oz</li>
+<li>includes protective acrylic capsule for display and preservation</li>
+</ul>
+</div>
+</div>
+</div></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10154944200980</id>
+      <title>Default Title</title>
+      <s:price currency="USD">49.00</s:price>
+      <s:sku>TRSLVC</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10152309621012</id>
+    <published>2026-03-16T15:06:57+01:00</published>
+    <updated>2026-03-16T15:06:57+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/x120-qfs-gold-bills"/>
+    <title>X120 QFS GOLD BILLS</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            999.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>hidden-bundle</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10152309621012</id>
+      <title>Default Title</title>
+      <s:price currency="USD">999.00</s:price>
+      <s:sku>120QFSBILL</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10152308769044</id>
+    <published>2026-03-16T15:00:22+01:00</published>
+    <updated>2026-03-16T15:00:22+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/x25-qfs-gold-bills"/>
+    <title>X25 QFS GOLD BILLS</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            299.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>hidden-bundle</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10152308769044</id>
+      <title>Default Title</title>
+      <s:price currency="USD">299.00</s:price>
+      <s:sku>25QFSBILL</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10150733840660</id>
+    <published>2026-03-14T23:51:44+01:00</published>
+    <updated>2026-03-14T23:51:44+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/x100-qfs-gold-bills"/>
+    <title>X180 QFS GOLD BILLS</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            1399.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>hidden-bundle</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10150733840660</id>
+      <title>Default Title</title>
+      <s:price currency="USD">1399.00</s:price>
+      <s:sku>180QFSBILL</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10111677563156</id>
+    <published>2026-02-20T13:05:42+01:00</published>
+    <updated>2026-02-20T13:05:42+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/qfs-gold-bill"/>
+    <title>QFS GOLD BILL</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            1999.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10111677563156</id>
+      <title>Default Title</title>
+      <s:price currency="USD">1999.00</s:price>
+      <s:sku>QFSBILL</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10093907902740</id>
+    <published>2026-02-12T11:14:28+01:00</published>
+    <updated>2026-02-12T11:14:28+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/qfs-coin-upsell"/>
+    <title>QFS COIN – Upsell</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            799.00 - 1899.00
+            <a href="https://ourmagashop.com/products/qfs-coin-upsell">(3 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p class="p1"><b>Golden QFS Coin – Limited Edition </b><b></b></p>
+<p class="p2">Celebrate the new era with the Golden QFS Coin — a beautifully crafted collectible designed to inspire and symbolize prosperity. Plated in radiant gold with sharp detailing, this coin is made <span class="s1"><b>exclusively as memorabilia</b></span> and a timeless keepsake for collectors and patriots.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>qfs</s:tag>
+    <s:tag>qfs coin</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10093907902740</id>
+      <title>25</title>
+      <s:price currency="USD">799.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10093907902740</id>
+      <title>50</title>
+      <s:price currency="USD">1299.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10093907902740</id>
+      <title>100</title>
+      <s:price currency="USD">1899.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/10091404820756</id>
+    <published>2026-01-13T15:10:04+01:00</published>
+    <updated>2026-01-13T15:10:04+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/nesara-gesara-qfs-gold-bar-1"/>
+    <title>Nesara Gesara QFS Gold Bar</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/QFSBARFRONTBACK.png?v=1768084851"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            1999.99
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Crafted with a radiant gold finish and precision-engraved detailing, the <strong>NESARA / GESARA QFS Gold Bar</strong> is far more than a collectible — it is a statement of belief, legacy, and unwavering patriotism.</p>
+<p>Every element of this piece reflects strength and purpose: from its refined craftsmanship to its certified presentation designed for those who recognize value beyond surface appearance. This gold bar symbolizes sovereignty, financial awakening, and the enduring spirit of individuals who stand for freedom and independence.</p>
+<p>Created for collectors who demand meaning, not mass production, this exclusive item represents faith in a brighter economic future and pride in American ideals. It is a timeless keepsake — bold, symbolic, and destined to be preserved as part of a legacy that transcends generations.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>qfs</s:tag>
+    <s:tag>qfs coin</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/10091404820756</id>
+      <title>Default Title</title>
+      <s:price currency="USD">1999.99</s:price>
+      <s:sku>QFSBAR</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/9978055065876</id>
+    <published>2025-11-25T20:04:36+01:00</published>
+    <updated>2025-11-25T20:04:36+01:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/qfs-coin"/>
+    <title>Golden QFS Coin | LIMITED EDITION</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            1999.99
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p class="p1"><b>Golden QFS Coin – Limited Edition </b><b></b></p>
+<p class="p2">Celebrate the new era with the Golden QFS Coin — a beautifully crafted collectible designed to inspire and symbolize prosperity. Plated in radiant gold with sharp detailing, this coin is made <span class="s1"><b>exclusively as memorabilia</b></span> and a timeless keepsake for collectors and patriots.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>qfs</s:tag>
+    <s:tag>qfs coin</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9978055065876</id>
+      <title>Default Title</title>
+      <s:price currency="USD">1999.99</s:price>
+      <s:sku>QFSCOIN</s:sku>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/9959764787476</id>
+    <published>2025-09-11T21:04:26+02:00</published>
+    <updated>2025-09-11T21:04:26+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/trump-1000-bitcoins-gold-bar"/>
+    <title>Trump 1000 Bitcoins Gold Bar</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            19999.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>btc bar</s:tag>
+    <s:tag>golden btc bar</s:tag>
+    <s:tag>trump gold bar</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9959764787476</id>
+      <title>Default Title</title>
+      <s:price currency="USD">19999.00</s:price>
+      <s:sku>BTCBAR</s:sku>
+      <s:grams>7</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/9959549174036</id>
+    <published>2025-09-11T15:47:13+02:00</published>
+    <updated>2025-09-11T15:47:13+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/liberty-gold-coin"/>
+    <title>Liberty Gold Coin</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            199.99
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p><strong data-start="68" data-end="89">Liberty Gold Coin</strong> – A timeless collectible crafted to honor the spirit of freedom and American pride. Struck with exquisite detail, this coin is a symbol of strength, heritage, and lasting value — perfect for any patriot’s collection.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>gold coin</s:tag>
+    <s:tag>golden liberty coin</s:tag>
+    <s:tag>liberty coin</s:tag>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9959549174036</id>
+      <title>Default Title</title>
+      <s:price currency="USD">199.99</s:price>
+      <s:sku>0</s:sku>
+      <s:grams>70</s:grams>
+    </s:variant>
+  </entry>
+</feed>

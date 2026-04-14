@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify">
+  <id>https://ourmagashop.com/collections/all.atom</id>
+  <link rel="alternate" type="text/html" href="https://ourmagashop.com/collections/all"/>
+  <link rel="self" type="application/atom+xml" href="https://ourmagashop.com/collections/apparel.atom"/>
+  <title>Our Maga Shop</title>
+  <updated>2025-09-23T16:41:56+02:00</updated>
+  <author>
+    <name>Our Maga Shop</name>
+  </author>
+  <entry>
+    <id>https://ourmagashop.com/products/9982857969940</id>
+    <published>2025-09-23T16:41:56+02:00</published>
+    <updated>2025-09-23T16:41:56+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/trump-2024-socks"/>
+    <title>Trump 2024 Socks</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            9.99
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+<li>Designed For Unisex</li>
+</ul>
+<p>Crafted from a premium polyester and cotton blend, these Trump 2024 Socks combine durability with comfort. The elastic fabric ensures a snug fit while enhancing breathability and sweat absorption for all-day wear. Featuring a black knit tube and heel with seamless toes, these unisex socks provide both style and a smooth finish to prevent irritation. Ideal for supporters seeking both performance and subtle design.</p>
+<h2><strong>Key Features</strong></h2>
+<p>✅ Premium polyester and cotton blend fabric.</p>
+<p>✅ Elastic and comfortable, with better touch feeling and sweat absorption.</p>
+<p>✅ Contrast black knit tube and heel with seamless toes.</p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9982857969940</id>
+      <title>Default Title</title>
+      <s:price currency="USD">9.99</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/9957538693396</id>
+    <published>2025-09-10T16:08:59+02:00</published>
+    <updated>2025-09-10T16:08:59+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/make-america-great-again-dark-maga-blackout-edition"/>
+    <title>Make America Great Again Dark MAGA Edition</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            55.00
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>Make a statement with this sleek, classic high crown hat that has made waves across the world.</p>
+<ul>
+<li>Black American flag at left temple</li>
+<li>45/47 embroidery at right temple</li>
+<li>TRUMP embroidery on the back of the hat</li>
+<li>Adjustable closure</li>
+<li>One size fits all</li>
+<li>Made in America</li>
+</ul></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9957538693396</id>
+      <title>Default Title</title>
+      <s:price currency="USD">55.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://ourmagashop.com/products/9957534335252</id>
+    <published>2025-09-10T16:08:10+02:00</published>
+    <updated>2025-09-10T16:08:10+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://ourmagashop.com/products/jesus-is-my-savior-trump-is-my-president-shirt"/>
+    <title>Jesus Is My Savior Trump Is My President Shirt</title>
+    <s:type></s:type>
+    <s:vendor>Our Maga Shop</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Our Maga Shop<br>
+        <strong>Type: </strong><br>
+        <strong>Price: </strong>
+            39.99
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><p><span>Quality You Can Trust</span><br><span>✔ Premium Fabric – Soft, breathable, and built to last</span><br><span>✔ Bold Design – Crisp lettering that won’t fade or crack</span><br><span>✔ Perfect Fit – Available in multiple sizes for men and women</span><br><span>✔ Great for Any Occasion – Ideal for rallies, prayer groups, family gatherings, or everyday wear</span></p></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:variant>
+      <id>https://ourmagashop.com/products/9957534335252</id>
+      <title>Default Title</title>
+      <s:price currency="USD">39.99</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+</feed>
