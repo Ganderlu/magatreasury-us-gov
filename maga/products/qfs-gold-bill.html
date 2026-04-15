@@ -2939,28 +2939,78 @@ Log in</a><ul class="list list-social list-unstyled" role="list"></ul>
         return;
       }
 
-      // НЕ го дисаблираме копчето → работи и ако се вратиш назад
-      // btn.disabled = true;  // <– отстрането
+      function parseJsonScript(selector){
+        const el = document.querySelector(selector);
+        if(!el) return null;
+        try { return JSON.parse(el.textContent || el.innerText || ''); } catch(e){ return null; }
+      }
 
-      // 1) исчисти cart
-      fetch('/cart/clear.js', {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json' },
-        credentials: 'same-origin'
-      }).catch(function(){})
-        .finally(function(){
-          // 2) submit на оригиналниот product form (Kaching ќе си го примени deal-от)
-          if (form.requestSubmit){
-            form.requestSubmit(atc || undefined);
-          } else {
-            form.submit();
-          }
+      function getSelectedDealId(){
+        const host =
+          selected.closest('[data-deal-bar-id]') ||
+          selected.closest('[data-dealbar-id]') ||
+          selected;
+        if(!host) return '';
+        return (
+          host.getAttribute('data-deal-bar-id') ||
+          host.getAttribute('data-dealbar-id') ||
+          (host.dataset ? (host.dataset.dealBarId || host.dataset.dealbarId || host.dataset.id) : '') ||
+          ''
+        );
+      }
 
-          // 3) кратко чекање → директно во checkout
-          setTimeout(function(){
-            window.location.href = '/checkout';
-          }, 450); // помал delay, можеш да смениш 350–600ms по вкус
-        });
+      const settings = parseJsonScript('script.kaching-bundles-deal-block-settings[data-product-id="10111677563156"]');
+      const product = parseJsonScript('script.kaching-bundles-product[data-product-id="10111677563156"]');
+
+      const selectedId = getSelectedDealId();
+      const selectedText = (selected.textContent || '').replace(/\s+/g,' ').trim();
+
+      let deal = null;
+      if (settings && Array.isArray(settings.dealBars)) {
+        deal = settings.dealBars.find(d => d && d.id === selectedId) || null;
+        if(!deal && selectedText){
+          deal = settings.dealBars.find(d => d && d.title && selectedText.indexOf(d.title) !== -1) || null;
+        }
+      }
+
+      if (!deal){
+        shake(btn);
+        return;
+      }
+
+      const baseCents =
+        product && product.variants && product.variants[0] && typeof product.variants[0].price === 'number'
+          ? product.variants[0].price
+          : 0;
+      const baseUnit = baseCents ? baseCents / 100 : 0;
+      const qtyBreak = typeof deal.quantity === 'number' ? deal.quantity : 1;
+      const sale = typeof deal.discountValue === 'number' ? deal.discountValue : 0;
+      const compare = baseUnit && qtyBreak ? baseUnit * qtyBreak : 0;
+
+      const image =
+        (document.querySelector('meta[property="og:image:secure_url"]') && document.querySelector('meta[property="og:image:secure_url"]').getAttribute('content')) ||
+        (document.querySelector('meta[property="og:image"]') && document.querySelector('meta[property="og:image"]').getAttribute('content')) ||
+        '';
+
+      const item = {
+        id: 'qfs-bundle:' + deal.id,
+        title: deal.title || 'QFS GOLD BILL',
+        qty: 1,
+        price: '$' + Number(sale).toFixed(2),
+        comparePrice: compare ? ('$' + Number(compare).toFixed(2)) : '',
+        image: image,
+        url: window.location.pathname + window.location.search
+      };
+
+      if (window.LocalCart && typeof window.LocalCart.setItems === 'function') {
+        window.LocalCart.setItems([item]);
+      } else {
+        try {
+          localStorage.setItem('localCart.v1', JSON.stringify({ items: [item] }));
+        } catch(e){}
+      }
+
+      window.location.href = '/checkout.html';
     });
   }
 
