@@ -1,0 +1,772 @@
+Uri: https://cdn.shopify.com/extensions/019daaee-e3fb-78dc-81f9-4b1df8112233/js-client-272/assets/pushowl-shopify.js
+File Name: C:\Users\User\Desktop\continue\extensions\019daaee-e3fb-78dc-81f9-4b1df8112233\js-client-272\assets\pushowl-shopify.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019dac91-ce1d-7587-aa97-5be57767d424/aftersell-704/assets/aftersell-utm-triggers.js
+File Name: C:\Users\User\Desktop\continue\extensions\019dac91-ce1d-7587-aa97-5be57767d424\aftersell-704\assets\aftersell-utm-triggers.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019dacd2-78b9-7397-8d0f-df691476558f/kaching-bundles-1781/assets/kaching-bundles.css
+File Name: C:\Users\User\Desktop\continue\extensions\019dacd2-78b9-7397-8d0f-df691476558f\kaching-bundles-1781\assets\kaching-bundles.css
+Content Type: text/css
+
+Uri: https://cdn.shopify.com/extensions/019dacd2-78b9-7397-8d0f-df691476558f/kaching-bundles-1781/assets/kaching-bundles.js
+File Name: C:\Users\User\Desktop\continue\extensions\019dacd2-78b9-7397-8d0f-df691476558f\kaching-bundles-1781\assets\kaching-bundles.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019dacd2-78b9-7397-8d0f-df691476558f/kaching-bundles-1781/assets/loader.js
+File Name: C:\Users\User\Desktop\continue\extensions\019dacd2-78b9-7397-8d0f-df691476558f\kaching-bundles-1781\assets\loader.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/proxy/6a4cd01c1028cf9c527bb1c3da4faa55ccf46adeef7a9f9a9def572f2f554f38/api.goaffpro.com/loader.js?shop=s50p29-va.myshopify.com&sp-cache-control=cHVibGljLCBtYXgtYWdlPTkwMA
+File Name: C:\Users\User\Desktop\continue\proxy\6a4cd01c1028cf9c527bb1c3da4faa55ccf46adeef7a9f9a9def572f2f554f38\api.goaffpro.com\loader.js
+Content Type: text/javascript
+
+Uri: https://cdn.trustedsite.com/js/partner-shopify.js?shop=s50p29-va.myshopify.com
+File Name: C:\Users\User\Desktop\continue\js\partner-shopify.js
+Content Type: text/javascript
+
+Uri: https://cdn.ywxi.net/js/1.js
+File Name: C:\Users\User\Desktop\continue\js\1.js
+Content Type: text/javascript
+
+Uri: https://fonts.gstatic.com/s/materialsymbolsoutlined/v141/kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzBwG-RpA6RzaxHMPdY40KH8nGzv3fzfVJU22ZZLsYEpzC_1qmr5Y0.woff2
+File Name: C:\Users\User\Desktop\continue\s\materialsymbolsoutlined\v141\kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzBwG-RpA6RzaxHMPdY40KH8nGzv3fzfVJU22ZZLsYEpzC_1qmr5Y0.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/a/goaffpro/loader.js
+File Name: C:\Users\User\Desktop\continue\a\goaffpro\loader.js
+Content Type: application/javascript
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i5.76d414ea3d56bb79ef992a9c62dce2e9063bc062.woff
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_i5.76d414ea3d56bb79ef992a9c62dce2e9063bc062.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i5.d3a783eb0cc26f2fda1e99d1dfec3ebaea1dc164.woff2
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_i5.d3a783eb0cc26f2fda1e99d1dfec3ebaea1dc164.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff
+File Name: C:\Users\User\Desktop\continue\cdn\fonts\montserrat\montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/s/trekkie.storefront.853740ed6e9bdebbd97573c5bbdd9cfe5fb59a39.min.js
+File Name: C:\Users\User\Desktop\continue\cdn\s\trekkie.storefront.853740ed6e9bdebbd97573c5bbdd9cfe5fb59a39.min.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791 1280w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-6.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710.webp?v=1773935791&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\002_i_3fee5de6-cf22-41e7-ad0f-98b62ad0d710-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?crop=center&height=32&v=1757530482&width=32
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=100
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=150
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=170
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-10.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=200
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=250
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-7.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=300
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-8.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=340
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-11.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=400
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-9.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=50
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=500
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=760
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\12312312312321321321-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193 1248w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom.png?v=1764256193&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce-Photoroom-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244 1248w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3.png?v=1764256244&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1764252873058-019ac5aa-10e0-7762-acdc-a5a96fc891ce_3-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274 990w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b.webp?v=1757513274&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\1961586c-e09f-416a-a658-617dc5d98777.049522a7549b4cd67e9842dbf787f10b-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417 1498w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-6.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-5.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-1.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-2.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-3.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/76ee6ba6-0b2a-4d1c-8acb-754b60a43af9.jpg?v=1775218417&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\76ee6ba6-0b2a-4d1c-8acb-754b60a43af9-4.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442 1346w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-6.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/866bccb8c9414884b6c8e5d06ae343bb.webp?v=1758638442&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\866bccb8c9414884b6c8e5d06ae343bb-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443 1346w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-6.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/94ada23a40c049b39c971f10efc013c3.webp?v=1758638443&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\94ada23a40c049b39c971f10efc013c3-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699 1280w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom.png?v=1770144699&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\A59d68b9040a248cf9bf3d4d6d56aa4d1P-Photoroom-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256 1024w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender-5.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender-1.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender-2.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender-3.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/FullSizeRender.jpg?v=1774292256&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\FullSizeRender-4.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368 2048w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Gemini_Generated_Image_1eiwhi1eiwhi1eiw.png?v=1770399368&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Gemini_Generated_Image_1eiwhi1eiwhi1eiw-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370 1000w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4.webp?v=1757617370&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\gempages_548339283191137160-ad70ef30-7bb3-44dc-b56e-498a9359e8c4-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239 1000w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec-5.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec-1.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec-2.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec-3.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H05788c6144a64d12a39b86eaea00b84ec.jpg?v=1757598239&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H05788c6144a64d12a39b86eaea00b84ec-4.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232 1000w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y-5.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y-1.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y-2.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y-3.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/H1b9ff8100f0f4fc7926b46092cc84d61y.jpg?v=1757598232&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\H1b9ff8100f0f4fc7926b46092cc84d61y-4.jpg
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370 1000w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41-5.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-07-11_09-42-41.webp?v=1757617370&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-07-11_09-42-41-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170 1024w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min-5.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min-1.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min-2.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min-3.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/photo_2025-10-07_19-55-18-Photoroom-min.webp?v=1771593170&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\photo_2025-10-07_19-55-18-Photoroom-min-4.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/protection.png?v=1773489030 512w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\protection-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/protection.png?v=1773489030&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\protection-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/protection.png?v=1773489030&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\protection-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/protection.png?v=1773489030&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\protection.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851 1024w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/qfsbar-front.png?v=1768084851&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\qfsbar-front-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851 1920w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/QFSBARFRONTBACK.png?v=1768084851&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\QFSBARFRONTBACK-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170 1600w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-6.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-5.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-1.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-2.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-3.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba.webp?v=1771593170&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\trumpbadge1_01f8b3b3-01b0-4a30-a7f9-af92647734ba-4.webp
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791 800w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_-_2025-08-13T163525.187-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_-_2025-08-13T163525.187-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_-_2025-08-13T163525.187-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_-_2025-08-13T163525.187.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_-_2025-08-13T163525.187.webp?v=1773935791&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_-_2025-08-13T163525.187-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551 2048w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=1066
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/Untitled_design_7.png?v=1770399551&width=940
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\Untitled_design_7-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327 800w
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\WhatsApp_Image_2025-08-30_at_18.29.01_a6713121-4.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327&width=165
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\WhatsApp_Image_2025-08-30_at_18.29.01_a6713121-1.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327&width=360
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\WhatsApp_Image_2025-08-30_at_18.29.01_a6713121-2.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327&width=533
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/files/WhatsApp_Image_2025-08-30_at_18.29.01_a6713121.webp?v=1757513327&width=720
+File Name: C:\Users\User\Desktop\continue\cdn\shop\files\WhatsApp_Image_2025-08-30_at_18.29.01_a6713121-3.webp
+Content Type: image/jpeg
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/base.css?v=5283702335686849421757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\base.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/component-facets.css?v=85339117615856704561757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\component-facets.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/component-predictive-search.css?v=76514217051199997821757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\component-predictive-search.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/facets.js?v=5979223589038938931757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\facets.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/main.js?v=21054179157073394981757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\main.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/quick-add.css?v=66140427377835179181757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\quick-add.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/quick-add.js?v=167831755224568317711757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\quick-add.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/secondary.js?v=176493633728047177611757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\secondary.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/show-more.js?v=90883108635033788741757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\show-more.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/template-collection.css?v=131127499998367489021757597594
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\assets\template-collection.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/compiled_assets/scripts.js?v=105813173562866673361757597621
+File Name: C:\Users\User\Desktop\continue\cdn\shop\t\4\compiled_assets\scripts.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.3.1.min.js
+File Name: C:\Users\User\Desktop\continue\cdn\shopifycloud\perf-kit\shopify-perf-kit-3.3.1.min.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/privacy-banner/storefront-banner.js
+File Name: C:\Users\User\Desktop\continue\cdn\shopifycloud\privacy-banner\storefront-banner.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.en.esm.js
+File Name: C:\Users\User\Desktop\continue\cdn\shopifycloud\shop-js\modules\v2\loader.init-shop-cart-sync.en.esm.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/storefront/assets/shop_events_listener-3da45d37.js
+File Name: C:\Users\User\Desktop\continue\cdn\shopifycloud\storefront\assets\shop_events_listener-3da45d37.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/storefront/assets/storefront/load_feature-1bd60354.js
+File Name: C:\Users\User\Desktop\continue\cdn\shopifycloud\storefront\assets\storefront\load_feature-1bd60354.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/wpm/b5153dfa3wa14e0a32p72aa89e7m94579b79l.js
+File Name: C:\Users\User\Desktop\continue\cdn\wpm\b5153dfa3wa14e0a32p72aa89e7m94579b79l.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/checkouts/internal/preloads.js?locale=en-US
+File Name: C:\Users\User\Desktop\continue\checkouts\internal\preloads.js
+Content Type: application/javascript
+
+Uri: https://ourmagashop.com/collections/all
+File Name: C:\Users\User\Desktop\continue\collections\all.html
+Content Type: text/html
+
+Uri: https://ourmagashop.com/collections/all.atom
+File Name: C:\Users\User\Desktop\continue\collections\all.atom
+Content Type: application/atom+xml
+
+Uri: https://shopify.jsdeliver.cloud/js/config.js
+File Name: C:\Users\User\Desktop\continue\js\config.js
+Content Type: text/javascript
+
