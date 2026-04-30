@@ -386,7 +386,24 @@
         var network = String(params.get("network") || "").toUpperCase();
         var returnUrl = String(params.get("return") || "/checkout.html");
 
-        var recipientAddress = "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+        var addressByCoin = {
+          BTC: "bc1qdmh9fwdy4fwnm7he6jgghxeelag32yausv0rv3",
+          ETH: "0x9D4E6b1c2Cb72A5967B05DA0614fcD59f8cFF6fA",
+          ADA: "addr1qygfjn089nezy2wcgpzjhysws0h9rz0cgtwfp7uysryl7azmunx99jnpj5zrf29hj4qg3wcssudsdyfa4wv65dxckkjsyhhc22",
+          QNT: "0x9D4E6b1c2Cb72A5967B05DA0614fcD59f8cFF6fA",
+          ALGO: "4PNEAKTNZUTM4FBBYHGKWB2F2DVFMYMM64GSXOAPNNIZXWDEGKKZ2D5H5A",
+          XDC: "F5Sm5ELi4xvnaQNLM2nd32UQNBX8TnwabCQ7xSaxHtnC",
+          XLM: "GDZQUL5UTWPUTUS6ZBAEYGICV235PLFK5JYKQVP3CEZROT2NIDXUHOIO",
+          XRP: "rpnoTuitEf2kKXP2qkXSg23Ctwd81dBitJ",
+        };
+
+        var recipientAddress = null;
+        if (coin === "USDT" && network === "TRC20") {
+          recipientAddress = "TRH3bhpgs1zf2xy4YMAYgQj2nXiVBwVvQF";
+        } else {
+          recipientAddress =
+            addressByCoin[coin] || "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+        }
 
         var ratesUsd = {
           BTC: 76400,
@@ -399,6 +416,9 @@
           SOL: 170,
           XRP: 0.55,
           ADA: 0.45,
+          QNT: 120,
+          ALGO: 0.2,
+          XDC: 0.04,
           DOGE: 0.15,
           DOT: 7.5,
           MATIC: 0.85,

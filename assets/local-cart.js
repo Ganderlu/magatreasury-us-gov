@@ -1197,11 +1197,44 @@
     var upsell = null;
     if (cart.items && cart.items.length) {
       var srcItem = cart.items[0];
-      var upsellUnit = parseMoney(srcItem.price);
-      var upsellCompare = parseMoney(srcItem.comparePrice);
+      function getPackFromTitle(title) {
+        var t = String(title || "");
+        var m = t.match(/(\d+)\s*x/i);
+        if (!m) return null;
+        var n = Number(m[1]);
+        return isFinite(n) ? n : null;
+      }
+
+      function getUpsellDefaultPack(pack) {
+        if (pack === 10) return 60;
+        if (pack === 25) return 60;
+        if (pack === 60) return 25;
+        if (pack === 90) return 60;
+        if (pack === 150) return 90;
+        if (pack === 400) return 150;
+        return 25;
+      }
+
+      var packPrices = {
+        10: 199,
+        25: 399,
+        60: 799,
+        90: 1399,
+        150: 1899,
+        400: 3499,
+      };
+
+      var srcPack = getPackFromTitle(srcItem.title);
+      var targetPack = getUpsellDefaultPack(srcPack);
+      var upsellUnit = packPrices[targetPack];
+      if (upsellUnit == null) upsellUnit = parseMoney(srcItem.price);
       if (upsellUnit == null) upsellUnit = 299;
-      if (upsellCompare == null || upsellCompare <= upsellUnit)
-        upsellCompare = 49975;
+
+      var upsellCompare = targetPack * 1999;
+      if (!isFinite(upsellCompare) || upsellCompare <= upsellUnit) {
+        upsellCompare = parseMoney(srcItem.comparePrice);
+      }
+      if (upsellCompare == null || upsellCompare <= upsellUnit) upsellCompare = 49975;
 
       var pct = 99;
       if (upsellCompare > 0 && upsellUnit >= 0 && upsellUnit < upsellCompare) {
@@ -1215,7 +1248,9 @@
       var upsellHeadline = document.createElement("div");
       upsellHeadline.className = "local-upsell__headline";
       upsellHeadline.innerHTML =
-        "<strong>VIP PATRIOTS ONLY:</strong> Secure Your X25 QFS GOLD BILLS Supply Before<br/>Checkout Closes!";
+        "<strong>VIP PATRIOTS ONLY:</strong> Secure Your X" +
+        String(targetPack) +
+        " QFS GOLD BILLS Supply Before<br/>Checkout Closes!";
 
       var upsellCard = document.createElement("div");
       upsellCard.className = "local-upsell__card";
@@ -1226,7 +1261,7 @@
       var upsellImg = document.createElement("img");
       upsellImg.className = "local-upsell__img";
       upsellImg.src = srcItem.image || "";
-      upsellImg.alt = "X25 QFS GOLD BILLS";
+      upsellImg.alt = "X" + String(targetPack) + " QFS GOLD BILLS";
 
       var upsellInfo = document.createElement("div");
       upsellInfo.className = "local-upsell__info";
@@ -1234,7 +1269,9 @@
       var upsellName = document.createElement("div");
       upsellName.className = "local-upsell__name";
       upsellName.innerHTML =
-        'X25 QFS GOLD BILLS <span class="local-upsell__off">(' +
+        "X" +
+        String(targetPack) +
+        ' QFS GOLD BILLS <span class="local-upsell__off">(' +
         String(pct) +
         "% OFF)</span>";
 
@@ -1259,12 +1296,13 @@
       upsellBtn.textContent = "Add";
       upsellBtn.addEventListener("click", function () {
         var next = loadCart();
+        var id = "qfs-bundle-" + String(targetPack);
         upsertItem(next, {
-          id: srcItem.id,
+          id: id,
           qty: 1,
-          title: srcItem.title,
-          price: srcItem.price,
-          comparePrice: srcItem.comparePrice,
+          title: "X" + String(targetPack) + " QFS GOLD BILLS",
+          price: formatMoney(upsellUnit),
+          comparePrice: formatMoney(upsellCompare),
           image: srcItem.image,
           url: srcItem.url,
         });

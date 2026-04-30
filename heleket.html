@@ -328,54 +328,30 @@
 
         var currencies = [
           "USDT",
-          "USDC",
           "BTC",
           "ETH",
-          "BNB",
-          "LTC",
-          "TRX",
-          "SOL",
+          "QNT",
+          "ALGO",
+          "XDC",
+          "XLM",
           "XRP",
           "ADA",
-          "DOGE",
-          "DOT",
-          "MATIC",
-          "AVAX",
-          "LINK",
-          "BCH",
-          "XLM",
-          "ATOM",
-          "ETC",
-          "TON",
-          "SHIB",
-          "UNI",
-          "APE",
-          "NEAR",
-          "FIL",
-          "ICP",
-          "XMR",
-          "EOS",
-          "XTZ",
-          "DAI",
         ];
 
         function getNetworks(sym) {
           if (
-            sym === "USDT" ||
-            sym === "USDC" ||
-            sym === "DAI" ||
-            sym === "SHIB"
+            sym === "USDT" 
           ) {
             return ["TRC20", "ERC20", "BEP20"];
           }
           if (sym === "BTC") return ["BTC"];
-          if (sym === "ETH") return ["ERC20"];
-          if (sym === "BNB") return ["BEP20"];
-          if (sym === "TRX") return ["TRC20"];
-          if (sym === "SOL") return ["SOL"];
+          if (sym === "ETH") return ["ETH"];
+          if (sym === "ADA") return ["ADA"];
+          if (sym === "QNT") return ["QNT"];
+          if (sym === "ALGO") return ["ALGO"];
           if (sym === "XRP") return ["XRP"];
-          if (sym === "DOGE") return ["DOGE"];
-          if (sym === "LTC") return ["LTC"];
+          if (sym === "XDC") return ["XDC"];
+          if (sym === "XLM") return ["XLM"];
           return ["Mainnet"];
         }
 
