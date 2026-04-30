@@ -1531,36 +1531,22 @@
     btn.textContent = "Redirecting to Heleket...";
     btn.disabled = true;
 
-    var payload = {
-      amount: String(amount),
-      currency: "USD",
-      order_id: "HELE-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
-      email: email,
-    };
+    var amt = typeof amount === "number" ? amount : Number(amount);
+    if (!isFinite(amt)) amt = 0;
 
-    fetch("/api/heleket.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        if (data && data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.message || "Failed to create Heleket invoice");
-        }
-      })
-      .catch(function (err) {
-        console.error("Heleket error:", err);
-        alert("Error: " + err.message);
-        btn.textContent = originalText;
-        btn.disabled = false;
-      });
+    var url =
+      "/heleket.html?amount=" +
+      encodeURIComponent(String(amt.toFixed(2))) +
+      "&currency=USD" +
+      "&return=" +
+      encodeURIComponent("/checkout.html");
+
+    window.location.href = url;
+
+    setTimeout(function () {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }, 1000);
   }
 
   function createCryptomusInvoice(amount, email) {
@@ -1568,39 +1554,25 @@
     if (!btn) return;
 
     var originalText = btn.textContent;
-    btn.textContent = "Redirecting to Payment...";
+    btn.textContent = "Redirecting to Cryptomus...";
     btn.disabled = true;
 
-    var payload = {
-      amount: String(amount),
-      currency: "USD",
-      order_id: "ORD-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
-      email: email,
-    };
+    var amt = typeof amount === "number" ? amount : Number(amount);
+    if (!isFinite(amt)) amt = 0;
 
-    fetch("/api/cryptomus.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        if (data && data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.message || "Failed to create invoice");
-        }
-      })
-      .catch(function (err) {
-        console.error("Cryptomus error:", err);
-        alert("Error: " + err.message);
-        btn.textContent = originalText;
-        btn.disabled = false;
-      });
+    var url =
+      "/cryptomus.html?amount=" +
+      encodeURIComponent(String(amt.toFixed(2))) +
+      "&currency=USD" +
+      "&return=" +
+      encodeURIComponent("/checkout.html");
+
+    window.location.href = url;
+
+    setTimeout(function () {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }, 1000);
   }
 
   function init() {

