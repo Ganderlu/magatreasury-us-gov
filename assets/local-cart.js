@@ -998,11 +998,6 @@
   var currentMethodIdx = 0;
   var methods = [
     {
-      id: "binance",
-      label: "Binance Pay - [AUTOMATIC]",
-      icon: "₿",
-    },
-    {
       id: "cryptomus",
       label:
         "Cryptomus - USDT | USDC | BTC | ETH | LTC | BEP20 | TRC20 + All Crypto Coins Accepted",
@@ -1510,9 +1505,7 @@
   function handlePayment() {
     var amt = getSubtotalNumber();
     var m = methods[currentMethodIdx];
-    if (m.id === "binance") {
-      createBinancePayOrder(amt, getEmailValue());
-    } else if (m.id === "cryptomus") {
+    if (m.id === "cryptomus") {
       createCryptomusInvoice(amt, getEmailValue());
     } else if (m.id === "heleket") {
       createHeleketInvoice(amt, getEmailValue());
