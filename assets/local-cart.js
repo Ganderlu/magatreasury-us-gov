@@ -2,6 +2,7 @@
   var STORAGE_KEY = "localCart.v1";
   var CHECKOUT_URL = "/checkout.html";
   var CRYPTO_USDT_TRC20 = "TRH3bhpgs1zf2xy4YMAYgQj2nXiVBwVvQF";
+  var BINANCE_ID = "1159880271";
   var drawerState = {
     open: false,
     reservedUntil: 0,
@@ -191,108 +192,6 @@
     wrap.appendChild(label);
     wrap.appendChild(row);
     wrap.appendChild(p2);
-    return wrap;
-  }
-
-  function getPaystackKey() {
-    if (window.LOCAL_PAYSTACK_PUBLIC_KEY)
-      return window.LOCAL_PAYSTACK_PUBLIC_KEY;
-    var k = localStorage.getItem("localPayPublicKey");
-    return k || "";
-  }
-
-  function setPaystackKey(key) {
-    localStorage.setItem("localPayPublicKey", String(key || "").trim());
-  }
-
-  function loadPaystackSdk(done) {
-    if (window.PaystackPop) return done();
-    var existing = document.querySelector('script[data-local-pay="paystack"]');
-    if (existing) {
-      existing.addEventListener("load", done);
-      return;
-    }
-    var s = document.createElement("script");
-    s.src = "https://js.paystack.co/v1/inline.js";
-    s.async = true;
-    s.setAttribute("data-local-pay", "paystack");
-    s.addEventListener("load", done);
-    document.head.appendChild(s);
-  }
-
-  function openSecureCardPayment(amountNumber, email, onSuccess) {
-    var key = getPaystackKey();
-    if (!key) return;
-    var currency = window.LOCAL_PAYSTACK_CURRENCY || "USD";
-    var amount = Math.max(1, Math.round(Number(amountNumber || 0) * 100));
-    var ref = "LC-" + Date.now() + "-" + Math.random().toString(16).slice(2);
-    loadPaystackSdk(function () {
-      if (!window.PaystackPop || !window.PaystackPop.setup) return;
-      var handler = window.PaystackPop.setup({
-        key: key,
-        email: email || "customer@example.com",
-        amount: amount,
-        currency: currency,
-        ref: ref,
-        callback: function (_response) {
-          if (onSuccess) onSuccess();
-        },
-      });
-      handler.openIframe();
-    });
-  }
-
-  function buildCardPaymentModal(getAmount, getEmail, onSuccess) {
-    var wrap = document.createElement("div");
-    wrap.className = "local-pay";
-
-    var p1 = document.createElement("div");
-    p1.className = "local-pay__text";
-    p1.textContent =
-      "A secure payment window will open for you to enter your card details and complete your payment.";
-
-    var key = getPaystackKey();
-
-    var keyRow = document.createElement("div");
-    keyRow.className = "local-pay__keyrow";
-
-    var keyInput = document.createElement("input");
-    keyInput.type = "text";
-    keyInput.placeholder = "Payment public key (pk_...)";
-    keyInput.className = "local-pay__input";
-    keyInput.value = key || "";
-
-    var keySave = document.createElement("button");
-    keySave.type = "button";
-    keySave.className = "local-pay__btn";
-    keySave.textContent = "Save";
-    keySave.addEventListener("click", function () {
-      setPaystackKey(keyInput.value);
-      keySave.textContent = "Saved";
-      setTimeout(function () {
-        keySave.textContent = "Save";
-      }, 1200);
-    });
-
-    keyRow.appendChild(keyInput);
-    keyRow.appendChild(keySave);
-
-    var pay = document.createElement("button");
-    pay.type = "button";
-    pay.className = "local-pay__paybtn";
-    pay.textContent = "Pay now";
-    pay.addEventListener("click", function () {
-      var amt = getAmount ? getAmount() : 0;
-      var mail = getEmail ? getEmail() : "";
-      openSecureCardPayment(amt, mail, function () {
-        closeModal();
-        if (onSuccess) onSuccess();
-      });
-    });
-
-    wrap.appendChild(p1);
-    wrap.appendChild(keyRow);
-    wrap.appendChild(pay);
     return wrap;
   }
 
@@ -681,7 +580,6 @@
 
         bottom.appendChild(qty);
         bottom.appendChild(priceWrap);
-
         main.appendChild(top);
         main.appendChild(bottom);
 
@@ -1097,6 +995,27 @@
     updateCartBadge();
   }
 
+  var currentMethodIdx = 0;
+  var methods = [
+    {
+      id: "binance",
+      label: "Binance Pay - [AUTOMATIC]",
+      icon: "₿",
+    },
+    {
+      id: "cryptomus",
+      label:
+        "Cryptomus - USDT | USDC | BTC | ETH | LTC | BEP20 | TRC20 + All Crypto Coins Accepted",
+      icon: "₿",
+    },
+    {
+      id: "heleket",
+      label:
+        "Heleket - USDT | USDC | BTC | ETH | LTC | BEP20 | TRC20 + All Crypto Coins Accepted",
+      icon: "₿",
+    },
+  ];
+
   function renderCheckoutPage() {
     var root = document.getElementById("local-checkout-page");
     if (!root) return;
@@ -1107,10 +1026,18 @@
     var wrap = document.createElement("div");
     wrap.className = "local-checkout";
 
+    // Header matching image
     var header = document.createElement("div");
     header.className = "local-checkout__topbar";
     header.innerHTML =
-      '<div class="local-checkout__topbar-inner"><img class="local-checkout__headerimg" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="LIMITED TIME OFFER" /></div>';
+      '<div class="local-checkout__topbar-inner">' +
+      '<a href="/" style="display:flex; align-items:center;"><img class="local-checkout__headerimg" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="OUR MAGA SHOP" /></a>' +
+      '<div class="local-checkout__shields">' +
+      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_trusted_seller.png" />' +
+      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_100_secure.png" />' +
+      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_certified.png" />' +
+      "</div>" +
+      "</div>";
 
     var grid = document.createElement("div");
     grid.className = "local-checkout__grid";
@@ -1121,346 +1048,559 @@
     var right = document.createElement("div");
     right.className = "local-checkout__right";
 
-    var title = document.createElement("h1");
+    // TrustedSite badges (desktop at top, mobile after Complete Purchase)
+    var trustTopDesktop = document.createElement("img");
+    trustTopDesktop.className =
+      "local-checkout__trust-badge local-checkout__trust-badge--desktop";
+    trustTopDesktop.src = "https://cdn.ywxi.net/meter/ourmagashop.com/202.svg";
+
+    var trustTopMobile = document.createElement("img");
+    trustTopMobile.className =
+      "local-checkout__trust-badge local-checkout__trust-badge--mobile";
+    trustTopMobile.src = "https://cdn.ywxi.net/meter/ourmagashop.com/202.svg";
+
+    var title = document.createElement("div");
     title.className = "local-checkout__title";
-    title.textContent = "Checkout";
+    title.innerHTML =
+      'Email or Phone <a href="#" class="local-checkout__signin">Sign in</a>';
 
     var form = document.createElement("form");
     form.className = "local-checkout__form";
-    function showPaid() {
-      var notice = document.createElement("div");
-      notice.className = "local-checkout__success";
-      notice.textContent = "Payment received. Thank you!";
-      root.innerHTML = "";
-      root.appendChild(notice);
-      clearCart();
-    }
 
     function field(label, placeholder, type) {
       var w = document.createElement("div");
       w.className = "local-checkout__field";
-      var l = document.createElement("label");
-      l.textContent = label;
       var i = document.createElement("input");
       i.type = type || "text";
       i.placeholder = placeholder || "";
-      w.appendChild(l);
       w.appendChild(i);
       return w;
     }
 
+    var contactField = field("", "Email", "email");
+    var trackingWrap = document.createElement("label");
+    trackingWrap.className = "local-checkout__checkbox-wrap";
+    trackingWrap.innerHTML =
+      '<input type="checkbox" checked /> Send me live tracking and order updates';
+
     var contact = document.createElement("div");
     contact.className = "local-checkout__section";
-    contact.innerHTML = '<h2 class="local-checkout__h2">Email or Phone</h2>';
-    contact.appendChild(field("", "Email", "email"));
+    contact.appendChild(contactField);
+    contact.appendChild(trackingWrap);
 
     var delivery = document.createElement("div");
     delivery.className = "local-checkout__section";
     delivery.innerHTML = '<h2 class="local-checkout__h2">Delivery</h2>';
-    delivery.appendChild(field("", "Country/Region", "text"));
+
+    var country = document.createElement("div");
+    country.className = "local-checkout__field";
+    country.innerHTML =
+      '<select disabled style="background:#f9f9f9; cursor:default; color:#121212; border: 1px solid #d9d9d9; padding:14px; border-radius:10px; width:100%;"><option>United States</option></select>';
 
     var nameRow = document.createElement("div");
-    nameRow.className = "local-checkout__row";
+    nameRow.style.display = "grid";
+    nameRow.style.gridTemplateColumns = "1fr 1fr";
+    nameRow.style.gap = "12px";
+    nameRow.style.marginTop = "12px";
     nameRow.appendChild(field("", "First name", "text"));
     nameRow.appendChild(field("", "Last name", "text"));
+
+    delivery.appendChild(country);
     delivery.appendChild(nameRow);
     delivery.appendChild(field("", "Address", "text"));
-    delivery.appendChild(
-      field("", "Apartment, suite, etc. (optional)", "text"),
-    );
+    var aptField = field("", "Apartment, suite, etc. (optional)", "text");
+    aptField.style.marginTop = "12px";
+    delivery.appendChild(aptField);
+
     var cityRow = document.createElement("div");
-    cityRow.className = "local-checkout__row";
+    cityRow.style.display = "grid";
+    cityRow.style.gridTemplateColumns = "1fr 1fr 1fr";
+    cityRow.style.gap = "12px";
+    cityRow.style.marginTop = "12px";
     cityRow.appendChild(field("", "City", "text"));
     cityRow.appendChild(field("", "State", "text"));
     cityRow.appendChild(field("", "ZIP code", "text"));
     delivery.appendChild(cityRow);
-    delivery.appendChild(field("", "Phone", "tel"));
+
+    var phoneField = field("", "Phone", "tel");
+    phoneField.style.marginTop = "12px";
+    delivery.appendChild(phoneField);
 
     var payment = document.createElement("div");
     payment.className = "local-checkout__section";
     payment.innerHTML = '<h2 class="local-checkout__h2">Secure Checkout</h2>';
-    var payNote = document.createElement("div");
-    payNote.className = "local-checkout__paynote";
-    payNote.textContent =
-      "All transactions are secure and encrypted. Your order includes free returns and 24/7 access to our award-winning customer service.";
-    payment.appendChild(payNote);
 
-    var payChoices = document.createElement("div");
-    payChoices.className = "local-checkout__paychoices";
+    var payMethodWrap = document.createElement("div");
+    payMethodWrap.className = "local-pay-method";
+    payMethodWrap.innerHTML =
+      '<div class="local-pay-method__hi">Hi choose your desired Payment Method!</div>' +
+      '<div class="local-pay-method__label">Method</div>';
 
-    var btnCrypto = document.createElement("button");
-    btnCrypto.type = "button";
-    btnCrypto.className = "local-checkout__paychoice";
-    btnCrypto.textContent = "Pay with crypto wallet";
+    var selector = document.createElement("div");
+    selector.className = "local-pay-selector";
+    var selectorInner = document.createElement("div");
+    selectorInner.className = "local-pay-selector__inner";
+    var selected = methods[currentMethodIdx] || methods[0];
+    selectorInner.innerHTML =
+      '<span class="local-pay-selector__icon">' +
+      (selected ? selected.icon : "") +
+      '</span><span class="local-pay-selector__text">' +
+      (selected ? selected.label : "") +
+      '</span><span class="local-pay-selector__caret">⌄</span>';
+    selector.appendChild(selectorInner);
 
-    var btnCard = document.createElement("button");
-    btnCard.type = "button";
-    btnCard.className =
-      "local-checkout__paychoice local-checkout__paychoice--primary";
-    btnCard.textContent = "Pay with credit card";
-
-    payChoices.appendChild(btnCrypto);
-    payChoices.appendChild(btnCard);
-    payment.appendChild(payChoices);
-
-    form.appendChild(contact);
-    form.appendChild(delivery);
-    form.appendChild(payment);
-
-    function getSubtotalNumber() {
-      var c = loadCart();
-      var total = 0;
-      for (var i = 0; i < c.items.length; i++) {
-        var unit = parseMoney(c.items[i].price);
-        if (unit != null) total += unit * (c.items[i].qty || 1);
-      }
-      return total;
-    }
-
-    function getEmailValue() {
-      var input = contact.querySelector('input[type="email"]');
-      return input ? String(input.value || "").trim() : "";
-    }
-
-    btnCrypto.addEventListener("click", function () {
-      var amt = getSubtotalNumber();
-      openModal("Pay with crypto wallet", buildCryptoModal(formatMoney(amt)));
-    });
-
-    btnCard.addEventListener("click", function () {
-      openModal(
-        "Pay with credit card",
-        buildCardPaymentModal(getSubtotalNumber, getEmailValue, showPaid),
-      );
-    });
-
-    var vip = document.createElement("div");
-    vip.className = "local-checkout__vip";
-
-    var vipTitle = document.createElement("div");
-    vipTitle.className = "local-checkout__vip-title";
-    vipTitle.textContent =
-      "VIP PATRIOTS ONLY: Secure Your X25 QFS GOLD BILLS Supply Before Checkout Closes!";
-
-    var vipCard = document.createElement("div");
-    vipCard.className = "local-checkout__vipcard";
-
-    var vipRow = document.createElement("div");
-    vipRow.className = "local-checkout__viprow";
-
-    var vipImg = document.createElement("img");
-    vipImg.className = "local-checkout__vipimg";
-    vipImg.alt = "X25 QFS GOLD BILLS";
-    vipImg.src = (cart.items[0] && cart.items[0].image) || "";
-
-    var vipMeta = document.createElement("div");
-    vipMeta.className = "local-checkout__vipmeta";
-
-    var vipName = document.createElement("div");
-    vipName.className = "local-checkout__vipname";
-    vipName.innerHTML =
-      'X25 QFS GOLD BILLS <span class="local-checkout__vipoff">(99% OFF)</span>';
-
-    var vipPrices = document.createElement("div");
-    vipPrices.className = "local-checkout__vipprices";
-    vipPrices.innerHTML = "<strong>$299.00</strong> <s>$49,975.00</s>";
-
-    vipMeta.appendChild(vipName);
-    vipMeta.appendChild(vipPrices);
-
-    vipRow.appendChild(vipImg);
-    vipRow.appendChild(vipMeta);
-    vipCard.appendChild(vipRow);
-
-    var vipAdd = document.createElement("button");
-    vipAdd.type = "button";
-    vipAdd.className = "local-checkout__vipadd";
-    vipAdd.textContent = "Add";
-    vipAdd.addEventListener("click", function () {
-      var c = loadCart();
-      upsertItem(c, {
-        id: "vip-x25-qfs-gold-bills",
-        title: "X25 QFS GOLD BILLS (99% OFF)",
-        qty: 1,
-        price: "$299.00",
-        comparePrice: "$49,975.00",
-        image: vipImg.src || "",
-        url: window.location.pathname,
+    var options = document.createElement("div");
+    options.className = "local-pay-options";
+    methods.forEach(function (m, idx) {
+      var opt = document.createElement("div");
+      opt.className = "local-pay-option";
+      if (idx === currentMethodIdx) opt.classList.add("is-selected");
+      opt.innerHTML =
+        '<span class="local-pay-option__icon">' +
+        m.icon +
+        '</span><span class="local-pay-option__text">' +
+        m.label +
+        "</span>";
+      opt.addEventListener("click", function (e) {
+        e.stopPropagation();
+        currentMethodIdx = idx;
+        selectorInner.querySelector(".local-pay-selector__text").textContent =
+          m.label;
+        selectorInner.querySelector(".local-pay-selector__icon").textContent =
+          m.icon;
+        var all = options.querySelectorAll(".local-pay-option");
+        for (var i = 0; i < all.length; i++)
+          all[i].classList.remove("is-selected");
+        opt.classList.add("is-selected");
+        options.classList.remove("is-open");
+        selector.classList.remove("is-open");
       });
-      saveCart(c);
-      updateCartBadge();
-      renderCheckoutPage();
+      options.appendChild(opt);
     });
 
-    vipCard.appendChild(vipAdd);
-    vip.appendChild(vipTitle);
-    vip.appendChild(vipCard);
+    selector.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = !options.classList.contains("is-open");
+      options.classList.toggle("is-open", open);
+      selector.classList.toggle("is-open", open);
+    });
+
+    document.addEventListener("click", function () {
+      options.classList.remove("is-open");
+      selector.classList.remove("is-open");
+    });
+
+    payMethodWrap.appendChild(selector);
+    payMethodWrap.appendChild(options);
+    payment.appendChild(payMethodWrap);
+
+    var upsell = null;
+    if (cart.items && cart.items.length) {
+      var srcItem = cart.items[0];
+      var upsellUnit = parseMoney(srcItem.price);
+      var upsellCompare = parseMoney(srcItem.comparePrice);
+      if (upsellUnit == null) upsellUnit = 299;
+      if (upsellCompare == null || upsellCompare <= upsellUnit)
+        upsellCompare = 49975;
+
+      var pct = 99;
+      if (upsellCompare > 0 && upsellUnit >= 0 && upsellUnit < upsellCompare) {
+        var raw = Math.round((1 - upsellUnit / upsellCompare) * 100);
+        pct = Math.max(1, Math.min(99, raw));
+      }
+
+      upsell = document.createElement("div");
+      upsell.className = "local-upsell";
+
+      var upsellHeadline = document.createElement("div");
+      upsellHeadline.className = "local-upsell__headline";
+      upsellHeadline.innerHTML =
+        "<strong>VIP PATRIOTS ONLY:</strong> Secure Your X25 QFS GOLD BILLS Supply Before<br/>Checkout Closes!";
+
+      var upsellCard = document.createElement("div");
+      upsellCard.className = "local-upsell__card";
+
+      var upsellTop = document.createElement("div");
+      upsellTop.className = "local-upsell__top";
+
+      var upsellImg = document.createElement("img");
+      upsellImg.className = "local-upsell__img";
+      upsellImg.src = srcItem.image || "";
+      upsellImg.alt = "X25 QFS GOLD BILLS";
+
+      var upsellInfo = document.createElement("div");
+      upsellInfo.className = "local-upsell__info";
+
+      var upsellName = document.createElement("div");
+      upsellName.className = "local-upsell__name";
+      upsellName.innerHTML =
+        'X25 QFS GOLD BILLS <span class="local-upsell__off">(' +
+        String(pct) +
+        "% OFF)</span>";
+
+      var upsellPrices = document.createElement("div");
+      upsellPrices.className = "local-upsell__prices";
+      upsellPrices.innerHTML =
+        '<span class="local-upsell__price">' +
+        formatMoney(upsellUnit) +
+        '</span><s class="local-upsell__compare">' +
+        formatMoney(upsellCompare) +
+        "</s>";
+
+      upsellInfo.appendChild(upsellName);
+      upsellInfo.appendChild(upsellPrices);
+
+      upsellTop.appendChild(upsellImg);
+      upsellTop.appendChild(upsellInfo);
+
+      var upsellBtn = document.createElement("button");
+      upsellBtn.type = "button";
+      upsellBtn.className = "local-upsell__add";
+      upsellBtn.textContent = "Add";
+      upsellBtn.addEventListener("click", function () {
+        var next = loadCart();
+        upsertItem(next, {
+          id: srcItem.id,
+          qty: 1,
+          title: srcItem.title,
+          price: srcItem.price,
+          comparePrice: srcItem.comparePrice,
+          image: srcItem.image,
+          url: srcItem.url,
+        });
+        saveCart(next);
+        updateCartBadge();
+        renderCheckoutPage();
+      });
+
+      upsellCard.appendChild(upsellTop);
+      upsellCard.appendChild(upsellBtn);
+      upsell.appendChild(upsellHeadline);
+      upsell.appendChild(upsellCard);
+    }
 
     var complete = document.createElement("button");
     complete.type = "button";
     complete.className = "local-checkout__complete";
     complete.textContent = "Complete Purchase";
+    complete.style.marginTop = "30px";
     complete.addEventListener("click", function () {
-      btnCard.click();
+      handlePayment();
     });
 
     var foot = document.createElement("div");
     foot.className = "local-checkout__foot";
     foot.innerHTML =
-      '<a href="#" class="local-checkout__footlink">Refund policy</a><a href="#" class="local-checkout__footlink">Shipping</a><a href="#" class="local-checkout__footlink">Privacy policy</a><a href="#" class="local-checkout__footlink">Terms of service</a><a href="#" class="local-checkout__footlink">Contact</a>';
+      '<a href="/policies/refund-policy.html" class="local-checkout__footlink">Refund policy</a>' +
+      '<a href="/policies/shipping-policy.html" class="local-checkout__footlink">Shipping</a>' +
+      '<a href="/policies/privacy-policy.html" class="local-checkout__footlink">Privacy policy</a>' +
+      '<a href="/policies/terms-of-service.html" class="local-checkout__footlink">Terms of service</a>' +
+      '<a href="/policies/contact.html" class="local-checkout__footlink">Contact</a>';
 
-    form.appendChild(vip);
+    form.appendChild(contact);
+    form.appendChild(delivery);
+    form.appendChild(payment);
+    if (upsell) form.appendChild(upsell);
     form.appendChild(complete);
+    form.appendChild(trustTopMobile);
     form.appendChild(foot);
 
-    var trustTop = document.createElement("div");
-    trustTop.className =
-      "local-checkout__trustbadge local-checkout__trustbadge--top";
-    trustTop.innerHTML =
-      '<img src="https://cdn.ywxi.net/meter/ourmagashop.com/202.svg" alt="TrustedSite" />';
-
-    left.appendChild(trustTop);
+    left.appendChild(trustTopDesktop);
     left.appendChild(title);
     left.appendChild(form);
 
-    var summary = document.createElement("div");
-    summary.className = "local-checkout__summary";
-    summary.innerHTML = "";
+    var itemsWrap = document.createElement("div");
+    itemsWrap.className = "local-checkout__summary-items";
+    var subtotal = 0;
+    var totalSavings = 0;
 
-    var items = document.createElement("div");
-    items.className = "local-checkout__summary-items";
+    for (var i = 0; i < cart.items.length; i++) {
+      var item = cart.items[i];
+      var row = document.createElement("div");
+      row.className = "local-checkout__summary-item";
 
-    var discount = document.createElement("div");
-    discount.className = "local-checkout__discount";
-    discount.innerHTML =
-      '<input type="text" placeholder="Discount code" /><button type="button">Apply</button>';
+      var imgWrap = document.createElement("div");
+      imgWrap.className = "local-checkout__summary-img-wrap";
+      imgWrap.innerHTML =
+        '<img class="local-checkout__summary-img" src="' +
+        (item.image || "") +
+        '" />' +
+        '<span class="local-checkout__summary-qty">' +
+        (item.qty || 1) +
+        "</span>";
+
+      var infoWrap = document.createElement("div");
+      infoWrap.className = "local-checkout__summary-info";
+
+      var unit = parseMoney(item.price);
+      var compare = parseMoney(item.comparePrice);
+
+      var titleRow = document.createElement("div");
+      titleRow.className = "local-checkout__summary-title-row";
+      titleRow.innerHTML =
+        '<div class="local-checkout__summary-title">' +
+        (item.title || "Product") +
+        "</div>" +
+        '<div class="local-checkout__summary-price-col">' +
+        (compare != null && unit != null && compare > unit
+          ? '<div class="local-checkout__summary-compare">' +
+            formatMoney(compare * (item.qty || 1)) +
+            "</div>"
+          : "") +
+        '<div class="local-checkout__summary-price">' +
+        formatMoney(unit * (item.qty || 1)) +
+        "</div>" +
+        "</div>";
+
+      infoWrap.appendChild(titleRow);
+
+      if (compare != null && unit != null && compare > unit) {
+        var disc = document.createElement("div");
+        disc.className = "local-checkout__summary-discount";
+        var saved = (compare - unit) * (item.qty || 1);
+        disc.innerHTML =
+          '<svg style="width:14px; height:14px; margin-right:5px; vertical-align:text-bottom;" viewBox="0 0 24 24"><path fill="currentColor" d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 8.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg> PATRIOTDISCOUNT (-' +
+          formatMoney(saved) +
+          ")";
+        infoWrap.appendChild(disc);
+      }
+
+      row.appendChild(imgWrap);
+      row.appendChild(infoWrap);
+
+      if (unit != null) subtotal += unit * (item.qty || 1);
+      if (compare != null && unit != null && compare > unit) {
+        totalSavings += (compare - unit) * (item.qty || 1);
+      }
+      itemsWrap.appendChild(row);
+    }
+
+    var discountWrap = document.createElement("div");
+    discountWrap.className = "local-checkout__discount-wrap";
+    discountWrap.innerHTML =
+      '<input type="text" class="local-checkout__discount-input" placeholder="Discount code" />' +
+      '<button type="button" class="local-checkout__discount-btn">Apply</button>';
 
     var totals = document.createElement("div");
     totals.className = "local-checkout__totals";
+    var totalsHTML =
+      '<div class="local-checkout__total-row"><span>Subtotal</span><span>' +
+      formatMoney(subtotal) +
+      "</span></div>" +
+      '<div class="local-checkout__total-row"><span>Shipping</span><span style="color:#666; font-size:13px;">Enter shipping address</span></div>' +
+      '<div class="local-checkout__total-row is-big"><span>Total</span><span style="font-size:14px; color:#666; margin-right:8px; font-weight:400;">USD</span><span>' +
+      formatMoney(subtotal) +
+      "</span></div>";
 
-    var subtotal = 0;
-    var savings = 0;
-    var compareTotal = 0;
-
-    if (!cart.items.length) {
-      items.innerHTML = '<div class="local-checkout__empty">No items.</div>';
-    } else {
-      for (var i = 0; i < cart.items.length; i++) {
-        var item = cart.items[i];
-        var row = document.createElement("div");
-        row.className = "local-checkout__summary-item";
-        var img = document.createElement("img");
-        img.className = "local-checkout__summary-img";
-        img.src = item.image || "";
-        img.alt = item.title || "Product";
-        var meta = document.createElement("div");
-        meta.className = "local-checkout__summary-meta";
-        var t = document.createElement("div");
-        t.className = "local-checkout__summary-title";
-        t.textContent = item.title || "Product";
-        var q = document.createElement("div");
-        q.className = "local-checkout__summary-qty";
-        q.textContent = "Qty: " + String(item.qty || 1);
-        meta.appendChild(t);
-        meta.appendChild(q);
-        var price = document.createElement("div");
-        price.className = "local-checkout__summary-price";
-        var unit = parseMoney(item.price);
-        var compare = parseMoney(item.comparePrice);
-        var line = unit != null ? unit * (item.qty || 1) : 0;
-        subtotal += line;
-        if (compare != null && unit != null && compare > unit) {
-          savings += (compare - unit) * (item.qty || 1);
-          compareTotal += compare * (item.qty || 1);
-        }
-        price.textContent = formatMoney(line);
-        row.appendChild(img);
-        row.appendChild(meta);
-        row.appendChild(price);
-        items.appendChild(row);
-      }
+    if (totalSavings > 0) {
+      totalsHTML +=
+        '<div class="local-checkout__savings-row"><svg style="width:20px; height:20px; margin-right:8px; vertical-align:text-bottom;" viewBox="0 0 24 24"><path fill="currentColor" d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 8.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/></svg> TOTAL SAVINGS ' +
+        formatMoney(totalSavings) +
+        "</div>";
     }
 
-    function totalRow(label, value, big, neg) {
-      var r = document.createElement("div");
-      r.className = "local-checkout__total-row" + (big ? " is-big" : "");
-      var l = document.createElement("div");
-      l.textContent = label;
-      var v = document.createElement("div");
-      v.textContent = value;
-      if (neg) v.classList.add("is-neg");
-      r.appendChild(l);
-      r.appendChild(v);
-      return r;
-    }
+    totals.innerHTML = totalsHTML;
 
-    if (savings > 0) {
-      totals.appendChild(
-        totalRow("TOTAL SAVINGS", "-" + formatMoney(savings), false, true),
-      );
-    }
-    totals.appendChild(
-      totalRow("Subtotal", formatMoney(subtotal), false, false),
-    );
-    totals.appendChild(
-      totalRow("Shipping", "Enter shipping address", false, false),
-    );
-    totals.appendChild(totalRow("Total", formatMoney(subtotal), true, false));
+    var trustBottom = document.createElement("img");
+    trustBottom.className = "local-checkout__trust-badge-small";
+    trustBottom.src = "https://cdn.ywxi.net/meter/ourmagashop.com/202.svg";
 
-    var summaryHeadDesktop = document.createElement("div");
-    summaryHeadDesktop.className = "local-checkout__summary-head";
-    summaryHeadDesktop.textContent = "Order summary";
+    var orderHead = document.createElement("div");
+    orderHead.className = "local-order-summary__head";
 
-    var summaryHead = document.createElement("button");
-    summaryHead.type = "button";
-    summaryHead.className = "local-checkout__summary-headbtn";
-    summaryHead.innerHTML =
-      '<span class="local-checkout__summary-headleft">Order summary</span><span class="local-checkout__summary-headright"></span>';
-
-    var headRight = summaryHead.querySelector(
-      ".local-checkout__summary-headright",
-    );
-    if (headRight) {
-      if (compareTotal > 0 && compareTotal > subtotal) {
-        headRight.innerHTML =
-          "<s>" +
+    var compareTotal = subtotal + totalSavings;
+    var headBtn = document.createElement("button");
+    headBtn.type = "button";
+    headBtn.className = "local-order-summary__toggle";
+    headBtn.setAttribute("aria-expanded", "true");
+    headBtn.innerHTML =
+      '<span class="local-order-summary__left">' +
+      'Order summary <span class="local-order-summary__caret">⌃</span>' +
+      "</span>" +
+      '<span class="local-order-summary__prices">' +
+      (totalSavings > 0
+        ? '<span class="local-order-summary__compare">' +
           formatMoney(compareTotal) +
-          "</s><strong>" +
-          formatMoney(subtotal) +
-          "</strong>";
-      } else {
-        headRight.innerHTML = "<strong>" + formatMoney(subtotal) + "</strong>";
-      }
-    }
+          "</span>"
+        : "") +
+      '<span class="local-order-summary__total">' +
+      formatMoney(subtotal) +
+      "</span>" +
+      "</span>";
 
-    var summaryBody = document.createElement("div");
-    summaryBody.className = "local-checkout__summary-body";
+    orderHead.appendChild(headBtn);
 
-    var trustBottom = document.createElement("div");
-    trustBottom.className =
-      "local-checkout__trustbadge local-checkout__trustbadge--bottom";
-    trustBottom.innerHTML =
-      '<img src="https://cdn.ywxi.net/meter/ourmagashop.com/202.svg" alt="TrustedSite" />';
+    var orderBody = document.createElement("div");
+    orderBody.className = "local-order-summary__body";
 
-    summaryBody.appendChild(items);
-    summaryBody.appendChild(discount);
-    summaryBody.appendChild(totals);
-    summaryBody.appendChild(trustBottom);
-
-    summary.appendChild(summaryHeadDesktop);
-    summary.appendChild(summaryHead);
-    summary.appendChild(summaryBody);
-    summaryHead.addEventListener("click", function () {
-      summary.classList.toggle("is-collapsed");
+    headBtn.addEventListener("click", function () {
+      var collapsed = orderBody.classList.toggle("is-collapsed");
+      headBtn.classList.toggle("is-collapsed", collapsed);
+      headBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
     });
-    right.appendChild(summary);
+
+    orderBody.appendChild(itemsWrap);
+    orderBody.appendChild(discountWrap);
+    orderBody.appendChild(totals);
+    orderBody.appendChild(trustBottom);
+
+    right.appendChild(orderHead);
+    right.appendChild(orderBody);
 
     grid.appendChild(left);
     grid.appendChild(right);
-
     wrap.appendChild(header);
     wrap.appendChild(grid);
     root.appendChild(wrap);
+  }
+
+  function getSubtotalNumber() {
+    var c = loadCart();
+    var total = 0;
+    for (var i = 0; i < c.items.length; i++) {
+      var unit = parseMoney(c.items[i].price);
+      if (unit != null) total += unit * (c.items[i].qty || 1);
+    }
+    return total;
+  }
+
+  function getEmailValue() {
+    var input = document.querySelector('input[type="email"]');
+    return input ? String(input.value || "").trim() : "";
+  }
+
+  function handlePayment() {
+    var amt = getSubtotalNumber();
+    var m = methods[currentMethodIdx];
+    if (m.id === "binance") {
+      createBinancePayOrder(amt, getEmailValue());
+    } else if (m.id === "cryptomus") {
+      createCryptomusInvoice(amt, getEmailValue());
+    } else if (m.id === "heleket") {
+      createHeleketInvoice(amt, getEmailValue());
+    } else {
+      openModal(m.label, buildCryptoModal(formatMoney(amt)));
+    }
+  }
+
+  function createBinancePayOrder(amount, email) {
+    var btn = document.querySelector(".local-checkout__complete");
+    if (!btn) return;
+
+    var originalText = btn.textContent;
+    btn.textContent = "Redirecting to Binance Pay...";
+    btn.disabled = true;
+
+    var payload = {
+      amount: String(amount),
+      currency: "USD",
+      order_id: "BIN-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
+      email: email,
+    };
+
+    fetch("/api/binance-pay.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.message || "Failed to create Binance Pay order");
+        }
+      })
+      .catch(function (err) {
+        console.error("Binance error:", err);
+        alert("Error: " + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+  }
+
+  function createHeleketInvoice(amount, email) {
+    var btn = document.querySelector(".local-checkout__complete");
+    if (!btn) return;
+
+    var originalText = btn.textContent;
+    btn.textContent = "Redirecting to Heleket...";
+    btn.disabled = true;
+
+    var payload = {
+      amount: String(amount),
+      currency: "USD",
+      order_id: "HELE-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
+      email: email,
+    };
+
+    fetch("/api/heleket.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.message || "Failed to create Heleket invoice");
+        }
+      })
+      .catch(function (err) {
+        console.error("Heleket error:", err);
+        alert("Error: " + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+  }
+
+  function createCryptomusInvoice(amount, email) {
+    var btn = document.querySelector(".local-checkout__complete");
+    if (!btn) return;
+
+    var originalText = btn.textContent;
+    btn.textContent = "Redirecting to Payment...";
+    btn.disabled = true;
+
+    var payload = {
+      amount: String(amount),
+      currency: "USD",
+      order_id: "ORD-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
+      email: email,
+    };
+
+    fetch("/api/cryptomus.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.message || "Failed to create invoice");
+        }
+      })
+      .catch(function (err) {
+        console.error("Cryptomus error:", err);
+        alert("Error: " + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
   }
 
   function init() {
@@ -1468,19 +1608,26 @@
     attachInterceptors();
     updateCartBadge();
     renderCartPage();
+
+    // Handle return from payment gateways
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("status") === "success") {
+      var root = document.getElementById("local-checkout-page");
+      if (root) {
+        var notice = document.createElement("div");
+        notice.className = "local-checkout__success";
+        notice.textContent = "Payment received. Thank you for your purchase!";
+        root.innerHTML = "";
+        root.appendChild(notice);
+        clearCart();
+        disableOurMagaShopLogoClick();
+        return;
+      }
+    }
+
     renderCheckoutPage();
     disableOurMagaShopLogoClick();
     scheduleDisableLogo();
-    setTimeout(scheduleDisableLogo, 800);
-    setTimeout(scheduleDisableLogo, 2200);
-    if (!logoObserverStarted && window.MutationObserver) {
-      logoObserverStarted = true;
-      var obs = new MutationObserver(scheduleDisableLogo);
-      obs.observe(document.documentElement, {
-        childList: true,
-        subtree: true,
-      });
-    }
   }
 
   window.LocalCart = {

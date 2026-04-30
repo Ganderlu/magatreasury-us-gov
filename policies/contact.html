@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Our Maga Shop</title>
+    <style>
+      :root {
+        --bg: #f6f6f6;
+        --card: #ffffff;
+        --text: #111;
+        --muted: #555;
+        --border: #e6e6e6;
+        --link: #1a73e8;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 60px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #000;
+      }
+      .nav a {
+        color: var(--link);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 26px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+      .meta {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      h2 {
+        margin: 22px 0 10px;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.65;
+        font-size: 15px;
+      }
+      ul {
+        margin: 8px 0 0 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 16px;
+        margin-top: 14px;
+      }
+      @media (max-width: 880px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .box {
+        background: #fafafa;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 14px;
+      }
+      .box strong {
+        color: #000;
+      }
+      .field {
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #222;
+      }
+      input,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 12px;
+        border: 1px solid #d9d9d9;
+        border-radius: 10px;
+        font-size: 14px;
+        outline: none;
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .btn {
+        width: 100%;
+        height: 46px;
+        border: none;
+        border-radius: 10px;
+        background: #000;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+      a {
+        color: var(--link);
+      }
+      .footer {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .footer a {
+        color: var(--link);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">Our Maga Shop</div>
+        <div class="nav"><a href="/checkout.html">Back to checkout</a></div>
+      </div>
+      <div class="card">
+        <h1>Contact</h1>
+        <p class="meta">
+          Need help with an order, shipping, refunds, or payment questions? Use the
+          details below. For the fastest resolution, include your order number and
+          the email used at checkout.
+        </p>
+
+        <div class="grid">
+          <div>
+            <h2>Contact Form</h2>
+            <p>
+              If your browser supports it, you can send us a message using your email
+              application. Fill out the form and click “Send Message” to open an email
+              draft with your details.
+            </p>
+            <form
+              action="mailto:support@ourmagashop.com"
+              method="post"
+              enctype="text/plain"
+            >
+              <div class="field">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <div class="field">
+                <label for="order">Order number (optional)</label>
+                <input
+                  id="order"
+                  name="order"
+                  type="text"
+                  placeholder="Example: ORD-123456"
+                />
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell us what you need help with..."
+                ></textarea>
+              </div>
+              <button class="btn" type="submit">Send Message</button>
+              <div class="small">
+                If your device does not support mailto links, email us directly at
+                <a href="mailto:support@ourmagashop.com">support@ourmagashop.com</a>.
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h2>Support Details</h2>
+            <div class="box">
+              <p>
+                <strong>Email:</strong>
+                <a href="mailto:support@ourmagashop.com">support@ourmagashop.com</a>
+              </p>
+              <p>
+                <strong>What to include:</strong>
+              </p>
+              <ul>
+                <li>Order number</li>
+                <li>Email used at checkout</li>
+                <li>Item name(s)</li>
+                <li>Shipping address confirmation (if address-related)</li>
+                <li>Photos for damaged/incorrect items</li>
+              </ul>
+              <p class="small">
+                We respond as quickly as possible. During high-volume periods, replies
+                may take longer, but every request is handled in the order received.
+              </p>
+            </div>
+
+            <h2>Common Questions</h2>
+            <div class="box">
+              <p>
+                <strong>Where is my order?</strong>
+                Check your tracking link first (if provided). If tracking hasn’t updated
+                for an extended period, send us your order number and we’ll help.
+              </p>
+              <p>
+                <strong>I entered the wrong address.</strong>
+                Contact us immediately. If fulfillment has not started, we may be able to
+                update it. If shipped, changes may not be possible.
+              </p>
+              <p>
+                <strong>I need a refund or replacement.</strong>
+                Please include photos if the item arrived damaged or incorrect. Review our
+                Refund Policy for details.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <a href="/policies/refund-policy.html">Refunds</a>
+          <a href="/policies/shipping-policy.html">Shipping</a>
+          <a href="/policies/privacy-policy.html">Privacy</a>
+          <a href="/policies/terms-of-service.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
