@@ -53,7 +53,7 @@
       .card {
         width: 100%;
         background: var(--card);
-        border: 1px solid rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(17, 24, 39, 0.08);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         padding: 26px 26px 18px;
@@ -139,8 +139,8 @@
         color: var(--text);
       }
       .input:focus {
-        border-color: rgba(17, 24, 39, 0.35);
-        box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+        border-color: rgba(10, 91, 211, 0.9);
+        box-shadow: 0 0 0 3px rgba(10, 91, 211, 0.12);
       }
       .check {
         display: flex;
@@ -180,6 +180,95 @@
       }
       .privacy:hover {
         text-decoration: underline;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          background: #ffffff;
+        }
+        .wrap {
+          padding: 0;
+          place-items: stretch;
+        }
+        .stack {
+          width: 100%;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          padding: 56px 22px 34px;
+        }
+        .card {
+          border-radius: 0;
+          border: 0;
+          box-shadow: none;
+          padding: 0;
+          background: transparent;
+        }
+        .limited-offer {
+          margin-bottom: 32px;
+        }
+        .limited-offer img {
+          width: min(360px, 100%);
+        }
+        .h1 {
+          font-size: 42px;
+          letter-spacing: -0.04em;
+        }
+        .sub {
+          font-size: 22px;
+          margin: 10px 0 28px;
+        }
+        .btn {
+          height: 76px;
+          border-radius: 18px;
+          font-size: 22px;
+        }
+        .divider {
+          margin: 26px 0 22px;
+        }
+        .divider::before {
+          height: 2px;
+          background: rgba(17, 24, 39, 0.16);
+        }
+        .divider span {
+          font-size: 18px;
+          padding: 0 18px;
+          background: #ffffff;
+          color: rgba(17, 24, 39, 0.55);
+        }
+        .input {
+          height: 78px;
+          border-radius: 18px;
+          border-width: 2px;
+          font-size: 22px;
+          padding: 0 18px;
+        }
+        .input:focus {
+          border-color: rgba(10, 91, 211, 1);
+          box-shadow: 0 0 0 4px rgba(10, 91, 211, 0.12);
+        }
+        .check {
+          margin-top: 6px;
+          gap: 14px;
+          font-size: 20px;
+          align-items: center;
+        }
+        .check input {
+          width: 22px;
+          height: 22px;
+          margin-top: 0;
+        }
+        .terms {
+          margin: 28px 0 0;
+          font-size: 18px;
+        }
+        .privacy {
+          margin-top: auto;
+          padding: 44px 0 0;
+          text-align: center;
+          font-size: 20px;
+        }
       }
     </style>
   </head>
