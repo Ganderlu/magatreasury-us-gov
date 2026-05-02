@@ -1,0 +1,220 @@
+Uri: https://cdn.shopify.com/extensions/019dd7da-d6fa-724f-ab4c-80f8d06e4c11/js-client-275/assets/pushowl-shopify.js
+File Name: C:\Users\User\Desktop\accessorie\extensions\019dd7da-d6fa-724f-ab4c-80f8d06e4c11\js-client-275\assets\pushowl-shopify.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019de007-0099-7233-b7ee-20479a821acf/kaching-bundles-1797/assets/kaching-bundles.css
+File Name: C:\Users\User\Desktop\accessorie\extensions\019de007-0099-7233-b7ee-20479a821acf\kaching-bundles-1797\assets\kaching-bundles.css
+Content Type: text/css
+
+Uri: https://cdn.shopify.com/extensions/019de007-0099-7233-b7ee-20479a821acf/kaching-bundles-1797/assets/kaching-bundles.js
+File Name: C:\Users\User\Desktop\accessorie\extensions\019de007-0099-7233-b7ee-20479a821acf\kaching-bundles-1797\assets\kaching-bundles.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019de007-0099-7233-b7ee-20479a821acf/kaching-bundles-1797/assets/loader.js
+File Name: C:\Users\User\Desktop\accessorie\extensions\019de007-0099-7233-b7ee-20479a821acf\kaching-bundles-1797\assets\loader.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/extensions/019de586-7d52-7ec8-a868-dc4ddf99e131/aftersell-732/assets/aftersell-utm-triggers.js
+File Name: C:\Users\User\Desktop\accessorie\extensions\019de586-7d52-7ec8-a868-dc4ddf99e131\aftersell-732\assets\aftersell-utm-triggers.js
+Content Type: text/javascript
+
+Uri: https://cdn.shopify.com/proxy/6a4cd01c1028cf9c527bb1c3da4faa55ccf46adeef7a9f9a9def572f2f554f38/api.goaffpro.com/loader.js?shop=s50p29-va.myshopify.com&sp-cache-control=cHVibGljLCBtYXgtYWdlPTkwMA
+File Name: C:\Users\User\Desktop\accessorie\proxy\6a4cd01c1028cf9c527bb1c3da4faa55ccf46adeef7a9f9a9def572f2f554f38\api.goaffpro.com\loader.js
+Content Type: text/javascript
+
+Uri: https://cdn.trustedsite.com/js/partner-shopify.js?shop=s50p29-va.myshopify.com
+File Name: C:\Users\User\Desktop\accessorie\js\partner-shopify.js
+Content Type: text/javascript
+
+Uri: https://cdn.ywxi.net/js/1.js
+File Name: C:\Users\User\Desktop\accessorie\js\1.js
+Content Type: text/javascript
+
+Uri: https://fonts.gstatic.com/s/materialsymbolsoutlined/v141/kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzBwG-RpA6RzaxHMPdY40KH8nGzv3fzfVJU22ZZLsYEpzC_1qmr5Y0.woff2
+File Name: C:\Users\User\Desktop\accessorie\s\materialsymbolsoutlined\v141\kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzBwG-RpA6RzaxHMPdY40KH8nGzv3fzfVJU22ZZLsYEpzC_1qmr5Y0.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/a/goaffpro/loader.js
+File Name: C:\Users\User\Desktop\accessorie\a\goaffpro\loader.js
+Content Type: application/javascript
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i5.76d414ea3d56bb79ef992a9c62dce2e9063bc062.woff
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_i5.76d414ea3d56bb79ef992a9c62dce2e9063bc062.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i5.d3a783eb0cc26f2fda1e99d1dfec3ebaea1dc164.woff2
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_i5.d3a783eb0cc26f2fda1e99d1dfec3ebaea1dc164.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_i7.a0d4a463df4f146567d871890ffb3c80408e7732.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_i7.f6ec9f2a0681acc6f8152c40921d2a4d2e1a2c78.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n4.81949fa0ac9fd2021e16436151e8eaa539321637.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n4.a6c632ca7b62da89c3594789ba828388aac693fe.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n5.07ef3781d9c78c8b93c98419da7ad4fbeebb6635.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n5.adf9b4bd8b0e4f55a0b203cdd84512667e0d5e4d.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n7.3c434e22befd5c18a6b4afadb1e3d77c128c7939.woff2
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/fonts/montserrat/montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff
+File Name: C:\Users\User\Desktop\accessorie\cdn\fonts\montserrat\montserrat_n7.5d9fa6e2cae713c8fb539a9876489d86207fe957.woff
+Content Type: font/woff2
+
+Uri: https://ourmagashop.com/cdn/s/trekkie.storefront.f004f70532a80935fbc1843785865c9096eb1816.min.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\s\trekkie.storefront.f004f70532a80935fbc1843785865c9096eb1816.min.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?crop=center&height=32&v=1757530482&width=32
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=100
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-4.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=150
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-5.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=170
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-10.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=200
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-6.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=250
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-7.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=300
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-8.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=340
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-11.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=400
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-9.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=50
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-3.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=500
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-1.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/files/12312312312321321321.png?v=1757530482&width=760
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\files\12312312312321321321-2.png
+Content Type: image/png
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/base.css?v=5283702335686849421757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\base.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/component-facets.css?v=85339117615856704561757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\component-facets.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/component-predictive-search.css?v=76514217051199997821757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\component-predictive-search.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/facets.js?v=5979223589038938931757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\facets.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/main.js?v=21054179157073394981757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\main.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/quick-add.css?v=66140427377835179181757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\quick-add.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/quick-add.js?v=167831755224568317711757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\quick-add.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/secondary.js?v=176493633728047177611757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\secondary.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/show-more.js?v=90883108635033788741757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\show-more.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/assets/template-collection.css?v=131127499998367489021757597594
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\assets\template-collection.css
+Content Type: text/css
+
+Uri: https://ourmagashop.com/cdn/shop/t/4/compiled_assets/scripts.js?v=105813173562866673361757597621
+File Name: C:\Users\User\Desktop\accessorie\cdn\shop\t\4\compiled_assets\scripts.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.3.1.min.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\shopifycloud\perf-kit\shopify-perf-kit-3.3.1.min.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/privacy-banner/storefront-banner.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\shopifycloud\privacy-banner\storefront-banner.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.en.esm.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\shopifycloud\shop-js\modules\v2\loader.init-shop-cart-sync.en.esm.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/storefront/assets/shop_events_listener-3da45d37.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\shopifycloud\storefront\assets\shop_events_listener-3da45d37.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/shopifycloud/storefront/assets/storefront/load_feature-1bd60354.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\shopifycloud\storefront\assets\storefront\load_feature-1bd60354.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/cdn/wpm/bf4d92176wf885f6b7p0eb8715fm37bdd4cel.js
+File Name: C:\Users\User\Desktop\accessorie\cdn\wpm\bf4d92176wf885f6b7p0eb8715fm37bdd4cel.js
+Content Type: text/javascript
+
+Uri: https://ourmagashop.com/checkouts/internal/preloads.js?locale=en-US
+File Name: C:\Users\User\Desktop\accessorie\checkouts\internal\preloads.js
+Content Type: application/javascript
+
+Uri: https://ourmagashop.com/collections/accessories
+File Name: C:\Users\User\Desktop\accessorie\collections\accessories.html
+Content Type: text/html
+
+Uri: https://ourmagashop.com/collections/accessories.atom
+File Name: C:\Users\User\Desktop\accessorie\collections\accessories.atom
+Content Type: application/atom+xml
+
+Uri: https://ourmagashop.com/collections/accessories.oembed
+File Name: C:\Users\User\Desktop\accessorie\collections\accessories.oembed
+Content Type: application/json+oembed
+
+Uri: https://shopify.jsdeliver.cloud/js/config.js
+File Name: C:\Users\User\Desktop\accessorie\js\config.js
+Content Type: text/javascript
+
