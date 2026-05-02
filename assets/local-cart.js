@@ -1027,11 +1027,6 @@
     header.innerHTML =
       '<div class="local-checkout__topbar-inner">' +
       '<a href="/" style="display:flex; align-items:center;"><img class="local-checkout__headerimg" src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="OUR MAGA SHOP" /></a>' +
-      '<div class="local-checkout__shields">' +
-      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_trusted_seller.png" />' +
-      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_100_secure.png" />' +
-      '<img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/shield_certified.png" />' +
-      "</div>" +
       "</div>";
 
     var grid = document.createElement("div");

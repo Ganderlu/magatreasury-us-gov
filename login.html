@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #f3f4f6;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: rgba(15, 23, 42, 0.55);
+        --border: rgba(15, 23, 42, 0.12);
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+        --radius: 10px;
+        --shop: #5a31f4;
+        --continue: #0a5bd3;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--page-bg);
+        color: var(--text);
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 34px 16px;
+      }
+      .stack {
+        width: min(420px, 100%);
+        display: grid;
+        justify-items: center;
+        gap: 16px;
+      }
+      .card {
+        width: 100%;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        padding: 26px 26px 18px;
+      }
+      .brand {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+      .limited-offer-img {
+        display: block;
+        width: min(320px, 100%);
+        height: auto;
+      }
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+      }
+      .brand-text {
+        display: grid;
+        gap: 4px;
+      }
+      .brand-title {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: rgba(15, 23, 42, 0.85);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .badges {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 18px;
+        padding: 0 8px;
+        border-radius: 999px;
+        background: rgba(18, 183, 106, 0.14);
+        color: rgba(2, 122, 72, 0.95);
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .badge svg {
+        width: 12px;
+        height: 12px;
+      }
+      .h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .p {
+        margin: 6px 0 16px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .btn {
+        width: 100%;
+        height: 48px;
+        border-radius: 8px;
+        border: 0;
+        font-weight: 800;
+        font-size: 14px;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      .btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+      .btn--shop {
+        background: var(--shop);
+      }
+      .btn--continue {
+        background: var(--continue);
+      }
+      .divider {
+        position: relative;
+        margin: 14px 0;
+        display: grid;
+        place-items: center;
+      }
+      .divider::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: rgba(15, 23, 42, 0.12);
+      }
+      .divider span {
+        position: relative;
+        background: var(--card-bg);
+        padding: 0 10px;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.45);
+      }
+      form {
+        display: grid;
+        gap: 12px;
+      }
+      .input {
+        width: 100%;
+        height: 46px;
+        border-radius: 8px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        padding: 0 12px;
+        font-size: 14px;
+        outline: none;
+        background: #ffffff;
+        color: var(--text);
+      }
+      .input:focus {
+        border-color: rgba(15, 23, 42, 0.35);
+        box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+      }
+      .check {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.78);
+        line-height: 1.35;
+      }
+      .check input {
+        width: 14px;
+        height: 14px;
+        margin-top: 2px;
+        accent-color: var(--continue);
+      }
+      .terms {
+        margin: 6px 0 0;
+        text-align: center;
+        font-size: 11px;
+        color: rgba(15, 23, 42, 0.45);
+      }
+      .terms a {
+        color: rgba(15, 23, 42, 0.55);
+      }
+      .status {
+        min-height: 16px;
+        font-size: 12px;
+        text-align: left;
+        color: rgba(15, 23, 42, 0.7);
+      }
+      .status.is-error {
+        color: #b42318;
+      }
+      .status.is-success {
+        color: #067647;
+      }
+      .privacy {
+        font-size: 12px;
+        color: #1d4ed8;
+        text-decoration: none;
+      }
+      .privacy:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="stack">
+        <div class="card">
+          <div class="brand">
+            <img
+              class="limited-offer-img"
+              src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+              alt="LIMITED TIME OFFER"
+            />
+          </div>
+
+          <h1 class="h1">Sign in</h1>
+          <div class="p">Sign in or create an account</div>
+
+          <button id="continue-shop" class="btn btn--shop" type="button">
+            Continue with shop
+          </button>
+
+          <div class="divider"><span>or</span></div>
+
+          <form id="login-form" autocomplete="on">
+            <input
+              id="email"
+              class="input"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="Email"
+              required
+            />
+            <button id="submit" class="btn btn--continue" type="submit">
+              Continue
+            </button>
+            <label class="check">
+              <input id="updates" type="checkbox" checked />
+              <span>Send me live tracking and order updates</span>
+            </label>
+            <div
+              id="status"
+              class="status"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <div class="terms">
+              By continuing, you agree to our
+              <a href="/policies/terms.html">Terms of service</a>
+            </div>
+          </form>
+        </div>
+
+        <a class="privacy" href="/policies/privacy.html">Privacy policy</a>
+      </div>
+    </div>
+
+    <script src="/firebase/firebase-auth.js"></script>
+    <script>
+      (function () {
+        var form = document.getElementById("login-form");
+        var emailEl = document.getElementById("email");
+        var submitEl = document.getElementById("submit");
+        var statusEl = document.getElementById("status");
+        var updatesEl = document.getElementById("updates");
+        var shopBtn = document.getElementById("continue-shop");
+
+        function setStatus(text, kind) {
+          statusEl.textContent = text || "";
+          statusEl.classList.remove("is-error", "is-success");
+          if (kind === "error") statusEl.classList.add("is-error");
+          if (kind === "success") statusEl.classList.add("is-success");
+        }
+
+        function safeString(v) {
+          if (v === null || v === undefined) return "";
+          return String(v);
+        }
+
+        function getRedirectUrl() {
+          try {
+            var u = new URL(window.location.href);
+            var r = u.searchParams.get("redirect");
+            return r ? r : "/maga/products/qfs-gold-bill.html";
+          } catch (e) {
+            return "/maga/products/qfs-gold-bill.html";
+          }
+        }
+
+        function submitEvent(action) {
+          var email = safeString(emailEl.value).trim();
+          if (!email) {
+            setStatus("Enter your email.", "error");
+            return Promise.resolve(false);
+          }
+
+          submitEl.disabled = true;
+          if (shopBtn) shopBtn.disabled = true;
+          setStatus("Submitting…", "");
+
+          return FirebaseAuthHelper.init()
+            .then(function () {
+              return FirebaseAuthHelper.writeToFirestore("login_attempts", {
+                action: action,
+                email: email,
+                updatesOptIn: !!(updatesEl && updatesEl.checked),
+                sourcePath: window.location.pathname,
+                sourceSearch: window.location.search || "",
+                referrer: document.referrer || "",
+                userAgent: navigator.userAgent || "",
+                createdAt: FirebaseAuthHelper.serverTimestamp(),
+              });
+            })
+            .then(function () {
+              setStatus("Done.", "success");
+              setTimeout(function () {
+                window.location.href = getRedirectUrl();
+              }, 450);
+              return true;
+            })
+            .catch(function (err) {
+              if (err && err.code === "config") {
+                setStatus("Firebase is not configured yet.", "error");
+              } else {
+                setStatus("Failed to write to Firebase.", "error");
+              }
+              return false;
+            })
+            .finally(function () {
+              submitEl.disabled = false;
+              if (shopBtn) shopBtn.disabled = false;
+            });
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          submitEvent("email_continue");
+        });
+
+        if (shopBtn) {
+          shopBtn.addEventListener("click", function () {
+            var email = safeString(emailEl.value).trim();
+            var redirect = getRedirectUrl();
+            var next = "/shop.html";
+            try {
+              var u = new URL(next, window.location.origin);
+              if (email) u.searchParams.set("email", email);
+              if (redirect) u.searchParams.set("redirect", redirect);
+              window.location.href = u.toString();
+            } catch (e) {
+              window.location.href = next;
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

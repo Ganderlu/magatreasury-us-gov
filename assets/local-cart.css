@@ -511,9 +511,26 @@
 }
 
 .local-checkout__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.local-checkout__row .local-checkout__field {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.local-checkout__row--city {
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .local-checkout__row--name,
+  .local-checkout__row--city {
+    flex-direction: column;
+  }
 }
 
 .local-pay-method {

@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in to Shop</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --text: #0f172a;
+        --muted: rgba(15, 23, 42, 0.62);
+        --muted-2: rgba(15, 23, 42, 0.45);
+        --border: rgba(15, 23, 42, 0.18);
+        --purple: #5a31f4;
+        --shadow: 0 12px 30px rgba(90, 49, 244, 0.26);
+        --radius: 999px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      .page {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px 58px;
+      }
+      .card {
+        width: min(520px, 100%);
+        display: grid;
+        justify-items: center;
+        text-align: center;
+      }
+      .logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        user-select: none;
+      }
+      .logo--shop {
+        background: var(--purple);
+        color: #ffffff;
+        box-shadow: var(--shadow);
+      }
+      .logo--om {
+        background: #f1f5f9;
+        color: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+      }
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 850;
+        letter-spacing: -0.03em;
+      }
+      .sub {
+        margin: 8px 0 18px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .form {
+        width: min(320px, 100%);
+        display: grid;
+        gap: 12px;
+        justify-items: stretch;
+      }
+      .input {
+        width: 100%;
+        height: 44px;
+        border-radius: var(--radius);
+        border: 1.5px solid rgba(15, 23, 42, 0.42);
+        padding: 0 16px;
+        font-size: 14px;
+        outline: none;
+        background: #ffffff;
+        color: var(--text);
+      }
+      .input::placeholder {
+        color: rgba(15, 23, 42, 0.42);
+      }
+      .input:focus {
+        border-color: rgba(90, 49, 244, 0.65);
+        box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
+      }
+      .btn {
+        width: 100%;
+        height: 44px;
+        border: 0;
+        border-radius: var(--radius);
+        background: var(--purple);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+      .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .passkey {
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.82);
+        text-decoration: none;
+      }
+      .passkey svg {
+        width: 16px;
+        height: 16px;
+        color: rgba(15, 23, 42, 0.7);
+      }
+      .fineprint {
+        margin-top: 18px;
+        max-width: 420px;
+        font-size: 11px;
+        color: var(--muted-2);
+        line-height: 1.45;
+      }
+      .fineprint a {
+        color: rgba(15, 23, 42, 0.55);
+      }
+      .status {
+        min-height: 16px;
+        font-size: 12px;
+        margin-top: 10px;
+        color: rgba(15, 23, 42, 0.65);
+        text-align: center;
+      }
+      .status.is-error {
+        color: #b42318;
+      }
+      .status.is-success {
+        color: #067647;
+      }
+      .lang {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 14px;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .lang-inner {
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.55);
+        user-select: none;
+      }
+      .lang select {
+        border: 0;
+        background: transparent;
+        color: rgba(15, 23, 42, 0.55);
+        font-size: 12px;
+        outline: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="logos" aria-hidden="true">
+          <div class="logo logo--shop">shop</div>
+          <div class="logo logo--om">OM</div>
+        </div>
+        <h1>Sign in to Shop</h1>
+        <div class="sub">To continue to Our Maga Shop</div>
+
+        <form id="shop-form" class="form" autocomplete="on">
+          <input
+            id="email"
+            class="input"
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          />
+          <button id="continue" class="btn" type="submit">Continue</button>
+          <div
+            id="status"
+            class="status"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </form>
+
+        <a class="passkey" href="#" id="passkey">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M16.5 10a4.5 4.5 0 1 0-3.92 4.45L14 15.87V18h2v2h2v-2.5l-1.5-1.5 1.5-1.5-1.5-1.5 1.12-1.12A4.48 4.48 0 0 0 16.5 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6.5 10h.01"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+            />
+          </svg>
+          Use a passkey
+        </a>
+
+        <div class="fineprint">
+          By continuing, you agree to Shop's
+          <a href="/policies/terms.html">terms</a>,
+          <a href="/policies/privacy.html">privacy policy</a>, and to sharing
+          your email, name, and avatar with Our Maga Shop. See their
+          <a href="/policies/terms.html">terms</a> and
+          <a href="/policies/privacy.html">privacy policy</a>.
+        </div>
+      </div>
+    </div>
+
+    <div class="lang" aria-hidden="true">
+      <div class="lang-inner">
+        <select>
+          <option selected>English</option>
+        </select>
+      </div>
+    </div>
+
+    <script src="/firebase/firebase-auth.js"></script>
+    <script>
+      (function () {
+        var form = document.getElementById("shop-form");
+        var emailEl = document.getElementById("email");
+        var btn = document.getElementById("continue");
+        var statusEl = document.getElementById("status");
+        var passkey = document.getElementById("passkey");
+        var lastActionUrl = "";
+
+        function setStatus(text, kind) {
+          statusEl.textContent = text || "";
+          statusEl.classList.remove("is-error", "is-success");
+          if (kind === "error") statusEl.classList.add("is-error");
+          if (kind === "success") statusEl.classList.add("is-success");
+        }
+
+        function safeString(v) {
+          if (v === null || v === undefined) return "";
+          return String(v);
+        }
+
+        function getRedirectUrl() {
+          try {
+            var u = new URL(window.location.href);
+            var r = u.searchParams.get("redirect");
+            return r ? r : "/maga/products/qfs-gold-bill.html";
+          } catch (e) {
+            return "/maga/products/qfs-gold-bill.html";
+          }
+        }
+
+        function writeAttempt(payload) {
+          return FirebaseAuthHelper.writeToFirestore("login_attempts", payload);
+        }
+
+        try {
+          var u0 = new URL(window.location.href);
+          var initialEmail = u0.searchParams.get("email");
+          if (initialEmail && emailEl) emailEl.value = initialEmail;
+        } catch (e) {}
+
+        if (passkey) {
+          passkey.addEventListener("click", function (e) {
+            e.preventDefault();
+            setStatus("Passkeys are not enabled on this site yet.", "error");
+          });
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          var email = safeString(emailEl.value).trim();
+          if (!email) {
+            setStatus("Enter your email.", "error");
+            return;
+          }
+          if (
+            window.location.protocol !== "http:" &&
+            window.location.protocol !== "https:"
+          ) {
+            setStatus(
+              "Open this page using http://localhost:8000/shop.html (not file://) to use email link sign-in.",
+              "error",
+            );
+            return;
+          }
+
+          btn.disabled = true;
+          setStatus("Submitting…", "");
+
+          FirebaseAuthHelper.init()
+            .then(function () {
+              var redirect = getRedirectUrl();
+              try {
+                localStorage.setItem("emailForSignIn", email);
+                localStorage.setItem("postSignInRedirect", redirect);
+              } catch (e) {}
+
+              var emailKey = email.toLowerCase();
+              var now = Date.now();
+              var cooldownMs = 60 * 1000;
+              var dayMs = 24 * 60 * 60 * 1000;
+              try {
+                var lastKey = "emailLinkLastSentAt:" + emailKey;
+                var countKey = "emailLinkSentCount:" + emailKey;
+                var lastAt = Number(localStorage.getItem(lastKey) || "0");
+                if (lastAt && now - lastAt < cooldownMs) {
+                  var waitSec = Math.ceil((cooldownMs - (now - lastAt)) / 1000);
+                  setStatus("Please wait " + waitSec + "s before requesting another link.", "error");
+                  btn.disabled = false;
+                  return Promise.resolve();
+                }
+
+                var rawCount = localStorage.getItem(countKey);
+                var countObj = rawCount ? JSON.parse(rawCount) : null;
+                if (countObj && typeof countObj.dayStartMs === "number" && now - countObj.dayStartMs < dayMs) {
+                  if (typeof countObj.count === "number" && countObj.count >= 3) {
+                    setStatus("Daily limit reached for this email on this device. Try again tomorrow.", "error");
+                    btn.disabled = false;
+                    return Promise.resolve();
+                  }
+                }
+              } catch (e) {}
+
+              var actionUrl;
+              try {
+                var u = new URL("/finish.html", window.location.origin);
+                actionUrl = u.toString();
+              } catch (e) {
+                actionUrl = window.location.origin + "/finish.html";
+              }
+              lastActionUrl = actionUrl;
+
+              return FirebaseAuthHelper.sendSignInLinkToEmail(email, {
+                url: actionUrl,
+                handleCodeInApp: true,
+              })
+                .then(function () {
+                  try {
+                    var lastKey2 = "emailLinkLastSentAt:" + email.toLowerCase();
+                    var countKey2 = "emailLinkSentCount:" + email.toLowerCase();
+                    localStorage.setItem(lastKey2, String(Date.now()));
+                    var rawCount2 = localStorage.getItem(countKey2);
+                    var obj2 = rawCount2 ? JSON.parse(rawCount2) : null;
+                    var now2 = Date.now();
+                    if (!obj2 || typeof obj2.dayStartMs !== "number" || now2 - obj2.dayStartMs >= dayMs) {
+                      obj2 = { dayStartMs: now2, count: 0 };
+                    }
+                    obj2.count = (typeof obj2.count === "number" ? obj2.count : 0) + 1;
+                    localStorage.setItem(countKey2, JSON.stringify(obj2));
+                  } catch (e) {}
+                  return writeAttempt({
+                    action: "email_link_sent",
+                    email: email,
+                    sourcePath: window.location.pathname,
+                    sourceSearch: window.location.search || "",
+                    referrer: document.referrer || "",
+                    userAgent: navigator.userAgent || "",
+                    createdAt: FirebaseAuthHelper.serverTimestamp(),
+                  });
+                })
+                .then(function () {
+                  try {
+                    var next = new URL("/finish.html", window.location.origin);
+                    next.searchParams.set("email", email);
+                    if (redirect) next.searchParams.set("redirect", redirect);
+                    window.location.href = next.toString();
+                  } catch (e) {
+                    window.location.href = "/finish.html";
+                  }
+                });
+            })
+            .then(function () {
+              setStatus("Check your email for the sign-in link.", "success");
+            })
+            .catch(function (err) {
+              if (err && err.code === "config") {
+                setStatus("Firebase is not configured yet.", "error");
+              } else {
+                var code = err && err.code ? String(err.code) : "";
+                var msg = err && err.message ? String(err.message) : "";
+                var help = "Failed to send email link.";
+                if (code === "auth/operation-not-allowed") {
+                  help =
+                    "Enable Email link sign-in in Firebase Console → Authentication → Sign-in method → Email/Password → Email link.";
+                } else if (
+                  code === "auth/unauthorized-continue-uri" ||
+                  code === "auth/invalid-continue-uri"
+                ) {
+                  var host = "";
+                  try {
+                    host = window.location.hostname || "";
+                  } catch (e) {}
+                  help =
+                    "Authorize this domain in Firebase Console → Authentication → Settings → Authorized domains (add " +
+                    (host || "localhost") +
+                    "). Also add 127.0.0.1 if you use it.";
+                } else if (code === "auth/invalid-email") {
+                  help = "Enter a valid email address.";
+                } else if (code === "auth/network-request-failed") {
+                  help =
+                    "Network error. Check your internet connection and disable ad blockers for localhost.";
+                }
+                var detail = help;
+                if (code) detail += " [" + code + "]";
+                if (msg) detail += " " + msg;
+                if (lastActionUrl) detail += " Continue URL: " + lastActionUrl;
+                setStatus(detail, "error");
+                try {
+                  localStorage.setItem(
+                    "lastEmailLinkError",
+                    JSON.stringify({
+                      code: code || null,
+                      message: msg || null,
+                      atMs: Date.now(),
+                    }),
+                  );
+                } catch (e) {}
+                try {
+                  console.error("Email link error:", err);
+                } catch (e) {}
+                FirebaseAuthHelper.init()
+                  .then(function () {
+                    return FirebaseAuthHelper.writeToFirestore(
+                      "login_attempts",
+                      {
+                        action: "email_link_send_error",
+                        email: email,
+                        errorCode: code || null,
+                        errorMessage: msg || null,
+                        sourcePath: window.location.pathname,
+                        sourceSearch: window.location.search || "",
+                        referrer: document.referrer || "",
+                        userAgent: navigator.userAgent || "",
+                        createdAt: FirebaseAuthHelper.serverTimestamp(),
+                      },
+                    );
+                  })
+                  .catch(function () {});
+              }
+            })
+            .finally(function () {
+              btn.disabled = false;
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>

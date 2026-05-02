@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f6fa;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: rgba(15, 23, 42, 0.62);
+        --border: rgba(15, 23, 42, 0.12);
+        --purple: #5a31f4;
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 28px 16px;
+      }
+      .card {
+        width: min(820px, 100%);
+        background: var(--card);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 20px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 850;
+        letter-spacing: -0.02em;
+      }
+      .meta {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .btn {
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        color: var(--text);
+        font-weight: 800;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .btn--primary {
+        border: 0;
+        background: var(--purple);
+        color: #ffffff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .tile {
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(90, 49, 244, 0.03);
+      }
+      .tile h3 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        font-weight: 850;
+      }
+      .tile p {
+        margin: 0;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="top">
+          <div>
+            <h1 class="title">Dashboard</h1>
+            <p class="meta">Signed in as <span id="email"></span></p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button id="go-store" class="btn btn--primary" type="button">Go to product</button>
+            <button id="logout" class="btn" type="button">Log out</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="tile">
+            <h3>Orders</h3>
+            <p>View order updates and tracking in one place.</p>
+          </div>
+          <div class="tile">
+            <h3>Account</h3>
+            <p>Manage your email and notification preferences.</p>
+          </div>
+          <div class="tile">
+            <h3>Support</h3>
+            <p>Get help with shipping, refunds, and product questions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/firebase/firebase-auth.js"></script>
+    <script>
+      (function () {
+        var emailEl = document.getElementById('email');
+        var logoutBtn = document.getElementById('logout');
+        var storeBtn = document.getElementById('go-store');
+
+        function getParam(name) {
+          try {
+            var u = new URL(window.location.href);
+            return u.searchParams.get(name) || '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        function getRedirectUrl() {
+          try {
+            var u = new URL(window.location.href);
+            var r = u.searchParams.get('redirect');
+            if (r) return r;
+            try {
+              var s = localStorage.getItem('postSignInRedirect');
+              if (s) return s;
+            } catch (e) {}
+            return '/maga/products/qfs-gold-bill.html';
+          } catch (e) {
+            return '/maga/products/qfs-gold-bill.html';
+          }
+        }
+
+        FirebaseAuthHelper.init()
+          .then(function () {
+            FirebaseAuthHelper.onAuthStateChanged(function (user) {
+              if (!user) {
+                window.location.href = '/shop.html';
+                return;
+              }
+              emailEl.textContent = user.email || 'Unknown';
+              try {
+                var key = 'loginLoggedForUid';
+                var last = sessionStorage.getItem(key);
+                if (last !== String(user.uid || '')) {
+                  sessionStorage.setItem(key, String(user.uid || ''));
+                  FirebaseAuthHelper.writeToFirestore('login_attempts', {
+                    action: 'login_success',
+                    method: 'auth_persisted',
+                    email: user.email || null,
+                    uid: user.uid || null,
+                    sourcePath: window.location.pathname,
+                    sourceSearch: window.location.search || '',
+                    referrer: document.referrer || '',
+                    userAgent: navigator.userAgent || '',
+                    createdAt: FirebaseAuthHelper.serverTimestamp()
+                  }).catch(function () {});
+                }
+              } catch (e) {}
+              FirebaseAuthHelper.writeToFirestore('login_attempts', {
+                action: 'dashboard_view',
+                email: user.email || null,
+                uid: user.uid || null,
+                sourcePath: window.location.pathname,
+                sourceSearch: window.location.search || '',
+                referrer: document.referrer || '',
+                userAgent: navigator.userAgent || '',
+                createdAt: FirebaseAuthHelper.serverTimestamp()
+              }).catch(function () {});
+            });
+          })
+          .catch(function () {
+            window.location.href = '/shop.html';
+          });
+
+        storeBtn.addEventListener('click', function () {
+          window.location.href = getRedirectUrl();
+        });
+
+        logoutBtn.addEventListener('click', function () {
+          FirebaseAuthHelper.init()
+            .then(function () {
+              var u = FirebaseAuthHelper.currentUser();
+              return FirebaseAuthHelper.writeToFirestore('login_attempts', {
+                action: 'logout',
+                email: u && u.email ? u.email : null,
+                uid: u && u.uid ? u.uid : null,
+                sourcePath: window.location.pathname,
+                sourceSearch: window.location.search || '',
+                referrer: document.referrer || '',
+                userAgent: navigator.userAgent || '',
+                createdAt: FirebaseAuthHelper.serverTimestamp()
+              }).catch(function () {}).then(function () {
+                return FirebaseAuthHelper.signOut();
+              });
+            })
+            .catch(function () {})
+            .finally(function () {
+              window.location.href = '/shop.html';
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
