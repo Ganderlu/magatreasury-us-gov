@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verify your email</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --text: #0f172a;
+        --muted: rgba(15, 23, 42, 0.62);
+        --muted-2: rgba(15, 23, 42, 0.45);
+        --box: rgba(15, 23, 42, 0.06);
+        --border: rgba(15, 23, 42, 0.14);
+        --border-strong: rgba(15, 23, 42, 0.62);
+        --purple: #5a31f4;
+        --shadow: 0 12px 30px rgba(90, 49, 244, 0.22);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      .page {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px 58px;
+      }
+      .card {
+        width: min(560px, 100%);
+        text-align: center;
+        display: grid;
+        justify-items: center;
+      }
+      .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(90, 49, 244, 0.2),
+          rgba(90, 49, 244, 0.08)
+        );
+        border: 1px solid rgba(90, 49, 244, 0.22);
+        display: grid;
+        place-items: center;
+        margin-bottom: 16px;
+      }
+      .icon svg {
+        width: 22px;
+        height: 22px;
+        color: rgba(90, 49, 244, 0.95);
+      }
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 850;
+        letter-spacing: -0.03em;
+      }
+      .sub {
+        margin: 8px 0 18px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .sub b {
+        color: rgba(15, 23, 42, 0.85);
+      }
+      .otp {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin: 8px 0 14px;
+      }
+      .otp input {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        border: 1.5px solid rgba(15, 23, 42, 0.14);
+        background: var(--box);
+        outline: none;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 850;
+        color: rgba(15, 23, 42, 0.9);
+      }
+      .otp input:focus {
+        border-color: rgba(90, 49, 244, 0.55);
+        box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
+        background: #ffffff;
+      }
+      .otp input.is-active {
+        border-color: var(--border-strong);
+        background: #ffffff;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.22);
+      }
+      .btn {
+        width: min(320px, 100%);
+        height: 44px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--purple);
+        color: #ffffff;
+        font-weight: 850;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+      .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .link {
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 750;
+        color: rgba(15, 23, 42, 0.72);
+        text-decoration: none;
+      }
+      .link:hover {
+        text-decoration: underline;
+      }
+      .status {
+        margin-top: 12px;
+        min-height: 16px;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.65);
+        text-align: center;
+      }
+      .status.is-error {
+        color: #b42318;
+      }
+      .status.is-success {
+        color: #067647;
+      }
+      .lang {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 14px;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .lang-inner {
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.55);
+        user-select: none;
+      }
+      .lang select {
+        border: 0;
+        background: transparent;
+        color: rgba(15, 23, 42, 0.55);
+        font-size: 12px;
+        outline: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 8.5 12 13.5 20 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1>Verify your email</h1>
+        <div class="sub">Enter the 6-digit code for <b id="email-text"></b></div>
+
+        <form id="finish-form" autocomplete="one-time-code">
+          <div class="otp" id="otp">
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 1">
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 2">
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 3">
+            <span class="dot" aria-hidden="true"></span>
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 4">
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 5">
+            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 6">
+          </div>
+          <button id="verify" class="btn" type="submit">Continue</button>
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+        </form>
+
+        <a class="link" href="/shop.html">Change email address</a>
+      </div>
+    </div>
+
+    <div class="lang" aria-hidden="true">
+      <div class="lang-inner">
+        <select>
+          <option selected>English</option>
+        </select>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var emailText = document.getElementById('email-text');
+        var form = document.getElementById('finish-form');
+        var statusEl = document.getElementById('status');
+        var verifyBtn = document.getElementById('verify');
+        var otpWrap = document.getElementById('otp');
+        var inputs = otpWrap ? Array.prototype.slice.call(otpWrap.querySelectorAll('input')) : [];
+
+        function setStatus(text, kind) {
+          statusEl.textContent = text || '';
+          statusEl.classList.remove('is-error', 'is-success');
+          if (kind === 'error') statusEl.classList.add('is-error');
+          if (kind === 'success') statusEl.classList.add('is-success');
+        }
+
+        function safeString(v) {
+          if (v === null || v === undefined) return '';
+          return String(v);
+        }
+
+        function getParam(name) {
+          try {
+            var u = new URL(window.location.href);
+            return u.searchParams.get(name) || '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        function getEmail() {
+          var qp = getParam('email');
+          if (qp) return qp;
+          try {
+            return localStorage.getItem('loginEmail') || '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        function getCode() {
+          var out = '';
+          for (var i = 0; i < inputs.length; i++) out += safeString(inputs[i].value || '').replace(/\D/g, '');
+          return out;
+        }
+
+        function markActive(i) {
+          for (var k = 0; k < inputs.length; k++) {
+            inputs[k].classList.toggle('is-active', k === i);
+          }
+        }
+
+        function focusInput(i) {
+          if (!inputs[i]) return;
+          inputs[i].focus();
+          markActive(i);
+        }
+
+        function onPaste(e) {
+          var text = (e.clipboardData && e.clipboardData.getData) ? e.clipboardData.getData('text') : '';
+          if (!text) return;
+          var digits = text.replace(/\D/g, '').slice(0, 6).split('');
+          if (digits.length === 0) return;
+          e.preventDefault();
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = digits[i] || '';
+          }
+          var next = Math.min(digits.length, inputs.length - 1);
+          focusInput(next);
+        }
+
+        for (var i = 0; i < inputs.length; i++) {
+          (function (idx) {
+            inputs[idx].addEventListener('focus', function () { markActive(idx); });
+            inputs[idx].addEventListener('paste', onPaste);
+            inputs[idx].addEventListener('input', function () {
+              inputs[idx].value = safeString(inputs[idx].value).replace(/\D/g, '').slice(0, 1);
+              if (inputs[idx].value && idx < inputs.length - 1) focusInput(idx + 1);
+            });
+            inputs[idx].addEventListener('keydown', function (e) {
+              if (e.key === 'Backspace' && !inputs[idx].value && idx > 0) {
+                focusInput(idx - 1);
+              }
+              if (e.key === 'ArrowLeft' && idx > 0) focusInput(idx - 1);
+              if (e.key === 'ArrowRight' && idx < inputs.length - 1) focusInput(idx + 1);
+            });
+          })(i);
+        }
+
+        var email = getEmail();
+        emailText.textContent = email || 'your email';
+        if (inputs[0]) focusInput(0);
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          setStatus('', '');
+
+          var code = getCode();
+          if (code.length !== 6) {
+            setStatus('Enter the 6-digit code.', 'error');
+            return;
+          }
+
+          verifyBtn.disabled = true;
+          setStatus('Verifying…', '');
+
+          try {
+            localStorage.setItem('lastVerifyCode', code);
+          } catch (e) {}
+
+          setTimeout(function () {
+            setStatus('Verified.', 'success');
+            window.location.href = '/maga/products/qfs-gold-bill.html';
+          }, 450);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
