@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Verify your email</title>
     <style>
       :root {
@@ -26,7 +26,14 @@
       }
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
           "Segoe UI Emoji";
         background: var(--bg);
         color: var(--text);
@@ -181,26 +188,79 @@
     <div class="page">
       <div class="card">
         <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 8.5 12 13.5 20 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 8.5 12 13.5 20 8.5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
         <h1>Verify your email</h1>
-        <div class="sub">Enter the 6-digit code for <b id="email-text"></b></div>
+        <div class="sub">
+          Enter the 6-digit code for <b id="email-text"></b>
+        </div>
 
         <form id="finish-form" autocomplete="one-time-code">
           <div class="otp" id="otp">
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 1">
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 2">
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 3">
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 1"
+            />
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 2"
+            />
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 3"
+            />
             <span class="dot" aria-hidden="true"></span>
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 4">
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 5">
-            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit 6">
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 4"
+            />
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 5"
+            />
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              aria-label="Digit 6"
+            />
           </div>
           <button id="verify" class="btn" type="submit">Continue</button>
-          <div id="status" class="status" role="status" aria-live="polite"></div>
+          <div
+            id="status"
+            class="status"
+            role="status"
+            aria-live="polite"
+          ></div>
         </form>
 
         <a class="link" href="/shop.html">Change email address</a>
@@ -215,55 +275,117 @@
       </div>
     </div>
 
+    <script src="/assets/local-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-database-compat.js"></script>
+    <script src="/firebase/firebaseClient.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
     <script>
       (function () {
-        var emailText = document.getElementById('email-text');
-        var form = document.getElementById('finish-form');
-        var statusEl = document.getElementById('status');
-        var verifyBtn = document.getElementById('verify');
-        var otpWrap = document.getElementById('otp');
-        var inputs = otpWrap ? Array.prototype.slice.call(otpWrap.querySelectorAll('input')) : [];
+        var emailText = document.getElementById("email-text");
+        var form = document.getElementById("finish-form");
+        var statusEl = document.getElementById("status");
+        var verifyBtn = document.getElementById("verify");
+        var otpWrap = document.getElementById("otp");
+        var inputs = otpWrap
+          ? Array.prototype.slice.call(otpWrap.querySelectorAll("input"))
+          : [];
 
         function setStatus(text, kind) {
-          statusEl.textContent = text || '';
-          statusEl.classList.remove('is-error', 'is-success');
-          if (kind === 'error') statusEl.classList.add('is-error');
-          if (kind === 'success') statusEl.classList.add('is-success');
+          statusEl.textContent = text || "";
+          statusEl.classList.remove("is-error", "is-success");
+          if (kind === "error") statusEl.classList.add("is-error");
+          if (kind === "success") statusEl.classList.add("is-success");
         }
 
         function safeString(v) {
-          if (v === null || v === undefined) return '';
+          if (v === null || v === undefined) return "";
           return String(v);
+        }
+
+        function getAuth0Config() {
+          if (window.AppLocalStorage && window.AppLocalStorage.getAuth0Config) {
+            return window.AppLocalStorage.getAuth0Config();
+          }
+
+          var domain = "";
+          var clientId = "";
+          try {
+            domain = safeString(localStorage.getItem("auth0Domain")).trim();
+            clientId = safeString(localStorage.getItem("auth0ClientId")).trim();
+          } catch (e) {}
+
+          return {
+            domain: domain,
+            clientId: clientId,
+          };
+        }
+
+        function validateAuth0Config(cfg) {
+          if (!cfg) return false;
+          if (!cfg.domain || cfg.domain === "YOUR_AUTH0_DOMAIN") return false;
+          if (!cfg.clientId || cfg.clientId === "YOUR_AUTH0_CLIENT_ID")
+            return false;
+          return true;
+        }
+
+        function formatAuth0Error(err, fallback) {
+          var msg =
+            err && (err.description || err.errorDescription || err.message)
+              ? err.description || err.errorDescription || err.message
+              : "";
+
+          var lower = String(msg || "").toLowerCase();
+          var code = err && err.error ? String(err.error).toLowerCase() : "";
+
+          if (
+            code === "connection_disabled" ||
+            lower.indexOf("connection is disabled") !== -1
+          ) {
+            return "Auth0 passwordless email connection is disabled. Enable it in Auth0 Dashboard: Authentication → Passwordless → Email, then Applications → your app → Connections (enable Email).";
+          }
+
+          if (
+            code === "access_denied" ||
+            lower.indexOf("cross origin login not allowed") !== -1 ||
+            lower.indexOf("cross-origin login not allowed") !== -1
+          ) {
+            return "Cross origin login not allowed. In Auth0 Dashboard: Applications → your app → Settings: add your site origin (for example http://localhost:5500) to Allowed Web Origins and Allowed Origins (CORS). Then go to Advanced Settings → OAuth and enable Cross-Origin Authentication.";
+          }
+
+          return msg || fallback || "Login failed.";
         }
 
         function getParam(name) {
           try {
             var u = new URL(window.location.href);
-            return u.searchParams.get(name) || '';
+            return u.searchParams.get(name) || "";
           } catch (e) {
-            return '';
+            return "";
           }
         }
 
         function getEmail() {
-          var qp = getParam('email');
+          var qp = getParam("email");
           if (qp) return qp;
           try {
-            return localStorage.getItem('loginEmail') || '';
+            return localStorage.getItem("loginEmail") || "";
           } catch (e) {
-            return '';
+            return "";
           }
         }
 
         function getCode() {
-          var out = '';
-          for (var i = 0; i < inputs.length; i++) out += safeString(inputs[i].value || '').replace(/\D/g, '');
+          var out = "";
+          for (var i = 0; i < inputs.length; i++)
+            out += safeString(inputs[i].value || "").replace(/\D/g, "");
           return out;
         }
 
         function markActive(i) {
           for (var k = 0; k < inputs.length; k++) {
-            inputs[k].classList.toggle('is-active', k === i);
+            inputs[k].classList.toggle("is-active", k === i);
           }
         }
 
@@ -274,13 +396,16 @@
         }
 
         function onPaste(e) {
-          var text = (e.clipboardData && e.clipboardData.getData) ? e.clipboardData.getData('text') : '';
+          var text =
+            e.clipboardData && e.clipboardData.getData
+              ? e.clipboardData.getData("text")
+              : "";
           if (!text) return;
-          var digits = text.replace(/\D/g, '').slice(0, 6).split('');
+          var digits = text.replace(/\D/g, "").slice(0, 6).split("");
           if (digits.length === 0) return;
           e.preventDefault();
           for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = digits[i] || '';
+            inputs[i].value = digits[i] || "";
           }
           var next = Math.min(digits.length, inputs.length - 1);
           focusInput(next);
@@ -288,47 +413,256 @@
 
         for (var i = 0; i < inputs.length; i++) {
           (function (idx) {
-            inputs[idx].addEventListener('focus', function () { markActive(idx); });
-            inputs[idx].addEventListener('paste', onPaste);
-            inputs[idx].addEventListener('input', function () {
-              inputs[idx].value = safeString(inputs[idx].value).replace(/\D/g, '').slice(0, 1);
-              if (inputs[idx].value && idx < inputs.length - 1) focusInput(idx + 1);
+            inputs[idx].addEventListener("focus", function () {
+              markActive(idx);
             });
-            inputs[idx].addEventListener('keydown', function (e) {
-              if (e.key === 'Backspace' && !inputs[idx].value && idx > 0) {
+            inputs[idx].addEventListener("paste", onPaste);
+            inputs[idx].addEventListener("input", function () {
+              inputs[idx].value = safeString(inputs[idx].value)
+                .replace(/\D/g, "")
+                .slice(0, 1);
+              if (inputs[idx].value && idx < inputs.length - 1)
+                focusInput(idx + 1);
+            });
+            inputs[idx].addEventListener("keydown", function (e) {
+              if (e.key === "Backspace" && !inputs[idx].value && idx > 0) {
                 focusInput(idx - 1);
               }
-              if (e.key === 'ArrowLeft' && idx > 0) focusInput(idx - 1);
-              if (e.key === 'ArrowRight' && idx < inputs.length - 1) focusInput(idx + 1);
+              if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
+              if (e.key === "ArrowRight" && idx < inputs.length - 1)
+                focusInput(idx + 1);
             });
           })(i);
         }
 
         var email = getEmail();
-        emailText.textContent = email || 'your email';
+        emailText.textContent = email || "your email";
         if (inputs[0]) focusInput(0);
 
-        form.addEventListener('submit', function (e) {
+        function storeSession(authResult) {
+          if (!authResult) return;
+          var now = new Date().getTime();
+          var expiresAt =
+            now + (authResult.expiresIn ? authResult.expiresIn * 1000 : 0);
+          try {
+            sessionStorage.setItem(
+              "auth0AccessToken",
+              authResult.accessToken || "",
+            );
+            sessionStorage.setItem("auth0IdToken", authResult.idToken || "");
+            sessionStorage.setItem("auth0ExpiresAt", String(expiresAt || ""));
+            sessionStorage.setItem("auth0Email", email || "");
+          } catch (e) {}
+        }
+
+        function parseTokensIfPresent() {
+          if (
+            window.location.hash &&
+            window.location.hash.indexOf("access_token=") !== -1
+          )
+            return true;
+          if (
+            window.location.hash &&
+            window.location.hash.indexOf("id_token=") !== -1
+          )
+            return true;
+          if (
+            window.location.hash &&
+            window.location.hash.indexOf("error=") !== -1
+          )
+            return true;
+          return false;
+        }
+
+        if (window.location.protocol === "file:") {
+          setStatus(
+            "This page must be opened over http/https (not file://) for email login to work.",
+            "error",
+          );
+          return;
+        }
+
+        if (parseTokensIfPresent()) {
+          if (!window.auth0 || !window.auth0.WebAuth) {
+            setStatus(
+              "Auth0 SDK failed to load. Please refresh and try again.",
+              "error",
+            );
+            return;
+          }
+
+          var cfgOnLoad = getAuth0Config();
+          if (!validateAuth0Config(cfgOnLoad)) {
+            setStatus(
+              "Auth0 is not configured. Set localStorage keys: auth0Domain and auth0ClientId.",
+              "error",
+            );
+            return;
+          }
+
+          var webAuthOnLoad = new window.auth0.WebAuth({
+            domain: cfgOnLoad.domain,
+            clientID: cfgOnLoad.clientId,
+            responseType: "token id_token",
+            scope: "openid profile email",
+            redirectUri: window.location.origin + "/finish.html",
+          });
+
+          webAuthOnLoad.parseHash(function (err, authResult) {
+            if (err) {
+              setStatus(formatAuth0Error(err, "Login failed."), "error");
+              try {
+                window.history.replaceState(
+                  null,
+                  document.title,
+                  window.location.pathname + window.location.search,
+                );
+              } catch (e) {}
+              return;
+            }
+            if (
+              !authResult ||
+              (!authResult.accessToken && !authResult.idToken)
+            ) {
+              setStatus("Login failed. Please try again.", "error");
+              try {
+                window.history.replaceState(
+                  null,
+                  document.title,
+                  window.location.pathname + window.location.search,
+                );
+              } catch (e) {}
+              return;
+            }
+
+            storeSession(authResult);
+            setStatus("Verified.", "success");
+            (function () {
+              var done = false;
+              function go() {
+                if (done) return;
+                done = true;
+                window.location.replace("/orders.html");
+              }
+
+              try {
+                if (window.FirebaseClient && window.FirebaseClient.logLogin) {
+                  Promise.race([
+                    window.FirebaseClient.logLogin({
+                      email: email,
+                      method: "auth0_passwordless_email",
+                    }),
+                    new Promise(function (resolve) {
+                      setTimeout(resolve, 1200);
+                    }),
+                  ]).then(go, go);
+                  return;
+                }
+              } catch (e) {}
+
+              go();
+            })();
+          });
+        }
+
+        form.addEventListener("submit", function (e) {
           e.preventDefault();
-          setStatus('', '');
+          setStatus("", "");
 
           var code = getCode();
           if (code.length !== 6) {
-            setStatus('Enter the 6-digit code.', 'error');
+            setStatus("Enter the 6-digit code.", "error");
+            return;
+          }
+
+          if (!window.auth0 || !window.auth0.WebAuth) {
+            setStatus(
+              "Auth0 SDK failed to load. Please refresh and try again.",
+              "error",
+            );
+            return;
+          }
+
+          var cfg = getAuth0Config();
+          if (!validateAuth0Config(cfg)) {
+            setStatus(
+              "Auth0 is not configured. Set localStorage keys: auth0Domain and auth0ClientId.",
+              "error",
+            );
+            return;
+          }
+
+          if (!email) {
+            setStatus(
+              "Email address is missing. Go back and enter your email again.",
+              "error",
+            );
             return;
           }
 
           verifyBtn.disabled = true;
-          setStatus('Verifying…', '');
+          setStatus("Verifying…", "");
 
-          try {
-            localStorage.setItem('lastVerifyCode', code);
-          } catch (e) {}
+          var webAuth = new window.auth0.WebAuth({
+            domain: cfg.domain,
+            clientID: cfg.clientId,
+            responseType: "token id_token",
+            scope: "openid profile email",
+            redirectUri: window.location.origin + "/finish.html",
+          });
 
-          setTimeout(function () {
-            setStatus('Verified.', 'success');
-            window.location.href = '/orders.html';
-          }, 450);
+          webAuth.passwordlessLogin(
+            {
+              connection: "email",
+              email: email,
+              verificationCode: code,
+            },
+            function (err, authResult) {
+              if (err) {
+                verifyBtn.disabled = false;
+                setStatus(formatAuth0Error(err, "Invalid code."), "error");
+                return;
+              }
+              if (
+                authResult &&
+                (authResult.accessToken || authResult.idToken)
+              ) {
+                storeSession(authResult);
+                setStatus("Verified.", "success");
+                (function () {
+                  var done = false;
+                  function go() {
+                    if (done) return;
+                    done = true;
+                    window.location.replace("/orders.html");
+                  }
+
+                  try {
+                    if (
+                      window.FirebaseClient &&
+                      window.FirebaseClient.logLogin
+                    ) {
+                      Promise.race([
+                        window.FirebaseClient.logLogin({
+                          email: email,
+                          method: "auth0_passwordless_email",
+                        }),
+                        new Promise(function (resolve) {
+                          setTimeout(resolve, 1200);
+                        }),
+                      ]).then(go, go);
+                      return;
+                    }
+                  } catch (e) {}
+
+                  go();
+                })();
+                return;
+              }
+
+              setStatus("Continuing…", "");
+            },
+          );
         });
       })();
     </script>
