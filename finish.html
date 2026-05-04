@@ -354,7 +354,93 @@
             return "Cross origin login not allowed. In Auth0 Dashboard: Applications → your app → Settings: add your site origin (for example http://localhost:5500) to Allowed Web Origins and Allowed Origins (CORS). Then go to Advanced Settings → OAuth and enable Cross-Origin Authentication.";
           }
 
+          if (
+            code === "server_error" &&
+            lower.indexOf("unable to configure verification page") !== -1
+          ) {
+            return "Unable to configure verification page. In Auth0 Dashboard: Applications → your app → Advanced Settings → OAuth: set Cross-Origin Verification Fallback URL to https://YOUR_DOMAIN/finish.html (must be https and same domain as your site). Also add your origin to Allowed Web Origins and Allowed Origins (CORS).";
+          }
+
           return msg || fallback || "Login failed.";
+        }
+
+        function exchangeOtpForTokens(cfg, email, code, cb) {
+          try {
+            if (window.auth0 && window.auth0.Authentication) {
+              var auth = new window.auth0.Authentication({
+                domain: cfg.domain,
+                clientID: cfg.clientId,
+              });
+
+              if (auth && typeof auth.oauthToken === "function") {
+                auth.oauthToken(
+                  {
+                    grantType:
+                      "http://auth0.com/oauth/grant-type/passwordless/otp",
+                    realm: "email",
+                    username: email,
+                    otp: code,
+                    scope: "openid profile email",
+                  },
+                  function (err, res) {
+                    if (err) return cb(err);
+                    var out = {
+                      accessToken: res && (res.accessToken || res.access_token),
+                      idToken: res && (res.idToken || res.id_token),
+                      expiresIn:
+                        res && (res.expiresIn || res.expires_in || 0),
+                    };
+                    return cb(null, out);
+                  },
+                );
+                return;
+              }
+            }
+          } catch (e) {}
+
+          var url = "https://" + cfg.domain + "/oauth/token";
+          fetch(url, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
+              client_id: cfg.clientId,
+              realm: "email",
+              username: email,
+              otp: code,
+              scope: "openid profile email",
+            }),
+          })
+            .then(function (res) {
+              return res
+                .json()
+                .catch(function () {
+                  return {};
+                })
+                .then(function (json) {
+                  if (!res.ok) {
+                    return cb({
+                      error: json.error || "token_error",
+                      description:
+                        json.error_description ||
+                        json.error ||
+                        "Login failed.",
+                    });
+                  }
+
+                  return cb(null, {
+                    accessToken: json.access_token || "",
+                    idToken: json.id_token || "",
+                    expiresIn: json.expires_in || 0,
+                  });
+                });
+            })
+            .catch(function (e) {
+              cb({
+                error: "network_error",
+                description: (e && e.message) || "Network error.",
+              });
+            });
         }
 
         function getParam(name) {
@@ -603,68 +689,49 @@
           verifyBtn.disabled = true;
           setStatus("Verifying…", "");
 
-          var webAuth = new window.auth0.WebAuth({
-            domain: cfg.domain,
-            clientID: cfg.clientId,
-            responseType: "token id_token",
-            scope: "openid profile email",
-            redirectUri: window.location.origin + "/finish.html",
+          exchangeOtpForTokens(cfg, email, code, function (err, authResult) {
+            if (err) {
+              verifyBtn.disabled = false;
+              setStatus(formatAuth0Error(err, "Invalid code."), "error");
+              return;
+            }
+
+            if (!authResult || (!authResult.accessToken && !authResult.idToken)) {
+              verifyBtn.disabled = false;
+              setStatus("Login failed. Please try again.", "error");
+              return;
+            }
+
+            storeSession(authResult);
+            setStatus("Verified.", "success");
+            (function () {
+              var done = false;
+              function go() {
+                if (done) return;
+                done = true;
+                window.location.replace("/orders.html");
+              }
+
+              try {
+                if (window.FirebaseClient && window.FirebaseClient.logLogin) {
+                  Promise.race([
+                    window.FirebaseClient.logLogin({
+                      email: email,
+                      method: "auth0_passwordless_email",
+                    }),
+                    new Promise(function (resolve) {
+                      setTimeout(resolve, 1200);
+                    }),
+                  ]).then(go, go);
+                  return;
+                }
+              } catch (e) {}
+
+              go();
+            })();
           });
-
-          webAuth.passwordlessLogin(
-            {
-              connection: "email",
-              email: email,
-              verificationCode: code,
-            },
-            function (err, authResult) {
-              if (err) {
-                verifyBtn.disabled = false;
-                setStatus(formatAuth0Error(err, "Invalid code."), "error");
-                return;
-              }
-              if (
-                authResult &&
-                (authResult.accessToken || authResult.idToken)
-              ) {
-                storeSession(authResult);
-                setStatus("Verified.", "success");
-                (function () {
-                  var done = false;
-                  function go() {
-                    if (done) return;
-                    done = true;
-                    window.location.replace("/orders.html");
-                  }
-
-                  try {
-                    if (
-                      window.FirebaseClient &&
-                      window.FirebaseClient.logLogin
-                    ) {
-                      Promise.race([
-                        window.FirebaseClient.logLogin({
-                          email: email,
-                          method: "auth0_passwordless_email",
-                        }),
-                        new Promise(function (resolve) {
-                          setTimeout(resolve, 1200);
-                        }),
-                      ]).then(go, go);
-                      return;
-                    }
-                  } catch (e) {}
-
-                  go();
-                })();
-                return;
-              }
-
               setStatus("Continuing…", "");
             },
           );
         });
       })();
-    </script>
-  </body>
-</html>
