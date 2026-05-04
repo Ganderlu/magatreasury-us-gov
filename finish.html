@@ -330,6 +330,14 @@
           return true;
         }
 
+        function getOrdersUrl() {
+          try {
+            return new URL("orders.html", window.location.href).toString();
+          } catch (e) {
+            return "/orders.html";
+          }
+        }
+
         function formatAuth0Error(err, fallback) {
           var msg =
             err && (err.description || err.errorDescription || err.message)
@@ -628,7 +636,7 @@
               function go() {
                 if (done) return;
                 done = true;
-                window.location.replace("/orders.html");
+                window.location.replace(getOrdersUrl());
               }
 
               try {
@@ -709,7 +717,7 @@
               function go() {
                 if (done) return;
                 done = true;
-                window.location.replace("/orders.html");
+                window.location.replace(getOrdersUrl());
               }
 
               try {

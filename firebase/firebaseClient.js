@@ -52,17 +52,26 @@
     }
   }
 
+  function clamp(str, maxLen) {
+    var s = safeString(str);
+    if (!maxLen || maxLen <= 0) return s;
+    return s.length > maxLen ? s.slice(0, maxLen) : s;
+  }
+
   function logLogin(details) {
     init();
     var email =
       (details && safeString(details.email).trim()) || getEmailFallback();
 
     var payload = {
-      email: email,
-      method: (details && safeString(details.method)) || "auth0_passwordless_email",
+      email: clamp(email, 254),
+      method: clamp(
+        (details && safeString(details.method)) || "auth0_passwordless_email",
+        80,
+      ),
       createdAtIso: nowIso(),
-      userAgent: safeString(navigator.userAgent || ""),
-      origin: safeString(location.origin || ""),
+      userAgent: clamp(safeString(navigator.userAgent || ""), 512),
+      origin: clamp(safeString(location.origin || ""), 200),
     };
 
     var tasks = [];

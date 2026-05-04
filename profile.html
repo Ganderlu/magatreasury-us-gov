@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profile</title>
     <style>
       :root {
@@ -15,11 +15,24 @@
         --link: #2563eb;
         --purple: rgba(90, 49, 244, 0.7);
       }
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
         background: #ffffff;
         color: var(--text);
       }
@@ -68,7 +81,10 @@
         color: rgba(17, 24, 39, 0.75);
         margin-left: auto;
       }
-      .avatar svg { width: 18px; height: 18px; }
+      .avatar svg {
+        width: 18px;
+        height: 18px;
+      }
 
       .page {
         min-height: calc(100vh - 64px);
@@ -94,7 +110,9 @@
         border-radius: 10px;
         padding: 20px;
       }
-      .card + .card { margin-top: 18px; }
+      .card + .card {
+        margin-top: 18px;
+      }
 
       .row {
         display: grid;
@@ -121,7 +139,34 @@
         height: 18px;
         color: #0a5bd3;
       }
-      .edit svg { width: 16px; height: 16px; }
+      .edit svg {
+        width: 16px;
+        height: 16px;
+      }
+      .profile-name {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 800;
+        color: rgba(17, 24, 39, 0.95);
+      }
+      .edit-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: #0a5bd3;
+        cursor: pointer;
+      }
+      .edit-btn svg {
+        width: 16px;
+        height: 16px;
+      }
 
       .card-head {
         display: flex;
@@ -146,7 +191,10 @@
         color: #0a5bd3;
         text-decoration: none;
       }
-      .add svg { width: 16px; height: 16px; }
+      .add svg {
+        width: 16px;
+        height: 16px;
+      }
 
       .empty {
         border: 1px solid rgba(17, 24, 39, 0.1);
@@ -158,7 +206,227 @@
         background: rgba(17, 24, 39, 0.02);
         color: rgba(17, 24, 39, 0.8);
       }
-      .empty svg { width: 18px; height: 18px; color: rgba(17, 24, 39, 0.55); }
+      .empty svg {
+        width: 18px;
+        height: 18px;
+        color: rgba(17, 24, 39, 0.55);
+      }
+
+      .addr {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 6px 0 0;
+      }
+      .addr__title {
+        font-size: 13px;
+        font-weight: 800;
+        color: rgba(17, 24, 39, 0.9);
+        margin: 0 0 10px;
+      }
+      .addr__edit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        border: 1px solid rgba(17, 24, 39, 0.12);
+        background: rgba(17, 24, 39, 0.02);
+        color: #0a5bd3;
+        cursor: pointer;
+      }
+      .addr__edit svg {
+        width: 16px;
+        height: 16px;
+      }
+      .addr__lines {
+        margin-top: 2px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: rgba(17, 24, 39, 0.9);
+        white-space: pre-line;
+      }
+
+      .addr-form {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+      .addr-field {
+        display: grid;
+        gap: 6px;
+      }
+      .addr-field label {
+        font-size: 11px;
+        color: rgba(17, 24, 39, 0.62);
+        font-weight: 700;
+      }
+      .addr-input,
+      .addr-select {
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid rgba(17, 24, 39, 0.16);
+        background: #ffffff;
+        padding: 0 12px;
+        font-size: 13px;
+        outline: none;
+        color: rgba(17, 24, 39, 0.92);
+      }
+      .addr-input:focus,
+      .addr-select:focus {
+        border-color: rgba(37, 99, 235, 0.6);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+      #addressModal .modal__panel {
+        width: min(560px, 100%);
+      }
+      #addressModal .modal__top {
+        align-items: center;
+      }
+      #addressModal .modal__title {
+        font-size: 14px;
+      }
+      #addressModal .addr-field {
+        position: relative;
+      }
+      #addressModal .addr-field label {
+        position: absolute;
+        top: 6px;
+        left: 12px;
+        margin: 0;
+        font-size: 10px;
+        font-weight: 750;
+        color: rgba(17, 24, 39, 0.55);
+        pointer-events: none;
+      }
+      #addressModal .addr-input,
+      #addressModal .addr-select {
+        height: 44px;
+        padding: 18px 12px 0;
+      }
+      #addressModal .addr-phone-wrap {
+        position: relative;
+      }
+      #addressModal .addr-phone-wrap .addr-input {
+        padding-right: 74px;
+      }
+      #addressModal .addr-phone-region {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 66px;
+        height: 44px;
+        border-left: 1px solid rgba(17, 24, 39, 0.12);
+        border-radius: 0 8px 8px 0;
+        padding: 18px 10px 0;
+        background: #ffffff;
+      }
+      #addressModal .addr-phone-region:focus {
+        box-shadow: none;
+      }
+      .addr-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .addr-row-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+      }
+      .addr-phone-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 10px;
+      }
+      .addr-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        color: rgba(17, 24, 39, 0.75);
+        font-weight: 650;
+        margin-top: 6px;
+      }
+      .addr-check input {
+        width: 14px;
+        height: 14px;
+      }
+      .addr-actions {
+        margin-top: 14px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 14px;
+      }
+      .addr-cancel {
+        font-size: 12px;
+        font-weight: 750;
+        color: rgba(37, 99, 235, 0.9);
+        text-decoration: none;
+      }
+      .addr-save {
+        height: 36px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 8px;
+        background: #0a5bd3;
+        color: #ffffff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .addr-save:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      #profileModal .modal__panel {
+        width: min(560px, 100%);
+        max-height: min(70vh, 620px);
+      }
+      #profileModal .modal__top {
+        align-items: center;
+      }
+      #profileModal .modal__title {
+        font-size: 14px;
+      }
+      #profileModal .addr-form {
+        margin-top: 14px;
+        gap: 12px;
+      }
+      #profileModal .addr-check {
+        margin-top: 2px;
+        font-weight: 650;
+      }
+      #profileModal .addr-actions {
+        margin-top: 10px;
+      }
+      #profileModal .addr-save {
+        background: rgba(17, 24, 39, 0.12);
+        color: rgba(17, 24, 39, 0.55);
+      }
+      #profileModal .addr-save.is-primary {
+        background: #0a5bd3;
+        color: #ffffff;
+      }
+      #profileModal .addr-input[readonly] {
+        background: rgba(17, 24, 39, 0.02);
+        color: rgba(17, 24, 39, 0.72);
+      }
+
+      @media (max-width: 640px) {
+        .addr-row-2 {
+          grid-template-columns: 1fr;
+        }
+        .addr-row-3 {
+          grid-template-columns: 1fr;
+        }
+        .addr-phone-row {
+          grid-template-columns: 1fr;
+        }
+      }
       .actions {
         display: flex;
         align-items: center;
@@ -181,7 +449,9 @@
         text-decoration: none;
         font-weight: 700;
       }
-      .btn-link:hover { text-decoration: underline; }
+      .btn-link:hover {
+        text-decoration: underline;
+      }
 
       .footer {
         margin-top: auto;
@@ -202,15 +472,27 @@
         align-items: center;
         gap: 8px;
       }
-      .locale svg { width: 16px; height: 16px; color: rgba(17, 24, 39, 0.55); }
-      .caret { width: 10px; height: 10px; color: rgba(17, 24, 39, 0.55); }
+      .locale svg {
+        width: 16px;
+        height: 16px;
+        color: rgba(17, 24, 39, 0.55);
+      }
+      .caret {
+        width: 10px;
+        height: 10px;
+        color: rgba(17, 24, 39, 0.55);
+      }
       .footer a {
         color: var(--link);
         text-decoration: none;
       }
-      .footer a:hover { text-decoration: underline; }
+      .footer a:hover {
+        text-decoration: underline;
+      }
 
-      .modal[hidden] { display: none; }
+      .modal[hidden] {
+        display: none;
+      }
       .modal {
         position: fixed;
         inset: 0;
@@ -262,7 +544,9 @@
         color: rgba(17, 24, 39, 0.7);
         cursor: pointer;
       }
-      .modal__close:hover { background: rgba(17, 24, 39, 0.06); }
+      .modal__close:hover {
+        background: rgba(17, 24, 39, 0.06);
+      }
       .modal__content {
         margin-top: 14px;
         font-size: 13px;
@@ -275,16 +559,25 @@
         font-weight: 800;
         color: rgba(17, 24, 39, 0.9);
       }
-      .modal__content p { margin: 8px 0; }
-      .modal__content ul { margin: 8px 0 0 18px; padding: 0; }
-      .modal__content li { margin: 6px 0; }
+      .modal__content p {
+        margin: 8px 0;
+      }
+      .modal__content ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+      .modal__content li {
+        margin: 6px 0;
+      }
       .modal__fine {
         margin-top: 14px;
         font-size: 12px;
         color: rgba(17, 24, 39, 0.6);
       }
       @media (max-width: 520px) {
-        .modal { padding: 18px 12px; }
+        .modal {
+          padding: 18px 12px;
+        }
         .modal__panel {
           width: 100%;
           max-height: 86vh;
@@ -292,7 +585,9 @@
           padding: 18px 16px 16px;
           box-shadow: 0 22px 70px rgba(17, 24, 39, 0.2);
         }
-        .modal__title { font-size: 16px; }
+        .modal__title {
+          font-size: 16px;
+        }
         .modal__close {
           width: 32px;
           height: 32px;
@@ -303,30 +598,85 @@
           line-height: 1;
           color: rgba(17, 24, 39, 0.7);
         }
-        .modal__content { font-size: 12.5px; line-height: 1.6; }
-        .modal__content h3 { margin-top: 22px; }
+        .modal__content {
+          font-size: 12.5px;
+          line-height: 1.6;
+        }
+        .modal__content h3 {
+          margin-top: 22px;
+        }
+      }
+      @media (max-width: 520px) {
+        #addressModal.modal {
+          padding: 14px 10px;
+          place-items: end center;
+        }
+        #addressModal .modal__panel {
+          width: calc(100% - 20px);
+          max-height: 88vh;
+          padding: 14px 14px 12px;
+          border-radius: 12px;
+        }
+        #addressModal .addr-form {
+      @media (max-width: 520px) {
+        #profileModal.modal { padding: 14px 10px; }
+        #profileModal .modal__panel {
+          width: calc(100% - 20px);
+          max-height: 82vh;
+          padding: 14px 14px 12px;
+          border-radius: 12px;
+        }
       }
 
       @media (max-width: 640px) {
-        .brand img { width: 150px; }
-        .nav { gap: 20px; margin-left: 16px; }
-        .container { padding: 0 16px; }
+        .brand img {
+          width: 150px;
+        }
+        .nav {
+          gap: 20px;
+          margin-left: 16px;
+        }
+        .container {
+          padding: 0 16px;
+        }
       }
     </style>
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="/maga/products/qfs-gold-bill.html" aria-label="Home">
-        <img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="LIMITED TIME OFFER">
+      <a
+        class="brand"
+        href="/maga/products/qfs-gold-bill.html"
+        aria-label="Home"
+      >
+        <img
+          src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+          alt="LIMITED TIME OFFER"
+        />
       </a>
       <nav class="nav" aria-label="Account navigation">
         <a href="/orders.html">Orders</a>
         <a class="is-active" href="/profile.html">Profile</a>
       </nav>
       <a class="avatar" href="/profile.html" aria-label="Profile">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M20 21a8 8 0 1 0-16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M12 13a4 4 0 1 0-0.001-8.001A4 4 0 0 0 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M20 21a8 8 0 1 0-16 0"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M12 13a4 4 0 1 0-0.001-8.001A4 4 0 0 0 12 13Z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
         </svg>
       </a>
     </header>
@@ -337,20 +687,38 @@
 
         <section class="card" aria-label="Profile details">
           <div class="row">
-            <div class="label">
-              Name
-              <span class="edit" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </div>
-            <div class="value"></div>
+            <div id="profileName" class="profile-name"></div>
+            <button
+              id="editProfileBtn"
+              class="edit-btn"
+              type="button"
+              aria-label="Edit profile"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 20h9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
           </div>
           <div class="row">
             <div class="label">Email</div>
-            <div class="value"></div>
+            <div id="profileEmail" class="value"></div>
           </div>
         </section>
 
@@ -358,26 +726,97 @@
           <div class="card-head">
             <h2>Addresses</h2>
             <a class="add" href="#" id="add-address">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 5v14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M5 12h14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
               </svg>
               Add
             </a>
           </div>
-          <div class="empty">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 16v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M12 8h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <div id="addressesEmpty" class="empty">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M12 16v-5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M12 8h.01"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
             </svg>
             No addresses added
+          </div>
+          <div id="addressesView" hidden>
+            <div class="addr">
+              <div>
+                <div class="addr__title">Default address</div>
+                <div id="addressLines" class="addr__lines"></div>
+              </div>
+              <button
+                id="editAddressBtn"
+                class="addr__edit"
+                type="button"
+                aria-label="Edit address"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 20h9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </section>
 
         <div class="actions">
           <button class="btn" id="signout" type="button">Sign out</button>
-          <a class="btn-link" href="#" id="signout-all">Sign out of all devices</a>
+          <a class="btn-link" href="#" id="signout-all"
+            >Sign out of all devices</a
+          >
         </div>
       </div>
 
@@ -385,27 +824,71 @@
         <div class="container">
           <div class="footer-inner">
             <span class="locale">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M2 12h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M12 2c3.5 3.6 3.5 16.4 0 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <path
+                  d="M2 12h20"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M12 2c3.5 3.6 3.5 16.4 0 20"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
               </svg>
               United States
-              <svg class="caret" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg
+                class="caret"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 4.5 6 7.5 9 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </span>
-            <a id="refundPolicyLink" href="/policies/refund.html">Refund policy</a>
+            <a id="refundPolicyLink" href="/policies/refund.html"
+              >Refund policy</a
+            >
             <a id="shippingLink" href="/policies/shipping.html">Shipping</a>
-            <a id="privacyPolicyLink" href="/policies/privacy.html">Privacy policy</a>
+            <a id="privacyPolicyLink" href="/policies/privacy.html"
+              >Privacy policy</a
+            >
             <a id="termsLink" href="/policies/terms.html">Terms of service</a>
-            <a id="contactLink" href="/policies/contact.html">Contact information</a>
+            <a id="contactLink" href="/policies/contact.html"
+              >Contact information</a
+            >
           </div>
         </div>
       </footer>
     </main>
 
-    <div id="refundModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="refundTitle" hidden>
+    <div
+      id="refundModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="refundTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -413,44 +896,67 @@
             <h2 id="refundTitle" class="modal__title">Refund policy</h2>
             <div class="modal__subtitle">Refund Policy (30 Days)</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            At Our Maga Shop, your satisfaction means everything to us. That’s why we proudly offer a 30-day refund
-            policy on all eligible orders. Please review the details below:
+            At Our Maga Shop, your satisfaction means everything to us. That’s
+            why we proudly offer a 30-day refund policy on all eligible orders.
+            Please review the details below:
           </p>
 
           <h3>Damaged Items</h3>
           <p>
-            If your item arrives damaged, contact us within 60 days so we can review and resolve the issue. Once received
-            and inspected, we may issue a refund for the product cost. Please note: shipping fees are non-refundable.
+            If your item arrives damaged, contact us within 60 days so we can
+            review and resolve the issue. Once received and inspected, we may
+            issue a refund for the product cost. Please note: shipping fees are
+            non-refundable.
           </p>
 
           <h3>Lost or Undelivered Packages</h3>
           <p>
-            If your tracking shows “delivered” but you didn’t receive your package, please check with your local carrier
-            and your delivery location first. If it’s still missing, contact us and we’ll assist with next steps.
+            If your tracking shows “delivered” but you didn’t receive your
+            package, please check with your local carrier and your delivery
+            location first. If it’s still missing, contact us and we’ll assist
+            with next steps.
           </p>
 
           <h3>Refund Processing</h3>
           <p>
-            Approved refunds are issued to the original payment method. Processing times vary by provider; allow several
-            business days for the refund to appear after approval.
+            Approved refunds are issued to the original payment method.
+            Processing times vary by provider; allow several business days for
+            the refund to appear after approval.
           </p>
 
           <h3>Return Conditions</h3>
           <p>
-            For eligible returns, items must be unused and in the same condition you received them. Some items may be
-            non-returnable for hygiene, safety, personalization, or clearance reasons.
+            For eligible returns, items must be unused and in the same condition
+            you received them. Some items may be non-returnable for hygiene,
+            safety, personalization, or clearance reasons.
           </p>
 
-          <div class="modal__fine">Need help? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Need help? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="shippingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="shippingTitle" hidden>
+    <div
+      id="shippingModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="shippingTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -458,57 +964,78 @@
             <h2 id="shippingTitle" class="modal__title">Shipping</h2>
             <div class="modal__subtitle">Shipping Policy</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            Our Maga Shop processes and ships orders as quickly as possible. Shipping times can vary based on your
-            location, carrier conditions, and item availability.
+            Our Maga Shop processes and ships orders as quickly as possible.
+            Shipping times can vary based on your location, carrier conditions,
+            and item availability.
           </p>
 
           <h3>Processing Time</h3>
           <p>
-            Most orders are processed within 1–3 business days. During peak demand, promotions, or holidays, processing
-            may take longer.
+            Most orders are processed within 1–3 business days. During peak
+            demand, promotions, or holidays, processing may take longer.
           </p>
 
           <h3>Shipping Time</h3>
           <p>
-            Transit times depend on the carrier and your delivery address. Estimated delivery dates are not guaranteed
-            and may change due to weather, carrier delays, or operational issues.
+            Transit times depend on the carrier and your delivery address.
+            Estimated delivery dates are not guaranteed and may change due to
+            weather, carrier delays, or operational issues.
           </p>
 
           <h3>Tracking</h3>
           <p>
-            When available, we provide a tracking number after your order ships. Tracking updates may take time to
-            appear after the label is created.
+            When available, we provide a tracking number after your order ships.
+            Tracking updates may take time to appear after the label is created.
           </p>
 
           <h3>Address Accuracy</h3>
           <p>
-            Please make sure your shipping address is complete and correct. If an order is returned to us due to an
-            incorrect address, you may be responsible for reshipping fees.
+            Please make sure your shipping address is complete and correct. If
+            an order is returned to us due to an incorrect address, you may be
+            responsible for reshipping fees.
           </p>
 
           <h3>Lost, Delayed, or Missing Packages</h3>
           <p>
-            If your package is delayed, please check the tracking updates first. If tracking shows “delivered” but you
-            didn’t receive it, check with household members, neighbors, or the carrier. If it remains missing, contact
-            us and we’ll assist with next steps.
+            If your package is delayed, please check the tracking updates first.
+            If tracking shows “delivered” but you didn’t receive it, check with
+            household members, neighbors, or the carrier. If it remains missing,
+            contact us and we’ll assist with next steps.
           </p>
 
           <h3>Damaged in Transit</h3>
           <p>
-            If your order arrives damaged, contact us as soon as possible and include photos of the item and packaging
-            so we can help resolve the issue.
+            If your order arrives damaged, contact us as soon as possible and
+            include photos of the item and packaging so we can help resolve the
+            issue.
           </p>
 
-          <div class="modal__fine">Need help? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Need help? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="privacyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
+    <div
+      id="privacyModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacyTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -516,24 +1043,43 @@
             <h2 id="privacyTitle" class="modal__title">Privacy policy</h2>
             <div class="modal__subtitle">Privacy Policy</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            This Privacy Policy explains how Our Maga Shop collects, uses, and shares information when you visit our
-            website or make a purchase. By using our site, you agree to the practices described below.
+            This Privacy Policy explains how Our Maga Shop collects, uses, and
+            shares information when you visit our website or make a purchase. By
+            using our site, you agree to the practices described below.
           </p>
 
           <h3>Information We Collect</h3>
           <ul>
-            <li>Contact details such as name, email address, phone number, and shipping/billing address.</li>
-            <li>Order details such as items purchased, order totals, and order history.</li>
-            <li>Device and usage details such as browser type, pages visited, and approximate location based on IP.</li>
+            <li>
+              Contact details such as name, email address, phone number, and
+              shipping/billing address.
+            </li>
+            <li>
+              Order details such as items purchased, order totals, and order
+              history.
+            </li>
+            <li>
+              Device and usage details such as browser type, pages visited, and
+              approximate location based on IP.
+            </li>
           </ul>
 
           <h3>How We Use Information</h3>
           <ul>
-            <li>To process orders, deliver products, and provide customer support.</li>
+            <li>
+              To process orders, deliver products, and provide customer support.
+            </li>
             <li>To send order updates and service messages you request.</li>
             <li>To improve site performance, security, and user experience.</li>
             <li>To detect, prevent, and investigate fraud or abuse.</li>
@@ -541,35 +1087,55 @@
 
           <h3>Cookies & Analytics</h3>
           <p>
-            We may use cookies and similar technologies to remember preferences, understand site traffic, and improve
-            our services. You can control cookies through your browser settings; disabling cookies may impact features.
+            We may use cookies and similar technologies to remember preferences,
+            understand site traffic, and improve our services. You can control
+            cookies through your browser settings; disabling cookies may impact
+            features.
           </p>
 
           <h3>Sharing of Information</h3>
           <p>
-            We may share information with service providers that help us operate our store (for example, payment
-            processing, shipping carriers, email delivery, analytics, and customer support). We may also share
-            information if required by law or to protect our rights and the safety of our customers.
+            We may share information with service providers that help us operate
+            our store (for example, payment processing, shipping carriers, email
+            delivery, analytics, and customer support). We may also share
+            information if required by law or to protect our rights and the
+            safety of our customers.
           </p>
 
           <h3>Data Security</h3>
           <p>
-            We take reasonable measures to protect information. No method of transmission or storage is 100% secure, so
-            we cannot guarantee absolute security.
+            We take reasonable measures to protect information. No method of
+            transmission or storage is 100% secure, so we cannot guarantee
+            absolute security.
           </p>
 
           <h3>Your Choices</h3>
           <ul>
-            <li>You may request access, correction, or deletion of certain personal information where applicable.</li>
-            <li>You can opt out of non-essential marketing communications using the unsubscribe link.</li>
+            <li>
+              You may request access, correction, or deletion of certain
+              personal information where applicable.
+            </li>
+            <li>
+              You can opt out of non-essential marketing communications using
+              the unsubscribe link.
+            </li>
           </ul>
 
-          <div class="modal__fine">Questions? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Questions? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="termsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
+    <div
+      id="termsModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="termsTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -577,58 +1143,83 @@
             <h2 id="termsTitle" class="modal__title">Terms of service</h2>
             <div class="modal__subtitle">Terms of Service</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            These Terms of Service govern your use of Our Maga Shop and any purchase made through our website. By
-            accessing the site or placing an order, you agree to these terms.
+            These Terms of Service govern your use of Our Maga Shop and any
+            purchase made through our website. By accessing the site or placing
+            an order, you agree to these terms.
           </p>
 
           <h3>Use of the Site</h3>
           <p>
-            You agree not to misuse the site, attempt unauthorized access, disrupt service, or use the site for unlawful
-            purposes. We may suspend or restrict access to protect our customers and services.
+            You agree not to misuse the site, attempt unauthorized access,
+            disrupt service, or use the site for unlawful purposes. We may
+            suspend or restrict access to protect our customers and services.
           </p>
 
           <h3>Orders & Payments</h3>
           <ul>
             <li>All orders are subject to acceptance and availability.</li>
-            <li>Prices and product details may change at any time without notice.</li>
-            <li>You agree to provide accurate billing and shipping information.</li>
+            <li>
+              Prices and product details may change at any time without notice.
+            </li>
+            <li>
+              You agree to provide accurate billing and shipping information.
+            </li>
           </ul>
 
           <h3>Shipping, Returns & Refunds</h3>
           <p>
-            Shipping timelines are estimates and not guaranteed. Returns and refunds are handled according to our refund
-            policy and shipping policy.
+            Shipping timelines are estimates and not guaranteed. Returns and
+            refunds are handled according to our refund policy and shipping
+            policy.
           </p>
 
           <h3>Intellectual Property</h3>
           <p>
-            All site content, including text, graphics, logos, and design elements, is owned by Our Maga Shop or its
-            licensors and may not be copied or used without permission.
+            All site content, including text, graphics, logos, and design
+            elements, is owned by Our Maga Shop or its licensors and may not be
+            copied or used without permission.
           </p>
 
           <h3>Disclaimer & Limitation of Liability</h3>
           <p>
-            The site and products are provided “as is” and “as available.” To the fullest extent permitted by law, Our
-            Maga Shop is not liable for indirect, incidental, or consequential damages, or for losses arising from use
-            of the site or products.
+            The site and products are provided “as is” and “as available.” To
+            the fullest extent permitted by law, Our Maga Shop is not liable for
+            indirect, incidental, or consequential damages, or for losses
+            arising from use of the site or products.
           </p>
 
           <h3>Changes to These Terms</h3>
           <p>
-            We may update these Terms from time to time. Continued use of the site after changes means you accept the
-            updated Terms.
+            We may update these Terms from time to time. Continued use of the
+            site after changes means you accept the updated Terms.
           </p>
 
-          <div class="modal__fine">Questions? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Questions? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
+    <div
+      id="contactModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contactTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -636,19 +1227,35 @@
             <h2 id="contactTitle" class="modal__title">Contact information</h2>
             <div class="modal__subtitle">Customer Support</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            Need help with an order? Our Maga Shop support team is here to assist. For the fastest service, include your
-            order number and the email used at checkout.
+            Need help with an order? Our Maga Shop support team is here to
+            assist. For the fastest service, include your order number and the
+            email used at checkout.
           </p>
 
           <h3>How to Reach Us</h3>
           <ul>
-            <li>Contact form: use the “Contact information” link from the footer on any page.</li>
-            <li>Order questions: include your order number and a brief description of the issue.</li>
-            <li>Damaged items: attach clear photos of the item and packaging.</li>
+            <li>
+              Contact form: use the “Contact information” link from the footer
+              on any page.
+            </li>
+            <li>
+              Order questions: include your order number and a brief description
+              of the issue.
+            </li>
+            <li>
+              Damaged items: attach clear photos of the item and packaging.
+            </li>
           </ul>
 
           <h3>What to Include</h3>
@@ -656,56 +1263,655 @@
             <li>Order number (if available)</li>
             <li>Your name and email</li>
             <li>Item name(s) and quantity</li>
-            <li>A short summary of the request (refund, shipping issue, change of address, etc.)</li>
+            <li>
+              A short summary of the request (refund, shipping issue, change of
+              address, etc.)
+            </li>
           </ul>
 
           <h3>Response Time</h3>
           <p>
-            We aim to respond within 1–2 business days. During peak periods, responses may take longer.
+            We aim to respond within 1–2 business days. During peak periods,
+            responses may take longer.
           </p>
 
           <div class="modal__fine">
-            For privacy and security, we may request additional information to verify order ownership.
+            For privacy and security, we may request additional information to
+            verify order ownership.
           </div>
         </div>
       </div>
     </div>
 
+    <div
+      id="addressModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="addressModalTitle"
+      hidden
+    >
+      <div class="modal__backdrop" data-close="true"></div>
+      <div class="modal__panel" role="document" tabindex="-1">
+        <div class="modal__top">
+          <div>
+            <h2 id="addressModalTitle" class="modal__title">Add address</h2>
+          </div>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
+        </div>
+
+        <form id="addressForm" class="addr-form" autocomplete="on">
+          <div class="addr-field">
+            <label for="addrCountry">Country/region</label>
+            <select id="addrCountry" class="addr-select" required>
+              <option value="United States">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Cameroon">Cameroon</option>
+              <option value="China">China</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Egypt">Egypt</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Greece">Greece</option>
+              <option value="India">India</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Japan">Japan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="Norway">Norway</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Romania">Romania</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Singapore">Singapore</option>
+              <option value="South Africa">South Africa</option>
+              <option value="Spain">Spain</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+            </select>
+          </div>
+
+          <div class="addr-row-2">
+            <div class="addr-field">
+              <label for="addrFirstName">First name</label>
+              <input
+                id="addrFirstName"
+                class="addr-input"
+                type="text"
+                required
+              />
+            </div>
+            <div class="addr-field">
+              <label for="addrLastName">Last name</label>
+              <input
+                id="addrLastName"
+                class="addr-input"
+                type="text"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="addr-field">
+            <label for="addrAddress1">Address</label>
+            <input id="addrAddress1" class="addr-input" type="text" required />
+          </div>
+
+          <div class="addr-field">
+            <label for="addrAddress2">Apartment, suite, etc (optional)</label>
+            <input id="addrAddress2" class="addr-input" type="text" />
+          </div>
+
+          <div class="addr-row-3">
+            <div class="addr-field">
+              <label for="addrCity">City</label>
+              <input id="addrCity" class="addr-input" type="text" required />
+            </div>
+            <div class="addr-field">
+              <label for="addrState">State</label>
+              <select id="addrState" class="addr-select" required>
+                <option value="Alabama">Alabama</option>
+                <option value="Alaska">Alaska</option>
+                <option value="Arizona">Arizona</option>
+                <option value="California">California</option>
+                <option value="Florida">Florida</option>
+                <option value="New York">New York</option>
+                <option value="Texas">Texas</option>
+              </select>
+            </div>
+            <div class="addr-field">
+              <label for="addrZip">ZIP code</label>
+              <input id="addrZip" class="addr-input" type="text" required />
+            </div>
+          </div>
+
+          <div class="addr-phone-row">
+            <div class="addr-field">
+              <label for="addrPhoneCode">Phone</label>
+              <select id="addrPhoneCode" class="addr-select">
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+                <option value="+234">+234</option>
+                <option value="+1-CA">+1 (CA)</option>
+              </select>
+            </div>
+            <div class="addr-field">
+              <div class="addr-phone-wrap">
+                <input
+                  id="addrPhone"
+                  class="addr-input"
+                  type="tel"
+                  inputmode="tel"
+                  placeholder="Phone number"
+                  aria-label="Phone number"
+                />
+                <select
+                  id="addrPhoneRegion"
+                  class="addr-select addr-phone-region"
+                  aria-label="Phone region"
+                >
+                  <option value="US">🇺🇸</option>
+                  <option value="NG">🇳🇬</option>
+                  <option value="GB">🇬🇧</option>
+                  <option value="CA">🇨🇦</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <label class="addr-check">
+            <input id="addrDefault" type="checkbox" />
+            This is my default address
+          </label>
+
+          <div class="addr-actions">
+            <a class="addr-cancel" href="#" id="addrCancel">Cancel</a>
+            <button id="addrSave" class="addr-save" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="profileModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profileModalTitle"
+      hidden
+    >
+      <div class="modal__backdrop" data-close="true"></div>
+      <div class="modal__panel" role="document" tabindex="-1">
+        <div class="modal__top">
+          <div>
+            <h2 id="profileModalTitle" class="modal__title">Edit profile</h2>
+          </div>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
+        </div>
+
+        <form id="profileForm" class="addr-form" autocomplete="on">
+          <div class="addr-row-2">
+            <div class="addr-field">
+              <label for="profileFirstName">First name</label>
+              <input
+                id="profileFirstName"
+                class="addr-input"
+                type="text"
+                required
+              />
+            </div>
+            <div class="addr-field">
+              <label for="profileLastName">Last name</label>
+              <input
+                id="profileLastName"
+                class="addr-input"
+                type="text"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="addr-field">
+            <label for="profileEmailInput">Email</label>
+            <input id="profileEmailInput" class="addr-input" type="email" required />
+              id="profileEmailInput"
+
+          <label class="addr-check">
+            <input id="profileNewsletter" type="checkbox" checked />
+            Email me with news and offers
+          </label>
+
+          <div class="addr-actions">
+            <a class="addr-cancel" href="#" id="profileCancel">Cancel</a>
+            <button id="profileSave" class="addr-save" type="submit">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script>
       (function () {
-        var add = document.getElementById('add-address');
-        var signout = document.getElementById('signout');
-        var signoutAll = document.getElementById('signout-all');
-        var refundLink = document.getElementById('refundPolicyLink');
-        var refundModal = document.getElementById('refundModal');
-        var refundPanel = refundModal ? refundModal.querySelector('.modal__panel') : null;
-        var shippingLink = document.getElementById('shippingLink');
-        var shippingModal = document.getElementById('shippingModal');
-        var shippingPanel = shippingModal ? shippingModal.querySelector('.modal__panel') : null;
-        var privacyLink = document.getElementById('privacyPolicyLink');
-        var privacyModal = document.getElementById('privacyModal');
-        var privacyPanel = privacyModal ? privacyModal.querySelector('.modal__panel') : null;
-        var termsLink = document.getElementById('termsLink');
-        var termsModal = document.getElementById('termsModal');
-        var termsPanel = termsModal ? termsModal.querySelector('.modal__panel') : null;
-        var contactLink = document.getElementById('contactLink');
-        var contactModal = document.getElementById('contactModal');
-        var contactPanel = contactModal ? contactModal.querySelector('.modal__panel') : null;
+        var add = document.getElementById("add-address");
+        var profileName = document.getElementById("profileName");
+        var profileEmail = document.getElementById("profileEmail");
+        var editProfileBtn = document.getElementById("editProfileBtn");
+        var profileModal = document.getElementById("profileModal");
+        var profilePanel = profileModal
+          ? profileModal.querySelector(".modal__panel")
+          : null;
+        var profileForm = document.getElementById("profileForm");
+        var profileCancel = document.getElementById("profileCancel");
+        var profileSave = document.getElementById("profileSave");
+        var profileFirstName = document.getElementById("profileFirstName");
+        var profileLastName = document.getElementById("profileLastName");
+        var profileEmailInput = document.getElementById("profileEmailInput");
+        var profileNewsletter = document.getElementById("profileNewsletter");
+        var addressesEmpty = document.getElementById("addressesEmpty");
+        var addressesView = document.getElementById("addressesView");
+        var addressLines = document.getElementById("addressLines");
+        var editAddressBtn = document.getElementById("editAddressBtn");
+        var addressModal = document.getElementById("addressModal");
+        var addressPanel = addressModal
+          ? addressModal.querySelector(".modal__panel")
+          : null;
+        var addressForm = document.getElementById("addressForm");
+        var addrCancel = document.getElementById("addrCancel");
+        var addrSave = document.getElementById("addrSave");
+        var addrCountry = document.getElementById("addrCountry");
+        var addrFirstName = document.getElementById("addrFirstName");
+        var addrLastName = document.getElementById("addrLastName");
+        var addrAddress1 = document.getElementById("addrAddress1");
+        var addrAddress2 = document.getElementById("addrAddress2");
+        var addrCity = document.getElementById("addrCity");
+        var addrState = document.getElementById("addrState");
+        var addrZip = document.getElementById("addrZip");
+        var addrPhoneCode = document.getElementById("addrPhoneCode");
+        var addrPhone = document.getElementById("addrPhone");
+        var addrPhoneRegion = document.getElementById("addrPhoneRegion");
+        var addrDefault = document.getElementById("addrDefault");
+        var signout = document.getElementById("signout");
+        var signoutAll = document.getElementById("signout-all");
+        var refundLink = document.getElementById("refundPolicyLink");
+        var refundModal = document.getElementById("refundModal");
+        var refundPanel = refundModal
+          ? refundModal.querySelector(".modal__panel")
+          : null;
+        var shippingLink = document.getElementById("shippingLink");
+        var shippingModal = document.getElementById("shippingModal");
+        var shippingPanel = shippingModal
+          ? shippingModal.querySelector(".modal__panel")
+          : null;
+        var privacyLink = document.getElementById("privacyPolicyLink");
+        var privacyModal = document.getElementById("privacyModal");
+        var privacyPanel = privacyModal
+          ? privacyModal.querySelector(".modal__panel")
+          : null;
+        var termsLink = document.getElementById("termsLink");
+        var termsModal = document.getElementById("termsModal");
+        var termsPanel = termsModal
+          ? termsModal.querySelector(".modal__panel")
+          : null;
+        var contactLink = document.getElementById("contactLink");
+        var contactModal = document.getElementById("contactModal");
+        var contactPanel = contactModal
+          ? contactModal.querySelector(".modal__panel")
+          : null;
         var lastActive = null;
+        var profileBaseline = null;
 
         function goLogin() {
-          window.location.href = '/login.html';
+          window.location.href = "/login.html";
         }
 
-        add.addEventListener('click', function (e) {
-          e.preventDefault();
-        });
+        function safeString(v) {
+          if (v === null || v === undefined) return "";
+          return String(v);
+        }
 
-        signout.addEventListener('click', function () {
+        function readProfile() {
+          try {
+            var raw = localStorage.getItem("profileSettingsV1");
+            if (!raw) return null;
+            return JSON.parse(raw);
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function writeProfile(p) {
+          try {
+            localStorage.setItem(
+              "profileSettingsV1",
+              JSON.stringify(p || null),
+            );
+          } catch (e) {}
+        }
+
+        function getEmailFallback() {
+          try {
+            return (
+              safeString(sessionStorage.getItem("auth0Email")) ||
+              safeString(localStorage.getItem("loginEmail")) ||
+              ""
+            );
+          } catch (e) {
+            return "";
+          }
+        }
+
+        function formatName(p) {
+          var full = [p && p.firstName, p && p.lastName]
+            .filter(Boolean)
+            .join(" ");
+          return full || "Name";
+        }
+
+        function renderProfile() {
+          var p = readProfile() || {};
+          if (!p.email) p.email = getEmailFallback();
+          if (profileName) profileName.textContent = formatName(p);
+          if (profileEmail) profileEmail.textContent = p.email || "";
+        }
+
+        function openProfileModal() {
+          if (!profileModal) return;
+          lastActive = document.activeElement;
+          profileModal.hidden = false;
+          document.body.style.overflow = "hidden";
+          if (profilePanel) profilePanel.focus();
+        }
+
+        function closeProfileModal() {
+          if (!profileModal) return;
+          profileModal.hidden = true;
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
+        }
+
+        function fillProfileForm(p) {
+          p = p || {};
+          if (!p.email) p.email = getEmailFallback();
+          if (profileFirstName) profileFirstName.value = p.firstName || "";
+          if (profileLastName) profileLastName.value = p.lastName || "";
+          if (profileEmailInput) profileEmailInput.value = p.email || "";
+          if (profileNewsletter)
+            profileNewsletter.checked = p.newsletter !== false;
+          if (profileSave) profileSave.classList.remove("is-primary");
+        }
+
+        function collectProfileForm() {
+          var email = safeString(
+            profileEmailInput && profileEmailInput.value,
+          ).trim();
+          if (!email) email = getEmailFallback();
+          return {
+            firstName: safeString(
+              profileFirstName && profileFirstName.value,
+            ).trim(),
+            lastName: safeString(
+              profileLastName && profileLastName.value,
+            ).trim(),
+            email: email,
+            newsletter: !!(profileNewsletter && profileNewsletter.checked),
+          };
+        }
+
+        function sameProfile(a, b) {
+          a = a || {};
+          b = b || {};
+          return (
+            safeString(a.firstName) === safeString(b.firstName) &&
+            safeString(a.lastName) === safeString(b.lastName) &&
+            safeString(a.email) === safeString(b.email) &&
+            !!a.newsletter === !!b.newsletter
+          );
+        }
+
+        function updateProfileSaveState() {
+          if (!profileSave) return;
+          var current = collectProfileForm();
+          var changed = !sameProfile(current, profileBaseline);
+          profileSave.classList.toggle("is-primary", changed);
+        }
+
+        function readAddress() {
+          try {
+            var raw = localStorage.getItem("profileAddressV1");
+            if (!raw) return null;
+            return JSON.parse(raw);
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function writeAddress(addr) {
+          try {
+            localStorage.setItem(
+              "profileAddressV1",
+              JSON.stringify(addr || null),
+            );
+          } catch (e) {}
+        }
+
+        function formatAddressLines(addr) {
+          if (!addr) return "";
+          var lines = [];
+          var fullName = [addr.firstName, addr.lastName]
+            .filter(Boolean)
+            .join(" ");
+          if (fullName) lines.push(fullName);
+          if (addr.address1) lines.push(addr.address1);
+          if (addr.address2) lines.push(addr.address2);
+          var cityStateZip = [addr.city, addr.state, addr.zip]
+            .filter(Boolean)
+            .join(" ");
+          if (cityStateZip) lines.push(cityStateZip);
+          if (addr.country) lines.push(addr.country);
+          var phone = "";
+          if (addr.phoneCode && addr.phone) phone = addr.phoneCode + addr.phone;
+          else if (addr.phone) phone = addr.phone;
+          if (phone) lines.push(phone);
+          return lines.join("\n");
+        }
+
+        function renderAddress() {
+          var addr = readAddress();
+          var has = !!(addr && (addr.address1 || addr.city || addr.country));
+          if (addressesEmpty) addressesEmpty.hidden = has;
+          if (addressesView) addressesView.hidden = !has;
+          if (has && addressLines)
+            addressLines.textContent = formatAddressLines(addr);
+        }
+
+        function openAddressModal() {
+          if (!addressModal) return;
+          lastActive = document.activeElement;
+          addressModal.hidden = false;
+          document.body.style.overflow = "hidden";
+          if (addressPanel) addressPanel.focus();
+        }
+
+        function closeAddressModal() {
+          if (!addressModal) return;
+          addressModal.hidden = true;
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
+        }
+
+        function fillForm(addr) {
+          addr = addr || {};
+          if (addrCountry) addrCountry.value = addr.country || "United States";
+          if (addrFirstName) addrFirstName.value = addr.firstName || "";
+          if (addrLastName) addrLastName.value = addr.lastName || "";
+          if (addrAddress1) addrAddress1.value = addr.address1 || "";
+          if (addrAddress2) addrAddress2.value = addr.address2 || "";
+          if (addrCity) addrCity.value = addr.city || "";
+          if (addrState)
+            addrState.value =
+              addr.state ||
+              (addrState.options[0] ? addrState.options[0].value : "");
+          if (addrZip) addrZip.value = addr.zip || "";
+          if (addrPhoneCode) addrPhoneCode.value = addr.phoneCode || "+1";
+          if (addrPhone) addrPhone.value = addr.phone || "";
+          if (addrPhoneRegion) addrPhoneRegion.value = addr.phoneRegion || "US";
+          if (addrDefault) addrDefault.checked = !!addr.isDefault;
+        }
+
+        function collectForm() {
+          return {
+            country: safeString(addrCountry && addrCountry.value).trim(),
+            firstName: safeString(addrFirstName && addrFirstName.value).trim(),
+            lastName: safeString(addrLastName && addrLastName.value).trim(),
+            address1: safeString(addrAddress1 && addrAddress1.value).trim(),
+            address2: safeString(addrAddress2 && addrAddress2.value).trim(),
+            city: safeString(addrCity && addrCity.value).trim(),
+            state: safeString(addrState && addrState.value).trim(),
+            zip: safeString(addrZip && addrZip.value).trim(),
+            phoneCode: safeString(addrPhoneCode && addrPhoneCode.value).trim(),
+            phone: safeString(addrPhone && addrPhone.value).trim(),
+            phoneRegion: safeString(
+              addrPhoneRegion && addrPhoneRegion.value,
+            ).trim(),
+            isDefault: !!(addrDefault && addrDefault.checked),
+          };
+        }
+
+        if (editProfileBtn) {
+          editProfileBtn.addEventListener("click", function () {
+            fillProfileForm(readProfile() || {});
+            profileBaseline = collectProfileForm();
+            updateProfileSaveState();
+            openProfileModal();
+          });
+        }
+
+        if (profileCancel) {
+          profileCancel.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeProfileModal();
+          });
+        }
+
+        if (profileModal) {
+          profileModal.addEventListener("click", function (e) {
+            var t = e.target;
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeProfileModal();
+          });
+          window.addEventListener("keydown", function (e) {
+            if (profileModal.hidden) return;
+            if (e.key === "Escape") closeProfileModal();
+          });
+        }
+
+        if (profileForm) {
+          profileForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (profileSave) profileSave.disabled = true;
+            var p = collectProfileForm();
+            writeProfile(p);
+            try {
+              if (p && p.email) localStorage.setItem("loginEmail", p.email);
+            } catch (e) {}
+            renderProfile();
+            closeProfileModal();
+            if (profileSave) profileSave.disabled = false;
+          });
+        }
+
+        if (profileFirstName)
+          profileFirstName.addEventListener("input", updateProfileSaveState);
+        if (profileLastName)
+          profileLastName.addEventListener("input", updateProfileSaveState);
+        if (profileEmailInput)
+          profileEmailInput.addEventListener("input", updateProfileSaveState);
+        if (profileNewsletter)
+          profileNewsletter.addEventListener("change", updateProfileSaveState);
+
+        if (add) {
+          add.addEventListener("click", function (e) {
+            e.preventDefault();
+            fillForm(readAddress() || {});
+            openAddressModal();
+          });
+        }
+
+        if (editAddressBtn) {
+          editAddressBtn.addEventListener("click", function () {
+            fillForm(readAddress() || {});
+            openAddressModal();
+          });
+        }
+
+        if (addrCancel) {
+          addrCancel.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAddressModal();
+          });
+        }
+
+        if (addressModal) {
+          addressModal.addEventListener("click", function (e) {
+            var t = e.target;
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeAddressModal();
+          });
+          window.addEventListener("keydown", function (e) {
+            if (addressModal.hidden) return;
+            if (e.key === "Escape") closeAddressModal();
+          });
+        }
+
+        if (addressForm) {
+          addressForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (addrSave) addrSave.disabled = true;
+            var addr = collectForm();
+            writeAddress(addr);
+            renderAddress();
+            closeAddressModal();
+            if (addrSave) addrSave.disabled = false;
+          });
+        }
+
+        signout.addEventListener("click", function () {
           goLogin();
         });
 
-        signoutAll.addEventListener('click', function (e) {
+        signoutAll.addEventListener("click", function (e) {
           e.preventDefault();
           goLogin();
         });
@@ -714,31 +1920,33 @@
           if (!refundModal) return;
           lastActive = document.activeElement;
           refundModal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (refundPanel) refundPanel.focus();
         }
 
         function closeRefund() {
           if (!refundModal) return;
           refundModal.hidden = true;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         if (refundLink && refundModal) {
-          refundLink.addEventListener('click', function (e) {
+          refundLink.addEventListener("click", function (e) {
             e.preventDefault();
             openRefund();
           });
 
-          refundModal.addEventListener('click', function (e) {
+          refundModal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeRefund();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeRefund();
           });
 
-          window.addEventListener('keydown', function (e) {
+          window.addEventListener("keydown", function (e) {
             if (refundModal.hidden) return;
-            if (e.key === 'Escape') closeRefund();
+            if (e.key === "Escape") closeRefund();
           });
         }
 
@@ -746,31 +1954,33 @@
           if (!shippingModal) return;
           lastActive = document.activeElement;
           shippingModal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (shippingPanel) shippingPanel.focus();
         }
 
         function closeShipping() {
           if (!shippingModal) return;
           shippingModal.hidden = true;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         if (shippingLink && shippingModal) {
-          shippingLink.addEventListener('click', function (e) {
+          shippingLink.addEventListener("click", function (e) {
             e.preventDefault();
             openShipping();
           });
 
-          shippingModal.addEventListener('click', function (e) {
+          shippingModal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeShipping();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeShipping();
           });
 
-          window.addEventListener('keydown', function (e) {
+          window.addEventListener("keydown", function (e) {
             if (shippingModal.hidden) return;
-            if (e.key === 'Escape') closeShipping();
+            if (e.key === "Escape") closeShipping();
           });
         }
 
@@ -778,31 +1988,33 @@
           if (!privacyModal) return;
           lastActive = document.activeElement;
           privacyModal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (privacyPanel) privacyPanel.focus();
         }
 
         function closePrivacy() {
           if (!privacyModal) return;
           privacyModal.hidden = true;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         if (privacyLink && privacyModal) {
-          privacyLink.addEventListener('click', function (e) {
+          privacyLink.addEventListener("click", function (e) {
             e.preventDefault();
             openPrivacy();
           });
 
-          privacyModal.addEventListener('click', function (e) {
+          privacyModal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closePrivacy();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closePrivacy();
           });
 
-          window.addEventListener('keydown', function (e) {
+          window.addEventListener("keydown", function (e) {
             if (privacyModal.hidden) return;
-            if (e.key === 'Escape') closePrivacy();
+            if (e.key === "Escape") closePrivacy();
           });
         }
 
@@ -810,31 +2022,33 @@
           if (!termsModal) return;
           lastActive = document.activeElement;
           termsModal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (termsPanel) termsPanel.focus();
         }
 
         function closeTerms() {
           if (!termsModal) return;
           termsModal.hidden = true;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         if (termsLink && termsModal) {
-          termsLink.addEventListener('click', function (e) {
+          termsLink.addEventListener("click", function (e) {
             e.preventDefault();
             openTerms();
           });
 
-          termsModal.addEventListener('click', function (e) {
+          termsModal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeTerms();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeTerms();
           });
 
-          window.addEventListener('keydown', function (e) {
+          window.addEventListener("keydown", function (e) {
             if (termsModal.hidden) return;
-            if (e.key === 'Escape') closeTerms();
+            if (e.key === "Escape") closeTerms();
           });
         }
 
@@ -842,33 +2056,38 @@
           if (!contactModal) return;
           lastActive = document.activeElement;
           contactModal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (contactPanel) contactPanel.focus();
         }
 
         function closeContact() {
           if (!contactModal) return;
           contactModal.hidden = true;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         if (contactLink && contactModal) {
-          contactLink.addEventListener('click', function (e) {
+          contactLink.addEventListener("click", function (e) {
             e.preventDefault();
             openContact();
           });
 
-          contactModal.addEventListener('click', function (e) {
+          contactModal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeContact();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeContact();
           });
 
-          window.addEventListener('keydown', function (e) {
+          window.addEventListener("keydown", function (e) {
             if (contactModal.hidden) return;
-            if (e.key === 'Escape') closeContact();
+            if (e.key === "Escape") closeContact();
           });
         }
+
+        renderProfile();
+        renderAddress();
       })();
     </script>
   </body>
