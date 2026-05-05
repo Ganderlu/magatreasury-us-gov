@@ -103,6 +103,96 @@
         width: 22px;
         height: 22px;
       }
+      .mobile-drawer[hidden] {
+        display: none;
+      }
+      .mobile-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+      }
+      .mobile-drawer__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(17, 24, 39, 0.55);
+        opacity: 0;
+        transition: opacity 160ms ease;
+      }
+      .mobile-drawer__panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: min(78vw, 320px);
+        background: #fff;
+        transform: translateX(-100%);
+        transition: transform 180ms ease;
+        box-shadow: 0 20px 60px rgba(17, 24, 39, 0.28);
+      }
+      .mobile-drawer.is-open .mobile-drawer__backdrop {
+        opacity: 1;
+      }
+      .mobile-drawer.is-open .mobile-drawer__panel {
+        transform: translateX(0);
+      }
+      .mobile-drawer__header {
+        height: 64px;
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 12px;
+        border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+      }
+      .mobile-drawer__close {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: transparent;
+        color: rgba(17, 24, 39, 0.85);
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 1;
+        display: inline-grid;
+        place-items: center;
+      }
+      .mobile-drawer__brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .mobile-drawer__brand img {
+        width: 132px;
+        height: auto;
+        display: block;
+      }
+      .mobile-drawer__avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 2px solid rgba(90, 49, 244, 0.7);
+        display: grid;
+        place-items: center;
+        color: rgba(17, 24, 39, 0.75);
+        text-decoration: none;
+        justify-self: end;
+        font-weight: 800;
+      }
+      .mobile-drawer__nav {
+        padding: 18px 22px;
+      }
+      .mobile-drawer__nav a {
+        display: block;
+        margin: 10px 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(17, 24, 39, 0.85);
+        text-decoration: none;
+      }
+      .mobile-drawer__nav a.is-active {
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
       .page {
         min-height: calc(100vh - 64px);
         background: var(--bg);
@@ -327,10 +417,30 @@
   <body>
     <header class="topbar">
       <button class="menu-btn" type="button" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 7h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 12h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
         </svg>
       </button>
       <a
@@ -351,6 +461,49 @@
         <span id="navAvatarText" class="avatar__text">?</span>
       </a>
     </header>
+    <div
+      id="mobileNav"
+      class="mobile-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      hidden
+    >
+      <div class="mobile-drawer__backdrop" data-close="true"></div>
+      <div class="mobile-drawer__panel" role="document" tabindex="-1">
+        <div class="mobile-drawer__header">
+          <button
+            class="mobile-drawer__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
+          <a
+            class="mobile-drawer__brand"
+            href="/maga/products/qfs-gold-bill.html"
+            aria-label="Home"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+              alt="LIMITED TIME OFFER"
+            />
+          </a>
+          <a
+            class="mobile-drawer__avatar"
+            href="/profile.html"
+            aria-label="Profile"
+          >
+            <span id="navAvatarTextMobile" class="avatar__text">?</span>
+          </a>
+        </div>
+        <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
+          <a class="is-active" href="/orders.html">Orders</a>
+          <a href="/profile.html">Profile</a>
+        </nav>
+      </div>
+    </div>
 
     <main class="page">
       <div class="container">
@@ -408,17 +561,30 @@
                 />
               </svg>
             </span>
-            <a id="refundPolicyLink" href="/policies/refund.html">Refund policy</a>
+            <a id="refundPolicyLink" href="/policies/refund.html"
+              >Refund policy</a
+            >
             <a id="shippingLink" href="/policies/shipping.html">Shipping</a>
-            <a id="privacyPolicyLink" href="/policies/privacy.html">Privacy policy</a>
+            <a id="privacyPolicyLink" href="/policies/privacy.html"
+              >Privacy policy</a
+            >
             <a id="termsLink" href="/policies/terms.html">Terms of service</a>
-            <a id="contactLink" href="/policies/contact.html">Contact information</a>
+            <a id="contactLink" href="/policies/contact.html"
+              >Contact information</a
+            >
           </div>
         </div>
       </footer>
     </main>
 
-    <div id="refundModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="refundTitle" hidden>
+    <div
+      id="refundModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="refundTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -426,44 +592,67 @@
             <h2 id="refundTitle" class="modal__title">Refund policy</h2>
             <div class="modal__subtitle">Refund Policy (30 Days)</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            At Our Maga Shop, your satisfaction means everything to us. That’s why we proudly offer a 30-day refund
-            policy on all eligible orders. Please review the details below:
+            At Our Maga Shop, your satisfaction means everything to us. That’s
+            why we proudly offer a 30-day refund policy on all eligible orders.
+            Please review the details below:
           </p>
 
           <h3>Damaged Items</h3>
           <p>
-            If your item arrives damaged, contact us within 60 days so we can review and resolve the issue. Once received
-            and inspected, we may issue a refund for the product cost. Please note: shipping fees are non-refundable.
+            If your item arrives damaged, contact us within 60 days so we can
+            review and resolve the issue. Once received and inspected, we may
+            issue a refund for the product cost. Please note: shipping fees are
+            non-refundable.
           </p>
 
           <h3>Lost or Undelivered Packages</h3>
           <p>
-            If your tracking shows “delivered” but you didn’t receive your package, please check with your local carrier
-            and your delivery location first. If it’s still missing, contact us and we’ll assist with next steps.
+            If your tracking shows “delivered” but you didn’t receive your
+            package, please check with your local carrier and your delivery
+            location first. If it’s still missing, contact us and we’ll assist
+            with next steps.
           </p>
 
           <h3>Refund Processing</h3>
           <p>
-            Approved refunds are issued to the original payment method. Processing times vary by provider; allow several
-            business days for the refund to appear after approval.
+            Approved refunds are issued to the original payment method.
+            Processing times vary by provider; allow several business days for
+            the refund to appear after approval.
           </p>
 
           <h3>Return Conditions</h3>
           <p>
-            For eligible returns, items must be unused and in the same condition you received them. Some items may be
-            non-returnable for hygiene, safety, personalization, or clearance reasons.
+            For eligible returns, items must be unused and in the same condition
+            you received them. Some items may be non-returnable for hygiene,
+            safety, personalization, or clearance reasons.
           </p>
 
-          <div class="modal__fine">Need help? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Need help? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="shippingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="shippingTitle" hidden>
+    <div
+      id="shippingModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="shippingTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -471,57 +660,78 @@
             <h2 id="shippingTitle" class="modal__title">Shipping</h2>
             <div class="modal__subtitle">Shipping Policy</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            Our Maga Shop processes and ships orders as quickly as possible. Shipping times can vary based on your
-            location, carrier conditions, and item availability.
+            Our Maga Shop processes and ships orders as quickly as possible.
+            Shipping times can vary based on your location, carrier conditions,
+            and item availability.
           </p>
 
           <h3>Processing Time</h3>
           <p>
-            Most orders are processed within 1–3 business days. During peak demand, promotions, or holidays, processing
-            may take longer.
+            Most orders are processed within 1–3 business days. During peak
+            demand, promotions, or holidays, processing may take longer.
           </p>
 
           <h3>Shipping Time</h3>
           <p>
-            Transit times depend on the carrier and your delivery address. Estimated delivery dates are not guaranteed
-            and may change due to weather, carrier delays, or operational issues.
+            Transit times depend on the carrier and your delivery address.
+            Estimated delivery dates are not guaranteed and may change due to
+            weather, carrier delays, or operational issues.
           </p>
 
           <h3>Tracking</h3>
           <p>
-            When available, we provide a tracking number after your order ships. Tracking updates may take time to
-            appear after the label is created.
+            When available, we provide a tracking number after your order ships.
+            Tracking updates may take time to appear after the label is created.
           </p>
 
           <h3>Address Accuracy</h3>
           <p>
-            Please make sure your shipping address is complete and correct. If an order is returned to us due to an
-            incorrect address, you may be responsible for reshipping fees.
+            Please make sure your shipping address is complete and correct. If
+            an order is returned to us due to an incorrect address, you may be
+            responsible for reshipping fees.
           </p>
 
           <h3>Lost, Delayed, or Missing Packages</h3>
           <p>
-            If your package is delayed, please check the tracking updates first. If tracking shows “delivered” but you
-            didn’t receive it, check with household members, neighbors, or the carrier. If it remains missing, contact
-            us and we’ll assist with next steps.
+            If your package is delayed, please check the tracking updates first.
+            If tracking shows “delivered” but you didn’t receive it, check with
+            household members, neighbors, or the carrier. If it remains missing,
+            contact us and we’ll assist with next steps.
           </p>
 
           <h3>Damaged in Transit</h3>
           <p>
-            If your order arrives damaged, contact us as soon as possible and include photos of the item and packaging
-            so we can help resolve the issue.
+            If your order arrives damaged, contact us as soon as possible and
+            include photos of the item and packaging so we can help resolve the
+            issue.
           </p>
 
-          <div class="modal__fine">Need help? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Need help? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="privacyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
+    <div
+      id="privacyModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacyTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -529,24 +739,43 @@
             <h2 id="privacyTitle" class="modal__title">Privacy policy</h2>
             <div class="modal__subtitle">Privacy Policy</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            This Privacy Policy explains how Our Maga Shop collects, uses, and shares information when you visit our
-            website or make a purchase. By using our site, you agree to the practices described below.
+            This Privacy Policy explains how Our Maga Shop collects, uses, and
+            shares information when you visit our website or make a purchase. By
+            using our site, you agree to the practices described below.
           </p>
 
           <h3>Information We Collect</h3>
           <ul>
-            <li>Contact information such as your name, email address, phone number, and shipping/billing address.</li>
-            <li>Order information such as items purchased, order totals, and order history.</li>
-            <li>Device and usage information such as browser type, pages visited, and approximate location based on IP.</li>
+            <li>
+              Contact information such as your name, email address, phone
+              number, and shipping/billing address.
+            </li>
+            <li>
+              Order information such as items purchased, order totals, and order
+              history.
+            </li>
+            <li>
+              Device and usage information such as browser type, pages visited,
+              and approximate location based on IP.
+            </li>
           </ul>
 
           <h3>How We Use Information</h3>
           <ul>
-            <li>To process orders, deliver products, and provide customer support.</li>
+            <li>
+              To process orders, deliver products, and provide customer support.
+            </li>
             <li>To send order updates and service messages you request.</li>
             <li>To improve site performance, security, and user experience.</li>
             <li>To detect, prevent, and investigate fraud or abuse.</li>
@@ -554,36 +783,55 @@
 
           <h3>Cookies & Analytics</h3>
           <p>
-            We may use cookies and similar technologies to remember preferences, understand site traffic, and improve
-            our services. You can control cookies through your browser settings; disabling cookies may impact features
-            of the site.
+            We may use cookies and similar technologies to remember preferences,
+            understand site traffic, and improve our services. You can control
+            cookies through your browser settings; disabling cookies may impact
+            features of the site.
           </p>
 
           <h3>Sharing of Information</h3>
           <p>
-            We may share information with service providers that help us operate our store (for example, payment
-            processing, shipping carriers, email delivery, analytics, and customer support). We may also share
-            information if required by law or to protect our rights and the safety of our customers.
+            We may share information with service providers that help us operate
+            our store (for example, payment processing, shipping carriers, email
+            delivery, analytics, and customer support). We may also share
+            information if required by law or to protect our rights and the
+            safety of our customers.
           </p>
 
           <h3>Data Security</h3>
           <p>
-            We take reasonable measures to protect information. No method of transmission or storage is 100% secure, so
-            we cannot guarantee absolute security.
+            We take reasonable measures to protect information. No method of
+            transmission or storage is 100% secure, so we cannot guarantee
+            absolute security.
           </p>
 
           <h3>Your Choices</h3>
           <ul>
-            <li>You may request access, correction, or deletion of certain personal information where applicable.</li>
-            <li>You can opt out of non-essential marketing communications at any time using the unsubscribe link.</li>
+            <li>
+              You may request access, correction, or deletion of certain
+              personal information where applicable.
+            </li>
+            <li>
+              You can opt out of non-essential marketing communications at any
+              time using the unsubscribe link.
+            </li>
           </ul>
 
-          <div class="modal__fine">Questions? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Questions? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="termsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
+    <div
+      id="termsModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="termsTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -591,58 +839,83 @@
             <h2 id="termsTitle" class="modal__title">Terms of service</h2>
             <div class="modal__subtitle">Terms of Service</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            These Terms of Service govern your use of Our Maga Shop and any purchase made through our website. By
-            accessing the site or placing an order, you agree to these terms.
+            These Terms of Service govern your use of Our Maga Shop and any
+            purchase made through our website. By accessing the site or placing
+            an order, you agree to these terms.
           </p>
 
           <h3>Use of the Site</h3>
           <p>
-            You agree not to misuse the site, attempt unauthorized access, disrupt service, or use the site for unlawful
-            purposes. We may suspend or restrict access to protect our customers and services.
+            You agree not to misuse the site, attempt unauthorized access,
+            disrupt service, or use the site for unlawful purposes. We may
+            suspend or restrict access to protect our customers and services.
           </p>
 
           <h3>Orders & Payments</h3>
           <ul>
             <li>All orders are subject to acceptance and availability.</li>
-            <li>Prices and product details may change at any time without notice.</li>
-            <li>You agree to provide accurate billing and shipping information.</li>
+            <li>
+              Prices and product details may change at any time without notice.
+            </li>
+            <li>
+              You agree to provide accurate billing and shipping information.
+            </li>
           </ul>
 
           <h3>Shipping, Returns & Refunds</h3>
           <p>
-            Shipping timelines are estimates and not guaranteed. Returns and refunds are handled according to our refund
-            policy and shipping policy.
+            Shipping timelines are estimates and not guaranteed. Returns and
+            refunds are handled according to our refund policy and shipping
+            policy.
           </p>
 
           <h3>Intellectual Property</h3>
           <p>
-            All site content, including text, graphics, logos, and design elements, is owned by Our Maga Shop or its
-            licensors and may not be copied or used without permission.
+            All site content, including text, graphics, logos, and design
+            elements, is owned by Our Maga Shop or its licensors and may not be
+            copied or used without permission.
           </p>
 
           <h3>Disclaimer & Limitation of Liability</h3>
           <p>
-            The site and products are provided “as is” and “as available.” To the fullest extent permitted by law, Our
-            Maga Shop is not liable for indirect, incidental, or consequential damages, or for losses arising from use
-            of the site or products.
+            The site and products are provided “as is” and “as available.” To
+            the fullest extent permitted by law, Our Maga Shop is not liable for
+            indirect, incidental, or consequential damages, or for losses
+            arising from use of the site or products.
           </p>
 
           <h3>Changes to These Terms</h3>
           <p>
-            We may update these Terms from time to time. Continued use of the site after changes means you accept the
-            updated Terms.
+            We may update these Terms from time to time. Continued use of the
+            site after changes means you accept the updated Terms.
           </p>
 
-          <div class="modal__fine">Questions? Use “Contact information” in the footer to reach us.</div>
+          <div class="modal__fine">
+            Questions? Use “Contact information” in the footer to reach us.
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
+    <div
+      id="contactModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contactTitle"
+      hidden
+    >
       <div class="modal__backdrop" data-close="true"></div>
       <div class="modal__panel" role="document" tabindex="-1">
         <div class="modal__top">
@@ -650,19 +923,35 @@
             <h2 id="contactTitle" class="modal__title">Contact information</h2>
             <div class="modal__subtitle">Customer Support</div>
           </div>
-          <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
         </div>
         <div class="modal__content">
           <p>
-            Need help with an order? Our Maga Shop support team is here to assist. For the fastest service, include your
-            order number and the email used at checkout.
+            Need help with an order? Our Maga Shop support team is here to
+            assist. For the fastest service, include your order number and the
+            email used at checkout.
           </p>
 
           <h3>How to Reach Us</h3>
           <ul>
-            <li>Contact form: use the “Contact information” link from the footer on any page.</li>
-            <li>Order questions: include your order number and a brief description of the issue.</li>
-            <li>Damaged items: attach clear photos of the item and packaging.</li>
+            <li>
+              Contact form: use the “Contact information” link from the footer
+              on any page.
+            </li>
+            <li>
+              Order questions: include your order number and a brief description
+              of the issue.
+            </li>
+            <li>
+              Damaged items: attach clear photos of the item and packaging.
+            </li>
           </ul>
 
           <h3>What to Include</h3>
@@ -670,16 +959,21 @@
             <li>Order number (if available)</li>
             <li>Your name and email</li>
             <li>Item name(s) and quantity</li>
-            <li>A short summary of the request (refund, shipping issue, change of address, etc.)</li>
+            <li>
+              A short summary of the request (refund, shipping issue, change of
+              address, etc.)
+            </li>
           </ul>
 
           <h3>Response Time</h3>
           <p>
-            We aim to respond within 1–2 business days. During peak periods, responses may take longer.
+            We aim to respond within 1–2 business days. During peak periods,
+            responses may take longer.
           </p>
 
           <div class="modal__fine">
-            For privacy and security, we may request additional information to verify order ownership.
+            For privacy and security, we may request additional information to
+            verify order ownership.
           </div>
         </div>
       </div>
@@ -687,19 +981,27 @@
 
     <script>
       (function () {
-        var navAvatarText = document.getElementById('navAvatarText');
+        var navAvatarText = document.getElementById("navAvatarText");
+        var navAvatarTextMobile = document.getElementById(
+          "navAvatarTextMobile",
+        );
         var lastActive = null;
         var currentModal = null;
         var currentPanel = null;
+        var mobileNav = document.getElementById("mobileNav");
+        var mobileNavPanel = mobileNav
+          ? mobileNav.querySelector(".mobile-drawer__panel")
+          : null;
+        var menuBtn = document.querySelector(".menu-btn");
 
         function safeString(v) {
-          if (v === null || v === undefined) return '';
+          if (v === null || v === undefined) return "";
           return String(v);
         }
 
         function readProfile() {
           try {
-            var raw = localStorage.getItem('profileSettingsV1');
+            var raw = localStorage.getItem("profileSettingsV1");
             if (!raw) return null;
             return JSON.parse(raw);
           } catch (e) {
@@ -710,12 +1012,12 @@
         function getEmailFallback() {
           try {
             return (
-              safeString(sessionStorage.getItem('auth0Email')) ||
-              safeString(localStorage.getItem('loginEmail')) ||
-              ''
+              safeString(sessionStorage.getItem("auth0Email")) ||
+              safeString(localStorage.getItem("loginEmail")) ||
+              ""
             );
           } catch (e) {
-            return '';
+            return "";
           }
         }
 
@@ -725,15 +1027,59 @@
             safeString(p && p.lastName).trim() ||
             safeString(p && p.email).trim() ||
             getEmailFallback();
-          if (!s) return '?';
+          if (!s) return "?";
           return s.charAt(0).toUpperCase();
         }
 
         (function renderAvatar() {
           var p = readProfile() || {};
           if (!p.email) p.email = getEmailFallback();
-          if (navAvatarText) navAvatarText.textContent = profileInitial(p);
+          var initial = profileInitial(p);
+          if (navAvatarText) navAvatarText.textContent = initial;
+          if (navAvatarTextMobile) navAvatarTextMobile.textContent = initial;
         })();
+
+        function openMobileNav() {
+          if (!mobileNav || !mobileNavPanel) return;
+          lastActive = document.activeElement;
+          mobileNav.hidden = false;
+          document.body.style.overflow = "hidden";
+          requestAnimationFrame(function () {
+            mobileNav.classList.add("is-open");
+            mobileNavPanel.focus();
+          });
+        }
+
+        function closeMobileNav() {
+          if (!mobileNav || mobileNav.hidden) return;
+          mobileNav.classList.remove("is-open");
+          window.setTimeout(function () {
+            mobileNav.hidden = true;
+            document.body.style.overflow = "";
+            if (lastActive && typeof lastActive.focus === "function")
+              lastActive.focus();
+          }, 200);
+        }
+
+        if (menuBtn) {
+          menuBtn.addEventListener("click", function () {
+            openMobileNav();
+          });
+        }
+
+        if (mobileNav) {
+          mobileNav.addEventListener("click", function (e) {
+            var t = e.target;
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeMobileNav();
+          });
+          var mobileLinks = mobileNav.querySelectorAll("a");
+          for (var i = 0; i < mobileLinks.length; i++) {
+            mobileLinks[i].addEventListener("click", function () {
+              closeMobileNav();
+            });
+          }
+        }
 
         function openModal(modal) {
           if (!modal) return;
@@ -742,9 +1088,9 @@
           }
           lastActive = document.activeElement;
           currentModal = modal;
-          currentPanel = modal.querySelector('.modal__panel');
+          currentPanel = modal.querySelector(".modal__panel");
           modal.hidden = false;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           if (currentPanel) currentPanel.focus();
         }
 
@@ -753,8 +1099,9 @@
           currentModal.hidden = true;
           currentModal = null;
           currentPanel = null;
-          document.body.style.overflow = '';
-          if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+          document.body.style.overflow = "";
+          if (lastActive && typeof lastActive.focus === "function")
+            lastActive.focus();
         }
 
         function bindModal(linkId, modalId) {
@@ -762,26 +1109,29 @@
           var modal = document.getElementById(modalId);
           if (!link || !modal) return;
 
-          link.addEventListener('click', function (e) {
+          link.addEventListener("click", function (e) {
             e.preventDefault();
             openModal(modal);
           });
 
-          modal.addEventListener('click', function (e) {
+          modal.addEventListener("click", function (e) {
             var t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === 'true') closeCurrentModal();
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeCurrentModal();
           });
         }
 
-        bindModal('refundPolicyLink', 'refundModal');
-        bindModal('shippingLink', 'shippingModal');
-        bindModal('privacyPolicyLink', 'privacyModal');
-        bindModal('termsLink', 'termsModal');
-        bindModal('contactLink', 'contactModal');
+        bindModal("refundPolicyLink", "refundModal");
+        bindModal("shippingLink", "shippingModal");
+        bindModal("privacyPolicyLink", "privacyModal");
+        bindModal("termsLink", "termsModal");
+        bindModal("contactLink", "contactModal");
 
-        window.addEventListener('keydown', function (e) {
+        window.addEventListener("keydown", function (e) {
+          if (mobileNav && !mobileNav.hidden && e.key === "Escape")
+            closeMobileNav();
           if (!currentModal || currentModal.hidden) return;
-          if (e.key === 'Escape') closeCurrentModal();
+          if (e.key === "Escape") closeCurrentModal();
         });
       })();
     </script>

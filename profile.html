@@ -80,10 +80,118 @@
         place-items: center;
         color: rgba(17, 24, 39, 0.75);
         margin-left: auto;
+        text-decoration: none;
+        font-weight: 800;
       }
-      .avatar svg {
-        width: 18px;
-        height: 18px;
+      .avatar__text {
+        font-size: 14px;
+        line-height: 1;
+        color: rgba(17, 24, 39, 0.85);
+      }
+
+      .menu-btn {
+        display: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        border: 0;
+        background: transparent;
+        color: rgba(17, 24, 39, 0.85);
+        padding: 0;
+        cursor: pointer;
+      }
+      .menu-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+      .mobile-drawer[hidden] {
+        display: none;
+      }
+      .mobile-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+      }
+      .mobile-drawer__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(17, 24, 39, 0.55);
+        opacity: 0;
+        transition: opacity 160ms ease;
+      }
+      .mobile-drawer__panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: min(78vw, 320px);
+        background: #fff;
+        transform: translateX(-100%);
+        transition: transform 180ms ease;
+        box-shadow: 0 20px 60px rgba(17, 24, 39, 0.28);
+      }
+      .mobile-drawer.is-open .mobile-drawer__backdrop {
+        opacity: 1;
+      }
+      .mobile-drawer.is-open .mobile-drawer__panel {
+        transform: translateX(0);
+      }
+      .mobile-drawer__header {
+        height: 64px;
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items: center;
+        padding: 0 12px;
+        border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+      }
+      .mobile-drawer__close {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: transparent;
+        color: rgba(17, 24, 39, 0.85);
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 1;
+        display: inline-grid;
+        place-items: center;
+      }
+      .mobile-drawer__brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .mobile-drawer__brand img {
+        width: 132px;
+        height: auto;
+        display: block;
+      }
+      .mobile-drawer__avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 2px solid var(--purple);
+        display: grid;
+        place-items: center;
+        text-decoration: none;
+        justify-self: end;
+        font-weight: 800;
+      }
+      .mobile-drawer__nav {
+        padding: 18px 22px;
+      }
+      .mobile-drawer__nav a {
+        display: block;
+        margin: 10px 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(17, 24, 39, 0.85);
+        text-decoration: none;
+      }
+      .mobile-drawer__nav a.is-active {
+        text-decoration: underline;
+        text-underline-offset: 6px;
       }
 
       .page {
@@ -629,12 +737,29 @@
       }
 
       @media (max-width: 640px) {
+        .topbar {
+          display: grid;
+          grid-template-columns: 40px 1fr 40px;
+          padding: 0 12px;
+          justify-content: initial;
+        }
+        .menu-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .brand {
+          justify-content: center;
+        }
         .brand img {
-          width: 150px;
+          width: 132px;
         }
         .nav {
-          gap: 20px;
-          margin-left: 16px;
+          display: none;
+        }
+        .avatar {
+          margin-left: 0;
+          justify-self: end;
         }
         .container {
           padding: 0 16px;
@@ -644,6 +769,33 @@
   </head>
   <body>
     <header class="topbar">
+      <button class="menu-btn" type="button" aria-label="Menu">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 7h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 12h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
       <a
         class="brand"
         href="/maga/products/qfs-gold-bill.html"
@@ -659,27 +811,52 @@
         <a class="is-active" href="/profile.html">Profile</a>
       </nav>
       <a class="avatar" href="/profile.html" aria-label="Profile">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M20 21a8 8 0 1 0-16 0"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-          <path
-            d="M12 13a4 4 0 1 0-0.001-8.001A4 4 0 0 0 12 13Z"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
+        <span id="navAvatarText" class="avatar__text">?</span>
       </a>
     </header>
+    <div
+      id="mobileNav"
+      class="mobile-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      hidden
+    >
+      <div class="mobile-drawer__backdrop" data-close="true"></div>
+      <div class="mobile-drawer__panel" role="document" tabindex="-1">
+        <div class="mobile-drawer__header">
+          <button
+            class="mobile-drawer__close"
+            type="button"
+            aria-label="Close"
+            data-close="true"
+          >
+            ×
+          </button>
+          <a
+            class="mobile-drawer__brand"
+            href="/maga/products/qfs-gold-bill.html"
+            aria-label="Home"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+              alt="LIMITED TIME OFFER"
+            />
+          </a>
+          <a
+            class="mobile-drawer__avatar"
+            href="/profile.html"
+            aria-label="Profile"
+          >
+            <span id="navAvatarTextMobile" class="avatar__text">?</span>
+          </a>
+        </div>
+        <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
+          <a href="/orders.html">Orders</a>
+          <a class="is-active" href="/profile.html">Profile</a>
+        </nav>
+      </div>
+    </div>
 
     <main class="page">
       <div class="container">
@@ -1502,8 +1679,13 @@
 
           <div class="addr-field">
             <label for="profileEmailInput">Email</label>
-            <input id="profileEmailInput" class="addr-input" type="email" required />
+            <input
               id="profileEmailInput"
+              class="addr-input"
+              type="email"
+              required
+            />
+          </div>
 
           <label class="addr-check">
             <input id="profileNewsletter" type="checkbox" checked />
@@ -1523,6 +1705,15 @@
     <script>
       (function () {
         var add = document.getElementById("add-address");
+        var navAvatarText = document.getElementById("navAvatarText");
+        var navAvatarTextMobile = document.getElementById(
+          "navAvatarTextMobile",
+        );
+        var mobileNav = document.getElementById("mobileNav");
+        var mobileNavPanel = mobileNav
+          ? mobileNav.querySelector(".mobile-drawer__panel")
+          : null;
+        var menuBtn = document.querySelector(".menu-btn");
         var profileName = document.getElementById("profileName");
         var profileEmail = document.getElementById("profileEmail");
         var editProfileBtn = document.getElementById("editProfileBtn");
@@ -1637,11 +1828,24 @@
           return full || "Name";
         }
 
+        function profileInitial(p) {
+          var s =
+            safeString(p && p.firstName).trim() ||
+            safeString(p && p.lastName).trim() ||
+            safeString(p && p.email).trim() ||
+            getEmailFallback();
+          if (!s) return "?";
+          return s.charAt(0).toUpperCase();
+        }
+
         function renderProfile() {
           var p = readProfile() || {};
           if (!p.email) p.email = getEmailFallback();
           if (profileName) profileName.textContent = formatName(p);
           if (profileEmail) profileEmail.textContent = p.email || "";
+          var initial = profileInitial(p);
+          if (navAvatarText) navAvatarText.textContent = initial;
+          if (navAvatarTextMobile) navAvatarTextMobile.textContent = initial;
         }
 
         function openProfileModal() {
@@ -2085,6 +2289,53 @@
             if (e.key === "Escape") closeContact();
           });
         }
+
+        function openMobileNav() {
+          if (!mobileNav || !mobileNavPanel) return;
+          lastActive = document.activeElement;
+          mobileNav.hidden = false;
+          document.body.style.overflow = "hidden";
+          requestAnimationFrame(function () {
+            mobileNav.classList.add("is-open");
+            mobileNavPanel.focus();
+          });
+        }
+
+        function closeMobileNav() {
+          if (!mobileNav || mobileNav.hidden) return;
+          mobileNav.classList.remove("is-open");
+          window.setTimeout(function () {
+            mobileNav.hidden = true;
+            document.body.style.overflow = "";
+            if (lastActive && typeof lastActive.focus === "function")
+              lastActive.focus();
+          }, 200);
+        }
+
+        if (menuBtn) {
+          menuBtn.addEventListener("click", function () {
+            openMobileNav();
+          });
+        }
+
+        if (mobileNav) {
+          mobileNav.addEventListener("click", function (e) {
+            var t = e.target;
+            if (t && t.getAttribute && t.getAttribute("data-close") === "true")
+              closeMobileNav();
+          });
+          var mobileLinks = mobileNav.querySelectorAll("a");
+          for (var i = 0; i < mobileLinks.length; i++) {
+            mobileLinks[i].addEventListener("click", function () {
+              closeMobileNav();
+            });
+          }
+        }
+
+        window.addEventListener("keydown", function (e) {
+          if (mobileNav && !mobileNav.hidden && e.key === "Escape")
+            closeMobileNav();
+        });
 
         renderProfile();
         renderAddress();

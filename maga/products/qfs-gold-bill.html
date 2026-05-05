@@ -9134,7 +9134,7 @@
             <div
               id="mbg-banner"
               class="mbg-banner"
-              data-cta-url="https://ourmagashop.com/policies/refund-policy"
+              data-cta-url="../../policies/refund-policy.html"
               data-cta-text="Read Refund Policy"
               data-scroll-offset="80"
             >
@@ -9205,7 +9205,7 @@
                 <a
                   id="mbg-cta"
                   class="mbg-cta"
-                  href="https://ourmagashop.com/policies/refund-policy"
+                  href="../../policies/refund-policy.html"
                 >
                   <span class="mbg-cta-text">Read Refund Policy</span>
                 </a>
@@ -9770,7 +9770,7 @@
               <ul class="footer-block__details-content list-unstyled">
                 <li>
                   <a
-                    href="/policies/terms-of-service"
+                    href="/policies/terms-of-service.html"
                     class="link link--text list-menu__item list-menu__item--link"
                   >
                     Terms of Service
@@ -9778,7 +9778,7 @@
                 </li>
                 <li>
                   <a
-                    href="/policies/privacy-policy"
+                    href="/policies/privacy-policy.html"
                     class="link link--text list-menu__item list-menu__item--link"
                   >
                     Privacy Policy
@@ -9786,7 +9786,7 @@
                 </li>
                 <li>
                   <a
-                    href="/policies/shipping-policy"
+                    href="/policies/shipping-policy.html"
                     class="link link--text list-menu__item list-menu__item--link"
                   >
                     Shipping Policy
@@ -9794,7 +9794,7 @@
                 </li>
                 <li>
                   <a
-                    href="/policies/refund-policy"
+                    href="/policies/refund-policy.html"
                     class="link link--text list-menu__item list-menu__item--link"
                   >
                     Refund Policy
@@ -9802,7 +9802,7 @@
                 </li>
                 <li>
                   <a
-                    href="/policies/contact-information"
+                    href="/policies/contact.html"
                     class="link link--text list-menu__item list-menu__item--link"
                   >
                     Contact Us
@@ -9874,11 +9874,103 @@
                     Sign up
                   </button>
                 </form>
+                <div
+                  class="footer-newsletter-thanks"
+                  id="FooterNewsletterThanks"
+                  role="status"
+                  aria-live="polite"
+                  hidden=""
+                >
+                  <span
+                    class="footer-newsletter-thanks__icon"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="10" cy="10" r="9" fill="#22c55e"></circle>
+                      <path
+                        d="M8.3 12.6 5.9 10.2l1.1-1.1 1.3 1.3 4.7-4.7 1.1 1.1-5.8 5.8Z"
+                        fill="#052e16"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span class="footer-newsletter-thanks__text"
+                    >Thanks for subscribing</span
+                  >
+                </div>
               </div>
             </div>
           </div>
           <div class="footer-block--newsletter"></div>
         </div>
+        <style>
+          .footer-newsletter-thanks[hidden] {
+            display: none !important;
+          }
+          .footer-newsletter-thanks {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
+            line-height: 1.2;
+          }
+          .footer-newsletter-thanks__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            flex: 0 0 auto;
+          }
+          .footer-newsletter-thanks__icon svg {
+            display: block;
+          }
+        </style>
+        <script>
+          (function () {
+            function init() {
+              var form = document.getElementById("ContactFooter");
+              if (!form) return;
+
+              var input = form.querySelector('input[type="email"]');
+              var thanks = document.getElementById("FooterNewsletterThanks");
+              if (!input || !thanks) return;
+
+              form.addEventListener(
+                "submit",
+                function (e) {
+                  if (e) {
+                    e.preventDefault();
+                    if (e.stopImmediatePropagation)
+                      e.stopImmediatePropagation();
+                    if (e.stopPropagation) e.stopPropagation();
+                  }
+
+                  if (input.checkValidity && !input.checkValidity()) {
+                    if (form.reportValidity) form.reportValidity();
+                    return;
+                  }
+
+                  thanks.hidden = false;
+                  input.value = "";
+                },
+                true,
+              );
+            }
+
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", init);
+            } else {
+              init();
+            }
+          })();
+        </script>
         <div
           class="footer__content-bottom animate-item animate-item--child"
           style="--index: 5"
