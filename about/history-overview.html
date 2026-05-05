@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>History | About Treasury</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand {
+        font-weight: 800;
+        color: var(--text);
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+      .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 12px;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 20px 0 8px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      ul {
+        margin: 0 0 14px 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 14px;
+        background: #fff;
+      }
+      .card h3 {
+        font-size: 16px;
+        margin: 0 0 6px;
+        color: var(--text);
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <a href="/about/offices.html">Offices</a>
+    </header>
+
+    <main class="container">
+      <p class="kicker">About Treasury</p>
+      <h1>History</h1>
+      <p>
+        Treasury history is shaped by the evolution of the nation’s financial
+        system, the management of public resources, and the development of
+        institutions that support economic stability and public trust. This
+        section provides an overview and curated pages that highlight people,
+        places, and collections connected to Treasury’s legacy.
+      </p>
+
+      <h2>Topics</h2>
+      <div class="grid" aria-label="History topics">
+        <a class="card" href="/about/history/history-overview.html">
+          <h3>History Overview</h3>
+          <p>Major themes and milestones in Treasury’s development.</p>
+        </a>
+        <a class="card" href="/about/history/curator.html">
+          <h3>Curator</h3>
+          <p>How Treasury preserves artifacts, records, and historical spaces.</p>
+        </a>
+        <a class="card" href="/about/history/prior-secretaries.html">
+          <h3>Prior Secretaries</h3>
+          <p>About the role and legacy of Treasury’s leaders over time.</p>
+        </a>
+        <a class="card" href="/about/history/treasurers-of-the-united-states.html">
+          <h3>Prior Treasurers</h3>
+          <p>About the Treasurer role and how it supports Treasury operations.</p>
+        </a>
+        <a class="card" href="/about/history/the-treasury-building.html">
+          <h3>The Treasury Building</h3>
+          <p>Architecture, symbolism, and the building’s historic significance.</p>
+        </a>
+        <a class="card" href="/about/history/collection.html">
+          <h3>Collections</h3>
+          <p>Objects, documents, and materials preserved for education and research.</p>
+        </a>
+        <a class="card" href="/about/history/freedmans-bank-building.html">
+          <h3>Freedman’s Bank Building</h3>
+          <p>Context, purpose, and why this site matters in financial history.</p>
+        </a>
+      </div>
+
+      <h2>How These Pages Are Organized</h2>
+      <ul>
+        <li>
+          <strong>People:</strong> leadership roles and the responsibilities
+          associated with them.
+        </li>
+        <li>
+          <strong>Places:</strong> buildings and sites connected to Treasury’s
+          work and public presence.
+        </li>
+        <li>
+          <strong>Collections:</strong> the artifacts and records that help tell
+          the story of public finance, policy, and service.
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/index.htm">Back to Home</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tax Policy | Policy Issues</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand {
+        font-weight: 800;
+        color: var(--text);
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+      .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 12px;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 20px 0 8px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      ul {
+        margin: 0 0 14px 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff;
+      }
+      .card h2 {
+        font-size: 16px;
+        margin: 0 0 6px;
+        color: var(--text);
+      }
+      .card p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .chip {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: #fff;
+        white-space: nowrap;
+      }
+      .chip.is-active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(29, 78, 216, 0.06);
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        .nav {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <nav class="nav" aria-label="Tax policy navigation">
+        <a class="chip is-active" href="/policy-issues/tax-policy.html">Tax Policy</a>
+        <a class="chip" href="/policy-issues/coronavirus.html">COVID19 Relief</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <p class="kicker">Policy Issues</p>
+      <h1>Tax Policy</h1>
+      <p>
+        Tax policy work typically focuses on how tax rules affect revenue,
+        fairness, economic activity, and administrative feasibility. This page
+        provides a clear set of topics and references that help explain how tax
+        policy is developed, analyzed, and communicated.
+      </p>
+
+      <h2>What You’ll Find Here</h2>
+      <ul>
+        <li>
+          <strong>Transparency:</strong> how data and analysis support
+          understanding of policy impacts.
+        </li>
+        <li>
+          <strong>Proposals:</strong> how revenue proposals are structured and
+          described.
+        </li>
+        <li>
+          <strong>Expenditures:</strong> how tax expenditures are identified and
+          used for evaluation.
+        </li>
+        <li>
+          <strong>International:</strong> cross-border rules, treaties, and
+          compliance frameworks.
+        </li>
+        <li>
+          <strong>Process:</strong> how regulations are developed and finalized.
+        </li>
+      </ul>
+
+      <div class="grid" aria-label="Tax policy topics">
+        <a class="card" href="/policy-issues/tax-policy/data-transparency.html">
+          <h2>Data Transparency</h2>
+          <p>Public information, methodology, and clarity of assumptions.</p>
+        </a>
+        <a class="card" href="/policy-issues/tax-policy/revenue-proposals.html">
+          <h2>Revenue Proposals</h2>
+          <p>How proposals are framed, scored, and evaluated over time.</p>
+        </a>
+        <a class="card" href="/policy-issues/tax-policy/tax-expenditures.html">
+          <h2>Tax Expenditures</h2>
+          <p>Credits, deductions, and exclusions described as expenditures.</p>
+        </a>
+        <a class="card" href="/policy-issues/tax-policy/international-tax.html">
+          <h2>International Tax</h2>
+          <p>Cross-border rules, coordination, and global tax considerations.</p>
+        </a>
+        <a class="card" href="/policy-issues/tax-policy/treaties.html">
+          <h2>Treaties and Related Documents</h2>
+          <p>Treaty concepts, related materials, and how they are used.</p>
+        </a>
+        <a
+          class="card"
+          href="/policy-issues/tax-policy/foreign-account-tax-compliance-act.html"
+        >
+          <h2>Foreign Account Tax Compliance Act (FATCA)</h2>
+          <p>Compliance framework and information reporting themes.</p>
+        </a>
+        <a
+          class="card"
+          href="/policy-issues/tax-policy/office-of-tax-policy-reports.html"
+        >
+          <h2>Reports</h2>
+          <p>Policy reports, summaries, and reference materials.</p>
+        </a>
+        <a class="card" href="/policy-issues/tax-policy/office-of-tax-analysis.html">
+          <h2>Tax Analysis</h2>
+          <p>Methods, assumptions, and ways impacts are evaluated.</p>
+        </a>
+        <a
+          class="card"
+          href="/policy-issues/tax-policy/tax-regulatory-process.html"
+        >
+          <h2>Tax Regulatory Process</h2>
+          <p>How rules are drafted, reviewed, and finalized.</p>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/index.htm">Back to Home</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

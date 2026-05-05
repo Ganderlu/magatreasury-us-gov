@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Curator | History | About Treasury</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand {
+        font-weight: 800;
+        color: var(--text);
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+      .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 14px;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 20px 0 8px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      ul {
+        margin: 0 0 14px 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .chip {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: #fff;
+      }
+      .chip.is-active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(29, 78, 216, 0.06);
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 24px;
+        }
+        .nav {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <nav class="nav" aria-label="History navigation">
+        <a class="chip" href="/about/history-overview.html">History</a>
+        <a class="chip is-active" href="/about/history/curator.html">Curator</a>
+        <a class="chip" href="/about/history/collection.html">Collections</a>
+        <a class="chip" href="/about/history/the-treasury-building.html"
+          >Treasury Building</a
+        >
+      </nav>
+    </header>
+
+    <main class="container">
+      <p class="kicker">About Treasury • History</p>
+      <h1>Curator</h1>
+      <p>
+        The curator function supports preservation and interpretation of
+        Treasury’s historical materials. This includes artifacts, documents,
+        and spaces that help explain Treasury’s role in public finance and the
+        nation’s history.
+      </p>
+
+      <h2>What the Curator Typically Does</h2>
+      <ul>
+        <li>
+          <strong>Collection stewardship:</strong> inventories, conservation,
+          and storage practices that help protect materials over time.
+        </li>
+        <li>
+          <strong>Research support:</strong> provides context and reference
+          materials for internal teams, exhibits, and educational use.
+        </li>
+        <li>
+          <strong>Exhibitions and interpretation:</strong> helps design displays
+          and narratives that communicate historical significance clearly.
+        </li>
+        <li>
+          <strong>Historic spaces:</strong> collaborates on preservation of
+          historically significant areas and buildings.
+        </li>
+      </ul>
+
+      <h2>How Preservation Works</h2>
+      <p>
+        Preservation balances access with protection. Materials are cataloged,
+        assessed for condition, stabilized when necessary, and stored in ways
+        that reduce exposure to light, moisture, and handling damage.
+      </p>
+      <ul>
+        <li>Documentation of provenance and historical context</li>
+        <li>Condition assessment and conservation planning</li>
+        <li>Safe handling and environmental controls</li>
+        <li>Digitization where appropriate to increase access</li>
+      </ul>
+
+      <h2>How the Public Benefits</h2>
+      <p>
+        Curatorial work helps preserve the public record and supports education
+        and transparency. It helps ensure future generations can study and
+        understand the evolution of policy, institutions, and public service.
+      </p>
+      <ul>
+        <li>Improves public understanding of Treasury history and functions</li>
+        <li>Supports accurate interpretation of historical artifacts</li>
+        <li>Encourages responsible access through safe handling practices</li>
+      </ul>
+
+      <h2>Related Pages</h2>
+      <ul>
+        <li><a href="/about/history/collection.html">Collections</a></li>
+        <li>
+          <a href="/about/history/the-treasury-building.html"
+            >The Treasury Building</a
+          >
+        </li>
+        <li>
+          <a href="/about/history/freedmans-bank-building.html"
+            >Freedman’s Bank Building</a
+          >
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/about/history-overview.html">Back to History</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

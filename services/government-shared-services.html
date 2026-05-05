@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Government Shared Services | Services</title>
+    <style>
+      :root { --text: rgba(17,24,39,.92); --muted: rgba(17,24,39,.68); --border: rgba(17,24,39,.12); --bg:#fff; --link:#1d4ed8; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text); }
+      a { color:var(--link); text-decoration:none; } a:hover { text-decoration:underline; text-underline-offset:3px; }
+      header { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid var(--border); background:#fff; }
+      .brand { font-weight:800; color:var(--text); }
+      .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+      .kicker { font-size:13px; color:var(--muted); margin:0 0 6px; }
+      h1 { font-size:28px; margin:0 0 14px; }
+      p { margin:0 0 12px; color:var(--muted); line-height:1.6; }
+      .grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:14px; margin-top:14px; }
+      .card { border:1px solid var(--border); border-radius:12px; padding:14px; background:#fff; }
+      .card h2 { font-size:16px; margin:0 0 6px; color:var(--text); }
+      .card p { margin:0; font-size:13px; color:var(--muted); line-height:1.6; }
+      footer { border-top:1px solid var(--border); padding:18px 16px; color:var(--muted); font-size:12px; }
+      .footer-inner { max-width: 980px; margin:0 auto; }
+      @media (max-width:640px) { h1 { font-size:24px; } .grid { grid-template-columns:1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <a href="/services.html">Services</a>
+    </header>
+    <main class="container">
+      <p class="kicker">Services</p>
+      <h1>Government Shared Services</h1>
+      <p>
+        Government shared services are common solutions used across agencies for
+        finance, payments, administrative support, and other operational needs.
+        This section provides basic context and links to the sub-pages shown in
+        the Services dropdown.
+      </p>
+      <div class="grid" aria-label="Shared services pages">
+        <a class="card" href="/services/government-shared-services/treasury-franchise-fund.html">
+          <h2>Treasury Franchise Fund (TFF)</h2>
+          <p>Shared service operations, examples of services, and what TFF supports.</p>
+        </a>
+        <a class="card" href="/services/government-shared-services/administrative-resource-center.html">
+          <h2>Administrative Resource Center (ARC)</h2>
+          <p>Administrative and financial service support overview.</p>
+        </a>
+        <a class="card" href="/services/government-shared-services/shared-services-programs.html">
+          <h2>Shared Services Program (SSP)</h2>
+          <p>How shared services programs are organized and why they’re used.</p>
+        </a>
+      </div>
+      <p style="margin-top: 18px">
+        External service hubs referenced in the menu include
+        <a href="https://tfx.treasury.gov/fmqsmo/marketplace-catalog">FM Marketplace Catalog</a>,
+        <a href="https://www.treasurydirect.gov/government/">TreasuryDirect (Government)</a>,
+        and <a href="https://www.ipp.gov/">Invoice Processing Platform</a>.
+      </p>
+    </main>
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/services.html">Back to Services</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

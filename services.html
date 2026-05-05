@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Services | U.S. Department of the Treasury</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #fff;
+        --link: #1d4ed8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand {
+        font-weight: 800;
+        color: var(--text);
+      }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+      .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 12px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      h2 {
+        font-size: 16px;
+        margin: 0 0 6px;
+        color: var(--text);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff;
+      }
+      .card p {
+        margin: 0;
+        font-size: 13px;
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      @media (max-width: 840px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <a href="/index.htm">Home</a>
+    </header>
+    <main class="container">
+      <p class="kicker">Services</p>
+      <h1>Services</h1>
+      <p>
+        These pages provide quick access to commonly requested Treasury-related
+        services and service hubs. Each item matches the Services dropdown in
+        the site header.
+      </p>
+      <div class="grid" aria-label="Services categories">
+        <a class="card" href="/services/report-fraud-waste-and-abuse.html">
+          <h2>Report Fraud, Waste &amp; Abuse</h2>
+          <p>Reporting links and guidance for scams, fraud, and misconduct.</p>
+        </a>
+        <a class="card" href="/services/bonds-and-securities.html">
+          <h2>Bonds and Securities</h2>
+          <p>Savings bonds and Treasury securities information and links.</p>
+        </a>
+        <a class="card" href="/services/treasury-financial-assistance.html">
+          <h2>Grant Programs</h2>
+          <p>Financial assistance and grant-related service information.</p>
+        </a>
+        <a class="card" href="/services/treasury-payments.html">
+          <h2>Treasury Payments</h2>
+          <p>Refunds, federal payments, and payment service links.</p>
+        </a>
+        <a class="card" href="/services/currency-and-coins.html">
+          <h2>Currency and Coins</h2>
+          <p>Currency and coin resources and related services.</p>
+        </a>
+        <a class="card" href="/services/treasury-auctions.html">
+          <h2>Auctions</h2>
+          <p>Information about Treasury auctions and related resources.</p>
+        </a>
+        <a class="card" href="/services/the-multiemployer-pension-reform-act-of-2014.html">
+          <h2>Kline-Miller MPRA (2014)</h2>
+          <p>Program overview, applications, and FAQ access.</p>
+        </a>
+        <a class="card" href="/services/government-shared-services.html">
+          <h2>Government Shared Services</h2>
+          <p>Treasury shared services hubs and related program pages.</p>
+        </a>
+        <a class="card" href="/services/tours-and-library.html">
+          <h2>Tours and Library</h2>
+          <p>Treasury building tours and library resources.</p>
+        </a>
+        <a class="card" href="/services/education.html">
+          <h2>Education</h2>
+          <p>Educational resources and learning materials.</p>
+        </a>
+        <a class="card" href="/services/whistleblowing-and-financial-integrity.html">
+          <h2>Whistleblowing and Financial Integrity</h2>
+          <p>Whistleblower resources and integrity-related guidance.</p>
+        </a>
+        <a class="card" href="/services/taxes.html">
+          <h2>Taxes</h2>
+          <p>Tax-related service hub page with key resource links.</p>
+        </a>
+        <a class="card" href="/services/forms.html">
+          <h2>Forms</h2>
+          <p>Forms and commonly used application/reporting links.</p>
+        </a>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/index.htm">Back to Home</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

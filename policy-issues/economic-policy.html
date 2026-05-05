@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Economic Policy | Policy Issues</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand { font-weight: 800; color: var(--text); }
+      .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+      .kicker { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+      h1 { font-size: 28px; margin: 0 0 12px; }
+      h2 { font-size: 18px; margin: 20px 0 8px; }
+      p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+      ul { margin: 0 0 14px 18px; color: var(--muted); line-height: 1.6; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff;
+      }
+      .card h2 { font-size: 16px; margin: 0 0 6px; color: var(--text); }
+      .card p { margin: 0; font-size: 13px; color: var(--muted); }
+      .nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+      .chip {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: #fff;
+        white-space: nowrap;
+      }
+      .chip.is-active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(29, 78, 216, 0.06);
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner { max-width: 980px; margin: 0 auto; }
+      @media (max-width: 640px) {
+        .grid { grid-template-columns: 1fr; }
+        h1 { font-size: 24px; }
+        .nav { justify-content: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <nav class="nav" aria-label="Economic policy navigation">
+        <a class="chip is-active" href="/policy-issues/economic-policy.html"
+          >Economic Policy</a
+        >
+        <a class="chip" href="/policy-issues/tax-policy.html">Tax Policy</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <p class="kicker">Policy Issues</p>
+      <h1>Economic Policy</h1>
+      <p>
+        Economic policy focuses on how the economy is performing, how resources
+        flow through households and businesses, and how financial markets and
+        government programs shape outcomes over time. This section provides
+        reference pages for key economic datasets and recurring reports.
+      </p>
+
+      <h2>Topics</h2>
+      <div class="grid" aria-label="Economic policy topics">
+        <a class="card" href="/policy-issues/economic-policy/treasury-coupon-issues.html">
+          <h2>Treasury Coupon Issues</h2>
+          <p>Auctions, issuance patterns, and how coupon securities are described.</p>
+        </a>
+        <a class="card" href="/policy-issues/economic-policy/corporate-bond-yield-curve.html">
+          <h2>Corporate Bond Yield Curve</h2>
+          <p>Yield curve concepts and how corporate yields are interpreted.</p>
+        </a>
+        <a class="card" href="/policy-issues/economic-policy/economic-policy-reports.html">
+          <h2>Economic Policy Reports</h2>
+          <p>Recurring reports and common themes in economic reporting.</p>
+        </a>
+        <a class="card" href="/policy-issues/economic-policy/social-security-and-medicare.html">
+          <h2>Social Security and Medicare</h2>
+          <p>Trust fund concepts, projections, and how reports are typically used.</p>
+        </a>
+        <a class="card" href="/policy-issues/economic-policy/total-taxable-resources.html">
+          <h2>Total Taxable Resources</h2>
+          <p>What the measure represents and how it’s used for context and analysis.</p>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/index.htm">Back to Home</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

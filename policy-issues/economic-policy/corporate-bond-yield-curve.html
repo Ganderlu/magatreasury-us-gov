@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Corporate Bond Yield Curve | Economic Policy</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand { font-weight: 800; color: var(--text); }
+      .nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+      .chip {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: #fff;
+        white-space: nowrap;
+      }
+      .chip.is-active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(29, 78, 216, 0.06);
+      }
+      .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+      .kicker { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+      h1 { font-size: 28px; margin: 0 0 14px; }
+      h2 { font-size: 18px; margin: 20px 0 8px; }
+      p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+      ul { margin: 0 0 14px 18px; color: var(--muted); line-height: 1.6; }
+      .panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 14px;
+        background: #fff;
+      }
+      .table-wrap { overflow-x: auto; margin-top: 10px; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 640px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      th, td { text-align: left; padding: 10px 10px; border-top: 1px solid var(--border); }
+      th { color: var(--text); font-weight: 700; background: rgba(17, 24, 39, 0.02); }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner { max-width: 980px; margin: 0 auto; }
+      @media (max-width: 640px) {
+        h1 { font-size: 24px; }
+        .nav { justify-content: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <nav class="nav" aria-label="Economic policy navigation">
+        <a class="chip" href="/policy-issues/economic-policy.html">Economic Policy</a>
+        <a class="chip" href="/policy-issues/economic-policy/treasury-coupon-issues.html"
+          >Treasury Coupons</a
+        >
+        <a class="chip is-active" href="/policy-issues/economic-policy/corporate-bond-yield-curve.html"
+          >Corp Yield Curve</a
+        >
+      </nav>
+    </header>
+
+    <main class="container">
+      <p class="kicker">Policy Issues • Economic Policy</p>
+      <h1>Corporate Bond Yield Curve</h1>
+      <p>
+        A corporate bond yield curve summarizes the relationship between
+        <strong>maturity</strong> (time to repayment) and <strong>yield</strong>
+        (annualized return) for corporate debt. It is often compared with the
+        Treasury yield curve to understand how markets price <strong>credit
+        risk</strong>, <strong>liquidity</strong>, and <strong>term risk</strong>
+        across different horizons.
+      </p>
+
+      <h2>What the Curve Shows</h2>
+      <ul>
+        <li>
+          <strong>Level:</strong> the general height of corporate yields (higher
+          level usually means higher financing costs).
+        </li>
+        <li>
+          <strong>Slope:</strong> how much yields rise as maturities extend
+          (steeper slopes often indicate higher compensation for longer-term
+          risk).
+        </li>
+        <li>
+          <strong>Curvature:</strong> whether intermediate maturities are priced
+          unusually high or low relative to short and long maturities.
+        </li>
+        <li>
+          <strong>Credit spread:</strong> the gap between corporate yields and
+          comparable Treasury yields, often interpreted as compensation for
+          credit and liquidity risk.
+        </li>
+      </ul>
+
+      <h2>How Corporate Curves Are Built (Conceptually)</h2>
+      <div class="panel">
+        <h2>Typical Inputs</h2>
+        <ul>
+          <li>
+            <strong>Bond prices or yields:</strong> observed in the market and
+            converted into comparable yield measures.
+          </li>
+          <li>
+            <strong>Filtering rules:</strong> removing illiquid issues, unusual
+            structures, and bonds with embedded options (or adjusting for them).
+          </li>
+          <li>
+            <strong>Grouping:</strong> by rating bucket (investment-grade vs
+            high-yield), sector, or issuer type.
+          </li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Typical Curve Construction</h2>
+        <ul>
+          <li>
+            <strong>Par curve:</strong> the yield a hypothetical new bond would
+            need at each maturity to price at par (100).
+          </li>
+          <li>
+            <strong>Zero/spot curve:</strong> a curve of discount rates for each
+            maturity; often estimated from coupon bonds using a fitting method.
+          </li>
+          <li>
+            <strong>Fitting methods:</strong> many approaches exist (splines or
+            parametric fits) to smooth noisy bond-level data into a stable curve.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Reading the Curve in Practice</h2>
+      <div class="table-wrap" role="region" aria-label="Yield curve interpretation table">
+        <table>
+          <thead>
+            <tr>
+              <th>Observation</th>
+              <th>What it often suggests</th>
+              <th>Common follow-up questions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Corporate spreads widen across maturities</td>
+              <td>Higher risk compensation or reduced liquidity</td>
+              <td>Is it sector-specific, rating-specific, or broad-based?</td>
+            </tr>
+            <tr>
+              <td>Spreads widen more at long maturities</td>
+              <td>Greater uncertainty about long-term cash flows and risk</td>
+              <td>Are fundamentals changing or is duration risk repricing?</td>
+            </tr>
+            <tr>
+              <td>Curve flattens</td>
+              <td>Long and short yields move closer together</td>
+              <td>Did short rates rise, long rates fall, or both?</td>
+            </tr>
+            <tr>
+              <td>Curve inverts (short yields &gt; long yields)</td>
+              <td>Unusual pricing of near-term risk or expectations of easing</td>
+              <td>Is inversion driven by Treasuries, corporate spreads, or both?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Why It Matters</h2>
+      <ul>
+        <li>
+          <strong>Financing conditions:</strong> corporate yields influence the
+          cost of issuing debt, refinancing, and funding investment.
+        </li>
+        <li>
+          <strong>Valuation:</strong> discount rates used in credit analysis,
+          pricing, and risk management depend on the curve.
+        </li>
+        <li>
+          <strong>Signal about stress:</strong> rapid spread changes can reflect
+          changes in risk appetite, market liquidity, or default expectations.
+        </li>
+      </ul>
+
+      <h2>Key Terms</h2>
+      <ul>
+        <li>
+          <strong>Duration:</strong> a measure of interest-rate sensitivity;
+          longer duration generally means bigger price moves for a given yield
+          change.
+        </li>
+        <li>
+          <strong>Option-adjusted spread (OAS):</strong> a spread measure that
+          attempts to remove the impact of embedded options (such as calls).
+        </li>
+        <li>
+          <strong>Z-spread:</strong> a constant spread added to the spot curve
+          that matches a bond’s price (conceptually; implementation varies).
+        </li>
+      </ul>
+
+      <h2>Limitations and Caveats</h2>
+      <ul>
+        <li>
+          Corporate bonds differ by issuer, covenant protections, tax treatment,
+          liquidity, and call features, so a single curve is an approximation.
+        </li>
+        <li>
+          Ratings can change, and spreads can be affected by supply and demand,
+          not only by default expectations.
+        </li>
+        <li>
+          Curves can differ depending on data source, bond selection rules, and
+          curve-fitting method.
+        </li>
+      </ul>
+
+      <h2>Related Pages</h2>
+      <ul>
+        <li>
+          <a href="/policy-issues/economic-policy/treasury-coupon-issues.html"
+            >Treasury Coupon Issues</a
+          >
+        </li>
+        <li>
+          <a href="/policy-issues/economic-policy/economic-policy-reports.html"
+            >Economic Policy Reports</a
+          >
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/policy-issues/economic-policy.html">Back to Economic Policy</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

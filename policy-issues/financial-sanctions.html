@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Financial Sanctions | Policy Issues</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand { font-weight: 800; color: var(--text); }
+      .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+      .kicker { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+      h1 { font-size: 28px; margin: 0 0 14px; }
+      h2 { font-size: 18px; margin: 22px 0 10px; }
+      p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff;
+      }
+      .card h2 { font-size: 16px; margin: 0 0 6px; color: var(--text); }
+      .card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner { max-width: 980px; margin: 0 auto; }
+      @media (max-width: 640px) {
+        .grid { grid-template-columns: 1fr; }
+        h1 { font-size: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <a href="/index.htm">Home</a>
+    </header>
+
+    <main class="container">
+      <p class="kicker">Policy Issues</p>
+      <h1>Financial Sanctions</h1>
+      <p>
+        Financial sanctions restrict certain transactions or access to assets
+        for designated parties. This section provides simple explanations of the
+        most commonly referenced sanctions tools and links to official OFAC
+        resources.
+      </p>
+
+      <h2>Topics</h2>
+      <div class="grid" aria-label="Financial sanctions topics">
+        <a class="card" href="/policy-issues/financial-sanctions/sdn-list.html">
+          <h2>SDN List</h2>
+          <p>What the SDN List is and how it is typically used for screening.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/consolidated-sanctions-list.html">
+          <h2>Consolidated Sanctions List</h2>
+          <p>How the consolidated list supports compliance workflows.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/sanctions-list-search-tool.html">
+          <h2>Sanctions List Search Tool</h2>
+          <p>How users search for names and verify possible matches.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/additional-sanctions-lists.html">
+          <h2>Additional Sanctions Lists</h2>
+          <p>Other lists and how restrictions may differ across programs.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/ofac-recent-actions.html">
+          <h2>OFAC Recent Actions</h2>
+          <p>Why updates matter and how compliance teams monitor changes.</p>
+        </a>
+        <a
+          class="card"
+          href="/policy-issues/financial-sanctions/sanctions-programs-and-country-information.html"
+        >
+          <h2>Programs and Country Information</h2>
+          <p>How program pages summarize authorities, restrictions, and guidance.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/faqs.html">
+          <h2>Frequently Asked Questions</h2>
+          <p>How FAQs clarify interpretation and common scenarios.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/civil-penalties-and-enforcement.html">
+          <h2>Civil Penalties and Enforcement</h2>
+          <p>How enforcement guidance is used to improve compliance programs.</p>
+        </a>
+        <a class="card" href="/policy-issues/financial-sanctions/contact-ofac.html">
+          <h2>Contact OFAC</h2>
+          <p>Ways to reach OFAC for licensing questions and compliance help.</p>
+        </a>
+      </div>
+
+      <h2>Official OFAC Site</h2>
+      <p>
+        Official materials are published at
+        <a href="https://ofac.treasury.gov/" target="_blank" rel="noreferrer"
+          >ofac.treasury.gov</a
+        >.
+      </p>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/index.htm">Back to Home</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

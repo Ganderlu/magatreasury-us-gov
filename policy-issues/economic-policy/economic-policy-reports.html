@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Economic Policy Reports | Economic Policy</title>
+    <style>
+      :root {
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.68);
+        --border: rgba(17, 24, 39, 0.12);
+        --bg: #ffffff;
+        --link: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .brand { font-weight: 800; color: var(--text); }
+      .nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+      .chip {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: #fff;
+        white-space: nowrap;
+      }
+      .chip.is-active {
+        border-color: rgba(29, 78, 216, 0.35);
+        background: rgba(29, 78, 216, 0.06);
+      }
+      .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+      .kicker { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+      h1 { font-size: 28px; margin: 0 0 14px; }
+      h2 { font-size: 18px; margin: 20px 0 8px; }
+      h3 { font-size: 15px; margin: 14px 0 8px; color: var(--text); }
+      p { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+      ul { margin: 0 0 14px 18px; color: var(--muted); line-height: 1.6; }
+      .panel {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 14px;
+        background: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 12px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff;
+      }
+      .card h3 { margin: 0 0 8px; }
+      .card p { margin: 0; }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner { max-width: 980px; margin: 0 auto; }
+      @media (max-width: 640px) {
+        h1 { font-size: 24px; }
+        .nav { justify-content: flex-start; }
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/index.htm">U.S. Department of the Treasury</a>
+      <nav class="nav" aria-label="Economic policy navigation">
+        <a class="chip" href="/policy-issues/economic-policy.html">Economic Policy</a>
+        <a class="chip" href="/policy-issues/economic-policy/treasury-coupon-issues.html"
+          >Treasury Coupons</a
+        >
+        <a class="chip is-active" href="/policy-issues/economic-policy/economic-policy-reports.html"
+          >Reports</a
+        >
+      </nav>
+    </header>
+
+    <main class="container">
+      <p class="kicker">Policy Issues • Economic Policy</p>
+      <h1>Economic Policy Reports</h1>
+      <p>
+        Economic policy reports bring together data, context, and analysis so
+        readers can understand economic conditions and the fiscal and financial
+        environment. Reports vary in frequency and scope, but they often share a
+        common structure: a snapshot of current conditions, a discussion of
+        drivers, and supporting tables and definitions.
+      </p>
+
+      <h2>Common Report Types</h2>
+      <div class="grid" aria-label="Report types">
+        <div class="card">
+          <h3>Economic Conditions Briefs</h3>
+          <p>
+            Short summaries that highlight major developments in growth,
+            inflation, labor markets, and financial conditions, often pointing
+            to key releases and turning points.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Debt and Financing Updates</h3>
+          <p>
+            Overviews of market conditions that influence financing costs and
+            demand for government securities, including yield curve movements
+            and auction and issuance context.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Revenue and Receipts Context</h3>
+          <p>
+            Reports that interpret changes in receipts and outlays using
+            economic drivers, timing effects, and definitional notes (what is
+            included, excluded, or revised).
+          </p>
+        </div>
+        <div class="card">
+          <h3>Research and Methodology Notes</h3>
+          <p>
+            Longer notes that explain how an indicator is built, why it is used,
+            and what limitations matter when comparing across time periods.
+          </p>
+        </div>
+      </div>
+
+      <h2>How to Read an Economic Policy Report</h2>
+      <div class="panel">
+        <h2>Suggested Reading Order</h2>
+        <ul>
+          <li>
+            <strong>Executive summary:</strong> a quick statement of the main
+            conclusion and what changed since the prior period.
+          </li>
+          <li>
+            <strong>Key indicators:</strong> look for consistent definitions and
+            whether values are seasonally adjusted.
+          </li>
+          <li>
+            <strong>Drivers and decomposition:</strong> what explains changes
+            (for example: price vs quantity, or wages vs employment).
+          </li>
+          <li>
+            <strong>Definitions and revisions:</strong> note what is preliminary
+            and what can be revised later.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Indicators Frequently Discussed</h2>
+      <ul>
+        <li><strong>Growth:</strong> real output, consumption, investment, and net exports.</li>
+        <li><strong>Inflation:</strong> consumer prices and other price measures.</li>
+        <li><strong>Labor:</strong> employment, unemployment, participation, wages.</li>
+        <li><strong>Financial conditions:</strong> interest rates, spreads, and credit availability.</li>
+        <li><strong>Public finance context:</strong> receipts, outlays, and financing conditions.</li>
+      </ul>
+
+      <h2>Data Sources and Definitions</h2>
+      <p>
+        Reports often draw from multiple statistical agencies and market data.
+        Differences in scope can matter, so a report typically includes
+        definitions, methodology notes, and sometimes a reconciliation between
+        related concepts.
+      </p>
+      <div class="panel">
+        <h2>Examples of Source Categories</h2>
+        <ul>
+          <li>
+            <strong>National accounts:</strong> measures of output, income, and
+            production-side activity.
+          </li>
+          <li>
+            <strong>Prices:</strong> inflation indicators, underlying inflation
+            measures, and component breakdowns.
+          </li>
+          <li>
+            <strong>Labor market:</strong> employment, hours, earnings, and
+            participation metrics.
+          </li>
+          <li>
+            <strong>Financial markets:</strong> benchmark yields, corporate
+            spreads, and market volatility measures.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Revisions and “Vintage” Data</h2>
+      <p>
+        Many economic series are revised after initial release. Reports may
+        distinguish between preliminary values and later revisions, and some
+        analysis depends on whether you want the latest revised history or the
+        information available at the time decisions were made.
+      </p>
+      <ul>
+        <li><strong>Preliminary vs final:</strong> early estimates can change materially.</li>
+        <li><strong>Benchmark revisions:</strong> periodic methodology updates can reshape history.</li>
+        <li><strong>Seasonal adjustment:</strong> patterns can change as more data becomes available.</li>
+      </ul>
+
+      <h2>Related Pages</h2>
+      <ul>
+        <li>
+          <a href="/policy-issues/economic-policy/treasury-coupon-issues.html"
+            >Treasury Coupon Issues</a
+          >
+        </li>
+        <li>
+          <a href="/policy-issues/economic-policy/corporate-bond-yield-curve.html"
+            >Corporate Bond Yield Curve</a
+          >
+        </li>
+        <li>
+          <a href="/policy-issues/economic-policy/social-security-and-medicare.html"
+            >Social Security and Medicare</a
+          >
+        </li>
+        <li>
+          <a href="/policy-issues/economic-policy/total-taxable-resources.html"
+            >Total Taxable Resources</a
+          >
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div><a href="/policy-issues/economic-policy.html">Back to Economic Policy</a></div>
+      </div>
+    </footer>
+  </body>
+</html>
