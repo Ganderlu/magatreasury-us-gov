@@ -276,10 +276,6 @@
     </div>
 
     <script src="/assets/local-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-database-compat.js"></script>
-    <script src="/firebase/firebaseClient.js"></script>
     <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
     <script>
       (function () {
@@ -464,6 +460,24 @@
                 description: (e && e.message) || "Network error.",
               });
             });
+        }
+
+        function saveUserToMongo(email, idToken) {
+          try {
+            return fetch("/api/users/login", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                email: email || "",
+                idToken: idToken || "",
+                method: "auth0_passwordless_email",
+              }),
+            }).then(function () {
+              return null;
+            });
+          } catch (e) {
+            return Promise.resolve(null);
+          }
         }
 
         function getParam(name) {
@@ -655,28 +669,9 @@
               }
 
               try {
-                if (window.FirebaseClient) {
-                  var tasks = [];
-                  if (window.FirebaseClient.saveUser) {
-                    tasks.push(
-                      window.FirebaseClient.saveUser({
-                        email: email,
-                        idToken: authResult && authResult.idToken,
-                        method: "auth0_passwordless_email",
-                      }),
-                    );
-                  }
-                  if (window.FirebaseClient.logLogin) {
-                    tasks.push(
-                      window.FirebaseClient.logLogin({
-                        email: email,
-                        method: "auth0_passwordless_email",
-                      }),
-                    );
-                  }
-
+                if (typeof fetch === "function") {
                   Promise.race([
-                    Promise.allSettled(tasks),
+                    saveUserToMongo(email, authResult && authResult.idToken),
                     new Promise(function (resolve) {
                       setTimeout(resolve, 1200);
                     }),
@@ -756,28 +751,9 @@
               }
 
               try {
-                if (window.FirebaseClient) {
-                  var tasks = [];
-                  if (window.FirebaseClient.saveUser) {
-                    tasks.push(
-                      window.FirebaseClient.saveUser({
-                        email: email,
-                        idToken: authResult && authResult.idToken,
-                        method: "auth0_passwordless_email",
-                      }),
-                    );
-                  }
-                  if (window.FirebaseClient.logLogin) {
-                    tasks.push(
-                      window.FirebaseClient.logLogin({
-                        email: email,
-                        method: "auth0_passwordless_email",
-                      }),
-                    );
-                  }
-
+                if (typeof fetch === "function") {
                   Promise.race([
-                    Promise.allSettled(tasks),
+                    saveUserToMongo(email, authResult && authResult.idToken),
                     new Promise(function (resolve) {
                       setTimeout(resolve, 1200);
                     }),
