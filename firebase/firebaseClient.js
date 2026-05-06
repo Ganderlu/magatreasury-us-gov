@@ -52,10 +52,89 @@
     }
   }
 
+  function decodeJwtPayload(token) {
+    var raw = safeString(token).trim();
+    if (!raw) return null;
+    var parts = raw.split(".");
+    if (parts.length < 2) return null;
+    var b64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    try {
+      var pad = b64.length % 4;
+      if (pad) b64 += new Array(5 - pad).join("=");
+      var json = atob(b64);
+      try {
+        json = decodeURIComponent(
+          json
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join(""),
+        );
+      } catch (e) {}
+      return JSON.parse(json);
+    } catch (e2) {
+      return null;
+    }
+  }
+
   function clamp(str, maxLen) {
     var s = safeString(str);
     if (!maxLen || maxLen <= 0) return s;
     return s.length > maxLen ? s.slice(0, maxLen) : s;
+  }
+
+  function normalizeEmail(email) {
+    return safeString(email).trim().toLowerCase();
+  }
+
+  function saveUser(details) {
+    init();
+
+    var email = normalizeEmail(details && details.email);
+    if (!email) email = normalizeEmail(getEmailFallback());
+    if (!email) return Promise.resolve([]);
+
+    var idToken = safeString(details && details.idToken).trim();
+    var claims = decodeJwtPayload(idToken) || {};
+
+    var payload = {
+      email: clamp(email, 254),
+      name: clamp(safeString(claims.name || claims.nickname || ""), 120),
+      picture: clamp(safeString(claims.picture || ""), 400),
+      auth0Sub: clamp(safeString(claims.sub || ""), 200),
+      lastLoginAtIso: nowIso(),
+      method: clamp(safeString((details && details.method) || ""), 80),
+      userAgent: clamp(safeString(navigator.userAgent || ""), 512),
+      origin: clamp(safeString(location.origin || ""), 200),
+    };
+
+    var tasks = [];
+
+    try {
+      if (window.firebase && window.firebase.firestore) {
+        var db = window.firebase.firestore();
+        tasks.push(
+          db
+            .collection("users")
+            .doc(payload.email)
+            .set(payload, { merge: true }),
+        );
+      }
+    } catch (e) {}
+
+    try {
+      if (window.firebase && window.firebase.database) {
+        var rtdb = window.firebase.database();
+        tasks.push(
+          rtdb
+            .ref("users/" + encodeURIComponent(payload.email))
+            .update(payload),
+        );
+      }
+    } catch (e) {}
+
+    return Promise.allSettled(tasks);
   }
 
   function logLogin(details) {
@@ -95,6 +174,7 @@
 
   window.FirebaseClient = {
     init: init,
+    saveUser: saveUser,
     logLogin: logLogin,
   };
 })();

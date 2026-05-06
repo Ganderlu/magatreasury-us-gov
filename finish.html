@@ -640,12 +640,28 @@
               }
 
               try {
-                if (window.FirebaseClient && window.FirebaseClient.logLogin) {
+                if (window.FirebaseClient) {
+                  var tasks = [];
+                  if (window.FirebaseClient.saveUser) {
+                    tasks.push(
+                      window.FirebaseClient.saveUser({
+                        email: email,
+                        idToken: authResult && authResult.idToken,
+                        method: "auth0_passwordless_email",
+                      }),
+                    );
+                  }
+                  if (window.FirebaseClient.logLogin) {
+                    tasks.push(
+                      window.FirebaseClient.logLogin({
+                        email: email,
+                        method: "auth0_passwordless_email",
+                      }),
+                    );
+                  }
+
                   Promise.race([
-                    window.FirebaseClient.logLogin({
-                      email: email,
-                      method: "auth0_passwordless_email",
-                    }),
+                    Promise.allSettled(tasks),
                     new Promise(function (resolve) {
                       setTimeout(resolve, 1200);
                     }),
@@ -721,12 +737,28 @@
               }
 
               try {
-                if (window.FirebaseClient && window.FirebaseClient.logLogin) {
+                if (window.FirebaseClient) {
+                  var tasks = [];
+                  if (window.FirebaseClient.saveUser) {
+                    tasks.push(
+                      window.FirebaseClient.saveUser({
+                        email: email,
+                        idToken: authResult && authResult.idToken,
+                        method: "auth0_passwordless_email",
+                      }),
+                    );
+                  }
+                  if (window.FirebaseClient.logLogin) {
+                    tasks.push(
+                      window.FirebaseClient.logLogin({
+                        email: email,
+                        method: "auth0_passwordless_email",
+                      }),
+                    );
+                  }
+
                   Promise.race([
-                    window.FirebaseClient.logLogin({
-                      email: email,
-                      method: "auth0_passwordless_email",
-                    }),
+                    Promise.allSettled(tasks),
                     new Promise(function (resolve) {
                       setTimeout(resolve, 1200);
                     }),

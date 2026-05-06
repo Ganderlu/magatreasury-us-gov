@@ -2,13 +2,6 @@
   html.treas-mobile-nav-open,
   body.treas-mobile-nav-open {
     overflow: hidden;
-    * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-      overflow-x: hidden;
-
-    }
   }
 
   nav.mm.block-system-menublock.primary {
