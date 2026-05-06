@@ -106,7 +106,13 @@ app.post("/api/users/login", async (req, res) => {
       return;
     }
 
-    const claims = await verifyAuth0IdToken(idToken);
+    let claims;
+    try {
+      claims = await verifyAuth0IdToken(idToken);
+    } catch (e) {
+      res.status(401).json({ ok: false, error: "invalid_id_token" });
+      return;
+    }
     const claimEmail = normalizeEmail(claims && claims.email);
     if (!claimEmail || claimEmail !== email) {
       res.status(401).json({ ok: false, error: "email_mismatch" });
@@ -119,7 +125,13 @@ app.post("/api/users/login", async (req, res) => {
     const loginsColName =
       safeString(process.env.MONGODB_LOGINS_COLLECTION).trim() || "logins";
 
-    const client = await getMongo();
+    let client;
+    try {
+      client = await getMongo();
+    } catch (e) {
+      res.status(500).json({ ok: false, error: "mongo_connect_failed" });
+      return;
+    }
     const db = client.db(dbName);
     const users = db.collection(usersColName);
     const logins = db.collection(loginsColName);
@@ -135,16 +147,21 @@ app.post("/api/users/login", async (req, res) => {
       updatedAt: now,
     };
 
-    await Promise.all([
-      users.updateOne({ email: email }, { $set: payload }, { upsert: true }),
-      logins.insertOne({
-        email: email,
-        method: payload.method,
-        createdAt: now,
-        userAgent: safeString(req.get("user-agent")).slice(0, 512),
-        origin: safeString(req.get("origin")).slice(0, 200),
-      }),
-    ]);
+    try {
+      await Promise.all([
+        users.updateOne({ email: email }, { $set: payload }, { upsert: true }),
+        logins.insertOne({
+          email: email,
+          method: payload.method,
+          createdAt: now,
+          userAgent: safeString(req.get("user-agent")).slice(0, 512),
+          origin: safeString(req.get("origin")).slice(0, 200),
+        }),
+      ]);
+    } catch (e) {
+      res.status(500).json({ ok: false, error: "mongo_write_failed" });
+      return;
+    }
 
     res.json({ ok: true });
   } catch (e) {
@@ -160,4 +177,3 @@ app.get("*", (req, res) => {
 
 const port = Number(process.env.PORT || 3000);
 app.listen(port);
-

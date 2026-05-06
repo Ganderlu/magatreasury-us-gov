@@ -463,20 +463,40 @@
         }
 
         function saveUserToMongo(email, idToken) {
+          var e = safeString(email).trim();
+          var t = safeString(idToken).trim();
+          if (!e) return Promise.resolve({ ok: false, error: "missing_email" });
+          if (!t)
+            return Promise.resolve({ ok: false, error: "missing_id_token" });
           try {
             return fetch("/api/users/login", {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify({
-                email: email || "",
-                idToken: idToken || "",
+                email: e,
+                idToken: t,
                 method: "auth0_passwordless_email",
               }),
-            }).then(function () {
-              return null;
-            });
+            })
+              .then(function (res) {
+                return res
+                  .json()
+                  .catch(function () {
+                    return {};
+                  })
+                  .then(function (json) {
+                    if (res.ok && json && json.ok) return { ok: true };
+                    return {
+                      ok: false,
+                      error: (json && json.error) || "save_failed",
+                    };
+                  });
+              })
+              .catch(function () {
+                return { ok: false, error: "network_error" };
+              });
           } catch (e) {
-            return Promise.resolve(null);
+            return Promise.resolve({ ok: false, error: "save_failed" });
           }
         }
 
@@ -673,9 +693,21 @@
                   Promise.race([
                     saveUserToMongo(email, authResult && authResult.idToken),
                     new Promise(function (resolve) {
-                      setTimeout(resolve, 1200);
+                      setTimeout(function () {
+                        resolve({ ok: false, error: "timeout" });
+                      }, 4000);
                     }),
-                  ]).then(go, go);
+                  ]).then(function (result) {
+                    if (result && result.ok) {
+                      setStatus("Successful. Redirecting…", "success");
+                      go();
+                      return;
+                    }
+                    setStatus(
+                      "Successful, but we could not save your info to the database. Please try again.",
+                      "error",
+                    );
+                  }, go);
                   return;
                 }
               } catch (e) {}
@@ -755,9 +787,25 @@
                   Promise.race([
                     saveUserToMongo(email, authResult && authResult.idToken),
                     new Promise(function (resolve) {
-                      setTimeout(resolve, 1200);
+                      setTimeout(function () {
+                        resolve({ ok: false, error: "timeout" });
+                      }, 4000);
                     }),
-                  ]).then(go, go);
+                  ]).then(function (result) {
+                    if (result && result.ok) {
+                      setStatus("Successful. Redirecting…", "success");
+                      go();
+                      return;
+                    }
+                    verifyBtn.disabled = false;
+                    setStatus(
+                      "Successful, but we could not save your info to the database. Please try again.",
+                      "error",
+                    );
+                  }, function () {
+                    verifyBtn.disabled = false;
+                    go();
+                  });
                   return;
                 }
               } catch (e) {}
