@@ -2,6 +2,9 @@
   html.treas-mobile-nav-open,
   body.treas-mobile-nav-open {
     overflow: hidden;
+    * {
+      box-sizing: border-box;
+    }
   }
 
   nav.mm.block-system-menublock.primary {
