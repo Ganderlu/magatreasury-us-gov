@@ -407,7 +407,8 @@
               }
 
               setStatus("Code sent. Check your email.", "");
-              window.location.href = "/finish.html";
+              window.location.href =
+                "/finish.html?email=" + encodeURIComponent(email);
             },
           );
         });
