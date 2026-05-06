@@ -372,6 +372,21 @@
           return msg || fallback || "Login failed.";
         }
 
+        function isWrongOtpError(err) {
+          var code = err && err.error ? String(err.error).toLowerCase() : "";
+          var msg = String(
+            (err && (err.description || err.errorDescription || err.message)) ||
+              "",
+          ).toLowerCase();
+
+          if (code === "invalid_grant") return true;
+          if (msg.indexOf("wrong") !== -1 && msg.indexOf("code") !== -1)
+            return true;
+          if (msg.indexOf("verification code") !== -1) return true;
+          if (msg.indexOf("invalid otp") !== -1) return true;
+          return false;
+        }
+
         function exchangeOtpForTokens(cfg, email, code, cb) {
           try {
             if (window.auth0 && window.auth0.Authentication) {
@@ -630,7 +645,7 @@
             }
 
             storeSession(authResult);
-            setStatus("Verified.", "success");
+            setStatus("Successful.", "success");
             (function () {
               var done = false;
               function go() {
@@ -716,7 +731,11 @@
           exchangeOtpForTokens(cfg, email, code, function (err, authResult) {
             if (err) {
               verifyBtn.disabled = false;
-              setStatus(formatAuth0Error(err, "Invalid code."), "error");
+              if (isWrongOtpError(err)) {
+                setStatus("Wrong code.", "error");
+              } else {
+                setStatus(formatAuth0Error(err, "Login failed."), "error");
+              }
               return;
             }
 
@@ -727,7 +746,7 @@
             }
 
             storeSession(authResult);
-            setStatus("Verified.", "success");
+            setStatus("Successful.", "success");
             (function () {
               var done = false;
               function go() {
