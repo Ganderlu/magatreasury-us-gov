@@ -1224,7 +1224,8 @@
       if (!isFinite(upsellCompare) || upsellCompare <= upsellUnit) {
         upsellCompare = parseMoney(srcItem.comparePrice);
       }
-      if (upsellCompare == null || upsellCompare <= upsellUnit) upsellCompare = 49975;
+      if (upsellCompare == null || upsellCompare <= upsellUnit)
+        upsellCompare = 49975;
 
       var pct = 99;
       if (upsellCompare > 0 && upsellUnit >= 0 && upsellUnit < upsellCompare) {

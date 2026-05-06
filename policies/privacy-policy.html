@@ -19,7 +19,8 @@
         padding: 0;
         background: var(--bg);
         color: var(--text);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
           Arial, sans-serif;
       }
       .wrap {
@@ -39,6 +40,29 @@
         align-items: center;
         justify-content: space-between;
         gap: 24px;
+      }
+      .menu-toggle {
+        display: none;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        color: #111;
+      }
+      .menu-toggle svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
       .site-logo {
         display: inline-flex;
@@ -94,6 +118,9 @@
         color: #111;
         text-decoration: none;
       }
+      .icon-link.is-account {
+        display: inline-flex;
+      }
       .icon-link svg {
         width: 18px;
         height: 18px;
@@ -103,6 +130,129 @@
         stroke-width: 1.8;
         stroke-linecap: round;
         stroke-linejoin: round;
+      }
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 20000;
+        display: none;
+      }
+      .mobile-menu-inner {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: min(84vw, 320px) 1fr;
+      }
+      .mobile-menu__panel {
+        background: #ffffff;
+        border-right: 1px solid var(--border);
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .mobile-menu__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mobile-menu__title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #111;
+        letter-spacing: 0.2px;
+      }
+      .mobile-menu__close {
+        width: 40px;
+        height: 40px;
+        border: 0;
+        background: transparent;
+        color: #111;
+        border-radius: 10px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mobile-menu__close svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mobile-menu__list {
+        list-style: none;
+        margin: 0;
+        padding: 12px 0;
+      }
+      .mobile-menu__item a {
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #111;
+        font-weight: 500;
+        font-size: 16px;
+      }
+      .mobile-menu__divider {
+        margin-top: auto;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-menu__account {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .mobile-menu__account svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mobile-menu__backdrop {
+        background: rgba(0, 0, 0, 0.25);
+        position: relative;
+      }
+      .mobile-menu__cart {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #111;
+      }
+      .mobile-menu__cart svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      html.mobile-menu-open,
+      body.mobile-menu-open {
+        overflow: hidden;
       }
       .card {
         background: var(--card);
@@ -147,7 +297,8 @@
       }
       .site-footer {
         margin-top: 44px;
-        background: radial-gradient(
+        background:
+          radial-gradient(
             1000px 500px at 20% 0%,
             rgba(255, 255, 255, 0.06),
             rgba(0, 0, 0, 0)
@@ -316,9 +467,59 @@
           max-width: 100%;
         }
       }
+      @media (max-width: 749px) {
+        .header-inner {
+          display: grid;
+          grid-template-columns: 44px 1fr auto;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 12px;
+        }
+        .menu-toggle {
+          display: inline-flex;
+        }
+        .site-logo {
+          justify-self: center;
+        }
+        .site-logo img {
+          width: auto;
+          height: 26px;
+        }
+        .header-nav {
+          display: none;
+        }
+        .header-icons {
+          justify-self: end;
+          gap: 12px;
+        }
+        .icon-link {
+          width: 40px;
+          height: 40px;
+        }
+        .icon-link svg {
+          width: 20px;
+          height: 20px;
+        }
+        .icon-link.is-account {
+          display: none;
+        }
+        .header-bar.is-menu-open .mobile-menu {
+          display: block;
+        }
+        .header-bar.is-menu-open .menu-toggle {
+          visibility: hidden;
+        }
+        .header-bar.is-menu-open .site-logo {
+          visibility: hidden;
+        }
+        .header-bar.is-menu-open .header-icons a[aria-label="Search"] {
+          display: none;
+        }
+      }
       code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-          "Courier New", monospace;
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
         font-size: 13px;
       }
     </style>
@@ -326,6 +527,19 @@
   <body>
     <header class="header-bar">
       <div class="header-inner">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
         <a
           class="site-logo"
           href="../maga/products/qfs-gold-bill.html"
@@ -365,7 +579,11 @@
               <path d="M20 20l-3.5-3.5"></path>
             </svg>
           </a>
-          <a class="icon-link" href="../login.html" aria-label="Account">
+          <a
+            class="icon-link is-account"
+            href="../login.html"
+            aria-label="Account"
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M20 21a8 8 0 10-16 0"></path>
               <circle cx="12" cy="8" r="4"></circle>
@@ -379,14 +597,86 @@
           </a>
         </div>
       </div>
+      <div class="mobile-menu" id="mobile-menu" hidden>
+        <div class="mobile-menu-inner">
+          <div
+            class="mobile-menu__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+          >
+            <div class="mobile-menu__head">
+              <div class="mobile-menu__title">Menu</div>
+              <button
+                class="mobile-menu__close"
+                type="button"
+                aria-label="Close menu"
+                data-action="close-menu"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M6 6l12 12"></path>
+                  <path d="M18 6L6 18"></path>
+                </svg>
+              </button>
+            </div>
+            <nav aria-label="Mobile">
+              <ul class="mobile-menu__list">
+                <li class="mobile-menu__item">
+                  <a href="../maga/products/qfs-gold-bill.html">Home</a>
+                </li>
+                <li class="mobile-menu__item">
+                  <a href="../sellers/collections.html">Best Sellers</a>
+                </li>
+                <li class="mobile-menu__item">
+                  <a href="../medallions/collections/medallions.html"
+                    >Medallions</a
+                  >
+                </li>
+                <li class="mobile-menu__item">
+                  <a href="../apparel/collections/apparel.html">Apparel</a>
+                </li>
+                <li class="mobile-menu__item">
+                  <a href="../accessorie/collections/accessories.html"
+                    >Accesories</a
+                  >
+                </li>
+                <li class="mobile-menu__item">
+                  <a href="../orders.html">Track Your Order</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="mobile-menu__divider"></div>
+            <a class="mobile-menu__account" href="../login.html">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 21a8 8 0 10-16 0"></path>
+                <circle cx="12" cy="8" r="4"></circle>
+              </svg>
+              Account
+            </a>
+          </div>
+          <div class="mobile-menu__backdrop" data-action="close-menu">
+            <a
+              class="mobile-menu__cart"
+              href="../checkout.html"
+              aria-label="Cart"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M6 7h12l-1.2 12H7.2L6 7z"></path>
+                <path d="M9 7a3 3 0 016 0"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
     <div class="wrap">
       <div class="card">
         <h1>Privacy Policy</h1>
         <p class="meta">
-          This Privacy Policy explains how Our Maga Shop collects, uses, shares, and
-          protects your information when you visit our website or place an order. By
-          using our services, you agree to the practices described here.
+          This Privacy Policy explains how Our Maga Shop collects, uses, shares,
+          and protects your information when you visit our website or place an
+          order. By using our services, you agree to the practices described
+          here.
         </p>
 
         <h2>1) Information We Collect</h2>
@@ -400,27 +690,31 @@
             phone number (when provided).
           </li>
           <li>
-            <strong>Order and shipping information:</strong> such as name, shipping
-            address, and order details.
+            <strong>Order and shipping information:</strong> such as name,
+            shipping address, and order details.
           </li>
           <li>
-            <strong>Payment-related details:</strong> payment status confirmations,
-            transaction identifiers, and invoice/order references from payment
-            providers. We do not store full card details on our servers.
+            <strong>Payment-related details:</strong> payment status
+            confirmations, transaction identifiers, and invoice/order references
+            from payment providers. We do not store full card details on our
+            servers.
           </li>
           <li>
-            <strong>Device and usage data:</strong> such as browser type, IP address,
-            and pages visited, used for analytics and security.
+            <strong>Device and usage data:</strong> such as browser type, IP
+            address, and pages visited, used for analytics and security.
           </li>
         </ul>
 
         <h2>2) How We Use Your Information</h2>
         <p>
-          We use collected information for legitimate business purposes, including:
+          We use collected information for legitimate business purposes,
+          including:
         </p>
         <ul>
           <li>Processing and fulfilling your orders.</li>
-          <li>Sending transactional messages (order confirmations and updates).</li>
+          <li>
+            Sending transactional messages (order confirmations and updates).
+          </li>
           <li>Providing customer support and handling returns/refunds.</li>
           <li>Fraud prevention, risk checks, and security monitoring.</li>
           <li>Improving website functionality and user experience.</li>
@@ -428,113 +722,120 @@
 
         <h2>3) Cookies and Similar Technologies</h2>
         <p>
-          We may use cookies and similar technologies to keep the site working, store
-          preferences, and understand how visitors use our pages. Cookies may be used
-          for analytics, site performance, and security.
+          We may use cookies and similar technologies to keep the site working,
+          store preferences, and understand how visitors use our pages. Cookies
+          may be used for analytics, site performance, and security.
         </p>
         <p>
-          You can control cookies through your browser settings. Disabling cookies may
-          affect certain functionality, including checkout or cart features.
+          You can control cookies through your browser settings. Disabling
+          cookies may affect certain functionality, including checkout or cart
+          features.
         </p>
 
         <h2>4) Sharing and Disclosure</h2>
         <p>
-          We may share information with service providers only as needed to operate
-          the store and deliver services. We do not sell your personal information.
+          We may share information with service providers only as needed to
+          operate the store and deliver services. We do not sell your personal
+          information.
         </p>
         <ul>
           <li>
-            <strong>Payment providers:</strong> to create invoices, validate payment,
-            and confirm payment status.
+            <strong>Payment providers:</strong> to create invoices, validate
+            payment, and confirm payment status.
           </li>
           <li>
-            <strong>Shipping carriers:</strong> to deliver orders and provide tracking.
+            <strong>Shipping carriers:</strong> to deliver orders and provide
+            tracking.
           </li>
           <li>
-            <strong>Fraud prevention and security vendors:</strong> to protect the
-            platform and customers.
+            <strong>Fraud prevention and security vendors:</strong> to protect
+            the platform and customers.
           </li>
           <li>
-            <strong>Legal compliance:</strong> if required by law, subpoena, or to
-            protect rights and safety.
+            <strong>Legal compliance:</strong> if required by law, subpoena, or
+            to protect rights and safety.
           </li>
         </ul>
 
         <h2>5) Data Retention</h2>
         <p>
-          We retain information for as long as needed to fulfill the purposes described
-          in this policy, including recordkeeping, dispute resolution, security, and
-          legal obligations. Retention periods depend on the type of data and the
-          purpose for which it was collected.
+          We retain information for as long as needed to fulfill the purposes
+          described in this policy, including recordkeeping, dispute resolution,
+          security, and legal obligations. Retention periods depend on the type
+          of data and the purpose for which it was collected.
         </p>
 
         <h2>6) Security</h2>
         <p>
-          We take reasonable steps to protect your information from unauthorized access,
-          alteration, or disclosure. No online system is 100% secure, so we cannot
-          guarantee absolute security, but we use safeguards aligned with industry
-          practices.
+          We take reasonable steps to protect your information from unauthorized
+          access, alteration, or disclosure. No online system is 100% secure, so
+          we cannot guarantee absolute security, but we use safeguards aligned
+          with industry practices.
         </p>
 
         <h2>7) Your Choices and Rights</h2>
         <p>
-          Depending on your location, you may have rights to access, correct, or delete
-          your personal information. You may also have the right to object to certain
-          processing or request restrictions.
+          Depending on your location, you may have rights to access, correct, or
+          delete your personal information. You may also have the right to
+          object to certain processing or request restrictions.
         </p>
         <p>
-          To request access or changes, contact us using the information on the Contact
-          page and include your order number when applicable.
+          To request access or changes, contact us using the information on the
+          Contact page and include your order number when applicable.
         </p>
 
         <h2>8) Communications</h2>
         <p>
-          We may send you messages that are necessary to complete your purchase and
-          provide support. If marketing communications are offered, you can opt out at
-          any time by following the unsubscribe instructions in the message.
+          We may send you messages that are necessary to complete your purchase
+          and provide support. If marketing communications are offered, you can
+          opt out at any time by following the unsubscribe instructions in the
+          message.
         </p>
 
         <h2>9) International Visitors</h2>
         <p>
-          If you access the site from outside the country where our operations are
-          based, your information may be processed in a different jurisdiction that
-          may have different data protection laws. We apply safeguards appropriate to
-          the services we provide.
+          If you access the site from outside the country where our operations
+          are based, your information may be processed in a different
+          jurisdiction that may have different data protection laws. We apply
+          safeguards appropriate to the services we provide.
         </p>
 
         <h2>10) Changes to This Policy</h2>
         <p>
-          We may update this policy from time to time. Updates are effective when posted
-          on this page. If changes are significant, we may provide additional notice.
+          We may update this policy from time to time. Updates are effective
+          when posted on this page. If changes are significant, we may provide
+          additional notice.
         </p>
 
         <h2>11) Children’s Privacy</h2>
         <p>
-          Our services are intended for a general audience and are not directed to
-          children. We do not knowingly collect personal information from children.
-          If you believe a child has provided information, contact us so we can take
-          appropriate steps.
+          Our services are intended for a general audience and are not directed
+          to children. We do not knowingly collect personal information from
+          children. If you believe a child has provided information, contact us
+          so we can take appropriate steps.
         </p>
 
         <h2>12) Third-Party Services and Links</h2>
         <p>
           Our store may rely on third-party services (such as payment providers,
-          fraud prevention, analytics, and shipping carriers). Those providers may
-          process data in accordance with their own policies. When you follow links
-          to third-party websites, this Privacy Policy no longer applies.
+          fraud prevention, analytics, and shipping carriers). Those providers
+          may process data in accordance with their own policies. When you
+          follow links to third-party websites, this Privacy Policy no longer
+          applies.
         </p>
 
         <h2>13) Contact</h2>
         <p>
           For privacy requests or questions, contact us via the
-          <a href="./contact.html">Contact</a> page and include the email used at
-          checkout when applicable.
+          <a href="./contact.html">Contact</a> page and include the email used
+          at checkout when applicable.
         </p>
 
         <div class="box">
-          <strong>Tip:</strong> For faster support, include your order ID and the email
-          used at checkout when contacting us. If you are referencing a payment invoice,
-          include the invoice/order reference shown on the payment page.
+          <strong>Tip:</strong> For faster support, include your order ID and
+          the email used at checkout when contacting us. If you are referencing
+          a payment invoice, include the invoice/order reference shown on the
+          payment page.
         </div>
       </div>
     </div>
@@ -556,11 +857,15 @@
               <li><a href="../maga/products/qfs-gold-bill.html">Home</a></li>
               <li><a href="../sellers/collections.html">Best Sellers</a></li>
               <li>
-                <a href="../medallions/collections/medallions.html">Medallions</a>
+                <a href="../medallions/collections/medallions.html"
+                  >Medallions</a
+                >
               </li>
               <li><a href="../apparel/collections/apparel.html">Apparel</a></li>
               <li>
-                <a href="../accessorie/collections/accessories.html">Accessories</a>
+                <a href="../accessorie/collections/accessories.html"
+                  >Accessories</a
+                >
               </li>
               <li><a href="../orders.html">Track Your Order</a></li>
             </ul>
@@ -600,7 +905,11 @@
                 required
               />
               <button class="subscribe-btn" type="submit">Sign up</button>
-              <div class="subscribe-msg" id="footer-subscribe-msg" aria-live="polite"></div>
+              <div
+                class="subscribe-msg"
+                id="footer-subscribe-msg"
+                aria-live="polite"
+              ></div>
             </form>
           </div>
           <div></div>
@@ -819,7 +1128,12 @@
         </div>
       </div>
     </footer>
-    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <button
+      class="back-to-top"
+      id="backToTop"
+      type="button"
+      aria-label="Back to top"
+    >
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M6 14l6-6 6 6"></path>
       </svg>
@@ -868,6 +1182,40 @@
         }
         window.addEventListener("scroll", toggleBackToTop, { passive: true });
         toggleBackToTop();
+
+        const header = document.querySelector(".header-bar");
+        const btn = document.querySelector(".menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+
+        function setOpen(open) {
+          if (!header || !btn || !menu) return;
+          header.classList.toggle("is-menu-open", open);
+          document.documentElement.classList.toggle("mobile-menu-open", open);
+          document.body.classList.toggle("mobile-menu-open", open);
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+          menu.hidden = !open;
+        }
+
+        if (header && btn && menu) {
+          btn.addEventListener("click", function () {
+            const isOpen = btn.getAttribute("aria-expanded") === "true";
+            setOpen(!isOpen);
+          });
+
+          menu.addEventListener("click", function (e) {
+            const t = e.target;
+            if (t && t.closest && t.closest('[data-action="close-menu"]')) {
+              setOpen(false);
+              return;
+            }
+            if (t && t.tagName === "A") setOpen(false);
+          });
+
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") setOpen(false);
+          });
+        }
       })();
     </script>
   </body>
