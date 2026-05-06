@@ -36,6 +36,7 @@
         background: #ffffff;
         color: var(--text);
       }
+
       .topbar {
         height: 64px;
         display: flex;
@@ -75,7 +76,7 @@
         width: 36px;
         height: 36px;
         border-radius: 999px;
-        border: 2px solid var(--purple);
+        border: 2px solid rgba(90, 49, 244, 0.7);
         display: grid;
         place-items: center;
         color: rgba(17, 24, 39, 0.75);
@@ -86,7 +87,7 @@
       .avatar__text {
         font-size: 14px;
         line-height: 1;
-        color: rgba(17, 24, 39, 0.85);
+        color: rgba(90, 49, 244, 0.9);
       }
 
       .menu-btn {
@@ -171,9 +172,10 @@
         width: 36px;
         height: 36px;
         border-radius: 999px;
-        border: 2px solid var(--purple);
+        border: 2px solid rgba(90, 49, 244, 0.7);
         display: grid;
         place-items: center;
+        color: rgba(17, 24, 39, 0.75);
         text-decoration: none;
         justify-self: end;
         font-weight: 800;
@@ -726,8 +728,14 @@
           border-radius: 12px;
         }
         #addressModal .addr-form {
+          gap: 10px;
+        }
+      }
+
       @media (max-width: 520px) {
-        #profileModal.modal { padding: 14px 10px; }
+        #profileModal.modal {
+          padding: 14px 10px;
+        }
         #profileModal .modal__panel {
           width: calc(100% - 20px);
           max-height: 82vh;
@@ -857,7 +865,6 @@
         </nav>
       </div>
     </div>
-
     <main class="page">
       <div class="container">
         <h1>Profile</h1>
