@@ -1,1026 +1,311 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Verify your email</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #ffffff;
-        --text: #0f172a;
-        --muted: rgba(15, 23, 42, 0.62);
-        --muted-2: rgba(15, 23, 42, 0.45);
-        --box: rgba(15, 23, 42, 0.06);
-        --border: rgba(15, 23, 42, 0.14);
-        --border-strong: rgba(15, 23, 42, 0.62);
-        --purple: #5a31f4;
-        --shadow: 0 12px 30px rgba(90, 49, 244, 0.22);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        font-family:
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial,
-          "Apple Color Emoji",
-          "Segoe UI Emoji";
-        background: var(--bg);
-        color: var(--text);
-      }
-      .page {
-        min-height: 100%;
-        display: grid;
-        place-items: center;
-        padding: 32px 16px 58px;
-      }
-      .card {
-        width: min(560px, 100%);
-        text-align: center;
-        display: grid;
-        justify-items: center;
-      }
-      .icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        background: linear-gradient(
-          180deg,
-          rgba(90, 49, 244, 0.2),
-          rgba(90, 49, 244, 0.08)
-        );
-        border: 1px solid rgba(90, 49, 244, 0.22);
-        display: grid;
-        place-items: center;
-        margin-bottom: 16px;
-      }
-      .icon svg {
-        width: 22px;
-        height: 22px;
-        color: rgba(90, 49, 244, 0.95);
-      }
-      h1 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 850;
-        letter-spacing: -0.03em;
-      }
-      .sub {
-        margin: 8px 0 18px;
-        font-size: 14px;
-        color: var(--muted);
-      }
-      .sub b {
-        color: rgba(15, 23, 42, 0.85);
-      }
-      .otp {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
-        margin: 8px 0 14px;
-      }
-      .otp input {
-        width: 46px;
-        height: 46px;
-        border-radius: 10px;
-        border: 1.5px solid rgba(15, 23, 42, 0.14);
-        background: var(--box);
-        outline: none;
-        text-align: center;
-        font-size: 18px;
-        font-weight: 850;
-        color: rgba(15, 23, 42, 0.9);
-      }
-      .otp input:focus {
-        border-color: rgba(90, 49, 244, 0.55);
-        box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
-        background: #ffffff;
-      }
-      .otp input.is-active {
-        border-color: var(--border-strong);
-        background: #ffffff;
-      }
-      .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.22);
-      }
-      .btn {
-        width: min(320px, 100%);
-        height: 44px;
-        border: 0;
-        border-radius: 999px;
-        background: var(--purple);
-        color: #ffffff;
-        font-weight: 850;
-        font-size: 14px;
-        cursor: pointer;
-        box-shadow: var(--shadow);
-      }
-      .btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-      }
-      .link {
-        margin-top: 12px;
-        font-size: 12px;
-        font-weight: 750;
-        color: rgba(15, 23, 42, 0.72);
-        text-decoration: none;
-      }
-      .link:hover {
-        text-decoration: underline;
-      }
-      .status {
-        margin-top: 12px;
-        min-height: 16px;
-        font-size: 12px;
-        color: rgba(15, 23, 42, 0.65);
-        text-align: center;
-      }
-      .status.is-error {
-        color: #b42318;
-      }
-      .status.is-success {
-        color: #067647;
-      }
-      .lang {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 14px;
-        display: flex;
-        justify-content: center;
-        pointer-events: none;
-      }
-      .lang-inner {
-        pointer-events: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        color: rgba(15, 23, 42, 0.55);
-        user-select: none;
-      }
-      .lang select {
-        border: 0;
-        background: transparent;
-        color: rgba(15, 23, 42, 0.55);
-        font-size: 12px;
-        outline: none;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <div class="card">
-        <div class="icon" aria-hidden="true">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 8.5 12 13.5 20 8.5"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <h1>Verify your email</h1>
-        <div class="sub">
-          Enter the 6-digit code for <b id="email-text"></b>
-        </div>
-
-        <form id="finish-form" autocomplete="one-time-code">
-          <div class="otp" id="otp">
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 1"
-            />
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 2"
-            />
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 3"
-            />
-            <span class="dot" aria-hidden="true"></span>
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 4"
-            />
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 5"
-            />
-            <input
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="1"
-              aria-label="Digit 6"
-            />
-          </div>
-          <button id="verify" class="btn" type="submit">Continue</button>
-          <div id="status" class="status"></div>
-        </form>
-
-        <a class="link" href="/shop.html">Change email address</a>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verify your email</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: rgba(15, 23, 42, 0.62);
+      --muted-2: rgba(15, 23, 42, 0.45);
+      --box: rgba(15, 23, 42, 0.06);
+      --border: rgba(15, 23, 42, 0.14);
+      --border-strong: rgba(15, 23, 42, 0.62);
+      --purple: #5a31f4;
+      --shadow: 0 12px 30px rgba(90, 49, 244, 0.22);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .page {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px 58px;
+    }
+    .card {
+      width: min(560px, 100%);
+      text-align: center;
+    }
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(90,49,244,0.2), rgba(90,49,244,0.08));
+      border: 1px solid rgba(90,49,244,0.22);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+    }
+    .sub {
+      margin: 8px 0 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .sub b {
+      color: rgba(15, 23, 42, 0.85);
+    }
+    .otp {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin: 8px 0 14px;
+    }
+    .otp input {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(15, 23, 42, 0.14);
+      background: var(--box);
+      outline: none;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 850;
+      color: rgba(15, 23, 42, 0.9);
+    }
+    .otp input:focus {
+      border-color: rgba(90, 49, 244, 0.55);
+      box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
+      background: #ffffff;
+    }
+    .otp input.is-active {
+      border-color: var(--border-strong);
+      background: #ffffff;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.22);
+      align-self: center;
+    }
+    .btn {
+      width: min(320px, 100%);
+      height: 44px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--purple);
+      color: #ffffff;
+      font-weight: 850;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    .link {
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 750;
+      color: rgba(15, 23, 42, 0.72);
+      text-decoration: none;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+    .status {
+      margin-top: 12px;
+      min-height: 16px;
+      font-size: 12px;
+    }
+    .status.is-error {
+      color: #b42318;
+    }
+    .status.is-success {
+      color: #067647;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 8.5 12 13.5 20 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="lang" aria-hidden="true">
-      <div class="lang-inner">
-        <select>
-          <option selected>English</option>
-        </select>
+      <h1>Verify your email</h1>
+      <div class="sub">
+        Enter the 6-digit code sent to <b id="email-text"></b>
       </div>
+
+      <form id="finish-form" autocomplete="one-time-code">
+        <div class="otp" id="otp">
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 1"/>
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 2"/>
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 3"/>
+          <span class="dot" aria-hidden="true"></span>
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 4"/>
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 5"/>
+          <input inputmode="numeric" maxlength="1" aria-label="Digit 6"/>
+        </div>
+        <button id="verify" class="btn" type="submit">Continue</button>
+        <div id="status" class="status"></div>
+      </form>
+
+      <a class="link" href="/shop.html">Change email address</a>
     </div>
+  </div>
 
-    <script src="/assets/local-storage.js"></script>
-    <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
-    <!-- <script>
-      (function () {
-        var emailText = document.getElementById("email-text");
-        var form = document.getElementById("finish-form");
-        var statusEl = document.getElementById("status");
-        var verifyBtn = document.getElementById("verify");
-        var otpWrap = document.getElementById("otp");
-        var inputs = otpWrap
-          ? Array.prototype.slice.call(otpWrap.querySelectorAll("input"))
-          : [];
+  <script src="/assets/local-storage.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
+  <script>
+    (function () {
+      const emailText = document.getElementById("email-text");
+      const form = document.getElementById("finish-form");
+      const statusEl = document.getElementById("status");
+      const verifyBtn = document.getElementById("verify");
+      const inputs = Array.from(document.querySelectorAll("#otp input"));
 
-        function setStatus(text, kind) {
-          statusEl.textContent = text || "";
-          statusEl.classList.remove("is-error", "is-success");
-          if (kind === "error") statusEl.classList.add("is-error");
-          if (kind === "success") statusEl.classList.add("is-success");
-        }
+      let email = "";
 
-        function safeString(v) {
-          if (v === null || v === undefined) return "";
-          return String(v);
-        }
+      function setStatus(text, kind = "") {
+        statusEl.textContent = text;
+        statusEl.className = `status ${kind}`;
+      }
 
-        function getAuth0Config() {
-          if (window.AppLocalStorage && window.AppLocalStorage.getAuth0Config) {
-            return window.AppLocalStorage.getAuth0Config();
-          }
+      // Get email from URL or localStorage
+      email = new URLSearchParams(window.location.search).get("email") || 
+              localStorage.getItem("loginEmail") || "";
 
-          var domain = "";
-          var clientId = "";
-          try {
-            domain = safeString(localStorage.getItem("auth0Domain")).trim();
-            clientId = safeString(localStorage.getItem("auth0ClientId")).trim();
-          } catch (e) {}
+      emailText.textContent = email || "your email";
 
-          return {
-            domain: domain,
-            clientId: clientId,
-          };
-        }
-
-        function validateAuth0Config(cfg) {
-          if (!cfg) return false;
-          if (!cfg.domain || cfg.domain === "YOUR_AUTH0_DOMAIN") return false;
-          if (!cfg.clientId || cfg.clientId === "YOUR_AUTH0_CLIENT_ID")
-            return false;
-          return true;
-        }
-
-        function getOrdersUrl() {
-          try {
-            return new URL("orders.html", window.location.href).toString();
-          } catch (e) {
-            return "/orders.html";
-          }
-        }
-
-        function formatAuth0Error(err, fallback) {
-          var msg =
-            err && (err.description || err.errorDescription || err.message)
-              ? err.description || err.errorDescription || err.message
-              : "";
-
-          var lower = String(msg || "").toLowerCase();
-          var code = err && err.error ? String(err.error).toLowerCase() : "";
-
-          if (
-            code === "connection_disabled" ||
-            lower.indexOf("connection is disabled") !== -1
-          ) {
-            return "Auth0 passwordless email connection is disabled. Enable it in Auth0 Dashboard: Authentication → Passwordless → Email, then Applications → your app → Connections (enable Email).";
-          }
-
-          if (
-            code === "access_denied" ||
-            lower.indexOf("cross origin login not allowed") !== -1 ||
-            lower.indexOf("cross-origin login not allowed") !== -1
-          ) {
-            return "Cross origin login not allowed. In Auth0 Dashboard: Applications → your app → Settings: add your site origin (for example http://localhost:5500) to Allowed Web Origins and Allowed Origins (CORS). Then go to Advanced Settings → OAuth and enable Cross-Origin Authentication.";
-          }
-
-          if (
-            code === "server_error" &&
-            lower.indexOf("unable to configure verification page") !== -1
-          ) {
-            return "Unable to configure verification page. In Auth0 Dashboard: Applications → your app → Advanced Settings → OAuth: set Cross-Origin Verification Fallback URL to https://YOUR_DOMAIN/finish.html (must be https and same domain as your site). Also add your origin to Allowed Web Origins and Allowed Origins (CORS).";
-          }
-
-          return msg || fallback || "Login failed.";
-        }
-
-        function isWrongOtpError(err) {
-          var code = err && err.error ? String(err.error).toLowerCase() : "";
-          var msg = String(
-            (err && (err.description || err.errorDescription || err.message)) ||
-              "",
-          ).toLowerCase();
-
-          if (code === "invalid_grant") return true;
-          if (msg.indexOf("wrong") !== -1 && msg.indexOf("code") !== -1)
-            return true;
-          if (msg.indexOf("verification code") !== -1) return true;
-          if (msg.indexOf("invalid otp") !== -1) return true;
-          return false;
-        }
-
-        function exchangeOtpForTokens(cfg, email, code, cb) {
-          try {
-            if (window.auth0 && window.auth0.Authentication) {
-              var auth = new window.auth0.Authentication({
-                domain: cfg.domain,
-                clientID: cfg.clientId,
-              });
-
-              if (auth && typeof auth.oauthToken === "function") {
-                auth.oauthToken(
-                  {
-                    grantType:
-                      "http://auth0.com/oauth/grant-type/passwordless/otp",
-                    realm: "email",
-                    username: email,
-                    otp: code,
-                    scope: "openid profile email",
-                  },
-                  function (err, res) {
-                    if (err) return cb(err);
-                    var out = {
-                      accessToken: res && (res.accessToken || res.access_token),
-                      idToken: res && (res.idToken || res.id_token),
-                      expiresIn: res && (res.expiresIn || res.expires_in || 0),
-                    };
-                    return cb(null, out);
-                  },
-                );
-                return;
-              }
-            }
-          } catch (e) {}
-
-          var url = "https://" + cfg.domain + "/oauth/token";
-          fetch(url, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
-              client_id: cfg.clientId,
-              realm: "email",
-              username: email,
-              otp: code,
-              scope: "openid profile email",
-            }),
-          })
-            .then(function (res) {
-              return res
-                .json()
-                .catch(function () {
-                  return {};
-                })
-                .then(function (json) {
-                  if (!res.ok) {
-                    return cb({
-                      error: json.error || "token_error",
-                      description:
-                        json.error_description || json.error || "Login failed.",
-                    });
-                  }
-
-                  return cb(null, {
-                    accessToken: json.access_token || "",
-                    idToken: json.id_token || "",
-                    expiresIn: json.expires_in || 0,
-                  });
-                });
-            })
-            .catch(function (e) {
-              cb({
-                error: "network_error",
-                description: (e && e.message) || "Network error.",
-              });
-            });
-        }
-
-        function saveUserToMongo(email, idToken) {
-          var e = safeString(email).trim();
-          var t = safeString(idToken).trim();
-          if (!e) return Promise.resolve({ ok: false, error: "missing_email" });
-          if (!t)
-            return Promise.resolve({ ok: false, error: "missing_id_token" });
-          try {
-            return fetch("/api/users/login", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({
-                email: e,
-                idToken: t,
-                method: "auth0_passwordless_email",
-              }),
-            })
-              .then(function (res) {
-                return res
-                  .json()
-                  .catch(function () {
-                    return {};
-                  })
-                  .then(function (json) {
-                    if (res.ok && json && json.ok) return { ok: true };
-                    return {
-                      ok: false,
-                      error: (json && json.error) || "save_failed",
-                    };
-                  });
-              })
-              .catch(function () {
-                return { ok: false, error: "network_error" };
-              });
-          } catch (e) {
-            return Promise.resolve({ ok: false, error: "save_failed" });
-          }
-        }
-
-        function getParam(name) {
-          try {
-            var u = new URL(window.location.href);
-            return u.searchParams.get(name) || "";
-          } catch (e) {
-            return "";
-          }
-        }
-
-        function getEmail() {
-          var qp = getParam("email");
-          if (qp) return qp;
-          try {
-            return localStorage.getItem("loginEmail") || "";
-          } catch (e) {
-            return "";
-          }
-        }
-
-        function getCode() {
-          var out = "";
-          for (var i = 0; i < inputs.length; i++)
-            out += safeString(inputs[i].value || "").replace(/\D/g, "");
-          return out;
-        }
-
-        function markActive(i) {
-          for (var k = 0; k < inputs.length; k++) {
-            inputs[k].classList.toggle("is-active", k === i);
-          }
-        }
-
-        function focusInput(i) {
-          if (!inputs[i]) return;
+      // OTP Input Logic
+      function focusInput(i) {
+        if (inputs[i]) {
           inputs[i].focus();
-          markActive(i);
+          inputs.forEach((inp, idx) => inp.classList.toggle("is-active", idx === i));
         }
+      }
 
-        function onPaste(e) {
-          var text =
-            e.clipboardData && e.clipboardData.getData
-              ? e.clipboardData.getData("text")
-              : "";
+      function getCode() {
+        return inputs.map(input => input.value).join("");
+      }
+
+      inputs.forEach((input, idx) => {
+        input.addEventListener("input", () => {
+          input.value = input.value.replace(/\D/g, "").slice(0, 1);
+          if (input.value && idx < inputs.length - 1) focusInput(idx + 1);
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !input.value && idx > 0) focusInput(idx - 1);
+          if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
+          if (e.key === "ArrowRight" && idx < inputs.length - 1) focusInput(idx + 1);
+        });
+
+        input.addEventListener("paste", (e) => {
+          const text = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
           if (!text) return;
-          var digits = text.replace(/\D/g, "").slice(0, 6).split("");
-          if (digits.length === 0) return;
           e.preventDefault();
-          for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = digits[i] || "";
-          }
-          var next = Math.min(digits.length, inputs.length - 1);
-          focusInput(next);
-        }
+          text.split("").forEach((char, i) => {
+            if (inputs[i]) inputs[i].value = char;
+          });
+          focusInput(Math.min(text.length, inputs.length - 1));
+        });
+      });
 
-        for (var i = 0; i < inputs.length; i++) {
-          (function (idx) {
-            inputs[idx].addEventListener("focus", function () {
-              markActive(idx);
-            });
-            inputs[idx].addEventListener("paste", onPaste);
-            inputs[idx].addEventListener("input", function () {
-              inputs[idx].value = safeString(inputs[idx].value)
-                .replace(/\D/g, "")
-                .slice(0, 1);
-              if (inputs[idx].value && idx < inputs.length - 1)
-                focusInput(idx + 1);
-            });
-            inputs[idx].addEventListener("keydown", function (e) {
-              if (e.key === "Backspace" && !inputs[idx].value && idx > 0) {
-                focusInput(idx - 1);
-              }
-              if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
-              if (e.key === "ArrowRight" && idx < inputs.length - 1)
-                focusInput(idx + 1);
-            });
-          })(i);
-        }
+      if (inputs[0]) focusInput(0);
 
-        var email = getEmail();
-        emailText.textContent = email || "your email";
-        if (inputs[0]) focusInput(0);
+      function getAuth0Config() {
+        return window.AppLocalStorage ? 
+               window.AppLocalStorage.getAuth0Config() : {
+                 domain: localStorage.getItem("auth0Domain") || "",
+                 clientId: localStorage.getItem("auth0ClientId") || ""
+               };
+      }
 
-        function storeSession(authResult) {
-          if (!authResult) return;
-          var now = new Date().getTime();
-          var expiresAt =
-            now + (authResult.expiresIn ? authResult.expiresIn * 1000 : 0);
-          try {
-            sessionStorage.setItem(
-              "auth0AccessToken",
-              authResult.accessToken || "",
-            );
-            sessionStorage.setItem("auth0IdToken", authResult.idToken || "");
-            sessionStorage.setItem("auth0ExpiresAt", String(expiresAt || ""));
-            sessionStorage.setItem("auth0Email", email || "");
-          } catch (e) {}
-        }
+      function isWrongOtpError(err) {
+        const msg = String(err?.description || err?.message || "").toLowerCase();
+        return msg.includes("wrong") || msg.includes("invalid") || msg.includes("code");
+      }
 
-        function parseTokensIfPresent() {
-          if (
-            window.location.hash &&
-            window.location.hash.indexOf("access_token=") !== -1
-          )
-            return true;
-          if (
-            window.location.hash &&
-            window.location.hash.indexOf("id_token=") !== -1
-          )
-            return true;
-          if (
-            window.location.hash &&
-            window.location.hash.indexOf("error=") !== -1
-          )
-            return true;
-          return false;
-        }
+      function exchangeOtpForTokens(cfg, code, callback) {
+        fetch(`https://${cfg.domain}/oauth/token`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
+            client_id: cfg.clientId,
+            realm: "email",
+            username: email,
+            otp: code,
+            scope: "openid profile email"
+          })
+        })
+        .then(res => res.json().then(data => ({ res, data })))
+        .then(({ res, data }) => {
+          if (!res.ok) return callback(data);
+          callback(null, data);
+        })
+        .catch(err => callback(err));
+      }
 
-        if (window.location.protocol === "file:") {
-          setStatus(
-            "This page must be opened over http/https (not file://) for email login to work.",
-            "error",
-          );
+      function saveUserToMongo(idToken) {
+        return fetch("/api/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            idToken: idToken,
+            method: "auth0_passwordless_email"
+          })
+        }).then(res => res.json()).catch(() => ({}));
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const code = getCode();
+
+        if (code.length !== 6) {
+          setStatus("Please enter the full 6-digit code", "error");
           return;
         }
 
-        if (parseTokensIfPresent()) {
-          if (!window.auth0 || !window.auth0.WebAuth) {
-            setStatus(
-              "Auth0 SDK failed to load. Please refresh and try again.",
-              "error",
-            );
-            return;
-          }
-
-          var cfgOnLoad = getAuth0Config();
-          if (!validateAuth0Config(cfgOnLoad)) {
-            setStatus(
-              "Auth0 is not configured. Set localStorage keys: auth0Domain and auth0ClientId.",
-              "error",
-            );
-            return;
-          }
-
-          var webAuthOnLoad = new window.auth0.WebAuth({
-            domain: cfgOnLoad.domain,
-            clientID: cfgOnLoad.clientId,
-            responseType: "token id_token",
-            scope: "openid profile email",
-            redirectUri: window.location.origin + "/finish.html",
-          });
-
-          webAuthOnLoad.parseHash(function (err, authResult) {
-            if (err) {
-              setStatus(formatAuth0Error(err, "Login failed."), "error");
-              try {
-                window.history.replaceState(
-                  null,
-                  document.title,
-                  window.location.pathname + window.location.search,
-                );
-              } catch (e) {}
-              return;
-            }
-            if (
-              !authResult ||
-              (!authResult.accessToken && !authResult.idToken)
-            ) {
-              setStatus("Login failed. Please try again.", "error");
-              try {
-                window.history.replaceState(
-                  null,
-                  document.title,
-                  window.location.pathname + window.location.search,
-                );
-              } catch (e) {}
-              return;
-            }
-
-            storeSession(authResult);
-            setStatus("Successful.", "success");
-            (function () {
-              var done = false;
-              function go() {
-                if (done) return;
-                done = true;
-                window.location.replace(getOrdersUrl());
-              }
-
-              try {
-                if (typeof fetch === "function") {
-                  Promise.race([
-                    saveUserToMongo(email, authResult && authResult.idToken),
-                    new Promise(function (resolve) {
-                      setTimeout(function () {
-                        resolve({ ok: false, error: "timeout" });
-                      }, 4000);
-                    }),
-                  ]).then(function (result) {
-                    if (result && result.ok) {
-                      setStatus("Successful. Redirecting…", "success");
-                      go();
-                      return;
-                    }
-                    setStatus(
-                      "Successful, but we could not save your info to the database. Please try again.",
-                      "error",
-                    );
-                  }, go);
-                  return;
-                }
-              } catch (e) {}
-
-              go();
-            })();
-          });
+        const cfg = getAuth0Config();
+        if (!cfg.domain || !cfg.clientId) {
+          setStatus("Auth0 configuration missing", "error");
+          return;
         }
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          setStatus("", "");
+        verifyBtn.disabled = true;
+        setStatus("Verifying code...");
 
-          var code = getCode();
-          if (code.length !== 6) {
-            setStatus("Enter the 6-digit code.", "error");
+        exchangeOtpForTokens(cfg, code, async (err, authResult) => {
+          if (err) {
+            verifyBtn.disabled = false;
+            setStatus(isWrongOtpError(err) ? "Wrong code. Please try again." : "Verification failed. Try again.", "error");
             return;
           }
 
-          if (!window.auth0 || !window.auth0.WebAuth) {
-            setStatus(
-              "Auth0 SDK failed to load. Please refresh and try again.",
-              "error",
-            );
-            return;
-          }
+          // Save to MongoDB
+          await saveUserToMongo(authResult.id_token || authResult.idToken);
 
-          var cfg = getAuth0Config();
-          if (!validateAuth0Config(cfg)) {
-            setStatus(
-              "Auth0 is not configured. Set localStorage keys: auth0Domain and auth0ClientId.",
-              "error",
-            );
-            return;
-          }
-
-          if (!email) {
-            setStatus(
-              "Email address is missing. Go back and enter your email again.",
-              "error",
-            );
-            return;
-          }
-
-          verifyBtn.disabled = true;
-          setStatus("Verifying…", "");
-
-          exchangeOtpForTokens(cfg, email, code, function (err, authResult) {
-            if (err) {
-              verifyBtn.disabled = false;
-              if (isWrongOtpError(err)) {
-                setStatus("Wrong code.", "error");
-              } else {
-                setStatus(formatAuth0Error(err, "Login failed."), "error");
-              }
-              return;
-            }
-
-            if (
-              !authResult ||
-              (!authResult.accessToken && !authResult.idToken)
-            ) {
-              verifyBtn.disabled = false;
-              setStatus("Login failed. Please try again.", "error");
-              return;
-            }
-
-            storeSession(authResult);
-            setStatus("Successful.", "success");
-            (function () {
-              var done = false;
-              function go() {
-                if (done) return;
-                done = true;
-                window.location.replace(getOrdersUrl());
-              }
-
-              try {
-                if (typeof fetch === "function") {
-                  Promise.race([
-                    saveUserToMongo(email, authResult && authResult.idToken),
-                    new Promise(function (resolve) {
-                      setTimeout(function () {
-                        resolve({ ok: false, error: "timeout" });
-                      }, 4000);
-                    }),
-                  ]).then(
-                    function (result) {
-                      if (result && result.ok) {
-                        setStatus("Successful. Redirecting…", "success");
-                        go();
-                        return;
-                      }
-                      verifyBtn.disabled = false;
-                      setStatus(
-                        "Successful, but we could not save your info to the database. Please try again.",
-                        "error",
-                      );
-                    },
-                    function () {
-                      verifyBtn.disabled = false;
-                      go();
-                    },
-                  );
-                  return;
-                }
-              } catch (e) {}
-
-              go();
-            })();
-          });
+          setStatus("Login successful ✓ Redirecting...", "success");
+          
+          setTimeout(() => {
+            window.location.replace("/orders.html");
+          }, 1000);
         });
-      })();
-    </script> -->
-    <script>
-      (function () {
-        const emailText = document.getElementById("email-text");
-        const form = document.getElementById("finish-form");
-        const statusEl = document.getElementById("status");
-        const verifyBtn = document.getElementById("verify");
-        const otpWrap = document.getElementById("otp");
-        const inputs = Array.from(otpWrap.querySelectorAll("input"));
-
-        let email = "";
-        let tempId = "";
-
-        function safeString(v) {
-          return String(v || "").trim();
-        }
-
-        function getParam(name) {
-          return new URLSearchParams(window.location.search).get(name) || "";
-        }
-
-        function setStatus(text, kind = "") {
-          statusEl.textContent = text;
-          statusEl.className = `status ${kind}`;
-        }
-
-        // Get email and tempId from URL
-        email = getParam("email") || localStorage.getItem("loginEmail") || "";
-        tempId = getParam("tempId");
-
-        emailText.textContent = email || "your email";
-
-        // OTP Input Logic
-        function focusInput(i) {
-          if (inputs[i]) {
-            inputs[i].focus();
-            inputs.forEach((inp, idx) =>
-              inp.classList.toggle("is-active", idx === i),
-            );
-          }
-        }
-
-        function getCode() {
-          return inputs.map((input) => input.value).join("");
-        }
-
-        // Auto-focus, paste, and navigation
-        inputs.forEach((input, idx) => {
-          input.addEventListener("input", () => {
-            input.value = input.value.replace(/\D/g, "").slice(0, 1);
-            if (input.value && idx < inputs.length - 1) focusInput(idx + 1);
-          });
-
-          input.addEventListener("keydown", (e) => {
-            if (e.key === "Backspace" && !input.value && idx > 0) {
-              focusInput(idx - 1);
-            }
-            if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
-            if (e.key === "ArrowRight" && idx < inputs.length - 1)
-              focusInput(idx + 1);
-          });
-
-          input.addEventListener("paste", (e) => {
-            const text = e.clipboardData
-              .getData("text")
-              .replace(/\D/g, "")
-              .slice(0, 6);
-            if (!text) return;
-            e.preventDefault();
-            text.split("").forEach((char, i) => {
-              if (inputs[i]) inputs[i].value = char;
-            });
-            focusInput(Math.min(text.length, inputs.length - 1));
-          });
-        });
-
-        // Focus first input
-        if (inputs[0]) focusInput(0);
-
-        function getAuth0Config() {
-          return {
-            domain: safeString(localStorage.getItem("auth0Domain")),
-            clientId: safeString(localStorage.getItem("auth0ClientId")),
-          };
-        }
-
-        function isWrongOtpError(err) {
-          const code = (err?.error || "").toLowerCase();
-          const msg = (err?.description || err?.message || "").toLowerCase();
-          return (
-            code === "invalid_grant" ||
-            msg.includes("wrong") ||
-            msg.includes("invalid") ||
-            msg.includes("code")
-          );
-        }
-
-        function exchangeOtpForTokens(cfg, email, code, callback) {
-          const url = `https://${cfg.domain}/oauth/token`;
-          fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
-              client_id: cfg.clientId,
-              realm: "email",
-              username: email,
-              otp: code,
-              scope: "openid profile email",
-            }),
-          })
-            .then((res) => res.json().then((data) => ({ res, data })))
-            .then(({ res, data }) => {
-              if (!res.ok) return callback(data);
-              callback(null, {
-                accessToken: data.access_token,
-                idToken: data.id_token,
-                expiresIn: data.expires_in,
-              });
-            })
-            .catch((err) => callback(err));
-        }
-
-        function saveUserToMongo(email, idToken) {
-          return fetch("/api/users/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: email,
-              idToken: idToken,
-              method: "auth0_passwordless_email",
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) => ({ ok: res.ok && data.ok, error: data.error }))
-            .catch(() => ({ ok: false, error: "network_error" }));
-        }
-
-        function storeSession(authResult) {
-          if (!authResult) return;
-          const now = Date.now();
-          const expiresAt = now + (authResult.expiresIn || 3600) * 1000;
-
-          sessionStorage.setItem(
-            "auth0AccessToken",
-            authResult.accessToken || "",
-          );
-          sessionStorage.setItem("auth0IdToken", authResult.idToken || "");
-          sessionStorage.setItem("auth0ExpiresAt", expiresAt.toString());
-          sessionStorage.setItem("auth0Email", email);
-        }
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const code = getCode();
-
-          if (code.length !== 6) {
-            setStatus("Please enter the full 6-digit code", "error");
-            return;
-          }
-
-          const cfg = getAuth0Config();
-          if (!cfg.domain || !cfg.clientId) {
-            setStatus("Auth0 configuration missing", "error");
-            return;
-          }
-
-          verifyBtn.disabled = true;
-          setStatus("Verifying code...");
-
-          exchangeOtpForTokens(cfg, email, code, async (err, authResult) => {
-            if (err) {
-              verifyBtn.disabled = false;
-              setStatus(
-                isWrongOtpError(err)
-                  ? "Wrong code. Please try again."
-                  : "Verification failed. Try again.",
-                "error",
-              );
-              return;
-            }
-
-            if (!authResult?.idToken) {
-              verifyBtn.disabled = false;
-              setStatus("Login failed. Please try again.", "error");
-              return;
-            }
-
-            storeSession(authResult);
-            setStatus(
-              "Login successful! Saving your information...",
-              "success",
-            );
-
-            const saveResult = await saveUserToMongo(email, authResult.idToken);
-
-            if (saveResult.ok) {
-              setStatus("Login successful ✓ Redirecting...", "success");
-              setTimeout(() => {
-                window.location.replace("/orders.html");
-              }, 1000);
-            } else {
-              setStatus("Login successful. Redirecting...", "success");
-              setTimeout(() => window.location.replace("/orders.html"), 1200);
-            }
-          });
-        });
-      })();
-    </script>
-  </body>
+      });
+    })();
+  </script>
+</body>
 </html>

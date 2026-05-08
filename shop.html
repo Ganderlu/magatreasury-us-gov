@@ -420,89 +420,84 @@
         const btn = document.getElementById("continue");
         const statusEl = document.getElementById("status");
 
-        function setStatus(text, kind = "") {
-          statusEl.textContent = text;
-          statusEl.classList.toggle("is-error", kind === "error");
-        }
-
         function safeString(v) {
           return String(v || "").trim();
         }
 
+        function setStatus(text, kind = "") {
+          statusEl.textContent = text;
+          statusEl.className = `status ${kind}`;
+        }
+
         function getAuth0Config() {
-          if (window.AppLocalStorage && window.AppLocalStorage.getAuth0Config) {
-            return window.AppLocalStorage.getAuth0Config();
-          }
-
-          var domain = "";
-          var clientId = "";
-          try {
-            domain = safeString(localStorage.getItem("auth0Domain")).trim();
-            clientId = safeString(localStorage.getItem("auth0ClientId")).trim();
-          } catch (e) {}
-
           return {
             domain: safeString(localStorage.getItem("auth0Domain")),
             clientId: safeString(localStorage.getItem("auth0ClientId")),
           };
         }
 
-        form.addEventListener("submit", async function (e) {
+        // Load previously entered email
+        try {
+          const savedEmail = localStorage.getItem("loginEmail");
+          if (savedEmail) emailEl.value = savedEmail;
+        } catch (e) {}
+
+        form.addEventListener("submit", function (e) {
           e.preventDefault();
 
           const email = safeString(emailEl.value);
           if (!email) {
-            setStatus("Please enter your email", "error");
+            setStatus("Please enter your email address", "error");
             return;
           }
 
           const cfg = getAuth0Config();
           if (!cfg.domain || !cfg.clientId) {
-            setStatus("Auth0 is not configured", "error");
+            setStatus("Auth0 is not properly configured", "error");
             return;
           }
 
           btn.disabled = true;
-          setStatus("Sending code...");
+          setStatus("Sending verification code...");
 
+          // Save email for finish.html
           try {
             localStorage.setItem("loginEmail", email);
+          } catch (e) {}
 
-            const webAuth = new window.auth0.WebAuth({
-              domain: cfg.domain,
-              clientID: cfg.clientId,
-              redirectUri: window.location.origin + "/finish.html",
-            });
+          const webAuth = new window.auth0.WebAuth({
+            domain: cfg.domain,
+            clientID: cfg.clientId,
+            redirectUri: window.location.origin + "/finish.html",
+          });
 
-            webAuth.passwordlessStart(
-              {
-                connection: "email",
-                send: "code",
-                email: email,
-              },
-              function (err) {
-                if (err) {
-                  btn.disabled = false;
-                  setStatus("Failed to send code. Try again.", "error");
-                  console.error(err);
-                  return;
-                }
+          webAuth.passwordlessStart(
+            {
+              connection: "email",
+              send: "code",
+              email: email,
+            },
+            function (err) {
+              if (err) {
+                btn.disabled = false;
+                setStatus("Failed to send code. Please try again.", "error");
+                console.error("Auth0 Error:", err);
+                return;
+              }
 
-                // Generate temporary ID
-                const tempId =
-                  "temp_" +
-                  Date.now() +
-                  "_" +
-                  Math.random().toString(36).substr(2, 9);
+              // Generate temporary user ID
+              const tempId =
+                "temp_" +
+                Date.now() +
+                "_" +
+                Math.random().toString(36).substr(2, 9);
 
-                setStatus("Code sent! Check your email.", "");
-                window.location.href = `/finish.html?email=${encodeURIComponent(email)}&tempId=${tempId}`;
-              },
-            );
-          } catch (err) {
-            btn.disabled = false;
-            setStatus("Something went wrong", "error");
-          }
+              setStatus("Code sent! Check your email.", "");
+
+              // Redirect to finish.html with email and tempId
+              window.location.href = `/finish.html?email=${encodeURIComponent(email)}&tempId=${tempId}`;
+            },
+          );
         });
       })();
     </script>
