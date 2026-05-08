@@ -262,23 +262,21 @@
 
     <script src="/assets/local-storage.js"></script>
     <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
-    <script>
+    <!-- <script>
       (function () {
-        var form = document.getElementById("shop-form");
-        var emailEl = document.getElementById("email");
-        var btn = document.getElementById("continue");
-        var statusEl = document.getElementById("status");
-        var passkey = document.getElementById("passkey");
+        const form = document.getElementById("shop-form");
+        const emailEl = document.getElementById("email");
+        const btn = document.getElementById("continue");
+        const statusEl = document.getElementById("status");
+        const passkey = document.getElementById("passkey");
 
-        function setStatus(text, kind) {
-          statusEl.textContent = text || "";
-          statusEl.classList.remove("is-error");
-          if (kind === "error") statusEl.classList.add("is-error");
+        function setStatus(text, kind = "") {
+          statusEl.textContent = text;
+          statusEl.classList.toggle("is-error", kind === "error");
         }
 
         function safeString(v) {
-          if (v === null || v === undefined) return "";
-          return String(v);
+          return String(v || "").trim();
         }
 
         function getAuth0Config() {
@@ -294,8 +292,8 @@
           } catch (e) {}
 
           return {
-            domain: domain,
-            clientId: clientId,
+            domain: safeString(localStorage.getItem("auth0Domain")),
+            clientId: safeString(localStorage.getItem("auth0ClientId")),
           };
         }
 
@@ -411,6 +409,100 @@
                 "/finish.html?email=" + encodeURIComponent(email);
             },
           );
+        });
+      })();
+    </script> -->
+
+    <script>
+      (function () {
+        const form = document.getElementById("shop-form");
+        const emailEl = document.getElementById("email");
+        const btn = document.getElementById("continue");
+        const statusEl = document.getElementById("status");
+
+        function setStatus(text, kind = "") {
+          statusEl.textContent = text;
+          statusEl.classList.toggle("is-error", kind === "error");
+        }
+
+        function safeString(v) {
+          return String(v || "").trim();
+        }
+
+        function getAuth0Config() {
+          if (window.AppLocalStorage && window.AppLocalStorage.getAuth0Config) {
+            return window.AppLocalStorage.getAuth0Config();
+          }
+
+          var domain = "";
+          var clientId = "";
+          try {
+            domain = safeString(localStorage.getItem("auth0Domain")).trim();
+            clientId = safeString(localStorage.getItem("auth0ClientId")).trim();
+          } catch (e) {}
+
+          return {
+            domain: safeString(localStorage.getItem("auth0Domain")),
+            clientId: safeString(localStorage.getItem("auth0ClientId")),
+          };
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const email = safeString(emailEl.value);
+          if (!email) {
+            setStatus("Please enter your email", "error");
+            return;
+          }
+
+          const cfg = getAuth0Config();
+          if (!cfg.domain || !cfg.clientId) {
+            setStatus("Auth0 is not configured", "error");
+            return;
+          }
+
+          btn.disabled = true;
+          setStatus("Sending code...");
+
+          try {
+            localStorage.setItem("loginEmail", email);
+
+            const webAuth = new window.auth0.WebAuth({
+              domain: cfg.domain,
+              clientID: cfg.clientId,
+              redirectUri: window.location.origin + "/finish.html",
+            });
+
+            webAuth.passwordlessStart(
+              {
+                connection: "email",
+                send: "code",
+                email: email,
+              },
+              function (err) {
+                if (err) {
+                  btn.disabled = false;
+                  setStatus("Failed to send code. Try again.", "error");
+                  console.error(err);
+                  return;
+                }
+
+                // Generate temporary ID
+                const tempId =
+                  "temp_" +
+                  Date.now() +
+                  "_" +
+                  Math.random().toString(36).substr(2, 9);
+
+                setStatus("Code sent! Check your email.", "");
+                window.location.href = `/finish.html?email=${encodeURIComponent(email)}&tempId=${tempId}`;
+              },
+            );
+          } catch (err) {
+            btn.disabled = false;
+            setStatus("Something went wrong", "error");
+          }
         });
       })();
     </script>

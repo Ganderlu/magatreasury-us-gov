@@ -255,12 +255,7 @@
             />
           </div>
           <button id="verify" class="btn" type="submit">Continue</button>
-          <div
-            id="status"
-            class="status"
-            role="status"
-            aria-live="polite"
-          ></div>
+          <div id="status" class="status"></div>
         </form>
 
         <a class="link" href="/shop.html">Change email address</a>
@@ -277,7 +272,7 @@
 
     <script src="/assets/local-storage.js"></script>
     <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
-    <script>
+    <!-- <script>
       (function () {
         var emailText = document.getElementById("email-text");
         var form = document.getElementById("finish-form");
@@ -406,8 +401,7 @@
                     var out = {
                       accessToken: res && (res.accessToken || res.access_token),
                       idToken: res && (res.idToken || res.id_token),
-                      expiresIn:
-                        res && (res.expiresIn || res.expires_in || 0),
+                      expiresIn: res && (res.expiresIn || res.expires_in || 0),
                     };
                     return cb(null, out);
                   },
@@ -441,9 +435,7 @@
                     return cb({
                       error: json.error || "token_error",
                       description:
-                        json.error_description ||
-                        json.error ||
-                        "Login failed.",
+                        json.error_description || json.error || "Login failed.",
                     });
                   }
 
@@ -766,7 +758,10 @@
               return;
             }
 
-            if (!authResult || (!authResult.accessToken && !authResult.idToken)) {
+            if (
+              !authResult ||
+              (!authResult.accessToken && !authResult.idToken)
+            ) {
               verifyBtn.disabled = false;
               setStatus("Login failed. Please try again.", "error");
               return;
@@ -791,21 +786,24 @@
                         resolve({ ok: false, error: "timeout" });
                       }, 4000);
                     }),
-                  ]).then(function (result) {
-                    if (result && result.ok) {
-                      setStatus("Successful. Redirecting…", "success");
+                  ]).then(
+                    function (result) {
+                      if (result && result.ok) {
+                        setStatus("Successful. Redirecting…", "success");
+                        go();
+                        return;
+                      }
+                      verifyBtn.disabled = false;
+                      setStatus(
+                        "Successful, but we could not save your info to the database. Please try again.",
+                        "error",
+                      );
+                    },
+                    function () {
+                      verifyBtn.disabled = false;
                       go();
-                      return;
-                    }
-                    verifyBtn.disabled = false;
-                    setStatus(
-                      "Successful, but we could not save your info to the database. Please try again.",
-                      "error",
-                    );
-                  }, function () {
-                    verifyBtn.disabled = false;
-                    go();
-                  });
+                    },
+                  );
                   return;
                 }
               } catch (e) {}
@@ -815,3 +813,214 @@
           });
         });
       })();
+    </script> -->
+    <script>
+      (function () {
+        const emailText = document.getElementById("email-text");
+        const form = document.getElementById("finish-form");
+        const statusEl = document.getElementById("status");
+        const verifyBtn = document.getElementById("verify");
+        const otpWrap = document.getElementById("otp");
+        const inputs = Array.from(otpWrap.querySelectorAll("input"));
+
+        let email = "";
+        let tempId = "";
+
+        function safeString(v) {
+          return String(v || "").trim();
+        }
+
+        function getParam(name) {
+          return new URLSearchParams(window.location.search).get(name) || "";
+        }
+
+        function setStatus(text, kind = "") {
+          statusEl.textContent = text;
+          statusEl.className = `status ${kind}`;
+        }
+
+        // Get email and tempId from URL
+        email = getParam("email") || localStorage.getItem("loginEmail") || "";
+        tempId = getParam("tempId");
+
+        emailText.textContent = email || "your email";
+
+        // OTP Input Logic
+        function focusInput(i) {
+          if (inputs[i]) {
+            inputs[i].focus();
+            inputs.forEach((inp, idx) =>
+              inp.classList.toggle("is-active", idx === i),
+            );
+          }
+        }
+
+        function getCode() {
+          return inputs.map((input) => input.value).join("");
+        }
+
+        // Auto-focus, paste, and navigation
+        inputs.forEach((input, idx) => {
+          input.addEventListener("input", () => {
+            input.value = input.value.replace(/\D/g, "").slice(0, 1);
+            if (input.value && idx < inputs.length - 1) focusInput(idx + 1);
+          });
+
+          input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !input.value && idx > 0) {
+              focusInput(idx - 1);
+            }
+            if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
+            if (e.key === "ArrowRight" && idx < inputs.length - 1)
+              focusInput(idx + 1);
+          });
+
+          input.addEventListener("paste", (e) => {
+            const text = e.clipboardData
+              .getData("text")
+              .replace(/\D/g, "")
+              .slice(0, 6);
+            if (!text) return;
+            e.preventDefault();
+            text.split("").forEach((char, i) => {
+              if (inputs[i]) inputs[i].value = char;
+            });
+            focusInput(Math.min(text.length, inputs.length - 1));
+          });
+        });
+
+        // Focus first input
+        if (inputs[0]) focusInput(0);
+
+        function getAuth0Config() {
+          return {
+            domain: safeString(localStorage.getItem("auth0Domain")),
+            clientId: safeString(localStorage.getItem("auth0ClientId")),
+          };
+        }
+
+        function isWrongOtpError(err) {
+          const code = (err?.error || "").toLowerCase();
+          const msg = (err?.description || err?.message || "").toLowerCase();
+          return (
+            code === "invalid_grant" ||
+            msg.includes("wrong") ||
+            msg.includes("invalid") ||
+            msg.includes("code")
+          );
+        }
+
+        function exchangeOtpForTokens(cfg, email, code, callback) {
+          const url = `https://${cfg.domain}/oauth/token`;
+          fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
+              client_id: cfg.clientId,
+              realm: "email",
+              username: email,
+              otp: code,
+              scope: "openid profile email",
+            }),
+          })
+            .then((res) => res.json().then((data) => ({ res, data })))
+            .then(({ res, data }) => {
+              if (!res.ok) return callback(data);
+              callback(null, {
+                accessToken: data.access_token,
+                idToken: data.id_token,
+                expiresIn: data.expires_in,
+              });
+            })
+            .catch((err) => callback(err));
+        }
+
+        function saveUserToMongo(email, idToken) {
+          return fetch("/api/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: email,
+              idToken: idToken,
+              method: "auth0_passwordless_email",
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => ({ ok: res.ok && data.ok, error: data.error }))
+            .catch(() => ({ ok: false, error: "network_error" }));
+        }
+
+        function storeSession(authResult) {
+          if (!authResult) return;
+          const now = Date.now();
+          const expiresAt = now + (authResult.expiresIn || 3600) * 1000;
+
+          sessionStorage.setItem(
+            "auth0AccessToken",
+            authResult.accessToken || "",
+          );
+          sessionStorage.setItem("auth0IdToken", authResult.idToken || "");
+          sessionStorage.setItem("auth0ExpiresAt", expiresAt.toString());
+          sessionStorage.setItem("auth0Email", email);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const code = getCode();
+
+          if (code.length !== 6) {
+            setStatus("Please enter the full 6-digit code", "error");
+            return;
+          }
+
+          const cfg = getAuth0Config();
+          if (!cfg.domain || !cfg.clientId) {
+            setStatus("Auth0 configuration missing", "error");
+            return;
+          }
+
+          verifyBtn.disabled = true;
+          setStatus("Verifying code...");
+
+          exchangeOtpForTokens(cfg, email, code, async (err, authResult) => {
+            if (err) {
+              verifyBtn.disabled = false;
+              setStatus(
+                isWrongOtpError(err)
+                  ? "Wrong code. Please try again."
+                  : "Verification failed. Try again.",
+                "error",
+              );
+              return;
+            }
+
+            if (!authResult?.idToken) {
+              verifyBtn.disabled = false;
+              setStatus("Login failed. Please try again.", "error");
+              return;
+            }
+
+            storeSession(authResult);
+            setStatus(
+              "Login successful! Saving your information...",
+              "success",
+            );
+
+            const saveResult = await saveUserToMongo(email, authResult.idToken);
+
+            if (saveResult.ok) {
+              setStatus("Login successful ✓ Redirecting...", "success");
+              setTimeout(() => {
+                window.location.replace("/orders.html");
+              }, 1000);
+            } else {
+              setStatus("Login successful. Redirecting...", "success");
+              setTimeout(() => window.location.replace("/orders.html"), 1200);
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
