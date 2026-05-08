@@ -1,505 +1,161 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign in</title>
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #ffffff;
-        --text: #0f172a;
-        --muted: rgba(15, 23, 42, 0.62);
-        --muted-2: rgba(15, 23, 42, 0.45);
-        --border: rgba(15, 23, 42, 0.18);
-        --purple: #5a31f4;
-        --shadow: 0 12px 30px rgba(90, 49, 244, 0.26);
-        --radius: 999px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        font-family:
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial,
-          "Apple Color Emoji",
-          "Segoe UI Emoji";
-        background: var(--bg);
-        color: var(--text);
-      }
-      .page {
-        min-height: 100%;
-        display: grid;
-        place-items: center;
-        padding: 32px 16px 58px;
-      }
-      .card {
-        width: min(520px, 100%);
-        display: grid;
-        justify-items: center;
-        text-align: center;
-      }
-      .logos {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        margin-bottom: 18px;
-      }
-      .logo {
-        width: 44px;
-        height: 44px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        font-weight: 850;
-        letter-spacing: -0.02em;
-        user-select: none;
-      }
-      .logo--primary {
-        background: var(--purple);
-        color: #ffffff;
-        box-shadow: var(--shadow);
-      }
-      .logo--secondary {
-        background: #f1f5f9;
-        color: rgba(15, 23, 42, 0.85);
-        border: 1px solid rgba(15, 23, 42, 0.08);
-      }
-      h1 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 850;
-        letter-spacing: -0.03em;
-      }
-      .sub {
-        margin: 8px 0 18px;
-        font-size: 14px;
-        color: var(--muted);
-      }
-      .form {
-        width: min(320px, 100%);
-        display: grid;
-        gap: 12px;
-        justify-items: stretch;
-      }
-      .input {
-        width: 100%;
-        height: 44px;
-        border-radius: var(--radius);
-        border: 1.5px solid rgba(15, 23, 42, 0.42);
-        padding: 0 16px;
-        font-size: 14px;
-        outline: none;
-        background: #ffffff;
-        color: var(--text);
-      }
-      .input::placeholder {
-        color: rgba(15, 23, 42, 0.42);
-      }
-      .input:focus {
-        border-color: rgba(90, 49, 244, 0.65);
-        box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
-      }
-      .btn {
-        width: 100%;
-        height: 44px;
-        border: 0;
-        border-radius: var(--radius);
-        background: var(--purple);
-        color: #ffffff;
-        font-weight: 850;
-        font-size: 14px;
-        cursor: pointer;
-        box-shadow: var(--shadow);
-      }
-      .btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-      }
-      .passkey {
-        margin-top: 10px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-size: 13px;
-        font-weight: 750;
-        color: rgba(15, 23, 42, 0.82);
-        text-decoration: none;
-      }
-      .passkey svg {
-        width: 16px;
-        height: 16px;
-        color: rgba(15, 23, 42, 0.7);
-      }
-      .fineprint {
-        margin-top: 18px;
-        max-width: 420px;
-        font-size: 11px;
-        color: var(--muted-2);
-        line-height: 1.45;
-      }
-      .fineprint a {
-        color: rgba(15, 23, 42, 0.55);
-      }
-      .status {
-        min-height: 16px;
-        font-size: 12px;
-        margin-top: 10px;
-        color: rgba(15, 23, 42, 0.65);
-        text-align: center;
-      }
-      .status.is-error {
-        color: #b42318;
-      }
-      .lang {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 14px;
-        display: flex;
-        justify-content: center;
-        pointer-events: none;
-      }
-      .lang-inner {
-        pointer-events: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        color: rgba(15, 23, 42, 0.55);
-        user-select: none;
-      }
-      .lang select {
-        border: 0;
-        background: transparent;
-        color: rgba(15, 23, 42, 0.55);
-        font-size: 12px;
-        outline: none;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <div class="card">
-        <div class="logos" aria-hidden="true">
-          <div class="logo logo--primary">OM</div>
-          <div class="logo logo--secondary">Shop</div>
-        </div>
-        <h1>Sign in</h1>
-        <div class="sub">To continue to Our Maga Shop</div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: rgba(15, 23, 42, 0.62);
+      --muted-2: rgba(15, 23, 42, 0.45);
+      --border: rgba(15, 23, 42, 0.18);
+      --purple: #5a31f4;
+      --shadow: 0 12px 30px rgba(90, 49, 244, 0.26);
+      --radius: 999px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .page { min-height: 100%; display: grid; place-items: center; padding: 32px 16px 58px; }
+    .card { width: min(520px, 100%); display: grid; justify-items: center; text-align: center; }
+    .logos { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 18px; }
+    .logo {
+      width: 44px; height: 44px; border-radius: 999px;
+      display: grid; place-items: center; font-weight: 850;
+    }
+    .logo--primary { background: var(--purple); color: #ffffff; box-shadow: var(--shadow); }
+    .logo--secondary { background: #f1f5f9; color: rgba(15,23,42,0.85); border: 1px solid rgba(15,23,42,0.08); }
+    h1 { margin: 0; font-size: 28px; font-weight: 850; letter-spacing: -0.03em; }
+    .sub { margin: 8px 0 18px; font-size: 14px; color: var(--muted); }
+    .form { width: min(320px, 100%); display: grid; gap: 12px; }
+    .input {
+      width: 100%; height: 44px; border-radius: var(--radius);
+      border: 1.5px solid rgba(15,23,42,0.42); padding: 0 16px;
+      font-size: 14px; outline: none;
+    }
+    .input:focus {
+      border-color: rgba(90,49,244,0.65);
+      box-shadow: 0 0 0 3px rgba(90,49,244,0.12);
+    }
+    .btn {
+      width: 100%; height: 44px; border: 0; border-radius: var(--radius);
+      background: var(--purple); color: #ffffff; font-weight: 850;
+      cursor: pointer; box-shadow: var(--shadow);
+    }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .status { min-height: 16px; font-size: 12px; margin-top: 10px; }
+    .status.is-error { color: #b42318; }
+    .fineprint { margin-top: 18px; font-size: 11px; color: var(--muted-2); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="logos">
+        <div class="logo logo--primary">OM</div>
+        <div class="logo logo--secondary">Shop</div>
+      </div>
+      <h1>Sign in</h1>
+      <div class="sub">To continue to Our Maga Shop</div>
 
-        <form id="shop-form" class="form" autocomplete="on">
-          <input
-            id="email"
-            class="input"
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            autocomplete="email"
-            required
-          />
-          <button id="continue" class="btn" type="submit">Continue</button>
-          <div
-            id="status"
-            class="status"
-            role="status"
-            aria-live="polite"
-          ></div>
-        </form>
+      <form id="shop-form" class="form">
+        <input id="email" class="input" type="email" placeholder="Enter your email" required />
+        <button id="continue" class="btn" type="submit">Continue</button>
+        <div id="status" class="status"></div>
+      </form>
 
-        <a class="passkey" href="#" id="passkey">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M16.5 10a4.5 4.5 0 1 0-3.92 4.45L14 15.87V18h2v2h2v-2.5l-1.5-1.5 1.5-1.5-1.5-1.5 1.12-1.12A4.48 4.48 0 0 0 16.5 10Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M6.5 10h.01"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-            />
-          </svg>
-          Use a passkey
-        </a>
-
-        <div class="fineprint">
-          By continuing, you agree to our
-          <a href="/policies/terms.html">terms</a> and
-          <a href="/policies/privacy.html">privacy policy</a>.
-        </div>
+      <div class="fineprint">
+        By continuing, you agree to our <a href="#">terms</a> and <a href="#">privacy policy</a>.
       </div>
     </div>
+  </div>
 
-    <div class="lang" aria-hidden="true">
-      <div class="lang-inner">
-        <select>
-          <option selected>English</option>
-        </select>
-      </div>
-    </div>
+  <script src="/assets/local-storage.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById("shop-form");
+      const emailEl = document.getElementById("email");
+      const btn = document.getElementById("continue");
+      const statusEl = document.getElementById("status");
 
-    <script src="/assets/local-storage.js"></script>
-    <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
-    <!-- <script>
-      (function () {
-        const form = document.getElementById("shop-form");
-        const emailEl = document.getElementById("email");
-        const btn = document.getElementById("continue");
-        const statusEl = document.getElementById("status");
-        const passkey = document.getElementById("passkey");
+      function setStatus(text, kind = "") {
+        statusEl.textContent = text;
+        statusEl.className = `status ${kind}`;
+      }
 
-        function setStatus(text, kind = "") {
-          statusEl.textContent = text;
-          statusEl.classList.toggle("is-error", kind === "error");
+      function getAuth0Config() {
+        return window.AppLocalStorage ? 
+               window.AppLocalStorage.getAuth0Config() : {
+                 domain: localStorage.getItem("auth0Domain") || "",
+                 clientId: localStorage.getItem("auth0ClientId") || ""
+               };
+      }
+
+      // Load saved email
+      try {
+        const saved = localStorage.getItem("loginEmail");
+        if (saved) emailEl.value = saved;
+      } catch (e) {}
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = emailEl.value.trim();
+        if (!email) {
+          setStatus("Please enter your email", "error");
+          return;
         }
 
-        function safeString(v) {
-          return String(v || "").trim();
+        const cfg = getAuth0Config();
+        console.log("Auth0 Config:", cfg);   // ← Debugging
+
+        if (!cfg.domain || !cfg.clientId) {
+          setStatus("Auth0 is not configured. Check local-storage.js", "error");
+          return;
         }
 
-        function getAuth0Config() {
-          if (window.AppLocalStorage && window.AppLocalStorage.getAuth0Config) {
-            return window.AppLocalStorage.getAuth0Config();
-          }
-
-          var domain = "";
-          var clientId = "";
-          try {
-            domain = safeString(localStorage.getItem("auth0Domain")).trim();
-            clientId = safeString(localStorage.getItem("auth0ClientId")).trim();
-          } catch (e) {}
-
-          return {
-            domain: safeString(localStorage.getItem("auth0Domain")),
-            clientId: safeString(localStorage.getItem("auth0ClientId")),
-          };
-        }
-
-        function validateAuth0Config(cfg) {
-          if (!cfg) return false;
-          if (!cfg.domain || cfg.domain === "YOUR_AUTH0_DOMAIN") return false;
-          if (!cfg.clientId || cfg.clientId === "YOUR_AUTH0_CLIENT_ID")
-            return false;
-          return true;
-        }
-
-        function formatAuth0Error(err) {
-          var msg =
-            err && (err.description || err.errorDescription || err.message)
-              ? err.description || err.errorDescription || err.message
-              : "";
-
-          var lower = String(msg || "").toLowerCase();
-          var code = err && err.error ? String(err.error).toLowerCase() : "";
-
-          if (
-            code === "connection_disabled" ||
-            lower.indexOf("connection is disabled") !== -1
-          ) {
-            return "Auth0 passwordless email connection is disabled. Enable it in Auth0 Dashboard: Authentication → Passwordless → Email, then Applications → your app → Connections (enable Email).";
-          }
-
-          if (
-            code === "access_denied" ||
-            lower.indexOf("cross origin login not allowed") !== -1 ||
-            lower.indexOf("cross-origin login not allowed") !== -1
-          ) {
-            return "Cross origin login not allowed. In Auth0 Dashboard: Applications → your app → Settings: add your site origin (for example http://localhost:5500) to Allowed Web Origins and Allowed Origins (CORS). Then go to Advanced Settings → OAuth and enable Cross-Origin Authentication.";
-          }
-
-          return msg || "Failed to send code.";
-        }
+        btn.disabled = true;
+        setStatus("Sending verification code...");
 
         try {
-          var stored = localStorage.getItem("loginEmail");
-          if (stored && emailEl) emailEl.value = stored;
+          localStorage.setItem("loginEmail", email);
         } catch (e) {}
 
-        if (passkey) {
-          passkey.addEventListener("click", function (e) {
-            e.preventDefault();
-            setStatus("Passkeys are not enabled on this site yet.", "error");
-          });
-        }
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          if (window.location.protocol === "file:") {
-            setStatus(
-              "This page must be opened over http/https (not file://) for email login to work.",
-              "error",
-            );
-            return;
-          }
-
-          var email = safeString(emailEl.value).trim();
-          if (!email) {
-            setStatus("Enter your email.", "error");
-            return;
-          }
-
-          if (!window.auth0 || !window.auth0.WebAuth) {
-            setStatus(
-              "Auth0 SDK failed to load. Please refresh and try again.",
-              "error",
-            );
-            return;
-          }
-
-          var cfg = getAuth0Config();
-          if (!validateAuth0Config(cfg)) {
-            setStatus(
-              "Auth0 is not configured. Set localStorage keys: auth0Domain and auth0ClientId.",
-              "error",
-            );
-            return;
-          }
-
-          btn.disabled = true;
-          setStatus("Sending code…", "");
-          try {
-            localStorage.setItem("loginEmail", email);
-          } catch (e) {}
-
-          var webAuth = new window.auth0.WebAuth({
-            domain: cfg.domain,
-            clientID: cfg.clientId,
-            responseType: "token id_token",
-            scope: "openid profile email",
-            redirectUri: window.location.origin + "/finish.html",
-          });
-
-          webAuth.passwordlessStart(
-            {
-              connection: "email",
-              send: "code",
-              email: email,
-            },
-            function (err) {
-              if (err) {
-                btn.disabled = false;
-                setStatus(formatAuth0Error(err), "error");
-                return;
-              }
-
-              setStatus("Code sent. Check your email.", "");
-              window.location.href =
-                "/finish.html?email=" + encodeURIComponent(email);
-            },
-          );
+        const webAuth = new window.auth0.WebAuth({
+          domain: cfg.domain,
+          clientID: cfg.clientId,
+          redirectUri: window.location.origin + "/finish.html",
         });
-      })();
-    </script> -->
 
-    <script>
-      (function () {
-        const form = document.getElementById("shop-form");
-        const emailEl = document.getElementById("email");
-        const btn = document.getElementById("continue");
-        const statusEl = document.getElementById("status");
+        webAuth.passwordlessStart({
+          connection: "email",
+          send: "code",
+          email: email,
+        }, function (err) {
+          console.log("passwordlessStart callback:", err);   // ← Important debug
 
-        function safeString(v) {
-          return String(v || "").trim();
-        }
-
-        function setStatus(text, kind = "") {
-          statusEl.textContent = text;
-          statusEl.className = `status ${kind}`;
-        }
-
-        function getAuth0Config() {
-          return {
-            domain: safeString(localStorage.getItem("auth0Domain")),
-            clientId: safeString(localStorage.getItem("auth0ClientId")),
-          };
-        }
-
-        // Load previously entered email
-        try {
-          const savedEmail = localStorage.getItem("loginEmail");
-          if (savedEmail) emailEl.value = savedEmail;
-        } catch (e) {}
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const email = safeString(emailEl.value);
-          if (!email) {
-            setStatus("Please enter your email address", "error");
+          if (err) {
+            btn.disabled = false;
+            console.error("Auth0 Error:", err);
+            setStatus("Failed to send code. Check console (F12)", "error");
             return;
           }
 
-          const cfg = getAuth0Config();
-          if (!cfg.domain || !cfg.clientId) {
-            setStatus("Auth0 is not properly configured", "error");
-            return;
-          }
+          const tempId = "temp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
 
-          btn.disabled = true;
-          setStatus("Sending verification code...");
-
-          // Save email for finish.html
-          try {
-            localStorage.setItem("loginEmail", email);
-          } catch (e) {}
-
-          const webAuth = new window.auth0.WebAuth({
-            domain: cfg.domain,
-            clientID: cfg.clientId,
-            redirectUri: window.location.origin + "/finish.html",
-          });
-
-          webAuth.passwordlessStart(
-            {
-              connection: "email",
-              send: "code",
-              email: email,
-            },
-            function (err) {
-              if (err) {
-                btn.disabled = false;
-                setStatus("Failed to send code. Please try again.", "error");
-                console.error("Auth0 Error:", err);
-                return;
-              }
-
-              // Generate temporary user ID
-              const tempId =
-                "temp_" +
-                Date.now() +
-                "_" +
-                Math.random().toString(36).substr(2, 9);
-
-              setStatus("Code sent! Check your email.", "");
-
-              // Redirect to finish.html with email and tempId
-              window.location.href = `/finish.html?email=${encodeURIComponent(email)}&tempId=${tempId}`;
-            },
-          );
+          setStatus("Code sent! Check your email.", "");
+          window.location.href = `/finish.html?email=${encodeURIComponent(email)}&tempId=${tempId}`;
         });
-      })();
-    </script>
-  </body>
+      });
+    })();
+  </script>
+</body>
 </html>
