@@ -178,7 +178,7 @@
 
       function setStatus(text, kind = "") {
         statusEl.textContent = text;
-        statusEl.className = `status ${kind}`;
+        statusEl.className = kind ? `status ${kind}` : "status";
       }
 
       // Get email from URL or localStorage
@@ -186,6 +186,12 @@
               localStorage.getItem("loginEmail") || "";
 
       emailText.textContent = email || "your email";
+      try {
+        if (email) {
+          localStorage.setItem("loginEmail", email);
+          sessionStorage.setItem("auth0Email", email);
+        }
+      } catch (e) {}
 
       // OTP Input Logic
       function focusInput(i) {
@@ -267,21 +273,37 @@
             idToken: idToken,
             method: "auth0_passwordless_email"
           })
-        }).then(res => res.json()).catch(() => ({}));
+        })
+          .then(async (res) => {
+            let data = null;
+            try {
+              data = await res.json();
+            } catch (e) {
+              data = null;
+            }
+            if (res.ok && data && data.ok) return { ok: true };
+            return { ok: false, error: (data && data.error) || "save_failed" };
+          })
+          .catch(() => ({ ok: false, error: "network_error" }));
       }
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
         const code = getCode();
 
+        if (!email) {
+          setStatus("Missing email. Please go back and enter your email again.", "is-error");
+          return;
+        }
+
         if (code.length !== 6) {
-          setStatus("Please enter the full 6-digit code", "error");
+          setStatus("Please enter the full 6-digit code", "is-error");
           return;
         }
 
         const cfg = getAuth0Config();
         if (!cfg.domain || !cfg.clientId) {
-          setStatus("Auth0 configuration missing", "error");
+          setStatus("Auth0 configuration missing", "is-error");
           return;
         }
 
@@ -291,14 +313,44 @@
         exchangeOtpForTokens(cfg, code, async (err, authResult) => {
           if (err) {
             verifyBtn.disabled = false;
-            setStatus(isWrongOtpError(err) ? "Wrong code. Please try again." : "Verification failed. Try again.", "error");
+            setStatus(
+              isWrongOtpError(err)
+                ? "Wrong code. Please try again."
+                : "Verification failed. Try again.",
+              "is-error",
+            );
             return;
           }
 
-          // Save to MongoDB
-          await saveUserToMongo(authResult.id_token || authResult.idToken);
+          const idToken = authResult && (authResult.id_token || authResult.idToken);
+          if (!idToken) {
+            verifyBtn.disabled = false;
+            setStatus("Login failed. Please try again.", "is-error");
+            return;
+          }
 
-          setStatus("Login successful ✓ Redirecting...", "success");
+          let saveResult = null;
+          try {
+            saveResult = await Promise.race([
+              saveUserToMongo(idToken),
+              new Promise((resolve) =>
+                setTimeout(() => resolve({ ok: false, error: "timeout" }), 4500),
+              ),
+            ]);
+          } catch (e) {
+            saveResult = { ok: false, error: "save_failed" };
+          }
+
+          if (!saveResult || !saveResult.ok) {
+            verifyBtn.disabled = false;
+            setStatus(
+              "Successful, but we could not save your info to the database. Please try again.",
+              "is-error",
+            );
+            return;
+          }
+
+          setStatus("Login successful ✓ Redirecting...", "is-success");
           
           setTimeout(() => {
             window.location.replace("/orders.html");
