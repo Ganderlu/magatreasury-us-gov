@@ -1082,39 +1082,77 @@
     delivery.className = "local-checkout__section";
     delivery.innerHTML = '<h2 class="local-checkout__h2">Delivery</h2>';
 
-    var country = document.createElement("div");
-    country.className = "local-checkout__field";
-    country.innerHTML =
-      '<select disabled style="background:#f9f9f9; cursor:default; color:#121212; border: 1px solid #d9d9d9; padding:14px; border-radius:10px; width:100%;"><option>United States</option></select>';
+    function createIconField(placeholder, iconType) {
+      var w = document.createElement("div");
+      w.className = "local-checkout__field local-checkout__field--icon";
+      var i = document.createElement("input");
+      i.type = "text";
+      i.placeholder = placeholder;
+      w.appendChild(i);
+
+      var icon = document.createElement("span");
+      icon.className = "local-checkout__field-icon";
+      if (iconType === "search") {
+        icon.innerHTML =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>';
+      } else if (iconType === "help") {
+        icon.innerHTML =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+      }
+      w.appendChild(icon);
+      return w;
+    }
+
+    var countryWrap = document.createElement("div");
+    countryWrap.className =
+      "local-checkout__field local-checkout__field--select";
+    countryWrap.innerHTML =
+      '<label class="local-checkout__field-label">Country/Region</label>' +
+      '<select class="local-checkout__select"><option value="">---</option><option>United States</option></select>' +
+      '<span class="local-checkout__select-caret">⌄</span>';
 
     var nameRow = document.createElement("div");
-    nameRow.style.display = "grid";
-    nameRow.style.gridTemplateColumns = "1fr 1fr";
-    nameRow.style.gap = "12px";
-    nameRow.style.marginTop = "12px";
-    nameRow.appendChild(field("", "First name", "text"));
-    nameRow.appendChild(field("", "Last name", "text"));
+    nameRow.className = "local-checkout__row";
+    nameRow.appendChild(field("", "First name"));
+    nameRow.appendChild(field("", "Last name"));
 
-    delivery.appendChild(country);
-    delivery.appendChild(nameRow);
-    delivery.appendChild(field("", "Address", "text"));
-    var aptField = field("", "Apartment, suite, etc. (optional)", "text");
-    aptField.style.marginTop = "12px";
-    delivery.appendChild(aptField);
+    var addrField = createIconField("Address", "search");
+    var aptField = field("", "Apartment, suite, etc. (optional)");
 
     var cityRow = document.createElement("div");
-    cityRow.style.display = "grid";
-    cityRow.style.gridTemplateColumns = "1fr 1fr 1fr";
-    cityRow.style.gap = "12px";
-    cityRow.style.marginTop = "12px";
-    cityRow.appendChild(field("", "City", "text"));
-    cityRow.appendChild(field("", "State", "text"));
-    cityRow.appendChild(field("", "ZIP code", "text"));
-    delivery.appendChild(cityRow);
+    cityRow.className = "local-checkout__row local-checkout__row--3-col";
+    cityRow.appendChild(field("", "City"));
 
-    var phoneField = field("", "Phone", "tel");
-    phoneField.style.marginTop = "12px";
+    var stateWrap = document.createElement("div");
+    stateWrap.className = "local-checkout__field local-checkout__field--select";
+    stateWrap.innerHTML =
+      '<label class="local-checkout__field-label">State</label>' +
+      '<select class="local-checkout__select"><option value="">---</option><option value="DE">Delaware</option></select>' +
+      '<span class="local-checkout__select-caret">⌄</span>';
+
+    cityRow.appendChild(stateWrap);
+    cityRow.appendChild(field("", "ZIP code"));
+
+    var phoneField = createIconField("Phone", "help");
+
+    var savedAddr = document.createElement("a");
+    savedAddr.href = "#";
+    savedAddr.className = "local-checkout__saved-addr";
+    savedAddr.textContent = "Use a saved address";
+
+    delivery.appendChild(countryWrap);
+    delivery.appendChild(nameRow);
+    delivery.appendChild(addrField);
+    delivery.appendChild(aptField);
+    delivery.appendChild(cityRow);
     delivery.appendChild(phoneField);
+    delivery.appendChild(savedAddr);
+
+    var shipping = document.createElement("div");
+    shipping.className = "local-checkout__section";
+    shipping.innerHTML =
+      '<h2 class="local-checkout__h2">Shipping method</h2>' +
+      '<div class="local-checkout__shipping-notice">Enter your shipping address to view available shipping methods.</div>';
 
     var payment = document.createElement("div");
     payment.className = "local-checkout__section";
@@ -1314,7 +1352,13 @@
     complete.textContent = "Complete Purchase";
     complete.style.marginTop = "30px";
     complete.addEventListener("click", function () {
-      handlePayment();
+      var email = getEmailValue();
+      if (!email) {
+        alert("Please enter your email first.");
+        return;
+      }
+      localStorage.setItem("loginEmail", email);
+      window.location.href = "/login.html";
     });
 
     var foot = document.createElement("div");
@@ -1328,6 +1372,7 @@
 
     form.appendChild(contact);
     form.appendChild(delivery);
+    form.appendChild(shipping);
     form.appendChild(payment);
     if (upsell) form.appendChild(upsell);
     form.appendChild(complete);
@@ -1416,7 +1461,7 @@
       '<div class="local-checkout__total-row"><span>Subtotal</span><span>' +
       formatMoney(subtotal) +
       "</span></div>" +
-      '<div class="local-checkout__total-row"><span>Shipping</span><span style="color:#666; font-size:13px;">Enter shipping address</span></div>' +
+      '<div class="local-checkout__total-row"><span>Shipping</span><span>Free</span></div>' +
       '<div class="local-checkout__total-row is-big"><span>Total</span><span style="font-size:14px; color:#666; margin-right:8px; font-weight:400;">USD</span><span>' +
       formatMoney(subtotal) +
       "</span></div>";

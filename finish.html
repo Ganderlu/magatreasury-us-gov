@@ -1,363 +1,283 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verify your email</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #ffffff;
-      --text: #0f172a;
-      --muted: rgba(15, 23, 42, 0.62);
-      --muted-2: rgba(15, 23, 42, 0.45);
-      --box: rgba(15, 23, 42, 0.06);
-      --border: rgba(15, 23, 42, 0.14);
-      --border-strong: rgba(15, 23, 42, 0.62);
-      --purple: #5a31f4;
-      --shadow: 0 12px 30px rgba(90, 49, 244, 0.22);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    .page {
-      min-height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 32px 16px 58px;
-    }
-    .card {
-      width: min(560px, 100%);
-      text-align: center;
-    }
-    .icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(90,49,244,0.2), rgba(90,49,244,0.08));
-      border: 1px solid rgba(90,49,244,0.22);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 28px;
-      font-weight: 850;
-      letter-spacing: -0.03em;
-    }
-    .sub {
-      margin: 8px 0 18px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .sub b {
-      color: rgba(15, 23, 42, 0.85);
-    }
-    .otp {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      margin: 8px 0 14px;
-    }
-    .otp input {
-      width: 46px;
-      height: 46px;
-      border-radius: 10px;
-      border: 1.5px solid rgba(15, 23, 42, 0.14);
-      background: var(--box);
-      outline: none;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 850;
-      color: rgba(15, 23, 42, 0.9);
-    }
-    .otp input:focus {
-      border-color: rgba(90, 49, 244, 0.55);
-      box-shadow: 0 0 0 3px rgba(90, 49, 244, 0.12);
-      background: #ffffff;
-    }
-    .otp input.is-active {
-      border-color: var(--border-strong);
-      background: #ffffff;
-    }
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.22);
-      align-self: center;
-    }
-    .btn {
-      width: min(320px, 100%);
-      height: 44px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--purple);
-      color: #ffffff;
-      font-weight: 850;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-    .btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    .link {
-      margin-top: 12px;
-      font-size: 12px;
-      font-weight: 750;
-      color: rgba(15, 23, 42, 0.72);
-      text-decoration: none;
-    }
-    .link:hover {
-      text-decoration: underline;
-    }
-    .status {
-      margin-top: 12px;
-      min-height: 16px;
-      font-size: 12px;
-    }
-    .status.is-error {
-      color: #b42318;
-    }
-    .status.is-success {
-      color: #067647;
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <div class="card">
-      <div class="icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 8.5 12 13.5 20 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <h1>Verify your email</h1>
-      <div class="sub">
-        Enter the 6-digit code sent to <b id="email-text"></b>
-      </div>
-
-      <form id="finish-form" autocomplete="one-time-code">
-        <div class="otp" id="otp">
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 1"/>
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 2"/>
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 3"/>
-          <span class="dot" aria-hidden="true"></span>
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 4"/>
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 5"/>
-          <input inputmode="numeric" maxlength="1" aria-label="Digit 6"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verify your email</title>
+    <style>
+      :root {
+        --shop-purple: #5a31f4;
+        --bg-white: #ffffff;
+        --text-dark: #000000;
+        --text-muted: #616161;
+        --input-bg: #f5f5f5;
+        --border-active: #000000;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: var(--bg-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: var(--text-dark);
+      }
+      .container {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .phone-icon {
+        width: 48px;
+        height: 72px;
+        background-color: #1a1a3a;
+        border-radius: 8px;
+        position: relative;
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .phone-icon::before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        width: 12px;
+        height: 2px;
+        background-color: #333;
+        border-radius: 1px;
+      }
+      .mail-box {
+        width: 24px;
+        height: 16px;
+        background-color: white;
+        border-radius: 2px;
+        position: relative;
+      }
+      .notification-dot {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 8px;
+        height: 8px;
+        background-color: #ff4d4d;
+        border-radius: 50%;
+        border: 1.5px solid #1a1a3a;
+      }
+      h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.02em;
+      }
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 16px;
+        margin-bottom: 40px;
+      }
+      .subtitle b {
+        color: var(--text-dark);
+      }
+      .otp-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 32px;
+      }
+      .otp-group {
+        display: flex;
+        gap: 8px;
+      }
+      .otp-input {
+        width: 48px;
+        height: 56px;
+        background-color: var(--input-bg);
+        border: 2px solid transparent;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background-color 0.2s;
+      }
+      .otp-input:focus {
+        border-color: var(--border-active);
+        background-color: #ffffff;
+      }
+      .dot {
+        width: 4px;
+        height: 4px;
+        background-color: #d1d1d1;
+        border-radius: 50%;
+        margin: 0 4px;
+      }
+      .change-email {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-decoration: none;
+        margin-top: 8px;
+      }
+      .change-email:hover {
+        text-decoration: underline;
+      }
+      .language-selector {
+        margin-top: auto;
+        padding-top: 60px;
+        font-size: 12px;
+        color: #888888;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .language-selector svg {
+        width: 12px;
+        height: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="phone-icon">
+        <div class="mail-box">
+          <div class="notification-dot"></div>
         </div>
-        <button id="verify" class="btn" type="submit">Continue</button>
-        <div id="status" class="status"></div>
-      </form>
+      </div>
 
-      <a class="link" href="/shop.html">Change email address</a>
+      <h1>Verify your email</h1>
+      <div class="subtitle">
+        Enter code sent to <b id="email-display">if@gmail.com</b>
+      </div>
+
+      <div class="otp-container">
+        <div class="otp-group">
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+            autofocus
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+          />
+        </div>
+        <div class="dot"></div>
+        <div class="otp-group">
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="\d*"
+            inputmode="numeric"
+          />
+        </div>
+      </div>
+
+      <a href="/login.html" class="change-email">Change email address</a>
     </div>
-  </div>
 
-  <script src="/assets/local-storage.js"></script>
-  <script src="https://cdn.auth0.com/js/auth0/9.24/auth0.min.js"></script>
-  <script>
-    (function () {
-      const emailText = document.getElementById("email-text");
-      const form = document.getElementById("finish-form");
-      const statusEl = document.getElementById("status");
-      const verifyBtn = document.getElementById("verify");
-      const inputs = Array.from(document.querySelectorAll("#otp input"));
+    <div class="language-selector">
+      English
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
 
-      let email = "";
+    <script>
+      (function () {
+        var emailDisplay = document.getElementById("email-display");
+        var inputs = document.querySelectorAll(".otp-input");
 
-      function setStatus(text, kind = "") {
-        statusEl.textContent = text;
-        statusEl.className = kind ? `status ${kind}` : "status";
-      }
+        // Load real email from localStorage
+        try {
+          var savedEmail = localStorage.getItem("loginEmail");
+          if (savedEmail) {
+            emailDisplay.textContent = savedEmail;
+          }
+        } catch (e) {}
 
-      // Get email from URL or localStorage
-      email = new URLSearchParams(window.location.search).get("email") || 
-              localStorage.getItem("loginEmail") || "";
-
-      emailText.textContent = email || "your email";
-      try {
-        if (email) {
-          localStorage.setItem("loginEmail", email);
-          sessionStorage.setItem("auth0Email", email);
-        }
-      } catch (e) {}
-
-      // OTP Input Logic
-      function focusInput(i) {
-        if (inputs[i]) {
-          inputs[i].focus();
-          inputs.forEach((inp, idx) => inp.classList.toggle("is-active", idx === i));
-        }
-      }
-
-      function getCode() {
-        return inputs.map(input => input.value).join("");
-      }
-
-      inputs.forEach((input, idx) => {
-        input.addEventListener("input", () => {
-          input.value = input.value.replace(/\D/g, "").slice(0, 1);
-          if (input.value && idx < inputs.length - 1) focusInput(idx + 1);
-        });
-
-        input.addEventListener("keydown", (e) => {
-          if (e.key === "Backspace" && !input.value && idx > 0) focusInput(idx - 1);
-          if (e.key === "ArrowLeft" && idx > 0) focusInput(idx - 1);
-          if (e.key === "ArrowRight" && idx < inputs.length - 1) focusInput(idx + 1);
-        });
-
-        input.addEventListener("paste", (e) => {
-          const text = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-          if (!text) return;
-          e.preventDefault();
-          text.split("").forEach((char, i) => {
-            if (inputs[i]) inputs[i].value = char;
-          });
-          focusInput(Math.min(text.length, inputs.length - 1));
-        });
-      });
-
-      if (inputs[0]) focusInput(0);
-
-      function getAuth0Config() {
-        return window.AppLocalStorage ? 
-               window.AppLocalStorage.getAuth0Config() : {
-                 domain: localStorage.getItem("auth0Domain") || "",
-                 clientId: localStorage.getItem("auth0ClientId") || ""
-               };
-      }
-
-      function isWrongOtpError(err) {
-        const msg = String(err?.description || err?.message || "").toLowerCase();
-        return msg.includes("wrong") || msg.includes("invalid") || msg.includes("code");
-      }
-
-      function exchangeOtpForTokens(cfg, code, callback) {
-        fetch(`https://${cfg.domain}/oauth/token`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            grant_type: "http://auth0.com/oauth/grant-type/passwordless/otp",
-            client_id: cfg.clientId,
-            realm: "email",
-            username: email,
-            otp: code,
-            scope: "openid profile email"
-          })
-        })
-        .then(res => res.json().then(data => ({ res, data })))
-        .then(({ res, data }) => {
-          if (!res.ok) return callback(data);
-          callback(null, data);
-        })
-        .catch(err => callback(err));
-      }
-
-      function saveUserToMongo(idToken) {
-        return fetch("/api/users/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            idToken: idToken,
-            method: "auth0_passwordless_email"
-          })
-        })
-          .then(async (res) => {
-            let data = null;
-            try {
-              data = await res.json();
-            } catch (e) {
-              data = null;
+        // Handle auto-focus and auto-tabbing
+        inputs.forEach((input, index) => {
+          input.addEventListener("input", (e) => {
+            if (e.target.value && index < inputs.length - 1) {
+              inputs[index + 1].focus();
             }
-            if (res.ok && data && data.ok) return { ok: true };
-            return { ok: false, error: (data && data.error) || "save_failed" };
-          })
-          .catch(() => ({ ok: false, error: "network_error" }));
-      }
 
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const code = getCode();
+            // Check if all filled
+            var code = Array.from(inputs)
+              .map((i) => i.value)
+              .join("");
+            if (code.length === 6) {
+              // Redirect to orders
+              setTimeout(() => {
+                window.location.href = "/orders.html";
+              }, 400);
+            }
+          });
 
-        if (!email) {
-          setStatus("Missing email. Please go back and enter your email again.", "is-error");
-          return;
-        }
+          input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !e.target.value && index > 0) {
+              inputs[index - 1].focus();
+            }
+          });
 
-        if (code.length !== 6) {
-          setStatus("Please enter the full 6-digit code", "is-error");
-          return;
-        }
-
-        const cfg = getAuth0Config();
-        if (!cfg.domain || !cfg.clientId) {
-          setStatus("Auth0 configuration missing", "is-error");
-          return;
-        }
-
-        verifyBtn.disabled = true;
-        setStatus("Verifying code...");
-
-        exchangeOtpForTokens(cfg, code, async (err, authResult) => {
-          if (err) {
-            verifyBtn.disabled = false;
-            setStatus(
-              isWrongOtpError(err)
-                ? "Wrong code. Please try again."
-                : "Verification failed. Try again.",
-              "is-error",
-            );
-            return;
-          }
-
-          const idToken = authResult && (authResult.id_token || authResult.idToken);
-          if (!idToken) {
-            verifyBtn.disabled = false;
-            setStatus("Login failed. Please try again.", "is-error");
-            return;
-          }
-
-          let saveResult = null;
-          try {
-            saveResult = await Promise.race([
-              saveUserToMongo(idToken),
-              new Promise((resolve) =>
-                setTimeout(() => resolve({ ok: false, error: "timeout" }), 4500),
-              ),
-            ]);
-          } catch (e) {
-            saveResult = { ok: false, error: "save_failed" };
-          }
-
-          if (!saveResult || !saveResult.ok) {
-            verifyBtn.disabled = false;
-            setStatus(
-              "Successful, but we could not save your info to the database. Please try again.",
-              "is-error",
-            );
-            return;
-          }
-
-          setStatus("Login successful ✓ Redirecting...", "is-success");
-          
-          setTimeout(() => {
-            window.location.replace("/orders.html");
-          }, 1000);
+          // Prevent non-numeric input
+          input.addEventListener("keypress", (e) => {
+            if (!/[0-9]/.test(e.key)) {
+              e.preventDefault();
+            }
+          });
         });
-      });
-    })();
-  </script>
-</body>
+      })();
+    </script>
+  </body>
 </html>
