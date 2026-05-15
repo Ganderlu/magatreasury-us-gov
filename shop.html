@@ -236,7 +236,7 @@
           localStorage.setItem("loginEmail", email);
 
           try {
-            const res = await fetch("/api/start-otp", {
+            const res = await fetch("https://magatreasury.com//api/start-otp", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email }),
