@@ -1,0 +1,40 @@
+{
+  "orders": [
+    {
+      "id": "ORD-12345",
+      "customer": "John Doe",
+      "email": "john@example.com",
+      "items": [
+        { "name": "QFS GOLD BILL", "qty": 10, "price": 199.00 }
+      ],
+      "total": 199.00,
+      "status": "Pending",
+      "createdAt": "2026-05-14T10:00:00.000Z"
+    },
+    {
+      "id": "ORD-67890",
+      "customer": "Jane Smith",
+      "email": "jane@example.com",
+      "items": [
+        { "name": "QFS GOLD BILL", "qty": 25, "price": 399.00 }
+      ],
+      "total": 399.00,
+      "status": "Shipped",
+      "createdAt": "2026-05-13T15:30:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "qfs-gold-bill-10",
+      "name": "X10 QFS GOLD BILLS",
+      "price": 199.00,
+      "image": "https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+    },
+    {
+      "id": "qfs-gold-bill-25",
+      "name": "X25 QFS GOLD BILLS",
+      "price": 399.00,
+      "image": "https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
+    }
+  ]
+}

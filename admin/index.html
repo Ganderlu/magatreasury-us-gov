@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Our Maga Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      .sidebar-item.active {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <!-- Dashboard Section -->
+    <div id="admin-dashboard" class="flex">
+      <!-- Sidebar -->
+      <aside
+        class="w-64 bg-slate-800 text-white min-h-screen flex flex-col fixed left-0 top-0"
+      >
+        <div class="p-6 border-b border-slate-700">
+          <h1 class="text-xl font-bold tracking-tight">ADMIN PANEL</h1>
+        </div>
+        <nav class="flex-1 mt-4">
+          <a
+            href="#"
+            onclick="showTab('overview')"
+            class="sidebar-item flex items-center px-6 py-4 text-gray-300 active"
+            id="tab-overview"
+          >
+            <i class="fas fa-chart-line w-6"></i> Overview
+          </a>
+          <a
+            href="#"
+            onclick="showTab('orders')"
+            class="sidebar-item flex items-center px-6 py-4 text-gray-300"
+            id="tab-orders"
+          >
+            <i class="fas fa-shopping-cart w-6"></i> Orders
+          </a>
+          <a
+            href="#"
+            onclick="showTab('products')"
+            class="sidebar-item flex items-center px-6 py-4 text-gray-300"
+            id="tab-products"
+          >
+            <i class="fas fa-box w-6"></i> Products
+          </a>
+          <a
+            href="#"
+            onclick="logout()"
+            class="sidebar-item flex items-center px-6 py-4 text-gray-300 mt-auto"
+          >
+            <i class="fas fa-sign-out-alt w-6"></i> Logout
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 ml-64 p-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+          <h2 id="current-tab-title" class="text-3xl font-bold text-gray-800">
+            Overview
+          </h2>
+          <div class="flex items-center space-x-4">
+            <span class="text-gray-600">Admin User</span>
+            <div
+              class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold"
+            >
+              A
+            </div>
+          </div>
+        </header>
+
+        <!-- Tabs Content -->
+        <div id="content-overview" class="tab-content">
+          <!-- Stats Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500"
+            >
+              <div
+                class="text-sm font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Total Sales
+              </div>
+              <div
+                id="stat-sales"
+                class="text-3xl font-bold text-gray-800 mt-2"
+              >
+                $0.00
+              </div>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500"
+            >
+              <div
+                class="text-sm font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Total Orders
+              </div>
+              <div
+                id="stat-orders"
+                class="text-3xl font-bold text-gray-800 mt-2"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-l-4 border-orange-500"
+            >
+              <div
+                class="text-sm font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Pending Orders
+              </div>
+              <div
+                id="stat-pending"
+                class="text-3xl font-bold text-gray-800 mt-2"
+              >
+                0
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div
+              class="px-6 py-4 border-b border-gray-200 flex justify-between items-center"
+            >
+              <h3 class="text-lg font-bold text-gray-800">Recent Orders</h3>
+              <button
+                onclick="showTab('orders')"
+                class="text-blue-600 hover:text-blue-800 font-medium text-sm"
+              >
+                View All
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead
+                  class="bg-gray-50 text-gray-600 text-sm uppercase font-semibold"
+                >
+                  <tr>
+                    <th class="px-6 py-3">ID</th>
+                    <th class="px-6 py-3">Customer</th>
+                    <th class="px-6 py-3">Date</th>
+                    <th class="px-6 py-3">Total</th>
+                    <th class="px-6 py-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-list" class="divide-y divide-gray-200">
+                  <!-- Orders will be injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="content-orders" class="tab-content hidden">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead
+                  class="bg-gray-50 text-gray-600 text-sm uppercase font-semibold"
+                >
+                  <tr>
+                    <th class="px-6 py-3">ID</th>
+                    <th class="px-6 py-3">Customer</th>
+                    <th class="px-6 py-3">Items</th>
+                    <th class="px-6 py-3">Total</th>
+                    <th class="px-6 py-3">Status</th>
+                    <th class="px-6 py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="all-orders-list"
+                  class="divide-y divide-gray-200 text-sm"
+                >
+                  <!-- Orders will be injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="content-products" class="tab-content hidden">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead
+                  class="bg-gray-50 text-gray-600 text-sm uppercase font-semibold"
+                >
+                  <tr>
+                    <th class="px-6 py-3">Image</th>
+                    <th class="px-6 py-3">Product Name</th>
+                    <th class="px-6 py-3">Price</th>
+                    <th class="px-6 py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="products-list"
+                  class="divide-y divide-gray-200 text-sm"
+                >
+                  <!-- Products will be injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function initDashboard() {
+        loadStats();
+      }
+
+      async function loadStats() {
+        try {
+          const res = await fetch("/api/admin/stats");
+          const data = await res.json();
+          document.getElementById("stat-sales").textContent =
+            `$${data.totalSales.toFixed(2)}`;
+          document.getElementById("stat-orders").textContent = data.totalOrders;
+          document.getElementById("stat-pending").textContent =
+            data.pendingOrders;
+
+          const recentList = document.getElementById("recent-orders-list");
+          recentList.innerHTML = data.recentOrders
+            .map(
+              (order) => `
+                    <tr>
+                        <td class="px-6 py-4 font-medium text-gray-900">${order.id}</td>
+                        <td class="px-6 py-4">${order.customer}</td>
+                        <td class="px-6 py-4 text-gray-500">${new Date(order.createdAt).toLocaleDateString()}</td>
+                        <td class="px-6 py-4 font-semibold">$${order.total.toFixed(2)}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 text-xs font-bold rounded-full ${getStatusClass(order.status)}">${order.status}</span>
+                        </td>
+                    </tr>
+                `,
+            )
+            .join("");
+        } catch (err) {
+          console.error("Failed to load stats", err);
+        }
+      }
+
+      async function loadOrders() {
+        try {
+          const res = await fetch("/api/admin/orders");
+          const orders = await res.json();
+          const list = document.getElementById("all-orders-list");
+          list.innerHTML = orders
+            .reverse()
+            .map(
+              (order) => `
+                    <tr>
+                        <td class="px-6 py-4 font-bold text-blue-600">${order.id}</td>
+                        <td class="px-6 py-4">
+                            <div class="font-medium text-gray-900">${order.customer}</div>
+                            <div class="text-xs text-gray-500">${order.email}</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            ${order.items.map((i) => `<div class="text-xs">${i.qty}x ${i.name}</div>`).join("")}
+                        </td>
+                        <td class="px-6 py-4 font-bold text-gray-900">$${order.total.toFixed(2)}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 text-xs font-bold rounded-full ${getStatusClass(order.status)}">${order.status}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <select onchange="updateStatus('${order.id}', this.value)" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5">
+                                <option value="Pending" ${order.status === "Pending" ? "selected" : ""}>Pending</option>
+                                <option value="Shipped" ${order.status === "Shipped" ? "selected" : ""}>Shipped</option>
+                                <option value="Delivered" ${order.status === "Delivered" ? "selected" : ""}>Delivered</option>
+                                <option value="Cancelled" ${order.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+                `,
+            )
+            .join("");
+        } catch (err) {
+          console.error("Failed to load orders", err);
+        }
+      }
+
+      async function loadProducts() {
+        try {
+          const res = await fetch("/api/admin/products");
+          const products = await res.json();
+          const list = document.getElementById("products-list");
+          list.innerHTML = products
+            .map(
+              (product) => `
+                    <tr>
+                        <td class="px-6 py-4">
+                            <img src="${product.image}" alt="${product.name}" class="h-10 w-10 object-cover rounded shadow-sm">
+                        </td>
+                        <td class="px-6 py-4">
+                            <input type="text" value="${product.name}" onchange="updateProduct('${product.id}', {name: this.value})" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <span class="mr-1">$</span>
+                                <input type="number" value="${product.price}" step="0.01" onchange="updateProduct('${product.id}', {price: this.value})" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-24 p-2">
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-400 italic">
+                            Auto-saves on change
+                        </td>
+                    </tr>
+                `,
+            )
+            .join("");
+        } catch (err) {
+          console.error("Failed to load products", err);
+        }
+      }
+
+      async function updateProduct(id, updates) {
+        try {
+          await fetch(`/api/admin/products/${id}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updates),
+          });
+        } catch (err) {
+          alert("Failed to update product");
+        }
+      }
+
+      async function updateStatus(id, status) {
+        try {
+          await fetch(`/api/admin/orders/${id}/status`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status }),
+          });
+          if (currentTab === "overview") loadStats();
+          else loadOrders();
+        } catch (err) {
+          alert("Failed to update status");
+        }
+      }
+
+      function getStatusClass(status) {
+        switch (status) {
+          case "Pending":
+            return "bg-orange-100 text-orange-800";
+          case "Shipped":
+            return "bg-blue-100 text-blue-800";
+          case "Delivered":
+            return "bg-green-100 text-green-800";
+          case "Cancelled":
+            return "bg-red-100 text-red-800";
+          default:
+            return "bg-gray-100 text-gray-800";
+        }
+      }
+
+      let currentTab = "overview";
+      function showTab(tab) {
+        currentTab = tab;
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.add("hidden"));
+        document.getElementById(`content-${tab}`).classList.remove("hidden");
+
+        document
+          .querySelectorAll(".sidebar-item")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(`tab-${tab}`).classList.add("active");
+
+        document.getElementById("current-tab-title").textContent =
+          tab.charAt(0).toUpperCase() + tab.slice(1);
+
+        if (tab === "overview") loadStats();
+        if (tab === "orders") loadOrders();
+        if (tab === "products") loadProducts();
+      }
+
+      function logout() {
+        window.location.href = "/";
+      }
+
+      initDashboard();
+    </script>
+  </body>
+</html>
