@@ -403,18 +403,19 @@
       }
       #addressModal .addr-field label {
         position: absolute;
-        top: 6px;
+        top: 5px;
         left: 12px;
         margin: 0;
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 750;
         color: rgba(17, 24, 39, 0.55);
         pointer-events: none;
+        z-index: 1;
       }
       #addressModal .addr-input,
       #addressModal .addr-select {
-        height: 44px;
-        padding: 18px 12px 0;
+        height: 52px;
+        padding: 24px 12px 4px;
       }
       #addressModal .addr-phone-wrap {
         position: relative;
@@ -1594,12 +1595,7 @@
           <div class="addr-phone-row">
             <div class="addr-field">
               <label for="addrPhoneCode">Phone</label>
-              <select id="addrPhoneCode" class="addr-select">
-                <option value="+1">+1</option>
-                <option value="+44">+44</option>
-                <option value="+234">+234</option>
-                <option value="+1-CA">+1 (CA)</option>
-              </select>
+              <select id="addrPhoneCode" class="addr-select"></select>
             </div>
             <div class="addr-field">
               <div class="addr-phone-wrap">
@@ -1617,9 +1613,10 @@
                   aria-label="Phone region"
                 >
                   <option value="US">🇺🇸</option>
-                  <option value="NG">🇳🇬</option>
                   <option value="GB">🇬🇧</option>
                   <option value="CA">🇨🇦</option>
+                  <option value="AU">🇦🇺</option>
+                  <option value="NG">🇳🇬</option>
                 </select>
               </div>
             </div>
@@ -1787,6 +1784,1055 @@
           : null;
         var lastActive = null;
         var profileBaseline = null;
+
+        var COUNTRY_DATA = {
+          "United States": {
+            code: "+1",
+            iso: "US",
+            states: [
+              "Alabama",
+              "Alaska",
+              "Arizona",
+              "Arkansas",
+              "California",
+              "Colorado",
+              "Connecticut",
+              "Delaware",
+              "Florida",
+              "Georgia",
+              "Hawaii",
+              "Idaho",
+              "Illinois",
+              "Indiana",
+              "Iowa",
+              "Kansas",
+              "Kentucky",
+              "Louisiana",
+              "Maine",
+              "Maryland",
+              "Massachusetts",
+              "Michigan",
+              "Minnesota",
+              "Mississippi",
+              "Missouri",
+              "Montana",
+              "Nebraska",
+              "Nevada",
+              "New Hampshire",
+              "New Jersey",
+              "New Mexico",
+              "New York",
+              "North Carolina",
+              "North Dakota",
+              "Ohio",
+              "Oklahoma",
+              "Oregon",
+              "Pennsylvania",
+              "Rhode Island",
+              "South Carolina",
+              "South Dakota",
+              "Tennessee",
+              "Texas",
+              "Utah",
+              "Vermont",
+              "Virginia",
+              "Washington",
+              "West Virginia",
+              "Wisconsin",
+              "Wyoming",
+            ],
+          },
+          Canada: {
+            code: "+1",
+            iso: "CA",
+            states: [
+              "Alberta",
+              "British Columbia",
+              "Manitoba",
+              "New Brunswick",
+              "Newfoundland and Labrador",
+              "Nova Scotia",
+              "Ontario",
+              "Prince Edward Island",
+              "Quebec",
+              "Saskatchewan",
+              "Northwest Territories",
+              "Nunavut",
+              "Yukon",
+            ],
+          },
+          "United Kingdom": {
+            code: "+44",
+            iso: "GB",
+            states: ["England", "Scotland", "Wales", "Northern Ireland"],
+          },
+          Australia: {
+            code: "+61",
+            iso: "AU",
+            states: [
+              "New South Wales",
+              "Queensland",
+              "South Australia",
+              "Tasmania",
+              "Victoria",
+              "Western Australia",
+              "Australian Capital Territory",
+              "Northern Territory",
+            ],
+          },
+          Austria: {
+            code: "+43",
+            iso: "AT",
+            states: [
+              "Vienna",
+              "Lower Austria",
+              "Upper Austria",
+              "Styria",
+              "Tyrol",
+              "Carinthia",
+              "Salzburg",
+              "Vorarlberg",
+              "Burgenland",
+            ],
+          },
+          Belgium: {
+            code: "+32",
+            iso: "BE",
+            states: ["Flanders", "Wallonia", "Brussels-Capital Region"],
+          },
+          Brazil: {
+            code: "+55",
+            iso: "BR",
+            states: [
+              "São Paulo",
+              "Rio de Janeiro",
+              "Minas Gerais",
+              "Bahia",
+              "Paraná",
+              "Rio Grande do Sul",
+              "Pernambuco",
+              "Ceará",
+              "Pará",
+              "Santa Catarina",
+              "Maranhão",
+              "Goiás",
+              "Amazonas",
+              "Espírito Santo",
+              "Paraíba",
+              "Rio Grande do Norte",
+              "Mato Grosso",
+              "Alagoas",
+              "Piauí",
+              "Distrito Federal",
+              "Mato Grosso do Sul",
+              "Sergipe",
+              "Rondônia",
+              "Tocantins",
+              "Acre",
+              "Amapá",
+              "Roraima",
+            ],
+          },
+          Cameroon: {
+            code: "+237",
+            iso: "CM",
+            states: [
+              "Adamawa",
+              "Central",
+              "East",
+              "Far North",
+              "Littoral",
+              "North",
+              "Northwest",
+              "South",
+              "Southwest",
+              "West",
+            ],
+          },
+          China: {
+            code: "+86",
+            iso: "CN",
+            states: [
+              "Anhui",
+              "Beijing",
+              "Chongqing",
+              "Fujian",
+              "Gansu",
+              "Guangdong",
+              "Guangxi",
+              "Guizhou",
+              "Hainan",
+              "Hebei",
+              "Heilongjiang",
+              "Henan",
+              "Hubei",
+              "Hunan",
+              "Jiangsu",
+              "Jiangxi",
+              "Jilin",
+              "Liaoning",
+              "Nei Mongol",
+              "Ningxia",
+              "Qinghai",
+              "Shaanxi",
+              "Shandong",
+              "Shanghai",
+              "Shanxi",
+              "Sichuan",
+              "Tianjin",
+              "Xinjiang",
+              "Xizang",
+              "Yunnan",
+              "Zhejiang",
+            ],
+          },
+          Denmark: {
+            code: "+45",
+            iso: "DK",
+            states: [
+              "Hovedstaden",
+              "Midtjylland",
+              "Nordjylland",
+              "Sjælland",
+              "Syddanmark",
+            ],
+          },
+          Egypt: {
+            code: "+20",
+            iso: "EG",
+            states: [
+              "Cairo",
+              "Alexandria",
+              "Giza",
+              "Dakahlia",
+              "Red Sea",
+              "Beheira",
+              "Faiyum",
+              "Gharbia",
+              "Ismailia",
+              "Monufia",
+              "Minya",
+              "Qalyubia",
+              "New Valley",
+              "Sharqia",
+              "Suez",
+              "Aswan",
+              "Assiut",
+              "Beni Suef",
+              "Damietta",
+              "South Sinai",
+              "Kafr el-Sheikh",
+              "Matrouh",
+              "Luxor",
+              "Qena",
+              "North Sinai",
+              "Sohag",
+            ],
+          },
+          Finland: {
+            code: "+358",
+            iso: "FI",
+            states: [
+              "Lapland",
+              "Northern Ostrobothnia",
+              "Kainuu",
+              "North Karelia",
+              "Northern Savonia",
+              "Southern Savonia",
+              "South Karelia",
+              "Central Finland",
+              "South Ostrobothnia",
+              "Ostrobothnia",
+              "Central Ostrobothnia",
+              "Pirkanmaa",
+              "Satakunta",
+              "Päijänne Tavastia",
+              "Tavastia Proper",
+              "Kymenlaakso",
+              "Uusimaa",
+              "Southwest Finland",
+              "Åland Islands",
+            ],
+          },
+          France: {
+            code: "+33",
+            iso: "FR",
+            states: [
+              "Auvergne-Rhône-Alpes",
+              "Bourgogne-Franche-Comté",
+              "Brittany",
+              "Centre-Val de Loire",
+              "Corsica",
+              "Grand Est",
+              "Hauts-de-France",
+              "Île-de-France",
+              "Normandy",
+              "Nouvelle-Aquitaine",
+              "Occitanie",
+              "Pays de la Loire",
+              "Provence-Alpes-Côte d'Azur",
+            ],
+          },
+          Germany: {
+            code: "+49",
+            iso: "DE",
+            states: [
+              "Baden-Württemberg",
+              "Bavaria",
+              "Berlin",
+              "Brandenburg",
+              "Bremen",
+              "Hamburg",
+              "Hesse",
+              "Lower Saxony",
+              "Mecklenburg-Vorpommern",
+              "North Rhine-Westphalia",
+              "Rhineland-Palatinate",
+              "Saarland",
+              "Saxony",
+              "Saxony-Anhalt",
+              "Schleswig-Holstein",
+              "Thuringia",
+            ],
+          },
+          Ghana: {
+            code: "+233",
+            iso: "GH",
+            states: [
+              "Ahafo",
+              "Ashanti",
+              "Bono",
+              "Bono East",
+              "Central",
+              "Eastern",
+              "Greater Accra",
+              "North East",
+              "Northern",
+              "Oti",
+              "Savannah",
+              "Upper East",
+              "Upper West",
+              "Volta",
+              "Western",
+              "Western North",
+            ],
+          },
+          Greece: {
+            code: "+30",
+            iso: "GR",
+            states: [
+              "Attica",
+              "Central Greece",
+              "Central Macedonia",
+              "Crete",
+              "Eastern Macedonia and Thrace",
+              "Epirus",
+              "Ionian Islands",
+              "North Aegean",
+              "Peloponnese",
+              "South Aegean",
+              "Thessaly",
+              "Western Greece",
+              "Western Macedonia",
+            ],
+          },
+          India: {
+            code: "+91",
+            iso: "IN",
+            states: [
+              "Andhra Pradesh",
+              "Arunachal Pradesh",
+              "Assam",
+              "Bihar",
+              "Chhattisgarh",
+              "Goa",
+              "Gujarat",
+              "Haryana",
+              "Himachal Pradesh",
+              "Jharkhand",
+              "Karnataka",
+              "Kerala",
+              "Madhya Pradesh",
+              "Maharashtra",
+              "Manipur",
+              "Meghalaya",
+              "Mizoram",
+              "Nagaland",
+              "Odisha",
+              "Punjab",
+              "Rajasthan",
+              "Sikkim",
+              "Tamil Nadu",
+              "Telangana",
+              "Tripura",
+              "Uttar Pradesh",
+              "Uttarakhand",
+              "West Bengal",
+            ],
+          },
+          Ireland: {
+            code: "+353",
+            iso: "IE",
+            states: [
+              "Carlow",
+              "Cavan",
+              "Clare",
+              "Cork",
+              "Donegal",
+              "Dublin",
+              "Galway",
+              "Kerry",
+              "Kildare",
+              "Kilkenny",
+              "Laois",
+              "Leitrim",
+              "Limerick",
+              "Longford",
+              "Louth",
+              "Mayo",
+              "Meath",
+              "Monaghan",
+              "Offaly",
+              "Roscommon",
+              "Sligo",
+              "Tipperary",
+              "Waterford",
+              "Westmeath",
+              "Wexford",
+              "Wicklow",
+            ],
+          },
+          Israel: {
+            code: "+972",
+            iso: "IL",
+            states: [
+              "Central",
+              "Haifa",
+              "Jerusalem",
+              "Northern",
+              "Southern",
+              "Tel Aviv",
+              "Judea and Samaria",
+            ],
+          },
+          Italy: {
+            code: "+39",
+            iso: "IT",
+            states: [
+              "Abruzzo",
+              "Aosta Valley",
+              "Apulia",
+              "Basilicata",
+              "Calabria",
+              "Campania",
+              "Emilia-Romagna",
+              "Friuli-Venezia Giulia",
+              "Lazio",
+              "Liguria",
+              "Lombardy",
+              "Marche",
+              "Molise",
+              "Piedmont",
+              "Sardinia",
+              "Sicily",
+              "Tuscany",
+              "Trentino-South Tyrol",
+              "Umbria",
+              "Veneto",
+            ],
+          },
+          Japan: {
+            code: "+81",
+            iso: "JP",
+            states: [
+              "Aichi",
+              "Akita",
+              "Aomori",
+              "Chiba",
+              "Ehime",
+              "Fukui",
+              "Fukuoka",
+              "Fukushima",
+              "Gifu",
+              "Gunma",
+              "Hiroshima",
+              "Hokkaido",
+              "Hyogo",
+              "Ibaraki",
+              "Ishikawa",
+              "Iwate",
+              "Kagawa",
+              "Kagoshima",
+              "Kanagawa",
+              "Kochi",
+              "Kumamoto",
+              "Kyoto",
+              "Mie",
+              "Miyagi",
+              "Miyazaki",
+              "Nagano",
+              "Nagasaki",
+              "Nara",
+              "Niigata",
+              "Oita",
+              "Okayama",
+              "Okinawa",
+              "Osaka",
+              "Saga",
+              "Saitama",
+              "Shiga",
+              "Shimane",
+              "Shizuoka",
+              "Tochigi",
+              "Tokushima",
+              "Tokyo",
+              "Tottori",
+              "Toyama",
+              "Wakayama",
+              "Yamagata",
+              "Yamaguchi",
+              "Yamanashi",
+            ],
+          },
+          Kenya: {
+            code: "+254",
+            iso: "KE",
+            states: [
+              "Baringo",
+              "Bomet",
+              "Bungoma",
+              "Busia",
+              "Elgeyo-Marakwet",
+              "Embu",
+              "Garissa",
+              "Homa Bay",
+              "Isiolo",
+              "Kajiado",
+              "Kakamega",
+              "Kericho",
+              "Kiambu",
+              "Kilifi",
+              "Kirinyaga",
+              "Kisii",
+              "Kisumu",
+              "Kitui",
+              "Kwale",
+              "Laikipia",
+              "Lamu",
+              "Machakos",
+              "Makueni",
+              "Mandera",
+              "Marsabit",
+              "Meru",
+              "Migori",
+              "Mombasa",
+              "Murang'a",
+              "Nairobi",
+              "Nakuru",
+              "Nandi",
+              "Narok",
+              "Nyamira",
+              "Nyandarua",
+              "Nyeri",
+              "Samburu",
+              "Siaya",
+              "Taita-Taveta",
+              "Tana River",
+              "Tharaka-Nithi",
+              "Trans-Nzoia",
+              "Turkana",
+              "Uasin Gishu",
+              "Vihiga",
+              "Wajir",
+              "West Pokot",
+            ],
+          },
+          Malaysia: {
+            code: "+60",
+            iso: "MY",
+            states: [
+              "Johor",
+              "Kedah",
+              "Kelantan",
+              "Malacca",
+              "Negeri Sembilan",
+              "Pahang",
+              "Penang",
+              "Perak",
+              "Perlis",
+              "Sabah",
+              "Sarawak",
+              "Selangor",
+              "Terengganu",
+              "Kuala Lumpur",
+              "Labuan",
+              "Putrajaya",
+            ],
+          },
+          Mexico: {
+            code: "+52",
+            iso: "MX",
+            states: [
+              "Aguascalientes",
+              "Baja California",
+              "Baja California Sur",
+              "Campeche",
+              "Chiapas",
+              "Chihuahua",
+              "Coahuila",
+              "Colima",
+              "Mexico City",
+              "Durango",
+              "Guanajuato",
+              "Guerrero",
+              "Hidalgo",
+              "Jalisco",
+              "Mexico",
+              "Michoacán",
+              "Morelos",
+              "Nayarit",
+              "Nuevo León",
+              "Oaxaca",
+              "Puebla",
+              "Querétaro",
+              "Quintana Roo",
+              "San Luis Potosí",
+              "Sinaloa",
+              "Sonora",
+              "Tabasco",
+              "Tamaulipas",
+              "Tlaxcala",
+              "Veracruz",
+              "Yucatán",
+              "Zacatecas",
+            ],
+          },
+          Netherlands: {
+            code: "+31",
+            iso: "NL",
+            states: [
+              "Drenthe",
+              "Flevoland",
+              "Friesland",
+              "Gelderland",
+              "Groningen",
+              "Limburg",
+              "North Brabant",
+              "North Holland",
+              "Overijssel",
+              "South Holland",
+              "Utrecht",
+              "Zeeland",
+            ],
+          },
+          "New Zealand": {
+            code: "+64",
+            iso: "NZ",
+            states: [
+              "Auckland",
+              "Bay of Plenty",
+              "Canterbury",
+              "Gisborne",
+              "Hawke's Bay",
+              "Manawatū-Whanganui",
+              "Marlborough",
+              "Nelson",
+              "Northland",
+              "Otago",
+              "Southland",
+              "Taranaki",
+              "Tasman",
+              "Waikato",
+              "Wellington",
+              "West Coast",
+            ],
+          },
+          Nigeria: {
+            code: "+234",
+            iso: "NG",
+            states: [
+              "Abia",
+              "Adamawa",
+              "Akwa Ibom",
+              "Anambra",
+              "Bauchi",
+              "Bayelsa",
+              "Benue",
+              "Borno",
+              "Cross River",
+              "Delta",
+              "Ebonyi",
+              "Edo",
+              "Ekiti",
+              "Enugu",
+              "FCT",
+              "Gombe",
+              "Imo",
+              "Jigawa",
+              "Kaduna",
+              "Kano",
+              "Katsina",
+              "Kebbi",
+              "Kogi",
+              "Kwara",
+              "Lagos",
+              "Nasarawa",
+              "Niger",
+              "Ogun",
+              "Ondo",
+              "Osun",
+              "Oyo",
+              "Plateau",
+              "Rivers",
+              "Sokoto",
+              "Taraba",
+              "Yobe",
+              "Zamfara",
+            ],
+          },
+          Norway: {
+            code: "+47",
+            iso: "NO",
+            states: [
+              "Agder",
+              "Innlandet",
+              "Møre og Romsdal",
+              "Nordland",
+              "Oslo",
+              "Rogaland",
+              "Troms og Finnmark",
+              "Trøndelag",
+              "Vestfold og Telemark",
+              "Vestland",
+              "Viken",
+            ],
+          },
+          Poland: {
+            code: "+48",
+            iso: "PL",
+            states: [
+              "Greater Poland",
+              "Kuyavian-Pomeranian",
+              "Lesser Poland",
+              "Łódź",
+              "Lower Silesian",
+              "Lublin",
+              "Lubusz",
+              "Masovian",
+              "Opole",
+              "Podlaskie",
+              "Pomeranian",
+              "Silesian",
+              "Subcarpathian",
+              "Holy Cross",
+              "Warmian-Masurian",
+              "West Pomeranian",
+            ],
+          },
+          Portugal: {
+            code: "+351",
+            iso: "PT",
+            states: [
+              "Aveiro",
+              "Beja",
+              "Braga",
+              "Bragança",
+              "Castelo Branco",
+              "Coimbra",
+              "Évora",
+              "Faro",
+              "Guarda",
+              "Leiria",
+              "Lisbon",
+              "Portalegre",
+              "Porto",
+              "Santarém",
+              "Setúbal",
+              "Viana do Castelo",
+              "Vila Real",
+              "Viseu",
+              "Azores",
+              "Madeira",
+            ],
+          },
+          Qatar: {
+            code: "+974",
+            iso: "QA",
+            states: [
+              "Doha",
+              "Al Rayyan",
+              "Al Khor",
+              "Al Wakrah",
+              "Umm Salal",
+              "Al Daayen",
+              "Al Shahaniya",
+              "Madinat ash Shamal",
+            ],
+          },
+          Romania: {
+            code: "+40",
+            iso: "RO",
+            states: [
+              "Bucharest",
+              "Alba",
+              "Arad",
+              "Argeș",
+              "Bacău",
+              "Bihor",
+              "Bistrița-Năsăud",
+              "Botoșani",
+              "Brașov",
+              "Brăila",
+              "Buzău",
+              "Caraș-Severin",
+              "Călărași",
+              "Cluj",
+              "Constanța",
+              "Covasna",
+              "Dâmbovița",
+              "Dolj",
+              "Galați",
+              "Giurgiu",
+              "Gorj",
+              "Harghita",
+              "Hunedoara",
+              "Ialomița",
+              "Iași",
+              "Ilfov",
+              "Maramureș",
+              "Mehedinți",
+              "Mureș",
+              "Neamț",
+              "Olt",
+              "Prahova",
+              "Satu Mare",
+              "Sălaj",
+              "Sibiu",
+              "Suceava",
+              "Teleorman",
+              "Timiș",
+              "Tulcea",
+              "Vaslui",
+              "Vâlcea",
+              "Vrancea",
+            ],
+          },
+          "Saudi Arabia": {
+            code: "+966",
+            iso: "SA",
+            states: [
+              "Al-Bahah",
+              "Al-Jawf",
+              "Al-Qassim",
+              "'Asir",
+              "Eastern Province",
+              "Ha'il",
+              "Jazan",
+              "Madinah",
+              "Makkah",
+              "Najran",
+              "Northern Borders",
+              "Riyadh",
+              "Tabuk",
+            ],
+          },
+          Singapore: {
+            code: "+65",
+            iso: "SG",
+            states: ["Central", "North", "North-East", "East", "West"],
+          },
+          "South Africa": {
+            code: "+27",
+            iso: "ZA",
+            states: [
+              "Eastern Cape",
+              "Free State",
+              "Gauteng",
+              "KwaZulu-Natal",
+              "Limpopo",
+              "Mpumalanga",
+              "North West",
+              "Northern Cape",
+              "Western Cape",
+            ],
+          },
+          Spain: {
+            code: "+34",
+            iso: "ES",
+            states: [
+              "Andalusia",
+              "Aragon",
+              "Asturias",
+              "Balearic Islands",
+              "Basque Country",
+              "Canary Islands",
+              "Cantabria",
+              "Castile and León",
+              "Castile-La Mancha",
+              "Catalonia",
+              "Extremadura",
+              "Galicia",
+              "La Rioja",
+              "Madrid",
+              "Murcia",
+              "Navarre",
+              "Valencia",
+            ],
+          },
+          Sweden: {
+            code: "+46",
+            iso: "SE",
+            states: [
+              "Blekinge",
+              "Dalarna",
+              "Gotland",
+              "Gävleborg",
+              "Halland",
+              "Jämtland",
+              "Jönköping",
+              "Kalmar",
+              "Kronoberg",
+              "Norrbotten",
+              "Skåne",
+              "Stockholm",
+              "Södermanland",
+              "Uppsala",
+              "Värmland",
+              "Västerbotten",
+              "Västernorrland",
+              "Västmanland",
+              "Västra Götaland",
+              "Örebro",
+              "Östergötland",
+            ],
+          },
+          Switzerland: {
+            code: "+41",
+            iso: "CH",
+            states: [
+              "Aargau",
+              "Appenzell Ausserrhoden",
+              "Appenzell Innerrhoden",
+              "Basel-Landschaft",
+              "Basel-Stadt",
+              "Bern",
+              "Fribourg",
+              "Geneva",
+              "Glarus",
+              "Graubünden",
+              "Jura",
+              "Lucerne",
+              "Neuchâtel",
+              "Nidwalden",
+              "Obwalden",
+              "Schaffhausen",
+              "Schwyz",
+              "Solothurn",
+              "St. Gallen",
+              "Thurgau",
+              "Ticino",
+              "Uri",
+              "Valais",
+              "Vaud",
+              "Zug",
+              "Zürich",
+            ],
+          },
+          "United Arab Emirates": {
+            code: "+971",
+            iso: "AE",
+            states: [
+              "Abu Dhabi",
+              "Ajman",
+              "Dubai",
+              "Fujairah",
+              "Ras Al Khaimah",
+              "Sharjah",
+              "Umm Al Quwain",
+            ],
+          },
+        };
+
+        function updateStates(country) {
+          if (!addrState) return;
+          var data = COUNTRY_DATA[country] || { states: [] };
+          var currentVal = addrState.value;
+          addrState.innerHTML = "";
+          data.states.forEach(function (state) {
+            var opt = document.createElement("option");
+            opt.value = state;
+            opt.textContent = state;
+            addrState.appendChild(opt);
+          });
+          if (data.states.indexOf(currentVal) !== -1) {
+            addrState.value = currentVal;
+          }
+        }
+
+        function updatePhoneCode(country) {
+          if (!addrPhoneCode) return;
+          var data = COUNTRY_DATA[country];
+          if (data) {
+            if (data.code) addrPhoneCode.value = data.code;
+            if (data.iso && addrPhoneRegion) {
+              // Ensure ISO exists in regions
+              var exists = false;
+              for (var i = 0; i < addrPhoneRegion.options.length; i++) {
+                if (addrPhoneRegion.options[i].value === data.iso) {
+                  exists = true;
+                  break;
+                }
+              }
+              if (!exists) {
+                var opt = document.createElement("option");
+                opt.value = data.iso;
+                opt.textContent = getFlagEmoji(data.iso);
+                addrPhoneRegion.appendChild(opt);
+              }
+              addrPhoneRegion.value = data.iso;
+            }
+          }
+        }
+
+        function getFlagEmoji(iso) {
+          if (!iso) return "🏳️";
+          return iso
+            .toUpperCase()
+            .replace(/./g, (char) =>
+              String.fromCodePoint(127397 + char.charCodeAt()),
+            );
+        }
+
+        function initPhoneCodes() {
+          if (!addrPhoneCode) return;
+          var codes = [];
+          for (var c in COUNTRY_DATA) {
+            var code = COUNTRY_DATA[c].code;
+            if (codes.indexOf(code) === -1) {
+              codes.push(code);
+            }
+          }
+          codes.sort();
+          addrPhoneCode.innerHTML = "";
+          codes.forEach(function (code) {
+            var opt = document.createElement("option");
+            opt.value = code;
+            opt.textContent = code;
+            addrPhoneCode.appendChild(opt);
+          });
+        }
+
+        if (addrCountry) {
+          addrCountry.addEventListener("change", function () {
+            var country = addrCountry.value;
+            updateStates(country);
+            updatePhoneCode(country);
+          });
+          // Initialize
+          initPhoneCodes();
+          updateStates(addrCountry.value);
+          updatePhoneCode(addrCountry.value);
+        }
 
         function goLogin() {
           window.location.href = "/login.html";
@@ -1984,18 +3030,22 @@
 
         function fillForm(addr) {
           addr = addr || {};
-          if (addrCountry) addrCountry.value = addr.country || "United States";
+          var country = addr.country || "United States";
+          if (addrCountry) addrCountry.value = country;
+
+          // Update dynamic fields based on country
+          updateStates(country);
+          updatePhoneCode(country);
+
           if (addrFirstName) addrFirstName.value = addr.firstName || "";
           if (addrLastName) addrLastName.value = addr.lastName || "";
           if (addrAddress1) addrAddress1.value = addr.address1 || "";
           if (addrAddress2) addrAddress2.value = addr.address2 || "";
           if (addrCity) addrCity.value = addr.city || "";
-          if (addrState)
-            addrState.value =
-              addr.state ||
-              (addrState.options[0] ? addrState.options[0].value : "");
+          if (addrState && addr.state) addrState.value = addr.state;
           if (addrZip) addrZip.value = addr.zip || "";
-          if (addrPhoneCode) addrPhoneCode.value = addr.phoneCode || "+1";
+          if (addrPhoneCode && addr.phoneCode)
+            addrPhoneCode.value = addr.phoneCode;
           if (addrPhone) addrPhone.value = addr.phone || "";
           if (addrPhoneRegion) addrPhoneRegion.value = addr.phoneRegion || "US";
           if (addrDefault) addrDefault.checked = !!addr.isDefault;
