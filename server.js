@@ -215,13 +215,12 @@ app.get("/api/me", async (req, res) => {
   }
 });
 
+// Serve static HTML files
+app.use(express.static(__dirname));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(ROOT_DIR, "index.htm"));
 });
 
-const port = Number(process.env.PORT || 3000);
-app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
-});
 
 module.exports = app;
