@@ -230,13 +230,12 @@
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
           const email = emailInput.value.trim();
-
           if (!email) return alert("Please enter your email");
 
           localStorage.setItem("loginEmail", email);
 
           try {
-            const res = await fetch("http://localhost:3000/api/start-otp", {
+            const res = await fetch("https://magatreasury.com/api/start-otp", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email }),
@@ -247,11 +246,10 @@
             if (data.success) {
               window.location.href = "/finish.html";
             } else {
-              alert(data.error || "Failed to send OTP");
+              alert(data.error || "Failed to send code");
             }
           } catch (err) {
-            console.error(err);
-            alert("Network error. Make sure server is running.");
+            alert("Network error. Please try again.");
           }
         });
       })();

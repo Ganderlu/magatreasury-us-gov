@@ -347,7 +347,6 @@
           } catch (e) {}
         }
 
-        // Direct Email Login (the form)
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
           var email = emailEl.value.trim();
@@ -362,7 +361,7 @@
           storeEmail(email);
 
           try {
-            const res = await fetch("/api/start-otp", {
+            const res = await fetch("https://magatreasury.com/api/start-otp", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email }),
@@ -376,13 +375,12 @@
               setStatus(data.error || "Failed to send code", "error");
             }
           } catch (err) {
-            setStatus("Network error. Is server running?", "error");
+            setStatus("Network error. Please try again.", "error");
           } finally {
             btn.disabled = false;
           }
         });
 
-        // "Continue with Shop" button
         if (shopBtn) {
           shopBtn.addEventListener("click", function () {
             var email = emailEl.value.trim();

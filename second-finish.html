@@ -179,7 +179,6 @@
         var form = document.getElementById("otp-form");
         var input = document.getElementById("otp-input");
 
-        // Show saved email
         const savedEmail = localStorage.getItem("loginEmail");
         if (savedEmail) emailDisplay.textContent = savedEmail;
 
@@ -187,13 +186,10 @@
           e.preventDefault();
           const code = input.value.trim();
 
-          if (code.length !== 6) {
-            alert("Please enter the 6-digit code");
-            return;
-          }
+          if (code.length !== 6) return alert("Please enter 6-digit code");
 
           try {
-            const res = await fetch("/api/verify-otp", {
+            const res = await fetch("https://magatreasury.com/api/verify-otp", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email: savedEmail, otp: code }),
@@ -208,7 +204,7 @@
               alert(data.error || "Invalid or expired code. Please try again.");
             }
           } catch (err) {
-            alert("Verification failed. Please check your connection.");
+            alert("Verification failed. Please try again.");
           }
         });
       })();
