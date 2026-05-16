@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign in</title>
+    <script>
+      // Redirect if already logged in
+      if (localStorage.getItem("loginEmail") && localStorage.getItem("authToken")) {
+        window.location.href = "/orders.html";
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;

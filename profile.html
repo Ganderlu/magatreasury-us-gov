@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profile</title>
+
+    <script>
+      // Protect page
+      if (!localStorage.getItem("loginEmail")) {
+        window.location.href = "/login.html";
+      }
+    </script>
+
     <style>
       :root {
         color-scheme: light;
@@ -3127,14 +3135,14 @@
         if (add) {
           add.addEventListener("click", function (e) {
             e.preventDefault();
-            fillForm(readAddress() || {});
+            fillForm({}); // Clear the form for a new address
             openAddressModal();
           });
         }
 
         if (editAddressBtn) {
           editAddressBtn.addEventListener("click", function () {
-            fillForm(readAddress() || {});
+            fillForm(readAddress() || {}); // Pre-fill with existing address
             openAddressModal();
           });
         }
@@ -3161,12 +3169,19 @@
         if (addressForm) {
           addressForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            if (addrSave) addrSave.disabled = true;
+            if (addrSave) {
+              addrSave.disabled = true;
+              addrSave.textContent = "Saving...";
+            }
             var addr = collectForm();
             writeAddress(addr);
+
             renderAddress();
             closeAddressModal();
-            if (addrSave) addrSave.disabled = false;
+            if (addrSave) {
+              addrSave.disabled = false;
+              addrSave.textContent = "Save";
+            }
           });
         }
 

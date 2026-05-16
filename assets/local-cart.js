@@ -1068,6 +1068,11 @@
     }
 
     var contactField = field("", "Email", "email");
+    // Auto-fill email if logged in
+    var loggedInEmail = localStorage.getItem("loginEmail");
+    if (loggedInEmail) {
+      contactField.querySelector("input").value = loggedInEmail;
+    }
     var trackingWrap = document.createElement("label");
     trackingWrap.className = "local-checkout__checkbox-wrap";
     trackingWrap.innerHTML =
@@ -1139,6 +1144,70 @@
     savedAddr.href = "#";
     savedAddr.className = "local-checkout__saved-addr";
     savedAddr.textContent = "Use a saved address";
+
+    savedAddr.addEventListener("click", function (e) {
+      e.preventDefault();
+      try {
+        var raw = localStorage.getItem("profileAddressV1");
+        if (!raw) {
+          alert("No saved address found in your profile.");
+          return;
+        }
+        var addr = JSON.parse(raw);
+        if (addr) {
+          var countrySel = countryWrap.querySelector("select");
+          if (countrySel) countrySel.value = addr.country || "";
+
+          var firstInp = nameRow.children[0].querySelector("input");
+          if (firstInp) firstInp.value = addr.firstName || "";
+
+          var lastInp = nameRow.children[1].querySelector("input");
+          if (lastInp) lastInp.value = addr.lastName || "";
+
+          var addrInp = addrField.querySelector("input");
+          if (addrInp) addrInp.value = addr.address1 || "";
+
+          var aptInp = aptField.querySelector("input");
+          if (aptInp) aptInp.value = addr.address2 || "";
+
+          var cityInp = cityRow.children[0].querySelector("input");
+          if (cityInp) cityInp.value = addr.city || "";
+
+          var stateSel = stateWrap.querySelector("select");
+          if (stateSel) {
+            var found = false;
+            for (var i = 0; i < stateSel.options.length; i++) {
+              if (
+                stateSel.options[i].value === addr.state ||
+                stateSel.options[i].textContent === addr.state
+              ) {
+                stateSel.selectedIndex = i;
+                found = true;
+                break;
+              }
+            }
+            if (!found && addr.state) {
+              var opt = document.createElement("option");
+              opt.value = addr.state;
+              opt.textContent = addr.state;
+              stateSel.appendChild(opt);
+              stateSel.value = addr.state;
+            }
+          }
+
+          var zipInp = cityRow.children[2].querySelector("input");
+          if (zipInp) zipInp.value = addr.zip || "";
+
+          var phoneInp = phoneField.querySelector("input");
+          if (phoneInp) {
+            var p = (addr.phoneCode || "") + (addr.phone || "");
+            phoneInp.value = p || addr.phone || "";
+          }
+        }
+      } catch (err) {
+        console.error("Error loading saved address:", err);
+      }
+    });
 
     delivery.appendChild(countryWrap);
     delivery.appendChild(nameRow);
