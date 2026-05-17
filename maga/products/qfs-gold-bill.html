@@ -5000,6 +5000,20 @@
                     }
                   }
                 </style>
+
+                <div id="bundle"></div>
+                <kaching-bundle
+                  product-id="10111677563156"
+                  manual-deal-block-id=""
+                  data-skip-node-update=""
+                  data-skip-subtree-update=""
+                ></kaching-bundle>
+
+                <div class="kb-buy-wrap">
+                  <button type="button" class="kb-buy-btn" id="kb-buy-now">
+                    BUY NOW
+                  </button>
+                </div>
                 <script>
                   (function () {
                     const root = document.querySelector(
@@ -5009,27 +5023,21 @@
 
                     /* Fixed totals by bundle count */
                     const FIXED_WAS = {
-                      1: 990.0,
-                      3: 2970.0,
-                      5: 4950.0,
-                      10: 9900.0,
-                      15: 14850.0,
-                      25: 24750.0,
-
-                      /* NEW: WAS for 40 bundle */
-                      40: 99999.0,
+                      10: 19990.0,
+                      25: 49975.0,
+                      60: 119940.0,
+                      90: 239880.0,
+                      150: 359820.0,
+                      400: 1079460.0,
                     };
 
                     const FIXED_NOW = {
-                      1: 199.0,
-                      3: 399.0,
-                      5: 599.0,
-                      10: 799.0,
-                      15: 999.0,
-                      25: 1399.0,
-
-                      /* NEW LAST OFFER */
-                      40: 1899.0,
+                      10: 199.0,
+                      25: 399.0,
+                      60: 799.0,
+                      90: 1399.0,
+                      150: 1899.0,
+                      400: 3499.0,
                     };
 
                     const $now = root.querySelector("[data-now]");
@@ -5097,12 +5105,12 @@
                       if (!row) return null;
                       const txt = (row.textContent || "").toUpperCase();
 
-                      // Prefer "40X / 25X / 10X" labels
-                      let m = txt.match(/\b(40|25|15|10|5|3|1)\s*X\b/);
+                      // Prefer "400X / 150X / 90X / 60X / 25X / 10X" labels
+                      let m = txt.match(/\b(400|150|90|60|25|10)\s*X\b/);
                       if (m) return m[1];
 
-                      // Fallback: plain number in label like "40 + 10 FREE"
-                      m = txt.match(/\b(40|25|15|10|5|3|1)\b/);
+                      // Fallback: plain number in label
+                      m = txt.match(/\b(400|150|90|60|25|10)\b/);
                       return m ? m[1] : null;
                     }
 
@@ -5451,25 +5459,10 @@
                           "title": "90X QFS GOLD BILLS",
                           "fieldId": "6c41cfad-5601-4531-b0f8-7dd585b4370d",
                           "upsells": [],
-                          "quantity": 120,
+                          "quantity": 90,
                           "subtitle": "",
                           "badgeText": "★ Most Popular ★",
-                          "freeGifts": [
-                            {
-                              "id": "PL2d",
-                              "text": "+ FREE 30X QFS GOLD BILLS",
-                              "quantity": 30,
-                              "imageSize": 30,
-                              "showPrice": true,
-                              "productGID": "gid:\/\/shopify\/Product\/9978055065876",
-                              "variantGID": "gid:\/\/shopify\/ProductVariant\/51315434815764",
-                              "variantGIDs": [
-                                "gid:\/\/shopify\/ProductVariant\/51315434815764"
-                              ],
-                              "mediaImageGID": "gid:\/\/shopify\/MediaImage\/44834362097940",
-                              "applyOnlyForSubscriptions": false
-                            }
-                          ],
+                          "freeGifts": [],
                           "badgeStyle": "simple",
                           "highlights": null,
                           "dealBarType": "quantity-break",
@@ -5489,25 +5482,10 @@
                           "title": "150X QFS GOLD BILLS",
                           "fieldId": "b41af257-4635-4b5b-aee5-0fa66fb6ab2b",
                           "upsells": [],
-                          "quantity": 180,
+                          "quantity": 150,
                           "subtitle": "",
                           "badgeText": "★ BIGGEST VALUE ★",
-                          "freeGifts": [
-                            {
-                              "id": "sWO_",
-                              "text": "+ FREE 30X QFS GOLD BILLS",
-                              "quantity": 30,
-                              "imageSize": 30,
-                              "showPrice": true,
-                              "productGID": "gid:\/\/shopify\/Product\/9978055065876",
-                              "variantGID": "gid:\/\/shopify\/ProductVariant\/51315434815764",
-                              "variantGIDs": [
-                                "gid:\/\/shopify\/ProductVariant\/51315434815764"
-                              ],
-                              "mediaImageGID": "gid:\/\/shopify\/MediaImage\/44834367537428",
-                              "applyOnlyForSubscriptions": false
-                            }
-                          ],
+                          "freeGifts": [],
                           "badgeStyle": "simple",
                           "highlights": null,
                           "dealBarType": "quantity-break",
@@ -5527,25 +5505,10 @@
                           "title": "400X QFS GOLD BILLS",
                           "fieldId": "b41af257-4635-4b5b-aee5-0fa66fb6ab2b",
                           "upsells": [],
-                          "quantity": 540,
+                          "quantity": 400,
                           "subtitle": "",
                           "badgeText": "🚨 SPECIAL OFFER 🚨",
-                          "freeGifts": [
-                            {
-                              "id": "c00c",
-                              "text": "+ FREE 140X QFS GOLD BILLS",
-                              "quantity": 30,
-                              "imageSize": 30,
-                              "showPrice": true,
-                              "productGID": "gid:\/\/shopify\/Product\/9978055065876",
-                              "variantGID": "gid:\/\/shopify\/ProductVariant\/51315434815764",
-                              "variantGIDs": [
-                                "gid:\/\/shopify\/ProductVariant\/51315434815764"
-                              ],
-                              "mediaImageGID": "gid:\/\/shopify\/MediaImage\/44834367537428",
-                              "applyOnlyForSubscriptions": false
-                            }
-                          ],
+                          "freeGifts": [],
                           "badgeStyle": "simple",
                           "highlights": null,
                           "dealBarType": "quantity-break",
@@ -5678,7 +5641,7 @@
                           "green": 204
                         },
                         "freeGiftSelectedBackground": {
-                          "red": 0,
+                          "red": 92,
                           "blue": 0,
                           "alpha": 1,
                           "green": 0
@@ -5696,11 +5659,11 @@
                         "upsell": { "size": "13", "style": "bold" },
                         "freeGift": { "size": "13", "style": "bold" },
                         "subtitle": { "size": "13", "style": "regular" },
-                        "unitLabel": { "size": "14", "style": "regular" },
+                        "customStyles": "div[data-deal-bar-id=\"6azi\"]{margin-top:50px !important;}div[data-deal-bar-id=\"6azi\"] .kaching-bundles__bar-container{background-color:#8B0000 !important;border:2px solid #000000 !important;border-radius:12px !important;overflow:visible !important;box-shadow:0px 8px 20px rgba(0,0,0,0.3) !important;position:relative !important;transition:all 0.2s ease-in-out !important;}div[data-deal-bar-id=\"6azi\"] input[type=\"radio\"]:checked~label.kaching-bundles__bar-container{background-color:#B30000 !important;border:2px solid #FFD700 !important;box-shadow:0px 0px 25px rgba(255,215,0,0.6) !important;transform:scale(1.02) !important;}div[data-deal-bar-id=\"6azi\"] [class*=\"most-popular\"]{top:-22px !important;z-index:99 !important;transform:scale(1.15) !important;transform-origin:top right !important;}div[data-deal-bar-id=\"6azi\"] *{color:#ffffff !important;}div[data-deal-bar-id=\"6azi\"] [class*=\"addition\"],div[data-deal-bar-id=\"6azi\"] .kaching-bundles__bar-container\u003ediv:last-child{background-color:#5C0000 !important;background-image:none !important;border-top:1px dashed rgba(255,255,255,0.3) !important;border-bottom-left-radius:10px !important;border-bottom-right-radius:10px !important;}",
                         "blockTitle": { "size": "14", "style": "bold" }
                       },
                       "customStylesEnabled": true,
-                      "customStyles": "div[data-deal-bar-id=\"6azi\"]{margin-top:50px !important;}div[data-deal-bar-id=\"6azi\"] .kaching-bundles__bar-container{background-color:#8B0000 !important;border:2px solid #000000 !important;border-radius:12px !important;overflow:visible !important;box-shadow:0px 8px 20px rgba(0,0,0,0.3) !important;position:relative !important;transition:all 0.2s ease-in-out !important;}div[data-deal-bar-id=\"6azi\"] input[type=\"radio\"]:checked~label.kaching-bundles__bar-container{background-color:#B30000 !important;border:2px solid #FFD700 !important;box-shadow:0px 0px 25px rgba(255,215,0,0.6) !important;transform:scale(1.02) !important;}div[data-deal-bar-id=\"6azi\"] [class*=\"most-popular\"]{top:-22px !important;z-index:99 !important;transform:scale(1.15) !important;transform-origin:top right !important;}div[data-deal-bar-id=\"6azi\"] *{color:#ffffff !important;}div[data-deal-bar-id=\"6azi\"] [class*=\"addition\"],div[data-deal-bar-id=\"6azi\"] .kaching-bundles__bar-container\u003ediv:last-child{background-color:#5C0000 !important;background-image:none !important;border-top:1px dashed rgba(255,255,255,0.3) !important;border-bottom-left-radius:10px !important;border-bottom-right-radius:10px !important;}",
+                      "customStyles": "div[data-deal-bar-id=\"6azi\"] .kaching-bundles__bar-container{background-color:#8B0000 !important;border:2px solid #000000 !important;border-radius:23px !important;}div[data-deal-bar-id=\"6azi\"] *{color:#ffffff !important;}div[data-deal-bar-id=\"6azi\"] [class*=\"badge\"]{background-color:#000000 !important;color:#ffffff !important;border:1px solid #ffffff !important;padding: 4px 12px !important;border-radius: 5px !important;}div[data-deal-bar-id=\"946425c6-6d19-4c50-b285-afbbb1826e50\"] [class*=\"badge\"], div[data-deal-bar-id=\"98ea01b2-644b-4471-8ebb-baa87ceacdc1\"] [class*=\"badge\"] {background-color:#000000 !important;color:#ffffff !important;padding: 4px 12px !important;border-radius: 5px !important;}",
                       "swatchOptions": [],
                       "swatchSize": 18,
                       "swatchShape": "circle",
@@ -5958,19 +5921,7 @@
 
                   <!-- END app snippet -->
 
-                  <kaching-bundle
-                    product-id="10111677563156"
-                    manual-deal-block-id=""
-                    data-skip-node-update=""
-                    data-skip-subtree-update=""
-                  ></kaching-bundle>
-
                   <!-- Kaching Bundles App Block End -->
-                </div>
-                <div class="kb-buy-wrap">
-                  <button type="button" class="kb-buy-btn" id="kb-buy-now">
-                    BUY NOW
-                  </button>
                 </div>
 
                 <style>
