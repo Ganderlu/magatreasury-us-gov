@@ -179,23 +179,27 @@
           const code = input.value.trim();
 
           if (code.length !== 6) {
-            alert("Please enter the full 6-digit code");
+            alert("Please enter the 6-digit code");
             return;
           }
 
-          // Fake successful login (just like finish.html)
-          localStorage.setItem("authToken", "fake-token-" + Date.now());
-          
-          // Redirect to orders.html
-          setTimeout(() => {
-            window.location.href = "/orders.html";
-          }, 400);
-        });
+          try {
+            const res = await fetch("/api/verify-otp", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: savedEmail, otp: code }),
+            });
 
-        // Optional: Auto-submit when user types 6 digits
-        input.addEventListener("input", function () {
-          if (this.value.length === 6) {
-            form.dispatchEvent(new Event("submit"));
+            const data = await res.json();
+
+            if (data.success) {
+              localStorage.setItem("authToken", data.token);
+              window.location.href = "/orders.html";
+            } else {
+              alert(data.error || "Invalid or expired code. Please try again.");
+            }
+          } catch (err) {
+            alert("Verification failed. Please check your connection.");
           }
         });
       })();
