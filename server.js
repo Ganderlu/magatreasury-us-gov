@@ -10,23 +10,14 @@ const app = express();
 
 // ====================== Firebase Initialization ======================
 /**
- * Support initialization via environment variable (for Render) or local JSON file.
+ * FIX: Using service account JSON file for reliable initialization.
  */
+const serviceAccountPath = path.join(__dirname, 'firebase-service-account.json');
+
 if (admin.apps.length === 0) {
   try {
-    let serviceAccount;
-    
-    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-      // Initialize from environment variable (Render)
-      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-      console.log('Using project ID from environment variable:', serviceAccount.project_id);
-    } else {
-      // Initialize from local file (Local Dev)
-      const serviceAccountPath = path.join(__dirname, 'firebase-service-account.json');
-      serviceAccount = require(serviceAccountPath);
-      console.log('Using project ID from service account file:', serviceAccount.project_id);
-    }
-
+    const serviceAccount = require(serviceAccountPath);
+    console.log('Using project ID from service account:', serviceAccount.project_id);
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       projectId: serviceAccount.project_id,
@@ -35,7 +26,6 @@ if (admin.apps.length === 0) {
     console.log('Firebase Admin initialized successfully for project:', serviceAccount.project_id);
   } catch (error) {
     console.error('Firebase initialization error:', error.message);
-    // Final fallback
     try {
       admin.initializeApp({
         credential: admin.credential.applicationDefault(),
@@ -52,10 +42,6 @@ const db = getFirestore(admin.app(), 'default');
 
 // Ensure Firestore uses the correct settings
 try {
-  db.settings({ ignoreUndefinedProperties: true });
-} catch (e) {
-  console.warn('Could not set Firestore settings:', e.message);
-}
 
 // Diagnostic test on startup
 (async () => {

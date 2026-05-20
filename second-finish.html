@@ -44,9 +44,7 @@
         max-width: 440px;
         background: var(--card);
         border-radius: var(--radius);
-        box-shadow:
-          0 1px 3px rgba(0, 0, 0, 0.1),
-          0 1px 2px rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow);
         padding: 32px 32px 28px;
         margin-bottom: 40px;
       }
@@ -81,14 +79,12 @@
         border-radius: 8px;
         border: 1px solid #005bd3;
         padding: 0 12px;
-        font-size: 14px;
+        font-size: 16px;
         outline: none;
         background: #ffffff;
         color: var(--text);
-        box-shadow: 0 0 0 1px #005bd3;
-      }
-      .input::placeholder {
-        color: #9ca3af;
+        text-align: center;
+        letter-spacing: 4px;
       }
       .btn {
         width: 100%;
@@ -105,9 +101,6 @@
       .btn:hover {
         background: #004bb1;
       }
-      .btn:active {
-        background: #00429d;
-      }
       .alt-link {
         display: block;
         margin-top: 16px;
@@ -115,16 +108,10 @@
         color: #005bd3;
         text-decoration: none;
       }
-      .alt-link:hover {
-        text-decoration: underline;
-      }
       .footer-link {
         font-size: 13px;
         color: #005bd3;
         text-decoration: none;
-      }
-      .footer-link:hover {
-        text-decoration: underline;
       }
       @media (max-width: 480px) {
         .card {
@@ -145,7 +132,7 @@
 
         <h1>Enter code</h1>
         <div class="sub">
-          Sent to <span id="email-display">ibirdteam@yahoo.com</span>
+          Sent to <span id="email-display">your@email.com</span>
         </div>
 
         <form id="otp-form">
@@ -181,9 +168,13 @@
 
         // Show saved email
         const savedEmail = localStorage.getItem("loginEmail");
-        if (savedEmail) emailDisplay.textContent = savedEmail;
+        if (savedEmail) {
+          emailDisplay.textContent = savedEmail;
+        } else {
+          window.location.href = "/login.html";
+        }
 
-        form.addEventListener("submit", async function (e) {
+        form.addEventListener("submit", function (e) {
           e.preventDefault();
           const code = input.value.trim();
 
