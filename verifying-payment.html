@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment Verification</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: #000;
+        color: #f2f2f2;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+      .bg {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            60% 60% at 50% 30%,
+            rgba(255, 255, 255, 0.12),
+            rgba(0, 0, 0, 0) 60%
+          ),
+          rgba(0, 0, 0, 1);
+      }
+      .wrap {
+        position: relative;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 26px;
+      }
+      .card {
+        width: 380px;
+        max-width: 100%;
+        border-radius: 16px;
+        background: linear-gradient(
+          180deg,
+          #3a3a3a 0%,
+          #242424 55%,
+          #1e1e1e 100%
+        );
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        padding: 40px 24px;
+        text-align: center;
+      }
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left-color: #41d17d;
+        border-radius: 50%;
+        display: inline-block;
+        animation: spin 1s linear infinite;
+        margin-bottom: 24px;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 16px;
+        color: #fff;
+      }
+      p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.75);
+        margin: 0 0 24px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #41d17d;
+        color: #000;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 14px;
+        transition: opacity 0.2s;
+      }
+      .btn:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="wrap">
+      <div class="card">
+        <div class="loader"></div>
+        <h1>Payment Verification</h1>
+        <p>
+          Your payment order is being verified. This process usually takes some minutes. 
+          Please stay on this page or check back later.
+        </p>
+        <a href="/orders.html" class="btn">Go to Orders</a>
+      </div>
+    </div>
+  </body>
+</html>

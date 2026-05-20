@@ -1,9 +1,5 @@
-.env.local
-.env 
-node_modules/
-.next/
-dist/
-build/
-*.log
-.DS_Store
+node_modules
+.env
 firebase-service-account.json
+.DS_Store
+*.log

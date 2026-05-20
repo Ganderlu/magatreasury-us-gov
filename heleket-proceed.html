@@ -294,6 +294,28 @@
         font-weight: 900;
         font-size: 18px;
       }
+      .continue-btn {
+        width: 100%;
+        height: 48px;
+        border-radius: 14px;
+        border: none;
+        background: #e11d2e;
+        color: #fff;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 24px;
+        transition: opacity 0.2s;
+        box-shadow: 0 10px 25px rgba(225, 29, 46, 0.2);
+      }
+      .continue-btn:hover {
+        opacity: 0.9;
+      }
+      .continue-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
       .hourglass {
         width: 18px;
         height: 18px;
@@ -448,10 +470,100 @@
             <span id="hk-timer">00:49:45</span>
           </div>
         </div>
+
+        <button class="continue-btn" id="continue-payment-btn" type="button">I have made the payment</button>
       </div>
 
       <div class="powered">Powered by <strong>Heleket</strong></div>
     </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+      import { initializeFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDWGrKnD4wJTLL0EcOvQK_M_FEV9FqeP8o",
+        authDomain: "magatreasure-4e9cf.firebaseapp.com",
+        projectId: "magatreasure-4e9cf",
+        storageBucket: "magatreasure-4e9cf.firebasestorage.app",
+        messagingSenderId: "996309317077",
+        appId: "1:996309317077:web:b253bceda52d501333795c",
+        measurementId: "G-KTMZ6LPBGV"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      
+      // Pre-authenticate on page load to save time later
+      signInAnonymously(auth).catch(err => console.error("Pre-auth failed:", err));
+      
+      // Reliable Firestore initialization
+      const db = initializeFirestore(app, {
+        experimentalForceLongPolling: true,
+        useFetchStreams: false
+      });
+
+      document.getElementById('continue-payment-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('continue-payment-btn');
+        if (btn.disabled) return;
+        
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const email = localStorage.getItem("loginEmail") || "Guest";
+          
+          // 1. Get pending order from localStorage
+          const pendingOrderRaw = localStorage.getItem("pendingOrder");
+          let pendingOrder = null;
+          if (pendingOrderRaw) {
+            try {
+              pendingOrder = JSON.parse(pendingOrderRaw);
+            } catch (e) {
+              console.error("Malformed pending order:", e);
+            }
+          }
+
+          // 2. Save the payment verification
+          const verificationData = {
+              provider: "heleket",
+              email: email,
+              usdAmount: params.get("amount") || "0",
+              usdCurrency: (params.get("currency") || "USD").toUpperCase(),
+              coin: (params.get("coin") || "BTC").toUpperCase(),
+              network: (params.get("network") || "").toUpperCase(),
+              coinAmount: document.getElementById("hk-coin-amount").textContent,
+              recipientAddress: document.getElementById("hk-address").textContent,
+              status: "pending_verification"
+            };
+
+          // 3. Save both via Server API
+          console.log("Debug: Saving via Server API...");
+          
+          if (pendingOrder) {
+            await fetch('/api/orders', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(pendingOrder)
+            });
+            localStorage.removeItem("pendingOrder");
+          }
+
+          await fetch('/api/payment-verifications', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(verificationData)
+          });
+
+          window.location.href = "/verifying-payment.html";
+        } catch (e) {
+          console.error("Save error:", e);
+          window.location.href = "/verifying-payment.html";
+        }
+      });
+    </script>
 
     <script>
       (function () {

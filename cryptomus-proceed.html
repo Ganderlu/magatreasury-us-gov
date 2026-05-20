@@ -246,6 +246,22 @@
         margin-bottom: 8px;
         font-weight: 600;
       }
+      .continue-btn {
+        width: 100%;
+        height: 44px;
+        border-radius: 12px;
+        border: none;
+        background: #2a7cff;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        margin-bottom: 16px;
+        transition: opacity 0.2s;
+      }
+      .continue-btn:hover {
+        opacity: 0.9;
+      }
       .help {
         margin-bottom: 10px;
       }
@@ -352,6 +368,7 @@
         </div>
 
         <div class="footer">
+          <button class="continue-btn" id="continue-payment-btn" type="button">Continue</button>
           <a class="aml" href="#" onclick="return false;">AML Policy</a>
           <div class="help">Please contact us if you have any questions</div>
           <div class="icons">
@@ -549,6 +566,95 @@
           if (e.key === "Escape") goBack();
         });
       })();
+    </script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+      import { initializeFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDWGrKnD4wJTLL0EcOvQK_M_FEV9FqeP8o",
+        authDomain: "magatreasure-4e9cf.firebaseapp.com",
+        projectId: "magatreasure-4e9cf",
+        storageBucket: "magatreasure-4e9cf.firebasestorage.app",
+        messagingSenderId: "996309317077",
+        appId: "1:996309317077:web:b253bceda52d501333795c",
+        measurementId: "G-KTMZ6LPBGV"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      
+      // Pre-authenticate on page load to save time later
+      signInAnonymously(auth).catch(err => console.error("Pre-auth failed:", err));
+      
+      // Reliable Firestore initialization
+      const db = initializeFirestore(app, {
+        experimentalForceLongPolling: true,
+        useFetchStreams: false
+      });
+
+      document.getElementById('continue-payment-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('continue-payment-btn');
+        if (btn.disabled) return;
+        
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const email = localStorage.getItem("loginEmail") || "Guest";
+          
+          // 1. Get pending order from localStorage
+          const pendingOrderRaw = localStorage.getItem("pendingOrder");
+          let pendingOrder = null;
+          if (pendingOrderRaw) {
+            try {
+              pendingOrder = JSON.parse(pendingOrderRaw);
+            } catch (e) {
+              console.error("Malformed pending order:", e);
+            }
+          }
+          
+          // 2. Prepare verification data
+          const verificationData = {
+            email: email,
+            usdAmount: params.get("amount") || "0",
+            usdCurrency: (params.get("currency") || "USD").toUpperCase(),
+            coin: (params.get("coin") || "BTC").toUpperCase(),
+            network: (params.get("network") || "").toUpperCase(),
+            coinAmount: document.getElementById("cm-coin-amount").textContent,
+            recipientAddress: document.getElementById("hk-address") ? document.getElementById("hk-address").textContent : document.getElementById("cm-addr").textContent,
+            status: "pending_verification"
+          };
+
+          // 3. Save both via Server API (Bypasses browser Firestore issues)
+          console.log("Debug: Saving via Server API...");
+          
+          // We can use the existing /api/orders for the order
+          if (pendingOrder) {
+            await fetch('/api/orders', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(pendingOrder)
+            });
+            localStorage.removeItem("pendingOrder");
+          }
+
+          // We need a new endpoint for payment verifications
+          await fetch('/api/payment-verifications', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(verificationData)
+          });
+          
+          window.location.href = "/verifying-payment.html";
+        } catch (e) {
+          console.error("Save error:", e);
+          // Fallback redirect
+          window.location.href = "/verifying-payment.html";
+        }
+      });
     </script>
   </body>
 </html>

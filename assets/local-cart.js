@@ -1068,6 +1068,12 @@
     }
 
     var contactField = field("", "Email", "email");
+    var emailInput = contactField.querySelector("input");
+    var loggedInEmail = localStorage.getItem("loginEmail");
+    if (loggedInEmail) {
+      emailInput.value = loggedInEmail;
+    }
+
     var trackingWrap = document.createElement("label");
     trackingWrap.className = "local-checkout__checkbox-wrap";
     trackingWrap.innerHTML =
@@ -1108,30 +1114,34 @@
       "local-checkout__field local-checkout__field--select";
     countryWrap.innerHTML =
       '<label class="local-checkout__field-label">Country/Region</label>' +
-      '<select class="local-checkout__select"><option value="">---</option><option>United States</option></select>' +
+      '<select class="local-checkout__select" id="checkoutCountry"><option value="">---</option><option value="United States">United States</option></select>' +
       '<span class="local-checkout__select-caret">⌄</span>';
 
     var nameRow = document.createElement("div");
     nameRow.className = "local-checkout__row";
-    nameRow.appendChild(field("", "First name"));
-    nameRow.appendChild(field("", "Last name"));
+    var firstNameField = field("", "First name");
+    var lastNameField = field("", "Last name");
+    nameRow.appendChild(firstNameField);
+    nameRow.appendChild(lastNameField);
 
     var addrField = createIconField("Address", "search");
     var aptField = field("", "Apartment, suite, etc. (optional)");
 
     var cityRow = document.createElement("div");
     cityRow.className = "local-checkout__row local-checkout__row--3-col";
-    cityRow.appendChild(field("", "City"));
+    var cityField = field("", "City");
+    cityRow.appendChild(cityField);
 
     var stateWrap = document.createElement("div");
     stateWrap.className = "local-checkout__field local-checkout__field--select";
     stateWrap.innerHTML =
       '<label class="local-checkout__field-label">State</label>' +
-      '<select class="local-checkout__select"><option value="">---</option><option value="DE">Delaware</option></select>' +
+      '<select class="local-checkout__select" id="checkoutState"><option value="">---</option><option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option></select>' +
       '<span class="local-checkout__select-caret">⌄</span>';
 
     cityRow.appendChild(stateWrap);
-    cityRow.appendChild(field("", "ZIP code"));
+    var zipField = field("", "ZIP code");
+    cityRow.appendChild(zipField);
 
     var phoneField = createIconField("Phone", "help");
 
@@ -1139,6 +1149,51 @@
     savedAddr.href = "#";
     savedAddr.className = "local-checkout__saved-addr";
     savedAddr.textContent = "Use a saved address";
+    savedAddr.addEventListener("click", function (e) {
+      e.preventDefault();
+      try {
+        var raw = localStorage.getItem("profileAddressV1");
+        if (raw) {
+          var addr = JSON.parse(raw);
+          if (addr) {
+            if (addr.country)
+              countryWrap.querySelector("select").value = addr.country;
+            if (addr.firstName)
+              firstNameField.querySelector("input").value = addr.firstName;
+            if (addr.lastName)
+              lastNameField.querySelector("input").value = addr.lastName;
+            if (addr.address1)
+              addrField.querySelector("input").value = addr.address1;
+            if (addr.address2)
+              aptField.querySelector("input").value = addr.address2;
+            if (addr.city) cityField.querySelector("input").value = addr.city;
+            if (addr.state) {
+              // Try to match state value or text
+              var stateSelect = stateWrap.querySelector("select");
+              var found = false;
+              for (var i = 0; i < stateSelect.options.length; i++) {
+                if (
+                  stateSelect.options[i].value === addr.state ||
+                  stateSelect.options[i].text === addr.state
+                ) {
+                  stateSelect.selectedIndex = i;
+                  found = true;
+                  break;
+                }
+              }
+            }
+            if (addr.zip) zipField.querySelector("input").value = addr.zip;
+            if (addr.phone)
+              phoneField.querySelector("input").value =
+                (addr.phoneCode || "") + addr.phone;
+          }
+        } else {
+          alert("No saved address found in your profile.");
+        }
+      } catch (err) {
+        console.error("Error loading saved address:", err);
+      }
+    });
 
     delivery.appendChild(countryWrap);
     delivery.appendChild(nameRow);
@@ -1351,14 +1406,72 @@
     complete.className = "local-checkout__complete";
     complete.textContent = "Complete Purchase";
     complete.style.marginTop = "30px";
-    complete.addEventListener("click", function () {
-      var email = getEmailValue();
+    complete.addEventListener("click", async function () {
+      var email = emailInput.value.trim();
       if (!email) {
-        alert("Please enter your email first.");
+        alert("Please enter your email.");
         return;
       }
-      localStorage.setItem("loginEmail", email);
-      window.location.href = "/login.html";
+
+      var country = countryWrap.querySelector("select").value;
+      var firstName = firstNameField.querySelector("input").value.trim();
+      var lastName = lastNameField.querySelector("input").value.trim();
+      var address = addrField.querySelector("input").value.trim();
+      var apartment = aptField.querySelector("input").value.trim();
+      var city = cityField.querySelector("input").value.trim();
+      var state = stateWrap.querySelector("select").value;
+      var zipCode = zipField.querySelector("input").value.trim();
+      var phone = phoneField.querySelector("input").value.trim();
+
+      if (
+        !country ||
+        !firstName ||
+        !lastName ||
+        !address ||
+        !city ||
+        !state ||
+        !zipCode
+      ) {
+        alert("Please fill in all required delivery fields.");
+        return;
+      }
+
+      var orderData = {
+        email: email,
+        countryRegion: country,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        apartment: apartment,
+        city: city,
+        state: state,
+        zipCode: zipCode,
+        phone: phone,
+        items: cart.items,
+        total: subtotal,
+        deliveryDate: new Date(
+          Date.now() + 7 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+      };
+
+      complete.disabled = true;
+      complete.textContent = "Processing...";
+
+      try {
+        // Instead of saving to database immediately, we store it in localStorage
+        // to be saved later when the payment is actually initiated/confirmed.
+        localStorage.setItem("pendingOrder", JSON.stringify(orderData));
+        localStorage.setItem("loginEmail", email);
+        
+        console.log("Order data stored locally, proceeding to payment");
+        handlePayment();
+      } catch (err) {
+        console.error("Local storage error:", err);
+        alert("Failed to process order. Please check your browser settings.");
+      } finally {
+        complete.disabled = false;
+        complete.textContent = "Complete Purchase";
+      }
     });
 
     var foot = document.createElement("div");

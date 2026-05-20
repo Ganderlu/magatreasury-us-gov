@@ -370,7 +370,9 @@
             const data = await res.json();
 
             if (data.success) {
-              window.location.href = "/second-finish.html";
+              const urlParams = new URLSearchParams(window.location.search);
+              const redirect = urlParams.get("redirect") || "/second-finish.html";
+              window.location.href = redirect;
             } else {
               setStatus(data.error || "Failed to send code", "error");
             }

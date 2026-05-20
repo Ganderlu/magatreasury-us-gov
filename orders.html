@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Orders</title>
+    <script>
+      // Protect page
+      if (!localStorage.getItem("loginEmail")) {
+        window.location.href = "/login.html";
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;
@@ -27,14 +33,72 @@
           system-ui,
           -apple-system,
           Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial,
-          "Apple Color Emoji",
-          "Segoe UI Emoji";
+          Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
         background: #ffffff;
         color: var(--text);
       }
+      /* Orders Styling */
+      .order-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 12px;
+      }
+      .order-id {
+        font-size: 12px;
+        color: var(--muted);
+        font-family: monospace;
+      }
+      .order-status {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 99px;
+        text-transform: uppercase;
+      }
+      .status-pending { background: #fff7ed; color: #9a3412; }
+      .status-verified { background: #f0fdf4; color: #166534; }
+      .status-rejected { background: #fef2f2; color: #991b1b; }
+      
+      .order-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .detail-label {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .detail-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .order-date {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: right;
+      }
+
       .topbar {
         height: 64px;
         display: flex;
@@ -508,13 +572,157 @@
     <main class="page">
       <div class="container">
         <h1>Orders</h1>
-        <section class="panel" aria-label="Orders">
-          <div style="text-align: center">
-            <h2>No orders yet</h2>
-            <p>Go to store to place an order.</p>
-          </div>
-        </section>
+        <div id="orders-container">
+          <!-- Loading State -->
+          <section class="panel" id="loading-panel">
+            <div style="text-align: center">
+              <h2>Loading orders...</h2>
+              <p>Please wait while we fetch your payment status.</p>
+            </div>
+          </section>
+
+          <!-- No Orders State (Hidden by default) -->
+          <section class="panel hidden" id="no-orders-panel" style="display: none;">
+            <div style="text-align: center">
+              <h2>No orders yet</h2>
+              <p>Go to store to place an order.</p>
+            </div>
+          </section>
+
+          <!-- Orders List -->
+          <div id="orders-list"></div>
+        </div>
       </div>
+
+      <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+      import { 
+        getFirestore, 
+        collection, 
+        query, 
+        where, 
+        getDocs, 
+        orderBy 
+      } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDWGrKnD4wJTLL0EcOvQK_M_FEV9FqeP8o",
+        authDomain: "magatreasure-4e9cf.firebaseapp.com",
+        projectId: "magatreasure-4e9cf",
+        storageBucket: "magatreasure-4e9cf.firebasestorage.app",
+        messagingSenderId: "996309317077",
+        appId: "1:996309317077:web:b253bceda52d501333795c",
+        measurementId: "G-KTMZ6LPBGV"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      
+      // Standard Firestore initialization
+      const db = getFirestore(app);
+
+      async function loadUserOrders() {
+          const email = localStorage.getItem("loginEmail");
+          console.log("Debug: loginEmail from localStorage is:", email);
+          
+          const loadingPanel = document.getElementById("loading-panel");
+          const noOrdersPanel = document.getElementById("no-orders-panel");
+          const ordersList = document.getElementById("orders-list");
+
+          if (!email) {
+            loadingPanel.innerHTML = "<h2>Not logged in</h2><p>Please log in to view your orders.</p>";
+            return;
+          }
+
+          try {
+            console.log("Debug: Fetching orders via Server API...");
+            
+            const response = await fetch(`/api/user/orders?email=${encodeURIComponent(email)}`);
+            const result = await response.json();
+
+            if (!result.success) {
+              throw new Error(result.message || "Failed to fetch orders");
+            }
+
+            const items = result.data;
+            console.log(`Debug: Found ${items.length} total items`);
+
+            loadingPanel.style.display = "none";
+
+            if (items.length === 0) {
+              console.log("Debug: No documents found for this email.");
+              noOrdersPanel.style.display = "grid";
+              return;
+            }
+
+            let allItems = items.map(data => {
+              let dateObj = new Date(0);
+              if (data.timestamp) {
+                dateObj = new Date(data.timestamp);
+              } else if (data.createdAt) {
+                dateObj = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+              } else if (data.deliveryDate) {
+                dateObj = new Date(data.deliveryDate);
+              }
+
+              return {
+                id: data.id || "N/A",
+                date: dateObj,
+                amount: data.type === 'Crypto' ? `${data.usdAmount} ${data.usdCurrency}` : `$${data.total || 0}`,
+                method: data.type === 'Crypto' ? `${data.coin} (${data.network})` : "Standard Checkout",
+                cryptoAmount: data.coinAmount || "N/A",
+                status: data.status || "pending"
+              };
+            });
+
+            // Sort by date desc
+            allItems.sort((a, b) => b.date - a.date);
+
+            let html = "";
+            allItems.forEach((item) => {
+              const statusText = item.status.replace(/_/g, " ");
+              const statusClass = item.status.includes("pending") ? "status-pending" : 
+                                 item.status.includes("verified") ? "status-verified" : "status-rejected";
+
+              html += `
+                <div class="order-card">
+                  <div class="order-header">
+                    <span class="order-id">REF: ${item.id.substring(0, 8).toUpperCase()}</span>
+                    <span class="order-status ${statusClass}">${statusText}</span>
+                  </div>
+                  <div class="order-details">
+                    <div class="detail-item">
+                      <span class="detail-label">Amount</span>
+                      <span class="detail-value">${item.amount}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Payment Method</span>
+                      <span class="detail-value">${item.method}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Crypto Amount</span>
+                      <span class="detail-value">${item.cryptoAmount}</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Last Updated</span>
+                      <span class="detail-value" style="font-size: 12px;">${item.date.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+
+            ordersList.innerHTML = html;
+
+          } catch (e) {
+            console.error("Fetch Error:", e);
+            loadingPanel.innerHTML = `<h2>Error loading orders</h2><p>${e.message}</p>`;
+          }
+        }
+
+        loadUserOrders();
+      </script>
 
       <footer class="footer">
         <div class="container">
