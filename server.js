@@ -650,41 +650,41 @@ app.use((req, res) => {
 });
 
 // ====================== Server Start & Graceful Shutdown ======================
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// function startServer(port) {
-//   const server = app
-//     .listen(port)
-//     .on("listening", () => {
-//       console.log(`Server running on port ${port}`);
-//     })
-//     .on("error", (err) => {
-//       if (err.code === "EADDRINUSE") {
-//         console.warn(`Port ${port} is busy, trying ${parseInt(port) + 1}...`);
-//         startServer(parseInt(port) + 1);
-//       } else {
-//         console.error("Server error:", err);
-//       }
-//     });
+function startServer(port) {
+  const server = app
+    .listen(port)
+    .on("listening", () => {
+      console.log(`Server running on port ${port}`);
+    })
+    .on("error", (err) => {
+      if (err.code === "EADDRINUSE") {
+        console.warn(`Port ${port} is busy, trying ${parseInt(port) + 1}...`);
+        startServer(parseInt(port) + 1);
+      } else {
+        console.error("Server error:", err);
+      }
+    });
 
-//   // FIX: Added graceful shutdown handlers (fixes missing signal handling)
-//   const shutdown = () => {
-//     console.log("Shutting down gracefully...");
-//     server.close(() => {
-//       console.log("Closed out remaining connections");
-//       process.exit(0);
-//     });
-//   };
+  // FIX: Added graceful shutdown handlers (fixes missing signal handling)
+  const shutdown = () => {
+    console.log("Shutting down gracefully...");
+    server.close(() => {
+      console.log("Closed out remaining connections");
+      process.exit(0);
+    });
+  };
 
-//   process.on("SIGTERM", shutdown);
-//   process.on("SIGINT", shutdown);
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
 
-//   return server;
-// }
+  return server;
+}
 
-// Vercel Export
-module.exports = app;
+
 
 const server = startServer(PORT);
 
-module.exports = server;
+// Vercel Export
+module.exports = app;
