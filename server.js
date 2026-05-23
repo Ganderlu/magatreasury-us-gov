@@ -682,17 +682,8 @@ app.use((req, res) => {
 //   return server;
 // }
 
-// ====================== VERCEL COMPATIBLE SERVER START ======================
-const PORT = process.env.PORT || 3000;
-
-if (process.env.VERCEL) {
-  console.log("🚀 Running on Vercel");
-  module.exports = app;   // Important for Vercel
-} else {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
-}
+// Vercel Export
+module.exports = app;
 
 const server = startServer(PORT);
 
