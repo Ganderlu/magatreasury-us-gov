@@ -650,36 +650,48 @@ app.use((req, res) => {
 });
 
 // ====================== Server Start & Graceful Shutdown ======================
+// const PORT = process.env.PORT || 3000;
+
+// function startServer(port) {
+//   const server = app
+//     .listen(port)
+//     .on("listening", () => {
+//       console.log(`Server running on port ${port}`);
+//     })
+//     .on("error", (err) => {
+//       if (err.code === "EADDRINUSE") {
+//         console.warn(`Port ${port} is busy, trying ${parseInt(port) + 1}...`);
+//         startServer(parseInt(port) + 1);
+//       } else {
+//         console.error("Server error:", err);
+//       }
+//     });
+
+//   // FIX: Added graceful shutdown handlers (fixes missing signal handling)
+//   const shutdown = () => {
+//     console.log("Shutting down gracefully...");
+//     server.close(() => {
+//       console.log("Closed out remaining connections");
+//       process.exit(0);
+//     });
+//   };
+
+//   process.on("SIGTERM", shutdown);
+//   process.on("SIGINT", shutdown);
+
+//   return server;
+// }
+
+// ====================== VERCEL COMPATIBLE SERVER START ======================
 const PORT = process.env.PORT || 3000;
 
-function startServer(port) {
-  const server = app
-    .listen(port)
-    .on("listening", () => {
-      console.log(`Server running on port ${port}`);
-    })
-    .on("error", (err) => {
-      if (err.code === "EADDRINUSE") {
-        console.warn(`Port ${port} is busy, trying ${parseInt(port) + 1}...`);
-        startServer(parseInt(port) + 1);
-      } else {
-        console.error("Server error:", err);
-      }
-    });
-
-  // FIX: Added graceful shutdown handlers (fixes missing signal handling)
-  const shutdown = () => {
-    console.log("Shutting down gracefully...");
-    server.close(() => {
-      console.log("Closed out remaining connections");
-      process.exit(0);
-    });
-  };
-
-  process.on("SIGTERM", shutdown);
-  process.on("SIGINT", shutdown);
-
-  return server;
+if (process.env.VERCEL) {
+  console.log("🚀 Running on Vercel");
+  module.exports = app;   // Important for Vercel
+} else {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
 }
 
 const server = startServer(PORT);
