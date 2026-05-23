@@ -686,5 +686,4 @@ function startServer(port) {
 
 const server = startServer(PORT);
 
-// Vercel Export
-module.exports = app;
+module.exports = server;
