@@ -346,6 +346,10 @@
           const email = emailEl.value.trim();
           if (!email) return alert("Please enter your email");
 
+          // Clear old session/profile data before starting new login
+          localStorage.removeItem("authToken");
+          localStorage.removeItem("profileSettingsV1");
+          localStorage.removeItem("profileAddressV1");
           localStorage.setItem("loginEmail", email);
 
           btn.disabled = true;

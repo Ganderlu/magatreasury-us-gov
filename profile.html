@@ -2775,8 +2775,8 @@
         function goLogin() {
           localStorage.removeItem("loginEmail");
           localStorage.removeItem("authToken");
-          // Clear profile settings too so the next user doesn't see them
           localStorage.removeItem("profileSettingsV1");
+          localStorage.removeItem("profileAddressV1");
           window.location.href = "/login.html";
         }
 
@@ -2861,7 +2861,13 @@
             if (result.success && result.data) {
               const p = result.data;
               writeProfile(p);
-              if (p.address) writeAddress(p.address);
+
+              if (p.address) {
+                writeAddress(p.address);
+              } else {
+                localStorage.removeItem("profileAddressV1");
+              }
+
               renderProfile();
               renderAddress();
             }
