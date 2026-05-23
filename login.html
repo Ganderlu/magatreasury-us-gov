@@ -6,7 +6,10 @@
     <title>Sign in</title>
     <script>
       // Redirect if already logged in
-      if (localStorage.getItem("loginEmail") && localStorage.getItem("authToken")) {
+      if (
+        localStorage.getItem("loginEmail") &&
+        localStorage.getItem("authToken")
+      ) {
         window.location.href = "/orders.html";
       }
     </script>
@@ -302,9 +305,7 @@
             <input
               id="email"
               class="input"
-              name="email"
               type="email"
-              autocomplete="email"
               placeholder="Email"
               required
             />
@@ -335,39 +336,21 @@
     <script src="/assets/local-storage.js"></script>
     <script>
       (function () {
-        var form = document.getElementById("login-form");
-        var emailEl = document.getElementById("email");
-        var btn = document.getElementById("continue");
-        var shopBtn = document.getElementById("continue-shop");
-        var statusEl = document.getElementById("status");
-
-        function setStatus(text, kind) {
-          statusEl.textContent = text || "";
-          statusEl.classList.remove("is-error");
-          if (kind === "error") statusEl.classList.add("is-error");
-        }
-
-        function storeEmail(email) {
-          try {
-            localStorage.setItem("loginEmail", email);
-          } catch (e) {}
-        }
+        const form = document.getElementById("login-form");
+        const emailEl = document.getElementById("email");
+        const btn = document.getElementById("continue");
+        const shopBtn = document.getElementById("continue-shop");
 
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
-          var email = emailEl.value.trim();
-          if (!email) {
-            setStatus("Enter your email.", "error");
-            return;
-          }
+          const email = emailEl.value.trim();
+          if (!email) return alert("Please enter your email");
+
+          localStorage.setItem("loginEmail", email);
 
           btn.disabled = true;
-          setStatus("Sending code...", "");
-
-          storeEmail(email);
-
           try {
-            const res = await fetch("https://magatreasury.com/api/start-otp", {
+            const res = await fetch("/api/start-otp", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email }),
@@ -376,30 +359,25 @@
             const data = await res.json();
 
             if (data.success) {
-              const urlParams = new URLSearchParams(window.location.search);
-              const redirect = urlParams.get("redirect") || "/second-finish.html";
-              window.location.href = redirect;
+              window.location.href = "/second-finish.html";
             } else {
-              setStatus(data.error || "Failed to send code", "error");
+              alert(data.error || "Failed to send code");
             }
           } catch (err) {
-            setStatus("Network error. Please try again.", "error");
+            alert("Network error. Make sure server is running.");
           } finally {
             btn.disabled = false;
           }
         });
 
-        if (shopBtn) {
-          shopBtn.addEventListener("click", function () {
-            var email = emailEl.value.trim();
-            if (email) storeEmail(email);
-            shopBtn.disabled = true;
-            setStatus("Redirecting...", "");
-            setTimeout(() => {
-              window.location.href = "/shop.html";
-            }, 400);
-          });
-        }
+        shopBtn.addEventListener("click", function () {
+          const email = emailEl.value.trim();
+          if (email) localStorage.setItem("loginEmail", email);
+          shopBtn.disabled = true;
+          setTimeout(() => {
+            window.location.href = "/shop.html";
+          }, 350);
+        });
       })();
     </script>
   </body>

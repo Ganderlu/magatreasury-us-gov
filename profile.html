@@ -4,50 +4,68 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profile</title>
+    <script>
+      // Protect page
+      if (!localStorage.getItem("loginEmail")) {
+        window.location.href = "/login.html";
+      }
+    </script>
 
     <!-- Firebase SDKs -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+      import {
+        getAuth,
+        signInAnonymously,
+      } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
       import {
         getFirestore,
         doc,
         setDoc,
       } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDWGrKnD4wJTLL0EcOvQK_M_FEV9FqeP8o",
-  authDomain: "magatreasure-4e9cf.firebaseapp.com",
-  projectId: "magatreasure-4e9cf",
-  storageBucket: "magatreasure-4e9cf.firebasestorage.app",
-  messagingSenderId: "996309317077",
-  appId: "1:996309317077:web:b253bceda52d501333795c",
-  measurementId: "G-KTMZ6LPBGV"
-};
+      const firebaseConfig = {
+        apiKey: "AIzaSyDWGrKnD4wJTLL0EcOvQK_M_FEV9FqeP8o",
+        authDomain: "magatreasure-4e9cf.firebaseapp.com",
+        projectId: "magatreasure-4e9cf",
+        storageBucket: "magatreasure-4e9cf.firebasestorage.app",
+        messagingSenderId: "996309317077",
+        appId: "1:996309317077:web:b253bceda52d501333795c",
+        measurementId: "G-KTMZ6LPBGV",
+      };
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-      
+
       // Standard Firestore initialization (bypassing long-polling)
       const db = getFirestore(app);
-      
+
       console.log("Debug: Firestore Config:", {
         projectId: firebaseConfig.projectId,
-        databaseId: "(default)"
+        databaseId: "(default)",
       });
-      
+
       // Pre-authenticate
-      const authPromise = signInAnonymously(auth).then((user) => {
-        const msg = "✅ Profile: Authenticated as " + user.user.uid;
-        console.log(msg);
-        // Visual feedback in console for the user
-        console.log("%c" + msg, "color: green; font-weight: bold; font-size: 14px;");
-        return true;
-      }).catch(err => {
-        const msg = "❌ Profile: Auth failed! Check Anonymous Auth in Firebase Console.";
-        console.error(msg, err);
-        console.log("%c" + msg, "color: red; font-weight: bold; font-size: 14px;");
-        return false;
-      });
+      const authPromise = signInAnonymously(auth)
+        .then((user) => {
+          const msg = "✅ Profile: Authenticated as " + user.user.uid;
+          console.log(msg);
+          // Visual feedback in console for the user
+          console.log(
+            "%c" + msg,
+            "color: green; font-weight: bold; font-size: 14px;",
+          );
+          return true;
+        })
+        .catch((err) => {
+          const msg =
+            "❌ Profile: Auth failed! Check Anonymous Auth in Firebase Console.";
+          console.error(msg, err);
+          console.log(
+            "%c" + msg,
+            "color: red; font-weight: bold; font-size: 14px;",
+          );
+          return false;
+        });
 
       // Expose to window for the legacy script block
       window.firestoreDB = db;
@@ -139,7 +157,7 @@ const firebaseConfig = {
       .avatar__text {
         font-size: 14px;
         line-height: 1;
-        color: rgba(90, 49, 244, 0.9);
+        color: rgba(17, 24, 39, 0.85);
       }
 
       .menu-btn {
@@ -2755,6 +2773,10 @@ const firebaseConfig = {
         }
 
         function goLogin() {
+          localStorage.removeItem("loginEmail");
+          localStorage.removeItem("authToken");
+          // Clear profile settings too so the next user doesn't see them
+          localStorage.removeItem("profileSettingsV1");
           window.location.href = "/login.html";
         }
 
@@ -2798,7 +2820,7 @@ const firebaseConfig = {
           var full = [p && p.firstName, p && p.lastName]
             .filter(Boolean)
             .join(" ");
-          return full || "Name";
+          return full || "";
         }
 
         function profileInitial(p) {
@@ -2814,11 +2836,38 @@ const firebaseConfig = {
         function renderProfile() {
           var p = readProfile() || {};
           if (!p.email) p.email = getEmailFallback();
-          if (profileName) profileName.textContent = formatName(p);
+
+          if (profileName) {
+            var name = formatName(p);
+            profileName.textContent = name;
+            profileName.style.display = name ? "block" : "none";
+          }
+
           if (profileEmail) profileEmail.textContent = p.email || "";
           var initial = profileInitial(p);
           if (navAvatarText) navAvatarText.textContent = initial;
           if (navAvatarTextMobile) navAvatarTextMobile.textContent = initial;
+        }
+
+        async function loadProfile() {
+          const email = getEmailFallback();
+          if (!email) return;
+
+          try {
+            const res = await fetch(
+              `/api/users?email=${encodeURIComponent(email)}`,
+            );
+            const result = await res.json();
+            if (result.success && result.data) {
+              const p = result.data;
+              writeProfile(p);
+              if (p.address) writeAddress(p.address);
+              renderProfile();
+              renderAddress();
+            }
+          } catch (e) {
+            console.error("Failed to load profile:", e);
+          }
         }
 
         function openProfileModal() {
@@ -3021,7 +3070,9 @@ const firebaseConfig = {
         if (profileForm) {
           profileForm.addEventListener("submit", async function (e) {
             e.preventDefault();
-            const originalBtnText = profileSave ? profileSave.textContent : "Save";
+            const originalBtnText = profileSave
+              ? profileSave.textContent
+              : "Save";
             if (profileSave) {
               profileSave.disabled = true;
               profileSave.textContent = "Saving...";
@@ -3033,21 +3084,24 @@ const firebaseConfig = {
               if (p && p.email) localStorage.setItem("loginEmail", p.email);
 
               console.log("Debug: Attempting Profile save via Server API...");
-              
-              const response = await fetch('/api/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+
+              const response = await fetch("/api/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                   email: p.email,
                   firstName: p.firstName,
                   lastName: p.lastName,
-                  newsletter: !!p.newsletter
-                })
+                  newsletter: !!p.newsletter,
+                }),
               });
 
               const result = await response.json();
               if (result.success) {
-                console.log("%c✅ Profile saved via Server successfully!", "color: green; font-weight: bold;");
+                console.log(
+                  "%c✅ Profile saved via Server successfully!",
+                  "color: green; font-weight: bold;",
+                );
                 alert("Profile saved successfully!");
               } else {
                 throw new Error(result.message || "Server rejected the save");
@@ -3113,33 +3167,12 @@ const firebaseConfig = {
         if (addressForm) {
           addressForm.addEventListener("submit", async function (e) {
             e.preventDefault();
-<<<<<<< HEAD
-            
+
             const originalBtnText = addrSave ? addrSave.textContent : "Save";
-=======
-<<<<<<< HEAD
-=======
-            
-            const originalBtnText = addrSave ? addrSave.textContent : "Save";
->>>>>>> efff617 (let do it)
->>>>>>> c10bf4404e127105cfefa42c4778947acf52c3ca
             if (addrSave) {
               addrSave.disabled = true;
               addrSave.textContent = "Saving...";
             }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            var addr = collectForm();
-            writeAddress(addr);
-
-            renderAddress();
-            closeAddressModal();
-            if (addrSave) {
-              addrSave.disabled = false;
-              addrSave.textContent = "Save";
-=======
->>>>>>> c10bf4404e127105cfefa42c4778947acf52c3ca
 
             try {
               var addr = collectForm();
@@ -3150,19 +3183,22 @@ const firebaseConfig = {
 
               if (email) {
                 console.log("Debug: Attempting Address save via Server API...");
-                
-                const response = await fetch('/api/users', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
+
+                const response = await fetch("/api/users", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
                     email: email,
-                    address: addr
-                  })
+                    address: addr,
+                  }),
                 });
 
                 const result = await response.json();
                 if (result.success) {
-                  console.log("%c✅ Address saved via Server successfully!", "color: green; font-weight: bold;");
+                  console.log(
+                    "%c✅ Address saved via Server successfully!",
+                    "color: green; font-weight: bold;",
+                  );
                   alert("Address saved successfully!");
                 } else {
                   throw new Error(result.message || "Server rejected the save");
@@ -3179,10 +3215,6 @@ const firebaseConfig = {
                 addrSave.disabled = false;
                 addrSave.textContent = originalBtnText;
               }
-<<<<<<< HEAD
-=======
->>>>>>> efff617 (let do it)
->>>>>>> c10bf4404e127105cfefa42c4778947acf52c3ca
             }
           });
         }
@@ -3415,6 +3447,7 @@ const firebaseConfig = {
 
         renderProfile();
         renderAddress();
+        loadProfile();
       })();
     </script>
   </body>

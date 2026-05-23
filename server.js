@@ -3,10 +3,27 @@ const cors = require("cors");
 const helmet = require("helmet");
 const admin = require("firebase-admin");
 const { body, query, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
+const { Resend } = require("resend");
 const path = require("path");
 require("dotenv").config();
 
 const app = express();
+
+app.use(cors({ origin: "*" }));
+app.use(express.json());
+app.use(helmet({ contentSecurityPolicy: false }));
+
+const resend = new Resend("re_iZTQy4TE_JDvmn89butKcs7nZ9xcait1T");
+const JWT_SECRET = "your-super-secret-jwt-key-2026";
+
+// In-memory OTP store
+const otpStore = new Map();
+
+// Generate OTP
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
 
 // ====================== Firebase Initialization ======================
 /**
@@ -53,7 +70,9 @@ if (admin.apps.length === 0) {
 
 const { getFirestore } = require("firebase-admin/firestore");
 const db = getFirestore(admin.app(), "default");
-
+// Auth0 Config
+const AUTH0_DOMAIN = "dev-v5jb4jp8jpd5zw86.us.auth0.com";
+const AUTH0_CLIENT_ID = "mEjDdiRLe9FAU8LUgY351CGWlDb2Kc4G";
 // Ensure Firestore uses the correct settings
 try {
   db.settings({ ignoreUndefinedProperties: true });
@@ -84,12 +103,87 @@ try {
   console.log("---------------------------");
 })();
 
+// ====================== SEND OTP ======================
+app.post("/api/start-otp", async (req, res) => {
+  const { email } = req.body;
+  console.log("📧 OTP request for:", email);
+
+  if (!email) return res.status(400).json({ error: "Email is required" });
+
+  try {
+    const otp = generateOTP();
+    const expiresAt = Date.now() + 10 * 60 * 1000;
+
+    otpStore.set(email, { otp, expiresAt });
+
+    // Send Email
+    const result = await resend.emails.send({
+      from: "Maga Treasury <noreply@magatreasury.com>", // Try this sender
+      to: email,
+      subject: "Your 6-Digit Login Code",
+      html: `
+        <div style="font-family: Arial; padding: 20px;">
+          <h2>Your Login Code</h2>
+          <h1 style="color: #5a31f4; font-size: 42px; letter-spacing: 8px;">${otp}</h1>
+          <p>This code will expire in 10 minutes.</p>
+          <p>If you didn't request this code, please ignore this email.</p>
+        </div>
+      `,
+    });
+
+    console.log("✅ Email sent successfully to", email);
+    console.log("Resend Response:", result);
+
+    res.json({ success: true, message: "OTP sent to your email" });
+  } catch (err) {
+    console.error("❌ Failed to send email:", err);
+    res.status(500).json({
+      error: "Failed to send OTP",
+      details: err.message,
+    });
+  }
+});
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
     firebase: admin.apps.length > 0 ? "initialized" : "failed",
     timestamp: new Date().toISOString(),
+  });
+});
+
+// ====================== VERIFY OTP ======================
+app.post("/api/verify-otp", async (req, res) => {
+  const { email, otp } = req.body;
+
+  if (!email || !otp)
+    return res.status(400).json({ error: "Email and OTP required" });
+
+  const stored = otpStore.get(email);
+
+  if (!stored)
+    return res
+      .status(400)
+      .json({ error: "No OTP request found. Request new code." });
+  if (Date.now() > stored.expiresAt) {
+    otpStore.delete(email);
+    return res
+      .status(400)
+      .json({ error: "OTP has expired. Request new code." });
+  }
+  if (stored.otp !== otp) {
+    return res.status(400).json({ error: "Invalid OTP" });
+  }
+
+  const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "7d" });
+
+  otpStore.delete(email);
+
+  res.json({
+    success: true,
+    token,
+    message: "Login successful",
   });
 });
 
@@ -289,6 +383,35 @@ app.get(
       res.json({ success: true, data: items });
     } catch (error) {
       console.error("Error fetching user orders:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  },
+);
+
+/**
+ * GET /api/users
+ * Retrieve a user profile
+ */
+app.get(
+  "/api/users",
+  [query("email").isEmail().withMessage("Invalid email")],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    try {
+      const { email } = req.query;
+      const userDoc = await db.collection("users").doc(email).get();
+
+      if (!userDoc.exists) {
+        return res.json({ success: true, data: { email } });
+      }
+
+      res.json({ success: true, data: userDoc.data() });
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
       res.status(500).json({ success: false, message: error.message });
     }
   },
