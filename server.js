@@ -11,8 +11,39 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors({ origin: "*" }));
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 app.use(helmet({ contentSecurityPolicy: false }));
+
+// FIX: Serve static files with 'html' and 'htm' extensions for clean URLs
+app.use(
+  express.static(path.join(__dirname, "public"), {
+    extensions: ["html", "htm"],
+  }),
+);
+app.use(
+  express.static(__dirname, {
+    index: "index.htm",
+    extensions: ["html", "htm"],
+    setHeaders: (res, path) => {
+      // Block sensitive files from being served
+      const sensitiveFiles = [
+        ".env",
+        "server.js",
+        "package.json",
+        "firebase-service-account.json",
+        "FIXES.md",
+      ];
+      if (sensitiveFiles.some((file) => path.endsWith(file))) {
+        res.status(403).end();
+      }
+    },
+  }),
+);
+
+// Route for the root to explicitly serve index.htm
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.htm"));
+});
 
 const resend = new Resend("re_iZTQy4TE_JDvmn89butKcs7nZ9xcait1T");
 const JWT_SECRET = "your-super-secret-jwt-key-2026";
@@ -187,63 +218,22 @@ app.post("/api/verify-otp", async (req, res) => {
   });
 });
 
-// ====================== Middleware & Security ======================
-
-// FIX: Added helmet for security headers (fixes missing security headers)
-app.use(
-  helmet({
-    contentSecurityPolicy: false, // Disable CSP for simplicity in this demo, enable in strict prod
-  }),
-);
-
-// FIX: Strict CORS configuration (fixes insecure "*" origin)
-const allowedOrigin = process.env.ALLOWED_ORIGIN || "*";
-app.use(cors({ origin: allowedOrigin }));
-
-// FIX: Use express.json with limit to prevent DoS (fixes missing body limit and deprecated body-parser)
-app.use(express.json({ limit: "10kb" }));
-
-// FIX: Serve static files with 'html' and 'htm' extensions for clean URLs
-app.use(
-  express.static(path.join(__dirname, "public"), {
-    extensions: ["html", "htm"],
-  }),
-);
-app.use(
-  express.static(__dirname, {
-    index: "index.htm",
-    extensions: ["html", "htm"],
-    setHeaders: (res, path) => {
-      // Block sensitive files from being served
-      const sensitiveFiles = [
-        ".env",
-        "server.js",
-        "package.json",
-        "firebase-service-account.json",
-        "FIXES.md",
-      ];
-      if (sensitiveFiles.some((file) => path.endsWith(file))) {
-        res.status(403).end();
-      }
-    },
-  }),
-);
-
-// Route for the root to explicitly serve index.htm
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.htm"));
-});
-
-// Catch-all to serve index.htm for SPA behavior or clean URL routing
-app.get("*", (req, res, next) => {
-  // If the request is for an API, don't serve index.htm
-  if (req.url.startsWith("/api/")) {
-    return next();
+/**
+ * GET /api/admin/users
+ * Retrieve all users for admin dashboard (with addresses)
+ */
+app.get("/api/admin/users", async (req, res) => {
+  try {
+    const usersSnapshot = await db.collection("users").get();
+    const users = [];
+    usersSnapshot.forEach((doc) => {
+      users.push({ id: doc.id, ...doc.data() });
+    });
+    res.json({ success: true, data: users });
+  } catch (error) {
+    console.error("Error fetching admin users:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
-
-  // If it's a request for a file that doesn't exist, fallback to index.htm
-  // This ensures that when the server starts, or for any unknown route, we show the home page
-  res.sendFile(path.join(__dirname, "index.htm"));
 });
 
 /**
@@ -644,7 +634,12 @@ app.get(
  * app.use('/api/', limiter);
  */
 
-// Catch-all for SPA or 404
+// Catch-all to serve index.htm for SPA behavior or clean URL routing
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.htm"));
+});
+
+// Catch-all for 404
 app.use((req, res) => {
   res.status(404).send("Not Found");
 });
@@ -681,8 +676,6 @@ function startServer(port) {
 
   return server;
 }
-
-
 
 const server = startServer(PORT);
 

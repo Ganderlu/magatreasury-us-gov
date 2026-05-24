@@ -204,6 +204,68 @@
         }
       }
 
+      async function loadAddresses() {
+        try {
+          console.log("Admin: Fetching users for addresses...");
+          const response = await fetch("/api/admin/users");
+          const result = await response.json();
+
+          if (!result.success) {
+            throw new Error(result.message || "Failed to fetch users");
+          }
+
+          const users = result.data || [];
+          const list = document.getElementById("all-addresses-list");
+
+          if (!users.length) {
+            list.innerHTML =
+              '<tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">No user addresses found.</td></tr>';
+            return;
+          }
+
+          list.innerHTML = users
+            .map((u) => {
+              const addr = u.address || {};
+              const hasAddr = !!(addr.address1 || addr.city);
+              const fullName =
+                [addr.firstName || u.firstName, addr.lastName || u.lastName]
+                  .filter(Boolean)
+                  .join(" ") || "N/A";
+
+              return `
+                <tr>
+                  <td class="px-6 py-4">
+                    <div class="text-sm font-bold text-gray-900">${fullName}</div>
+                    <div class="text-xs text-gray-500">${u.email}</div>
+                  </td>
+                  <td class="px-6 py-4">
+                    ${
+                      hasAddr
+                        ? `
+                      <div class="text-sm text-gray-900">${addr.address1}${addr.address2 ? ", " + addr.address2 : ""}</div>
+                      <div class="text-xs text-gray-500">${addr.city}, ${addr.state} ${addr.zip}</div>
+                    `
+                        : '<span class="text-xs text-gray-400 italic">No address provided</span>'
+                    }
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="text-sm text-gray-900">${addr.country || "N/A"}</div>
+                    <div class="text-xs text-gray-500">${addr.phoneCode || ""}${addr.phone || "No phone"}</div>
+                  </td>
+                  <td class="px-6 py-4 text-xs text-gray-400">
+                    ${u.updatedAt ? new Date(u.updatedAt).toLocaleDateString() : "N/A"}
+                  </td>
+                </tr>
+              `;
+            })
+            .join("");
+        } catch (err) {
+          console.error("Failed to load addresses", err);
+          document.getElementById("all-addresses-list").innerHTML =
+            `<tr><td colspan="4" class="px-6 py-4 text-red-500">Error: ${err.message}</td></tr>`;
+        }
+      }
+
       async function updateStatus(id, col, status) {
         try {
           const response = await fetch("/api/admin/update-status", {
@@ -245,6 +307,7 @@
 
         if (tab === "overview") loadStats();
         if (tab === "orders") loadOrders();
+        if (tab === "addresses") loadAddresses();
         if (tab === "products") {
           const listEl = document.getElementById("products-list");
           if (listEl)
@@ -357,6 +420,14 @@
             id="tab-orders"
           >
             <i class="fas fa-shopping-cart w-6"></i> Orders
+          </a>
+          <a
+            href="#"
+            onclick="showTab('addresses')"
+            class="sidebar-item flex items-center px-6 py-4 text-gray-300"
+            id="tab-addresses"
+          >
+            <i class="fas fa-map-marker-alt w-6"></i> User Addresses
           </a>
           <a
             href="#"
@@ -661,6 +732,46 @@
                     class="divide-y divide-gray-200 text-sm"
                   >
                     <!-- Orders will be injected here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div id="content-addresses" class="tab-content hidden">
+            <div
+              class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+            >
+              <div class="px-5 sm:px-6 py-4 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900">User Addresses</h3>
+                <div class="text-sm text-slate-500">
+                  Full list of saved customer addresses
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left min-w-[800px]">
+                  <thead
+                    class="bg-slate-50 text-slate-600 text-xs uppercase font-semibold tracking-wider"
+                  >
+                    <tr>
+                      <th class="px-6 py-3">Customer</th>
+                      <th class="px-6 py-3">Address</th>
+                      <th class="px-6 py-3">Contact</th>
+                      <th class="px-6 py-3">Last Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="all-addresses-list"
+                    class="divide-y divide-slate-200 text-sm"
+                  >
+                    <tr>
+                      <td
+                        colspan="4"
+                        class="px-6 py-8 text-center text-slate-500"
+                      >
+                        Loading addresses...
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
