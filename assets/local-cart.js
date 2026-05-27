@@ -1864,7 +1864,7 @@
     {
       id: "wise.com",
       label:
-        "Wise.com - USD | USDC | CAD | EURO | SEPA - Bank Transfer + Live Support Accepted",
+        "Wise.com - Bank Transfer + Live Support Accepted",
       icon: "₿",
     },
   ];
