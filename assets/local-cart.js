@@ -1861,6 +1861,12 @@
         "Heleket - USDT | USDC | BTC | ETH | LTC | BEP20 | TRC20 + All Crypto Coins Accepted",
       icon: "₿",
     },
+    {
+      id: "wise.com",
+      label:
+        "Wise.com - USD | USDC | CAD | EURO | SEPA - Bank Transfer + Live Support Accepted",
+      icon: "₿",
+    },
   ];
 
   function renderCheckoutPage() {
@@ -2151,9 +2157,9 @@
 
     var shipping = document.createElement("div");
     shipping.className = "local-checkout__section";
-    shipping.innerHTML =
-      '<h2 class="local-checkout__h2">Shipping method</h2>' +
-      '<div class="local-checkout__shipping-notice">Enter your shipping address to view available shipping methods.</div>';
+    // shipping.innerHTML =
+    //   '<h2 class="local-checkout__h2">Shipping method</h2>' +
+    //   '<div class="local-checkout__shipping-notice">Enter your shipping address to view available shipping methods.</div>';
 
     var payment = document.createElement("div");
     payment.className = "local-checkout__section";
