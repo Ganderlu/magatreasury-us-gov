@@ -152,12 +152,26 @@ app.post("/api/start-otp", async (req, res) => {
       from: "Maga Treasury <noreply@magatreasury.com>", // Try this sender
       to: email,
       subject: "Your 6-Digit Login Code",
+      attachments: [
+        {
+          filename: "treasure.jpeg",
+          path: path.join(__dirname, "images", "treasur.jpeg"),
+          cid: "profile-image",
+        },
+      ],
       html: `
-        <div style="font-family: Arial; padding: 20px;">
-          <h2>Your Login Code</h2>
-          <h1 style="color: #5a31f4; font-size: 42px; letter-spacing: 8px;">${otp}</h1>
-          <p>This code will expire in 10 minutes.</p>
-          <p>If you didn't request this code, please ignore this email.</p>
+        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <img src="cid:profile-image" alt="Maga Treasury" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
+          </div>
+          <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 20px; text-align: left; color: #000;">Your Login Code</h1>
+          <div style="margin: 30px 0;">
+            <h1 style="color: #5a31f4; font-size: 54px; font-weight: bold; letter-spacing: 4px; margin: 0;">${otp}</h1>
+          </div>
+          <p style="font-size: 18px; color: #000; margin-top: 40px;">This code will expire in 10 minutes.</p>
+          <p style="font-size: 16px; color: #000; margin-top: 20px;">
+            If you didn't request this code, please ignore this email.
+          </p>
         </div>
       `,
     });
@@ -306,6 +320,32 @@ app.get("/api/admin/data", async (req, res) => {
   } catch (error) {
     console.error("Error fetching admin data:", error);
     res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+/**
+ * POST /api/subscribe
+ * Save email for newsletter subscription
+ */
+app.post("/api/subscribe", body("email").isEmail(), async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, error: "Invalid email" });
+  }
+
+  const { email } = req.body;
+
+  try {
+    const db = admin.firestore();
+    await db.collection("subscribers").add({
+      email,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Subscription error:", error);
+    res.status(500).json({ success: false, error: "Failed to subscribe" });
   }
 });
 

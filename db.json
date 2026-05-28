@@ -26,13 +26,13 @@
   "products": [
     {
       "id": "qfs-gold-bill-10",
-      "name": "X10 QFS GOLD BILLS",
+      "name": "10X QFS GOLD BILLS",
       "price": 199.00,
       "image": "https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
     },
     {
       "id": "qfs-gold-bill-25",
-      "name": "X25 QFS GOLD BILLS",
+      "name": "25X QFS GOLD BILLS",
       "price": 399.00,
       "image": "https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214"
     }

@@ -855,7 +855,7 @@
                 autocomplete="email"
                 required
               />
-              <button class="subscribe-btn" type="submit">Sign up</button>
+              <button class="subscribe-btn" type="submit">Continue</button>
               <div
                 class="subscribe-msg"
                 id="footer-subscribe-msg"
@@ -1112,8 +1112,24 @@
             try {
               localStorage.setItem("oms_subscribed_email", email);
             } catch (err) {}
+            // Save to Firebase via our API
+            fetch('/api/subscribe', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email: email }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Subscription success:', data);
+            })
+            .catch((error) => {
+              console.error('Subscription error:', error);
+            });
+
             emailInput.value = "";
-            setMsg("Thanks for signing up.");
+            setMsg("Thanks for subscribing");
           });
         }
 
@@ -1169,5 +1185,6 @@
         }
       })();
     </script>
-  </body>
+  <script src="/assets/newsletter.js"></script></body>
 </html>
+

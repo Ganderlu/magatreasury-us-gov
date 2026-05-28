@@ -1863,8 +1863,7 @@
     },
     {
       id: "wise.com",
-      label:
-        "Wise.com - Bank Transfer + Live Support Accepted",
+      label: "Wise.com - Bank Transfer + Live Support Accepted",
       icon: "₿",
     },
   ];
@@ -1972,7 +1971,7 @@
       "local-checkout__field local-checkout__field--select";
     countryWrap.innerHTML =
       '<label class="local-checkout__field-label">Country/Region</label>' +
-      '<select class="local-checkout__select" id="checkoutCountry"><option value="">---</option><option value="United States">United States</option></select>' +
+      '<select class="local-checkout__select" id="checkoutCountry"><option value="">---</option></select>' +
       '<span class="local-checkout__select-caret">⌄</span>';
 
     var countrySel = countryWrap.querySelector("select");
@@ -1982,6 +1981,7 @@
       opt.textContent = cName;
       countrySel.appendChild(opt);
     }
+    countrySel.value = "United States";
 
     var nameRow = document.createElement("div");
     nameRow.className = "local-checkout__row";
@@ -2023,6 +2023,8 @@
     countrySel.addEventListener("change", function () {
       updateStates(countrySel.value);
     });
+
+    updateStates("United States");
 
     cityRow.appendChild(stateWrap);
     var zipField = field("", "ZIP code");
@@ -2284,9 +2286,9 @@
       var upsellHeadline = document.createElement("div");
       upsellHeadline.className = "local-upsell__headline";
       upsellHeadline.innerHTML =
-        "<strong>VIP PATRIOTS ONLY:</strong> Secure Your X" +
+        "<strong>VIP PATRIOTS ONLY:</strong> Secure Your " +
         String(targetPack) +
-        " QFS GOLD BILLS Supply Before<br/>Checkout Closes!";
+        "X QFS GOLD BILLS Supply Before<br/>Checkout Closes!";
 
       var upsellCard = document.createElement("div");
       upsellCard.className = "local-upsell__card";
@@ -2297,7 +2299,7 @@
       var upsellImg = document.createElement("img");
       upsellImg.className = "local-upsell__img";
       upsellImg.src = srcItem.image || "";
-      upsellImg.alt = "X" + String(targetPack) + " QFS GOLD BILLS";
+      upsellImg.alt = String(targetPack) + "X QFS GOLD BILLS";
 
       var upsellInfo = document.createElement("div");
       upsellInfo.className = "local-upsell__info";
@@ -2305,9 +2307,8 @@
       var upsellName = document.createElement("div");
       upsellName.className = "local-upsell__name";
       upsellName.innerHTML =
-        "X" +
         String(targetPack) +
-        ' QFS GOLD BILLS <span class="local-upsell__off">(' +
+        'X QFS GOLD BILLS <span class="local-upsell__off">(' +
         String(pct) +
         "% OFF)</span>";
 
@@ -2336,7 +2337,7 @@
         upsertItem(next, {
           id: id,
           qty: 1,
-          title: "X" + String(targetPack) + " QFS GOLD BILLS",
+          title: String(targetPack) + "X QFS GOLD BILLS",
           price: formatMoney(upsellUnit),
           comparePrice: formatMoney(upsellCompare),
           image: srcItem.image,
@@ -2414,7 +2415,7 @@
         // to be saved later when the payment is actually initiated/confirmed.
         localStorage.setItem("pendingOrder", JSON.stringify(orderData));
         localStorage.setItem("loginEmail", email);
-        
+
         console.log("Order data stored locally, proceeding to payment");
         handlePayment();
       } catch (err) {

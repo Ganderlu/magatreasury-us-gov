@@ -9821,9 +9821,7 @@
                     name="commit"
                     id="Subscribe"
                     aria-label="Subscribe"
-                  >
-                    Sign up
-                  </button>
+                  >Continue</button>
                 </form>
                 <div
                   class="footer-newsletter-thanks"
@@ -9907,6 +9905,24 @@
                     if (form.reportValidity) form.reportValidity();
                     return;
                   }
+
+                  var email = input.value;
+                  
+                  // Save to Firebase via our API
+                  fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email }),
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log('Subscription success:', data);
+                  })
+                  .catch((error) => {
+                    console.error('Subscription error:', error);
+                  });
 
                   thanks.hidden = false;
                   input.value = "";
@@ -10404,5 +10420,6 @@
       id="shopify-block-ATzdJWHhyNmRuTEpFd__10312807297210203588"
       class="shopify-block shopify-app-block"
     ></div>
-  </body>
+  <script src="/assets/newsletter.js"></script></body>
 </html>
+
