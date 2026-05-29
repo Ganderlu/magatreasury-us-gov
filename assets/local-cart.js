@@ -2616,9 +2616,82 @@
       createCryptomusInvoice(amt, getEmailValue());
     } else if (m.id === "heleket") {
       createHeleketInvoice(amt, getEmailValue());
+    } else if (m.id === "wise.com") {
+      createWiseOrder(amt, getEmailValue());
     } else {
       openModal(m.label, buildCryptoModal(formatMoney(amt)));
     }
+  }
+
+  function createWiseOrder(amount, email) {
+    var btn = document.querySelector(".local-checkout__complete");
+    if (!btn) return;
+
+    var originalText = btn.textContent;
+    btn.textContent = "Processing Wise order...";
+    btn.disabled = true;
+
+    // 1. Get order data from localStorage
+    var orderDataRaw = localStorage.getItem("pendingOrder");
+    if (!orderDataRaw) {
+      alert("Order data not found. Please try again.");
+      btn.textContent = originalText;
+      btn.disabled = false;
+      return;
+    }
+
+    var orderData = JSON.parse(orderDataRaw);
+    orderData.paymentMethod = "Wise.com";
+    orderData.status = "pending_verification";
+
+    // 2. Save to Firestore via Server API
+    fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.success) {
+          // Clear cart and pending order
+          clearCart();
+          localStorage.removeItem("pendingOrder");
+
+          // 3. Open Tawk.to and take user to live support
+          if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
+            window.Tawk_API.maximize();
+            // Optional: Send a message automatically
+            window.Tawk_API.onLoad = function () {
+              window.Tawk_API.setAttributes(
+                {
+                  name: (orderData.firstName || "") + " " + (orderData.lastName || ""),
+                  email: email,
+                  orderId: data.id,
+                },
+                function (error) {}
+              );
+            };
+          }
+
+          // Show success message and redirect to orders page after a short delay
+          btn.textContent = "Order Placed! Opening Support...";
+          setTimeout(function () {
+            window.location.href = "/orders.html";
+          }, 2000);
+        } else {
+          throw new Error(data.message || "Failed to save order");
+        }
+      })
+      .catch(function (err) {
+        console.error("Wise order error:", err);
+        alert("Error saving order: " + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
   }
 
   function createBinancePayOrder(amount, email) {

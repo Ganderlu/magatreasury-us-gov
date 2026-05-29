@@ -403,12 +403,19 @@ app.get(
       ]);
 
       const items = [];
-      verificationsSnapshot.forEach((doc) =>
-        items.push({ id: doc.id, type: "Crypto", ...doc.data() }),
-      );
-      ordersSnapshot.forEach((doc) =>
-        items.push({ id: doc.id, type: "Standard", ...doc.data() }),
-      );
+      verificationsSnapshot.forEach((doc) => {
+        const data = doc.data();
+        items.push({ id: doc.id, type: "Crypto", ...data });
+      });
+
+      ordersSnapshot.forEach((doc) => {
+        const data = doc.data();
+        // Convert Firestore timestamp to ISO string for consistency
+        if (data.createdAt && typeof data.createdAt.toDate === "function") {
+          data.createdAt = data.createdAt.toDate().toISOString();
+        }
+        items.push({ id: doc.id, type: "Standard", ...data });
+      });
 
       res.json({ success: true, data: items });
     } catch (error) {

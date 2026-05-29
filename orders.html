@@ -661,7 +661,12 @@
               if (data.timestamp) {
                 dateObj = new Date(data.timestamp);
               } else if (data.createdAt) {
-                dateObj = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+                // Handle both ISO string and Firestore Timestamp object
+                if (data.createdAt._seconds) {
+                  dateObj = new Date(data.createdAt._seconds * 1000);
+                } else {
+                  dateObj = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+                }
               } else if (data.deliveryDate) {
                 dateObj = new Date(data.deliveryDate);
               }
@@ -672,9 +677,35 @@
                 amount: data.type === 'Crypto' ? `${data.usdAmount} ${data.usdCurrency}` : `$${data.total || 0}`,
                 method: data.type === 'Crypto' ? `${data.coin} (${data.network})` : "Standard Checkout",
                 cryptoAmount: data.coinAmount || "N/A",
-                status: data.status || "pending"
+                status: data.status || "pending",
+                type: data.type,
+                total: data.total,
+                usdAmount: data.usdAmount
               };
             });
+
+            console.log("Debug: All items before deduplication:", allItems);
+
+            // Deduplicate: If we have a Crypto order (pending_verification), 
+            // remove any Standard order (pending) with the same amount and close timestamp
+            const cryptoItems = allItems.filter(i => i.type === 'Crypto');
+            const standardItems = allItems.filter(i => i.type === 'Standard');
+            
+            const filteredStandard = standardItems.filter(s => {
+              // Only deduplicate if the standard order is still 'pending'
+              if (s.status !== 'pending') return true;
+
+              // Find if there is a crypto item with same amount and close date (within 30 minutes)
+              const duplicate = cryptoItems.find(c => {
+                const sameAmount = Math.abs(parseFloat(c.usdAmount) - parseFloat(s.total)) < 1.0; // Allow $1 difference for rounding
+                const closeDate = !isNaN(c.date) && !isNaN(s.date) && Math.abs(c.date - s.date) < 30 * 60 * 1000;
+                return sameAmount && closeDate;
+              });
+              return !duplicate;
+            });
+
+            allItems = [...cryptoItems, ...filteredStandard];
+            console.log(`Debug: Items after deduplication: ${allItems.length}`);
 
             // Sort by date desc
             allItems.sort((a, b) => b.date - a.date);
@@ -784,6 +815,19 @@
         </div>
       </footer>
     </main>
+    <!--Start of Tawk.to Script--> 
+    <script type="text/javascript"> 
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); 
+    (function(){ 
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; 
+    s1.async=true; 
+    s1.src='https://embed.tawk.to/6a18eb623ed8611c37111efc/1jpoleui3'; 
+    s1.charset='UTF-8'; 
+    s1.setAttribute('crossorigin','*'); 
+    s0.parentNode.insertBefore(s1,s0); 
+    })(); 
+    </script> 
+    <!--End of Tawk.to Script-->
 
     <div
       id="refundModal"

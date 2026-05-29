@@ -10,11 +10,13 @@
       if (!successMsg) {
         successMsg = document.createElement('div');
         successMsg.className = 'newsletter-success-msg';
-        successMsg.style.cssText = 'display: none; align-items: center; gap: 6px; color: #fff; margin-top: 12px; font-size: 13px; font-family: inherit;';
+        successMsg.style.cssText = 'display: none; align-items: center; gap: 8px; color: #fff; margin-top: 15px; font-size: 13px; font-family: inherit; background: #333; padding: 6px 12px; border-radius: 4px; width: fit-content;';
         successMsg.innerHTML = `
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#4caf50"/>
-          </svg>
+          <div style="display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #4caf50; border-radius: 50%;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" fill="white"/>
+            </svg>
+          </div>
           <span>Thanks for subscribing</span>
         `;
         form.appendChild(successMsg);
