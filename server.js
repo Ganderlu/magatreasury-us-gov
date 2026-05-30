@@ -142,50 +142,32 @@ app.post("/api/start-otp", async (req, res) => {
   if (!email) return res.status(400).json({ error: "Email is required" });
 
   try {
-    const otp = generateOTP();
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const expiresAt = Date.now() + 10 * 60 * 1000;
 
+    // Save OTP
     otpStore.set(email, { otp, expiresAt });
 
-    // Send Email
+    // Send Email with better sender
     const result = await resend.emails.send({
-      from: "Maga Treasury <noreply@magatreasury.com>", // Try this sender
+      from: "Maga Treasury <hello@magatreasury.com>", // Try this
       to: email,
-      subject: "Your 6-Digit Login Code",
-      attachments: [
-        {
-          filename: "treasure.jpeg",
-          path: path.join(__dirname, "images", "treasur.jpeg"),
-          cid: "profile-image",
-        },
-      ],
+      subject: "Your 6-Digit Login Code - Maga Treasury",
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <img src="cid:profile-image" alt="Maga Treasury" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
-          </div>
-          <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 20px; text-align: left; color: #000;">Your Login Code</h1>
-          <div style="margin: 30px 0;">
-            <h1 style="color: #5a31f4; font-size: 54px; font-weight: bold; letter-spacing: 4px; margin: 0;">${otp}</h1>
-          </div>
-          <p style="font-size: 18px; color: #000; margin-top: 40px;">This code will expire in 10 minutes.</p>
-          <p style="font-size: 16px; color: #000; margin-top: 20px;">
-            If you didn't request this code, please ignore this email.
-          </p>
+        <div style="font-family: Arial, sans-serif; padding: 30px; max-width: 600px; margin: 0 auto; background: #f9f9f9;">
+          <h2 style="color: #111827;">Your Login Code</h2>
+          <h1 style="color: #5a31f4; font-size: 48px; letter-spacing: 8px; margin: 20px 0;">${otp}</h1>
+          <p style="font-size: 16px; color: #444;">This code will expire in 10 minutes.</p>
+          <p style="font-size: 14px; color: #666; margin-top: 30px;">If you didn't request this code, please ignore this email.</p>
         </div>
       `,
     });
 
-    console.log("✅ Email sent successfully to", email);
-    console.log("Resend Response:", result);
-
+    console.log("✅ Email sent. Resend ID:", result.data?.id);
     res.json({ success: true, message: "OTP sent to your email" });
   } catch (err) {
-    console.error("❌ Failed to send email:", err);
-    res.status(500).json({
-      error: "Failed to send OTP",
-      details: err.message,
-    });
+    console.error("❌ Send OTP Error:", err);
+    res.status(500).json({ error: "Failed to send OTP" });
   }
 });
 
