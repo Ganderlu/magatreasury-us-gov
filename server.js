@@ -171,6 +171,87 @@ app.post("/api/start-otp", async (req, res) => {
   }
 });
 
+const fs = require("fs");
+
+/**
+ * GET /api/search
+ * Simple full-text search across HTML files
+ */
+app.get("/api/search", async (req, res) => {
+  const query = (req.query.q || req.query.query || "").toLowerCase();
+  if (!query || query.length < 2) {
+    return res.json({ success: true, results: [] });
+  }
+
+  try {
+    const results = [];
+    const filesToSearch = [];
+
+    // Recursively find all HTML files
+    function walkDir(dir) {
+      const files = fs.readdirSync(dir);
+      for (const file of files) {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat.isDirectory()) {
+          // Skip node_modules and assets
+          if (file !== "node_modules" && file !== "assets" && file !== ".git") {
+            walkDir(filePath);
+          }
+        } else if (file.endsWith(".html") || file.endsWith(".htm")) {
+          filesToSearch.push(filePath);
+        }
+      }
+    }
+
+    walkDir(__dirname);
+
+    for (const filePath of filesToSearch) {
+      const content = fs.readFileSync(filePath, "utf8");
+      // Basic check if query exists in content (excluding tags)
+      const textOnly = content.replace(/<[^>]*>?/gm, " ");
+      if (textOnly.toLowerCase().includes(query)) {
+        // Extract title
+        let title = path.basename(filePath);
+        const titleMatch = content.match(/<title>([^<]*)<\/title>/i);
+        if (titleMatch && titleMatch[1]) {
+          title = titleMatch[1].trim();
+        } else {
+          const h1Match = content.match(/<h1>([^<]*)<\/h1>/i);
+          if (h1Match && h1Match[1]) {
+            title = h1Match[1].trim();
+          }
+        }
+
+        // Get relative URL
+        let url = path.relative(__dirname, filePath).replace(/\\/g, "/");
+        if (!url.startsWith("/")) url = "/" + url;
+
+        // Create a small snippet
+        const index = textOnly.toLowerCase().indexOf(query);
+        const start = Math.max(0, index - 60);
+        const end = Math.min(textOnly.length, index + query.length + 60);
+        let snippet = textOnly.substring(start, end).trim();
+        if (start > 0) snippet = "..." + snippet;
+        if (end < textOnly.length) snippet = snippet + "...";
+
+        results.push({
+          title,
+          url,
+          snippet,
+        });
+
+        if (results.length >= 20) break; // Limit results
+      }
+    }
+
+    res.json({ success: true, results });
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ success: false, message: "Search failed" });
+  }
+});
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({
@@ -333,7 +414,7 @@ app.post("/api/subscribe", body("email").isEmail(), async (req, res) => {
 
 /**
  * POST /api/admin/update-status
- * Update status of an order or verification
+ * Update status of an order or verification and notify the user
  */
 app.post(
   "/api/admin/update-status",
@@ -352,7 +433,112 @@ app.post(
 
     try {
       const { id, collection, status } = req.body;
-      await db.collection(collection).doc(id).update({ status });
+      const docRef = db.collection(collection).doc(id);
+      const docSnap = await docRef.get();
+
+      if (!docSnap.exists) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Document not found" });
+      }
+
+      const data = docSnap.data();
+      const userEmail = data.email;
+
+      await docRef.update({ status });
+
+      // Send notification email if status is 'verified' or 'rejected'
+      if (userEmail && (status === "verified" || status === "rejected")) {
+        try {
+          const isVerified = status === "verified";
+          const amount = data.usdAmount || data.total || "0.00";
+          const subject = isVerified
+            ? "Payment Verified - Order #" + id.substring(0, 8).toUpperCase()
+            : "Payment Rejected - Order #" + id.substring(0, 8).toUpperCase();
+
+          const emailHtml = `
+            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6;">
+              <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                <img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="Maga Treasury" style="width: 150px;">
+              </div>
+              
+              <div style="padding: 30px 0; text-align: center;">
+                <h1 style="color: ${isVerified ? "#16a34a" : "#dc2626"}; font-size: 24px; margin-bottom: 10px;">
+                  Payment ${isVerified ? "Verified Successfully" : "Rejected"}
+                </h1>
+                <p style="font-size: 16px; color: #666;">
+                  ${isVerified ? "Great news! Your payment has been confirmed." : "Unfortunately, we could not verify your payment at this time."}
+                </p>
+              </div>
+
+              <div style="background-color: #f9fafb; border-radius: 12px; padding: 25px; margin-bottom: 30px;">
+                <h2 style="font-size: 18px; margin-top: 0; color: #111; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">Order Details</h2>
+                <table style="width: 100%; font-size: 14px; margin-top: 10px;">
+                  <tr>
+                    <td style="padding: 5px 0; color: #6b7280;">Order Reference:</td>
+                    <td style="padding: 5px 0; text-align: right; font-weight: 600;">${id.substring(0, 8).toUpperCase()}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 5px 0; color: #6b7280;">Amount Paid:</td>
+                    <td style="padding: 5px 0; text-align: right; font-weight: 600;">$${parseFloat(amount).toFixed(2)} USD</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 5px 0; color: #6b7280;">Status:</td>
+                    <td style="padding: 5px 0; text-align: right;">
+                      <span style="background-color: ${isVerified ? "#dcfce7" : "#fee2e2"}; color: ${isVerified ? "#166534" : "#991b1b"}; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 12px; text-transform: uppercase;">
+                        ${status}
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              ${
+                isVerified
+                  ? `
+                <div style="margin-bottom: 30px;">
+                  <h3 style="font-size: 16px; color: #111;">Next Steps:</h3>
+                  <ul style="padding-left: 20px; color: #4b5563;">
+                    <li>Your order is now being processed for shipment.</li>
+                    <li>You will receive another update once your tracking number is available.</li>
+                    <li>Estimated delivery time: 3-7 business days.</li>
+                  </ul>
+                </div>
+              `
+                  : `
+                <div style="margin-bottom: 30px; border-left: 4px solid #dc2626; padding-left: 15px;">
+                  <p style="color: #4b5563;">If you believe this was an error, please contact our support team immediately with your payment proof.</p>
+                </div>
+              `
+              }
+
+              <div style="text-align: center; margin-top: 40px;">
+                <a href="https://magatreasury.com/orders.html" style="background-color: #111827; color: #fff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Your Order</a>
+              </div>
+
+              <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #9ca3af; font-size: 12px;">
+                <p>&copy; 2026 Maga Treasury. All rights reserved.</p>
+                <p>This is an automated message, please do not reply to this email.</p>
+              </div>
+            </div>
+          `;
+
+          await resend.emails.send({
+            from: "Maga Treasury <noreply@magatreasury.com>",
+            to: userEmail,
+            subject: subject,
+            html: emailHtml,
+          });
+
+          console.log(
+            `✅ Status update email sent to ${userEmail} for status ${status}`,
+          );
+        } catch (emailErr) {
+          console.error("❌ Failed to send status update email:", emailErr);
+          // Don't fail the whole request if email fails, but log it
+        }
+      }
+
       res.json({ success: true });
     } catch (error) {
       console.error("Error updating status:", error);

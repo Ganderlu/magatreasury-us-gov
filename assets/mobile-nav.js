@@ -88,7 +88,7 @@
         '  <button class="treas-mm__close" type="button" aria-label="Close menu" data-action="treas-mm-close"><span class="treas-mm__x" aria-hidden="true"></span></button>' +
         "</div>" +
         '<div class="treas-mm__search">' +
-        '  <form action="https://search.usa.gov/search" method="get" accept-charset="UTF-8">' +
+        '  <form action="/search.html" method="get" accept-charset="UTF-8">' +
         '    <input type="hidden" name="affiliate" value="treas" />' +
         '    <input type="search" name="query" placeholder="Enter keywords" autocomplete="off" />' +
         "  </form>" +

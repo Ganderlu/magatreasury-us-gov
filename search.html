@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results - U.S. Department of the Treasury</title>
+    <link
+      rel="stylesheet"
+      href="/assets/2e462066_css_s7FbPwT9FMxsus3m7lMeRNtlD1rsOoaTsF4Z.css"
+    />
+    <style>
+      .search-results-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        min-height: 400px;
+      }
+      .search-header {
+        border-bottom: 2px solid #111;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+      }
+      .search-item {
+        margin-bottom: 30px;
+      }
+      .search-item h3 {
+        margin: 0 0 5px 0;
+      }
+      .search-item a {
+        color: #005a9c;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .search-item a:hover {
+        text-decoration: underline;
+      }
+      .search-url {
+        color: #166534;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+      .search-snippet {
+        color: #4b5563;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .no-results {
+        text-align: center;
+        padding: 50px 0;
+        color: #666;
+      }
+      .loading {
+        text-align: center;
+        padding: 50px 0;
+      }
+      .search-query-display {
+        font-style: italic;
+        color: #005a9c;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="search-results-page">
+      <div class="search-results-container">
+        <div class="search-header">
+          <div style="margin-bottom: 20px">
+            <a
+              href="/"
+              style="
+                text-decoration: none;
+                color: #111;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <img
+                src="/assets/mobile-logo.svg"
+                alt="Logo"
+                style="width: 40px; margin-right: 10px"
+              />
+              U.S. DEPARTMENT OF THE TREASURY
+            </a>
+          </div>
+          <form
+            action="/search.html"
+            method="get"
+            style="display: flex; gap: 10px; margin-bottom: 30px"
+          >
+            <input
+              type="text"
+              name="query"
+              id="search-input-page"
+              placeholder="Search again..."
+              style="
+                flex: 1;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+              "
+            />
+            <button
+              type="submit"
+              style="
+                background: #005a9c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+              "
+            >
+              SEARCH
+            </button>
+          </form>
+          <h1>
+            Search Results for
+            <span id="search-query" class="search-query-display">...</span>
+          </h1>
+        </div>
+
+        <div id="results-list">
+          <div class="loading">Searching...</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get("query") || urlParams.get("q");
+
+        if (query) {
+          document.getElementById("search-query").textContent =
+            '"' + query + '"';
+          document.getElementById("search-input-page").value = query;
+          performSearch(query);
+        } else {
+          document.getElementById("results-list").innerHTML =
+            '<div class="no-results">Please enter a search term.</div>';
+        }
+      });
+
+      function performSearch(query) {
+        fetch("/api/search?q=" + encodeURIComponent(query))
+          .then((response) => response.json())
+          .then((data) => {
+            const container = document.getElementById("results-list");
+            if (data.success && data.results.length > 0) {
+              let html = "";
+              data.results.forEach((item) => {
+                html += `
+                  <div class="search-item">
+                    <h3><a href="${item.url}">${item.title}</a></h3>
+                    <div class="search-url">${window.location.origin}${item.url}</div>
+                    <div class="search-snippet">${item.snippet}</div>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+            } else {
+              container.innerHTML =
+                '<div class="no-results">No results found for your search. Try different keywords.</div>';
+            }
+          })
+          .catch((err) => {
+            console.error("Search error:", err);
+            document.getElementById("results-list").innerHTML =
+              '<div class="no-results">Sorry, an error occurred while searching. Please try again.</div>';
+          });
+      }
+    </script>
+  </body>
+</html>
