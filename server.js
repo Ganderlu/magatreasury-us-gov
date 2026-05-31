@@ -414,7 +414,7 @@ app.post("/api/subscribe", body("email").isEmail(), async (req, res) => {
 
 /**
  * POST /api/admin/update-status
- * Update status of an order or verification and notify the user
+ * Update status and send email notification
  */
 app.post(
   "/api/admin/update-status",
@@ -423,7 +423,7 @@ app.post(
     body("collection")
       .isIn(["orders", "payment_verifications"])
       .withMessage("Invalid collection"),
-    body("status").notEmpty().withMessage("Status is required"),
+    body("status").isIn(["pending", "verified", "rejected"]).withMessage("Invalid status"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -437,114 +437,86 @@ app.post(
       const docSnap = await docRef.get();
 
       if (!docSnap.exists) {
-        return res
-          .status(404)
-          .json({ success: false, message: "Document not found" });
+        return res.status(404).json({ success: false, message: "Document not found" });
       }
 
       const data = docSnap.data();
       const userEmail = data.email;
 
-      await docRef.update({ status });
+      // Update status
+      await docRef.update({ 
+        status,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp()
+      });
 
-      // Send notification email if status is 'verified' or 'rejected'
+      // Send email notification
       if (userEmail && (status === "verified" || status === "rejected")) {
-        try {
-          const isVerified = status === "verified";
-          const amount = data.usdAmount || data.total || "0.00";
-          const subject = isVerified
-            ? "Payment Verified - Order #" + id.substring(0, 8).toUpperCase()
-            : "Payment Rejected - Order #" + id.substring(0, 8).toUpperCase();
+        const isVerified = status === "verified";
+        const amount = data.usdAmount || data.total || data.amount || "0.00";
+        const orderIdShort = id.substring(0, 8).toUpperCase();
 
-          const emailHtml = `
-            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6;">
-              <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eee;">
-                <img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="Maga Treasury" style="width: 150px;">
-              </div>
-              
-              <div style="padding: 30px 0; text-align: center;">
-                <h1 style="color: ${isVerified ? "#16a34a" : "#dc2626"}; font-size: 24px; margin-bottom: 10px;">
-                  Payment ${isVerified ? "Verified Successfully" : "Rejected"}
-                </h1>
-                <p style="font-size: 16px; color: #666;">
-                  ${isVerified ? "Great news! Your payment has been confirmed." : "Unfortunately, we could not verify your payment at this time."}
-                </p>
-              </div>
+        const subject = isVerified 
+          ? `✅ Payment Verified - Order #${orderIdShort}` 
+          : `❌ Payment Rejected - Order #${orderIdShort}`;
 
-              <div style="background-color: #f9fafb; border-radius: 12px; padding: 25px; margin-bottom: 30px;">
-                <h2 style="font-size: 18px; margin-top: 0; color: #111; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">Order Details</h2>
-                <table style="width: 100%; font-size: 14px; margin-top: 10px;">
-                  <tr>
-                    <td style="padding: 5px 0; color: #6b7280;">Order Reference:</td>
-                    <td style="padding: 5px 0; text-align: right; font-weight: 600;">${id.substring(0, 8).toUpperCase()}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 5px 0; color: #6b7280;">Amount Paid:</td>
-                    <td style="padding: 5px 0; text-align: right; font-weight: 600;">$${parseFloat(amount).toFixed(2)} USD</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 5px 0; color: #6b7280;">Status:</td>
-                    <td style="padding: 5px 0; text-align: right;">
-                      <span style="background-color: ${isVerified ? "#dcfce7" : "#fee2e2"}; color: ${isVerified ? "#166534" : "#991b1b"}; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 12px; text-transform: uppercase;">
-                        ${status}
-                      </span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-              ${
-                isVerified
-                  ? `
-                <div style="margin-bottom: 30px;">
-                  <h3 style="font-size: 16px; color: #111;">Next Steps:</h3>
-                  <ul style="padding-left: 20px; color: #4b5563;">
-                    <li>Your order is now being processed for shipment.</li>
-                    <li>You will receive another update once your tracking number is available.</li>
-                    <li>Estimated delivery time: 3-7 business days.</li>
-                  </ul>
-                </div>
-              `
-                  : `
-                <div style="margin-bottom: 30px; border-left: 4px solid #dc2626; padding-left: 15px;">
-                  <p style="color: #4b5563;">If you believe this was an error, please contact our support team immediately with your payment proof.</p>
-                </div>
-              `
-              }
-
-              <div style="text-align: center; margin-top: 40px;">
-                <a href="https://magatreasury.com/orders.html" style="background-color: #111827; color: #fff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Your Order</a>
-              </div>
-
-              <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #9ca3af; font-size: 12px;">
-                <p>&copy; 2026 Maga Treasury. All rights reserved.</p>
-                <p>This is an automated message, please do not reply to this email.</p>
-              </div>
+        const htmlContent = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <img src="https://cdn.shopify.com/s/files/1/0967/3775/5412/files/LIMITED_TIME_OFFER_3_x320.png?v=1772663214" alt="Maga Treasury" style="width: 180px;">
             </div>
-          `;
+            
+            <h1 style="color: ${isVerified ? '#16a34a' : '#dc2626'}; text-align: center;">
+              ${isVerified ? 'Payment Successfully Verified' : 'Payment Rejected'}
+            </h1>
+            
+            <div style="background: #f8fafc; padding: 25px; border-radius: 12px; margin: 25px 0;">
+              <p><strong>Order Reference:</strong> #${orderIdShort}</p>
+              <p><strong>Amount:</strong> $${parseFloat(amount).toFixed(2)} USD</p>
+              <p><strong>Status:</strong> <span style="color: ${isVerified ? '#16a34a' : '#dc2626'}; font-weight: bold;">${status.toUpperCase()}</span></p>
+            </div>
 
-          await resend.emails.send({
-            from: "Maga Treasury <noreply@magatreasury.com>",
-            to: userEmail,
-            subject: subject,
-            html: emailHtml,
-          });
+            ${isVerified ? `
+            <p style="font-size: 16px; line-height: 1.6;">
+              Great news! Your payment has been verified. Your order is now being processed for shipment.
+            </p>
+            <p style="margin-top: 20px;">
+              You will receive another email with tracking information once your order ships.
+            </p>
+            ` : `
+            <p style="color: #991b1b; font-size: 16px;">
+              Unfortunately, we could not verify your payment. Please contact support with your payment proof if you believe this is an error.
+            </p>
+            `}
 
-          console.log(
-            `✅ Status update email sent to ${userEmail} for status ${status}`,
-          );
-        } catch (emailErr) {
-          console.error("❌ Failed to send status update email:", emailErr);
-          // Don't fail the whole request if email fails, but log it
-        }
+            <div style="text-align: center; margin: 35px 0;">
+              <a href="https://magatreasury.com/orders.html" 
+                 style="background: #111827; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                View My Orders
+              </a>
+            </div>
+
+            <p style="text-align: center; color: #666; font-size: 13px; margin-top: 40px;">
+              © 2026 Maga Treasury • This is an automated message
+            </p>
+          </div>
+        `;
+
+        await resend.emails.send({
+          from: "Maga Treasury <noreply@magatreasury.com>",
+          to: userEmail,
+          subject: subject,
+          html: htmlContent,
+        });
+
+        console.log(`📧 Status email sent to ${userEmail} (${status})`);
       }
 
-      res.json({ success: true });
+      res.json({ success: true, message: "Status updated and email sent" });
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error("Update status error:", error);
       res.status(500).json({ success: false, message: error.message });
     }
-  },
+  }
 );
 
 /**
